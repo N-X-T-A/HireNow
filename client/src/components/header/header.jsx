@@ -2,6 +2,7 @@ import React from "react";
 import "../header/header.css";
 import "../../assets/home/logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useNavigate } from "react-router-dom";
 import {
   faNewspaper,
   faUser,
@@ -11,17 +12,25 @@ import {
 import { faYoutube } from "@fortawesome/free-brands-svg-icons";
 
 const Header = () => {
+  const navigate = useNavigate();
+  const login = () => {
+    navigate("/login");
+  };
+  const home = () => {
+    navigate("/");
+  };
   return (
     <>
-      <header>
+      <header className="h-max">
         <div className="container-fluid flex justify-center">
-          <div className="row h-[80px] w-11/12">
+          <div className="row min-h-[80px] w-11/12">
             {/* logo */}
             <div className="col-lg-2 flex items-center justify-center">
               <img
                 className="max-w-28 w-full "
                 src="/src/assets/home/logo.png"
                 alt=""
+                onClick={home}
               />
             </div>
             {/* right item */}
@@ -53,7 +62,10 @@ const Header = () => {
                   <button className="!h-max !w-max !max-w-none px-[20px] py-[7px] rounded-[5px] text-[#1E90FF] transition ease-in-out duration-300 transform hover:-translate-y-[2px]  hover:bg-[#1E90FF]  hover:text-white">
                     Đăng ký ngay
                   </button>
-                  <button className=" !h-max !w-max !max-w-none px-[20px] py-[7px] rounded-[5px] bg-[#1E90FF] text-[#FFFFFF] transition ease-in-out duration-300 transform hover:-translate-y-[2px] hover:px-[19px] hover:py-[6px] hover:text-[#1E90FF]  hover:bg-white hover:border hover:border-[#1E90FF]">
+                  <button
+                    onClick={login}
+                    className=" !h-max !w-max !max-w-none px-[20px] py-[7px] rounded-[5px] bg-[#1E90FF] text-[#FFFFFF] transition ease-in-out duration-300 transform hover:-translate-y-[2px] hover:px-[19px] hover:py-[6px] hover:text-[#1E90FF]  hover:bg-white hover:border hover:border-[#1E90FF]"
+                  >
                     Đăng nhập
                   </button>
                 </div>
