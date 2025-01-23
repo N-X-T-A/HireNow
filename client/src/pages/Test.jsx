@@ -23,16 +23,6 @@ const Test = () => {
               scrollbar={{ draggable: true }}
               onSwiper={(swiper) => console.log(swiper)}
               onSlideChange={() => console.log("slide change")}
-              breakpoints={{
-                768: {
-                  // Khi màn hình nhỏ hơn 768px
-                  slidesPerView: 1,
-                },
-                1024: {
-                  // Khi màn hình lớn hơn 1024px
-                  slidesPerView: 1,
-                },
-              }}
             >
               <SwiperSlide>
                 <div className="relative">
