@@ -1,25 +1,20 @@
 "use strict";
-const { Model } = require("sequelize");
-module.exports = (sequelize, DataTypes) => {
-  class Company extends Model {
-    static associate(models) {
-      this.belongsTo(models.User, { foreignKey: "userId", as: "user" }); // Quan hệ N-1 với User
-      this.hasMany(models.JobListing, {
-        foreignKey: "companyId",
-        as: "jobListings",
-      }); // Quan hệ 1-N với JobListing
-    }
-  }
-  Company.init(
-    {
-      name: { type: DataTypes.STRING, allowNull: false },
-      industry: DataTypes.STRING,
-      description: DataTypes.TEXT,
-      website: DataTypes.STRING,
-      logoURL: DataTypes.STRING,
-      userId: { type: DataTypes.INTEGER, allowNull: false },
+const mongoose = require("mongoose");
+
+const CompanySchema = new mongoose.Schema(
+  {
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
     },
-    { sequelize, modelName: "Company" }
-  );
-  return Company;
-};
+    name: { type: String, required: true },
+    industry: { type: String },
+    description: { type: String },
+    website: { type: String },
+    logoURL: { type: String },
+  },
+  { timestamps: true }
+);
+
+module.exports = mongoose.model("Company", CompanySchema);

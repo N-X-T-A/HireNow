@@ -1,26 +1,26 @@
 "use strict";
-const { Model } = require("sequelize");
-module.exports = (sequelize, DataTypes) => {
-  class Application extends Model {
-    static associate(models) {
-      this.belongsTo(models.User, { foreignKey: "userId", as: "user" }); // Quan hệ N-1 với User
-      this.belongsTo(models.JobListing, {
-        foreignKey: "jobId",
-        as: "jobListing",
-      }); // Quan hệ N-1 với JobListing
-    }
-  }
-  Application.init(
-    {
-      jobId: { type: DataTypes.INTEGER, allowNull: false },
-      userId: { type: DataTypes.INTEGER, allowNull: false },
-      coverLetter: DataTypes.TEXT,
-      status: {
-        type: DataTypes.ENUM("Pending", "Reviewed", "Accepted", "Rejected"),
-        defaultValue: "Pending",
-      },
+const mongoose = require("mongoose");
+
+const ApplicationSchema = new mongoose.Schema(
+  {
+    jobId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "JobListing",
+      required: true,
     },
-    { sequelize, modelName: "Application" }
-  );
-  return Application;
-};
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    coverLetter: { type: String },
+    status: {
+      type: String,
+      enum: ["Pending", "Reviewed", "Accepted", "Rejected"],
+      default: "Pending",
+    },
+  },
+  { timestamps: true }
+);
+
+module.exports = mongoose.model("Application", ApplicationSchema);
