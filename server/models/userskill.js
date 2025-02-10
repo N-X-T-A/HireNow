@@ -1,15 +1,20 @@
 "use strict";
-const { Model } = require("sequelize");
-module.exports = (sequelize, DataTypes) => {
-  class UserSkill extends Model {
-    static associate(models) {}
-  }
-  UserSkill.init(
-    {
-      userId: { type: DataTypes.INTEGER, allowNull: false },
-      skillId: { type: DataTypes.INTEGER, allowNull: false },
+const mongoose = require("mongoose");
+
+const UserSkillSchema = new mongoose.Schema(
+  {
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
     },
-    { sequelize, modelName: "UserSkill" }
-  );
-  return UserSkill;
-};
+    skillId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Skill",
+      required: true,
+    },
+  },
+  { timestamps: true }
+);
+
+module.exports = mongoose.model("UserSkill", UserSkillSchema);

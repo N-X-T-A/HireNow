@@ -34,7 +34,15 @@ const verifyToken = (req, res, next) => {
 };
 
 const isAdmin = (req, res, next) => {
-  if (req.user && req.user.role === "admin") {
+  if (req.user && req.user.role === "Admin") {
+    next();
+  } else {
+    res.status(403).send({ message: "Bạn không có quyền hạn cần thiết." });
+  }
+};
+
+const isEmployer = (req, res, next) => {
+  if (req.user && req.user.role === "Employer") {
     next();
   } else {
     res.status(403).send({ message: "Bạn không có quyền hạn cần thiết." });
@@ -42,6 +50,7 @@ const isAdmin = (req, res, next) => {
 };
 
 const authJwt = {
+  isEmployer,
   verifyToken,
   isAdmin,
 };
