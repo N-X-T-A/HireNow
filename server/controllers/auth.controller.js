@@ -48,13 +48,9 @@ class AuthController {
         throw new AuthFailureError("Invalid email or password.");
       }
 
-      const token = jwt.sign(
-        { id: user._id, email: email, role: user.role },
-        process.env.SECRET_CODE,
-        { expiresIn: "1d" }
-      );
-
       user.passwordHash = undefined;
+
+      const token = generateToken(user);
 
       return new OK({
         message: "Đăng nhập tài khoản thành công!",
@@ -66,6 +62,44 @@ class AuthController {
       });
     }
   };
+
+  google = async (req, res) => {
+    try {
+      const { token } = req.body;
+      const ticket = await client.verifyIdToken({
+        idToken: token,
+        audience: process.env.GOOGLE_CLIENT_ID,
+      });
+
+      const { name, email, picture } = ticket.getPayload();
+      const user = await User.findOne({ email });
+      if (!user) {
+        const newUser = new User({
+          username: name,
+          email,
+          photoURL: picture,
+        });
+
+        await newUser.save();
+      }
+
+      const appToken = generateToken(user);
+
+      res.cookie("token", appToken, { httpOnly: true, secure: false });
+
+      res.json({ success: true });
+    } catch (error) {
+      res.status(400).json({ success: false, message: "Invalid Google Token" });
+    }
+  };
 }
+
+const generateToken = (user) => {
+  const token = jwt.sign({ user }, process.env.SECRET_CODE, {
+    expiresIn: "1d",
+  });
+
+  return token;
+};
 
 module.exports = new AuthController();
