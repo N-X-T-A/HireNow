@@ -1,30 +1,19 @@
-import React, { useState } from "react";
+//Lấy token
 
-const Test = () => {
-  const [inputText, setInputText] = useState("");
-  const handleInputChange = (e) => {
-    setInputText(e.target.value);
-  };
-  const handleSubmit = () => {
-    const formattedText = inputText
-      .split("\n")
-      .map((line) => `<p>${line}</p>`)
-      .join("<br>");
+// const accessToken = sessionStorage.getItem("access_token");
+// if (accessToken) {
+//   console.log("Token từ sessionStorage:", accessToken);
+// } else {
+//   console.log("Không có token, cần đăng nhập lại.");
+// }
 
-    console.log(formattedText);
-  };
+//Xóa token
 
-  return (
-    <div>
-      <textarea
-        value={inputText}
-        onChange={handleInputChange}
-        rows="4"
-        cols="50"
-      />
-      <button onClick={handleSubmit}>Gửi</button>
-    </div>
-  );
-};
+// const handleLogout = () => {
+//   sessionStorage.removeItem("access_token");
+//   alert("Đăng xuất thành công!");
+// };
 
-export default Test;
+export default function Test() {
+  return <>test</>;
+}
