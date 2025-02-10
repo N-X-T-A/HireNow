@@ -10,7 +10,6 @@ router.use(function (req, res, next) {
   next();
 });
 
-router.use("/auth", require("./auth.routes"));
-router.use("/joblistings", require("./joblistings.routes"));
-
+router.use("/v1/auth", require("./auth.routes"));
+router.use("/v1/joblistings", require("./joblistings.routes"));
 module.exports = router;

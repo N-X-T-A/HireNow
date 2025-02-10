@@ -14,5 +14,6 @@ router.post(
 );
 
 router.post("/signin", asyncHandler(AuthController.signIn));
+router.post("/google", asyncHandler(AuthController.google));
 
 module.exports = router;
