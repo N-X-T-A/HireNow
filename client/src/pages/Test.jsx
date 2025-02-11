@@ -116,3 +116,27 @@ export default function Test() {
 //     setIsLoading(false);
 //   },
 // });
+
+// const handleGoogleLogin = useGoogleLogin({
+//   onSuccess: async (response) => {
+//     try {
+//       const res = await axios.post(
+//         "http://localhost:5000/auth/google",
+//         {
+//           token: response.credential,
+//         },
+//         { withCredentials: true }
+//       );
+
+//       if (res.data.success) {
+//         setTimeout(() => {
+//           setIsLoading(false);
+//           setIsLoggedIn(true);
+//         }, 2000);
+//       }
+//     } catch (error) {
+//       console.error("Login Failed", error);
+//     }
+//   },
+//   onError: () => console.log("Login Failed"),
+// });
