@@ -10,6 +10,13 @@ import { jwtDecode } from "jwt-decode";
 import { Environment } from "../environments/Environment";
 import { useState, useEffect } from "react";
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
+import MultiStepForm from "../components/multiStepForm/MultistepForm";
+import StepperControl from "../components/multiStepForm/StepperControl";
+import Account from "../components/steps/Account";
+import JobRecommend from "../components/steps/JobRecommend";
+import Salary from "../components/steps/Salary";
+import Final from "../components/steps/Final";
+import { StepperContext } from "../contexts/StepperContext";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -24,8 +31,22 @@ export default function LoginMethod() {
     const userif = sessionStorage.getItem("user");
     return userif ? JSON.parse(userif) : null;
   });
+  const hadLogin = false;
   const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [currentStep, setCurrentStep] = useState(1);
+  const [userData, setUserData] = useState("");
+  const [finalData, setFinalData] = useState([]);
+  //login google
+  const login = () => {
+    setIsLoading(true);
+    const timeoutId = setTimeout(() => {
+      setIsLoading(false);
+      setIsLoggedIn(true);
+    }, 2000);
+
+    return () => clearTimeout(timeoutId);
+  };
 
   // const handleGoogleLogin = useGoogleLogin({
   //   onSuccess: async (response) => {
@@ -52,9 +73,45 @@ export default function LoginMethod() {
   // });
 
   //Lấy token local
-  const accessToken = sessionStorage.getItem("access_token");
-  const userif = sessionStorage.getItem("user");
+  // const accessToken = sessionStorage.getItem("access_token");
+  // const userif = sessionStorage.getItem("user");
+  //multiStep
+  const steps = [
+    "Thông tin tài khoản",
+    "Công việc phù hợp dành cho bạn",
+    "Mức lương và địa điểm",
+    "Hoàn tất",
+  ];
 
+  const displayStep = (step) => {
+    switch (step) {
+      case 1:
+        return <Account />;
+      case 2:
+        return <JobRecommend />;
+      case 3:
+        return <Salary />;
+      case 4:
+        return <Final />;
+      default:
+    }
+  };
+
+  const handleClick = (action) => {
+    if (action === "Tiếp theo") {
+      if (currentStep === steps.length) {
+        // Khi đến bước cuối cùng, in dữ liệu ra console
+        console.log("Dữ liệu cuối cùng:", userData);
+        setFinalData(userData);
+      } else {
+        setCurrentStep((prev) => prev + 1);
+      }
+    } else {
+      if (currentStep > 1) {
+        setCurrentStep((prev) => prev - 1);
+      }
+    }
+  };
   //log test
   console.log(user);
   return (
@@ -67,7 +124,38 @@ export default function LoginMethod() {
             <div className="loader"></div>
           </div>
         ) : isLoggedIn ? (
-          <MultiStepForm user={user} />
+          hadLogin ? (
+            <div className="flex flex-col w-full h-full items-center justify-items-center justify-center">
+              <img
+                className="w-[30%] rounded-md"
+                src="/src/assets/login/dance.gif"
+                alt=""
+              />
+              <h2 className="text-2xl font-bold">Chào Thái!</h2>
+              <p className="text-gray-600">
+                Sẵn sàng để bắt đầu một công việc chưa
+              </p>
+              <button className=" bg-blue-500 text-white py-2 px-4 rounded-md">
+                Bắt đầu
+              </button>
+            </div>
+          ) : (
+            <div className="flex flex-col w-full h-full items-center justify-center">
+              <MultiStepForm steps={steps} currentStep={currentStep} />
+              <div className="my-6 p-10 w-full min-h-[400px]">
+                <StepperContext.Provider
+                  value={{ userData, setUserData, finalData, setFinalData }}
+                >
+                  {displayStep(currentStep)}
+                </StepperContext.Provider>
+              </div>
+              <StepperControl
+                handleClick={handleClick}
+                currentStep={currentStep}
+                steps={steps}
+              />
+            </div>
+          )
         ) : (
           <>
             <div className="flex flex-col w-full h-full items-center justify-items-center justify-center">
@@ -105,7 +193,7 @@ export default function LoginMethod() {
               </div>
               <div className="flex  gap-[10px] flex-col items-center w-[70%] py-[25px]">
                 <button
-                  // onClick={handleGoogleLogin}
+                  onClick={login}
                   className="flex items-center justify-items-center justify-center gap-[10px] w-full h-[45px] rounded-[10px] px-[20px] py-[10px] border-[1px] border-zinc-800 text-black cursor-pointer  transition ease-in-out duration-300 "
                 >
                   <img
@@ -146,16 +234,3 @@ export default function LoginMethod() {
     </>
   );
 }
-
-const MultiStepForm = ({ user }) => {
-  return (
-    <div className="flex flex-col w-full h-full items-center justify-items-center justify-center">
-      <img className="w-[30%] rounded-md" src={user?.picture} alt="" />
-      <h2 className="text-2xl font-bold">Chào {user?.name}!</h2>
-      <p className="text-gray-600">Bắt đầu điền thông tin tiếp theo</p>
-      <button className="mt-4 bg-blue-500 text-white py-2 px-4 rounded-md">
-        Tiếp tục
-      </button>
-    </div>
-  );
-};

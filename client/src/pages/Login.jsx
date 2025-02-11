@@ -1,7 +1,13 @@
 import React from "react";
 import Header from "../components/header/header";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
+import {
+  Navigation,
+  Pagination,
+  Scrollbar,
+  A11y,
+  Autoplay,
+} from "swiper/modules";
 import LoginMethod from "./loginMethod";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -24,10 +30,11 @@ export default function Login() {
             {/* Left section */}
             <div className="respon-l flex-1 max-w-[800px] w-full">
               <Swiper
-                modules={[Navigation, Pagination, Scrollbar, A11y]}
+                modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
                 slidesPerView={1}
                 pagination={{ clickable: true }}
                 scrollbar={{ draggable: true }}
+                autoplay={{ delay: 3000, disableOnInteraction: false }}
                 onSlideChange={() => console.log("slide change")}
               >
                 <SwiperSlide>
@@ -61,14 +68,14 @@ export default function Login() {
                     />
                     <div className="absolute bottom-0 left-0 bg-gradient-to-t from-black to-transparent  p-[10px] w-full rounded-[10px]">
                       <p className="text-[white] text-[22px] font-[300]">
-                        "Dưới góc độ công nghệ thông tin, việc tuyển dụng nhân
-                        sự chất lượng là một yếu tố quyết định đến sự thành công
-                        của dự án. Chúng tôi tìm kiếm những ứng viên không chỉ
-                        có kỹ năng chuyên môn vững vàng mà còn có khả năng làm
-                        việc nhóm và giải quyết vấn đề sáng tạo."
+                        "Trong lĩnh vực tiếp thị, sự thấu hiểu khách hàng là
+                        chìa khóa dẫn đến thành công. Chúng tôi luôn tìm kiếm
+                        những chuyên gia có khả năng phân tích dữ liệu, sáng tạo
+                        chiến lược và xây dựng trải nghiệm mua sắm tuyệt vời cho
+                        khách hàng."
                       </p>
                       <p className="text-[white] text-[15px]">
-                        Pablo Escanor - Kỹ sư Phần mềm
+                        Minh Nguyễn - Chuyên gia Marketing
                       </p>
                     </div>
                   </div>
@@ -82,14 +89,14 @@ export default function Login() {
                     />
                     <div className="absolute bottom-0 left-0 bg-gradient-to-t from-black to-transparent  p-[10px] w-full rounded-[10px]">
                       <p className="text-[white] text-[22px] font-[300]">
-                        "Dưới góc độ công nghệ thông tin, việc tuyển dụng nhân
-                        sự chất lượng là một yếu tố quyết định đến sự thành công
-                        của dự án. Chúng tôi tìm kiếm những ứng viên không chỉ
-                        có kỹ năng chuyên môn vững vàng mà còn có khả năng làm
-                        việc nhóm và giải quyết vấn đề sáng tạo."
+                        "Mỗi bức ảnh không chỉ là một khoảnh khắc, mà còn là một
+                        câu chuyện. Tôi tin rằng nhiếp ảnh không chỉ ghi lại
+                        hình ảnh mà còn truyền tải cảm xúc, mang lại giá trị
+                        nghệ thuật và kết nối mọi người thông qua những khung
+                        hình đẹp."
                       </p>
                       <p className="text-[white] text-[15px]">
-                        Pablo Escanor - Kỹ sư Phần mềm
+                        Linh Trần - Nhiếp ảnh gia chuyên nghiệp
                       </p>
                     </div>
                   </div>
@@ -103,14 +110,13 @@ export default function Login() {
                     />
                     <div className="absolute bottom-0 left-0 bg-gradient-to-t from-black to-transparent  p-[10px] w-full rounded-[10px]">
                       <p className="text-[white] text-[22px] font-[300]">
-                        "Dưới góc độ công nghệ thông tin, việc tuyển dụng nhân
-                        sự chất lượng là một yếu tố quyết định đến sự thành công
-                        của dự án. Chúng tôi tìm kiếm những ứng viên không chỉ
-                        có kỹ năng chuyên môn vững vàng mà còn có khả năng làm
-                        việc nhóm và giải quyết vấn đề sáng tạo."
+                        "Để trở thành một diễn viên giỏi, bạn không chỉ cần tài
+                        năng mà còn phải có sự kiên trì và đam mê. Mỗi vai diễn
+                        là một thử thách mới, là cơ hội để hóa thân và truyền
+                        tải những câu chuyện đầy cảm xúc đến khán giả."
                       </p>
                       <p className="text-[white] text-[15px]">
-                        Pablo Escanor - Kỹ sư Phần mềm
+                        Huy Phạm - Diễn viên
                       </p>
                     </div>
                   </div>
