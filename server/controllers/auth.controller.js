@@ -66,30 +66,39 @@ class AuthController {
   google = async (req, res) => {
     try {
       const { token } = req.body;
-      const ticket = await client.verifyIdToken({
-        idToken: token,
-        audience: process.env.GOOGLE_CLIENT_ID,
-      });
+      console.log("Received token:", token);
 
-      const { name, email, picture } = ticket.getPayload();
-      const user = await User.findOne({ email });
-      if (!user) {
-        const newUser = new User({
-          username: name,
-          email,
-          photoURL: picture,
-        });
-
-        await newUser.save();
+      if (!token) {
+        console.error("Không nhận được token từ frontend");
+        return res.status(400).json({ message: "Token không hợp lệ" });
       }
 
-      const appToken = generateToken(user);
+      const googleRes = await fetch(
+        `https://www.googleapis.com/oauth2/v3/userinfo?access_token=${token}`
+      );
+      const googleUser = await googleRes.json();
 
-      res.cookie("token", appToken, { httpOnly: true, secure: false });
+      console.log("Google User:", googleUser);
 
-      res.json({ success: true });
+      if (!googleUser.email) {
+        console.error("Lỗi xác thực Google:", googleUser);
+        throw new Error("Lỗi xác thực Google");
+      }
+
+      const { email, name, picture } = googleUser;
+
+      const userToken = jwt.sign(
+        { email, name, photo: picture },
+        process.env.SECRET_CODE,
+        {
+          expiresIn: "7d",
+        }
+      );
+
+      res.json({ email, name, photo: picture, token: userToken });
     } catch (error) {
-      res.status(400).json({ success: false, message: "Invalid Google Token" });
+      console.error("Lỗi xác thực Google:", error);
+      res.status(401).json({ message: "Xác thực không hợp lệ" });
     }
   };
 }
