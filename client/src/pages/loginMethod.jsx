@@ -63,10 +63,14 @@ export default function LoginMethod() {
 
         const data = await res.json();
         console.log("User data:", data);
+        sessionStorage.setItem("access_token", data.access_token);
         setUser(data);
+        setTimeout(() => {
+          setIsLoading(false);
+          setIsLoggedIn(true);
+        }, 3000);
       } catch (error) {
         console.error("Lỗi đăng nhập:", error);
-      } finally {
         setIsLoading(false);
       }
     },
@@ -113,7 +117,7 @@ export default function LoginMethod() {
     }
   };
   //log test
-  console.log(user);
+
   return (
     <>
       <div className="respon-r flex-1 pl-[20px] w-full">

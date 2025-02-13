@@ -19,7 +19,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import { Environment } from "../environments/Environment";
 export default function Login() {
   const GG_ID = Environment.GG_CLIENT_ID;
-  console.log(GG_ID);
+
   return (
     <div>
       <Header />
@@ -38,7 +38,6 @@ export default function Login() {
                 pagination={{ clickable: true }}
                 scrollbar={{ draggable: true }}
                 autoplay={{ delay: 3000, disableOnInteraction: false }}
-                onSlideChange={() => console.log("slide change")}
               >
                 <SwiperSlide>
                   <div className="relative">
