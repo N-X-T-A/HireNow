@@ -87,15 +87,24 @@ class AuthController {
 
       const { email, name, picture } = googleUser;
 
-      const userToken = jwt.sign(
-        { email, name, photo: picture },
-        process.env.SECRET_CODE,
-        {
-          expiresIn: "7d",
-        }
-      );
+      const user = await User.findOne({ email });
+      if (!user) {
+        const newUser = new User({
+          username: name,
+          email,
+          photoURL: picture,
+        });
 
-      res.json({ email, name, photo: picture, token: userToken });
+        await newUser.save();
+        userToken.passwordHash = undefined;
+        const userToken = generateToken(newUser);
+        res.json({ user: newUser, token: userToken });
+      }
+
+      user.passwordHash = undefined;
+      const userToken = generateToken(user);
+
+      res.json({ user, token: userToken });
     } catch (error) {
       console.error("Lỗi xác thực Google:", error);
       res.status(401).json({ message: "Xác thực không hợp lệ" });
