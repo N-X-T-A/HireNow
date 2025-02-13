@@ -24,9 +24,9 @@ import "swiper/css/scrollbar";
 import "swiper/css";
 import "../pages/pageCss/Login.css";
 export default function LoginMethod() {
-  const GITHUB_CLIENT_ID = Environment.GITHUB_CLIENT_ID;
-  const REDIRECT_URI = "http://localhost:3000/login";
-  const GITHUB_SECRET_ID = Environment.GITHUB_SECRET_ID;
+  // const GITHUB_CLIENT_ID = Environment.GITHUB_CLIENT_ID;
+  // const REDIRECT_URI = "http://localhost:3000/login";
+  // const GITHUB_SECRET_ID = Environment.GITHUB_SECRET_ID;
   const [user, setUser] = useState(() => {
     const userif = sessionStorage.getItem("user");
     return userif ? JSON.parse(userif) : null;
@@ -47,7 +47,31 @@ export default function LoginMethod() {
 
     return () => clearTimeout(timeoutId);
   };
+  const handleGoogleLogin = useGoogleLogin({
+    onSuccess: async (response) => {
+      setIsLoading(true);
+      try {
+        console.log("Google Access Token:", response.access_token);
 
+        const res = await fetch("http://localhost:5000/v1/auth/google", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ token: response.access_token }),
+        });
+
+        if (!res.ok) throw new Error("Lỗi xác thực");
+
+        const data = await res.json();
+        console.log("User data:", data);
+        setUser(data);
+      } catch (error) {
+        console.error("Lỗi đăng nhập:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    onError: () => console.log("Login Failed"),
+  });
   //Lấy token local
   // const accessToken = sessionStorage.getItem("access_token");
   // const userif = sessionStorage.getItem("user");
@@ -169,7 +193,7 @@ export default function LoginMethod() {
               </div>
               <div className="flex  gap-[10px] flex-col items-center w-[70%] py-[25px]">
                 <button
-                  onClick={login}
+                  onClick={handleGoogleLogin}
                   className="flex items-center justify-items-center justify-center gap-[10px] w-full h-[45px] rounded-[10px] px-[20px] py-[10px] border-[1px] border-zinc-800 text-black cursor-pointer  transition ease-in-out duration-300 "
                 >
                   <img
@@ -181,7 +205,7 @@ export default function LoginMethod() {
                 </button>
 
                 <button
-                  // onClick={handleLoginGit}
+                  onClick={handleGoogleLogin}
                   className="flex items-center justify-items-center justify-center gap-[10px] w-full h-[45px] rounded-[10px] px-[20px] py-[10px] border-[1px] border-zinc-800 text-black cursor-pointer  transition ease-in-out duration-300 "
                 >
                   <img

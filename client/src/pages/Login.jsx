@@ -15,8 +15,11 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import "swiper/css";
 import "../pages/pageCss/Login.css";
-
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import { Environment } from "../environments/Environment";
 export default function Login() {
+  const GG_ID = Environment.GG_CLIENT_ID;
+  console.log(GG_ID);
   return (
     <div>
       <Header />
@@ -124,7 +127,10 @@ export default function Login() {
               </Swiper>
             </div>
             {/* Right section */}
-            <LoginMethod />
+            <GoogleOAuthProvider clientId={GG_ID}>
+              <LoginMethod />
+            </GoogleOAuthProvider>
+            ;
           </div>
         </div>
       </login>
