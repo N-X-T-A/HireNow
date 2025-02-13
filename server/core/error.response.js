@@ -14,7 +14,11 @@ const ReasonStatusCode = {
 
 class ErrorResponse extends Error {
   constructor(message, status) {
-    super(typeof message === "object" ? JSON.stringify(message) : message);
+    const errorMessage =
+      typeof message === "object"
+        ? message.message || JSON.stringify(message)
+        : message;
+    super(errorMessage);
     this.status = status;
   }
 
