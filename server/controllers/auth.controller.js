@@ -96,7 +96,7 @@ class AuthController {
         });
 
         await newUser.save();
-        userToken.passwordHash = undefined;
+        newUser.passwordHash = undefined;
         const userToken = generateToken(newUser);
         res.json({ user: newUser, token: userToken });
       }
