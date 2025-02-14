@@ -5,7 +5,7 @@ const { AuthFailureError } = require("../core/error.response");
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-
+const { generateToken } = require("../utils/generateToken");
 class AuthController {
   signUp = async (req, res) => {
     try {
@@ -65,40 +65,12 @@ class AuthController {
 
   google = async (req, res) => {
     try {
-      const { token } = req.body;
-      console.log("Received token:", token);
-
-      if (!token) {
-        console.error("Không nhận được token từ frontend");
-        return res.status(400).json({ message: "Token không hợp lệ" });
-      }
-
-      const googleRes = await fetch(
-        `https://www.googleapis.com/oauth2/v3/userinfo?access_token=${token}`
-      );
-      const googleUser = await googleRes.json();
-
-      console.log("Google User:", googleUser);
-
-      if (!googleUser.email) {
-        console.error("Lỗi xác thực Google:", googleUser);
-        throw new Error("Lỗi xác thực Google");
-      }
-
+      const { googleUser } = req;
       const { email, name, picture } = googleUser;
-
-      const user = await User.findOne({ email });
+      let user = await User.findOne({ email });
       if (!user) {
-        const newUser = new User({
-          username: name,
-          email,
-          photoURL: picture,
-        });
-
-        await newUser.save();
-        newUser.passwordHash = undefined;
-        const userToken = generateToken(newUser);
-        res.json({ user: newUser, token: userToken });
+        user = new User({ username: name, email, photoURL: picture });
+        await user.save();
       }
 
       user.passwordHash = undefined;
@@ -111,13 +83,5 @@ class AuthController {
     }
   };
 }
-
-const generateToken = (user) => {
-  const token = jwt.sign({ user }, process.env.SECRET_CODE, {
-    expiresIn: "1d",
-  });
-
-  return token;
-};
 
 module.exports = new AuthController();
