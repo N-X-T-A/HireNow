@@ -1,0 +1,29 @@
+.respon-l {
+  flex: 1;
+  transition: all 0.3s ease-in-out;
+  min-width: 50%;
+}
+
+.respon-r {
+  flex: 1;
+  min-width: 50%;
+  transition: all 0.3s ease-in-out;
+}
+
+@media (max-width: 1025px) {
+  .respon-l {
+    min-width: 50%;
+  }
+  .respon-r {
+    min-width: 50%;
+  }
+}
+
+@media (max-width: 925px) {
+  .respon-l {
+    display: none;
+  }
+  .respon-r {
+    min-width: 100%;
+  }
+}

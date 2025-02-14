@@ -5,7 +5,7 @@ const { AuthFailureError } = require("../core/error.response");
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-
+const { generateToken } = require("../utils/generateToken");
 class AuthController {
   signUp = async (req, res) => {
     try {
@@ -65,41 +65,23 @@ class AuthController {
 
   google = async (req, res) => {
     try {
-      const { token } = req.body;
-      const ticket = await client.verifyIdToken({
-        idToken: token,
-        audience: process.env.GOOGLE_CLIENT_ID,
-      });
-
-      const { name, email, picture } = ticket.getPayload();
-      const user = await User.findOne({ email });
+      const { googleUser } = req;
+      const { email, name, picture } = googleUser;
+      let user = await User.findOne({ email });
       if (!user) {
-        const newUser = new User({
-          username: name,
-          email,
-          photoURL: picture,
-        });
-
-        await newUser.save();
+        user = new User({ username: name, email, photoURL: picture });
+        await user.save();
       }
 
-      const appToken = generateToken(user);
+      user.passwordHash = undefined;
+      const userToken = generateToken(user);
 
-      res.cookie("token", appToken, { httpOnly: true, secure: false });
-
-      res.json({ success: true });
+      res.json({ user, token: userToken });
     } catch (error) {
-      res.status(400).json({ success: false, message: "Invalid Google Token" });
+      console.error("Lỗi xác thực Google:", error);
+      res.status(401).json({ message: "Xác thực không hợp lệ" });
     }
   };
 }
-
-const generateToken = (user) => {
-  const token = jwt.sign({ user }, process.env.SECRET_CODE, {
-    expiresIn: "1d",
-  });
-
-  return token;
-};
 
 module.exports = new AuthController();
