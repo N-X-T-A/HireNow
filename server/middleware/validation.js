@@ -26,32 +26,34 @@ const isDuplicateEmail = async (req, res, next) => {
   }
 };
 
-const isDuplicatePhoneNumber = async (req, res, next) => {
+const verifyGoogleToken = async (req, res, next) => {
   try {
-    const phoneNumber = req.body.phonenumber;
-
-    if (!phoneNumber) {
-      return res.status(400).json({ message: "Số điện thoại là bắt buộc." });
+    const { token } = req.body;
+    if (!token) {
+      return res.status(400).json({ message: "Token không hợp lệ" });
     }
 
-    const user = await User.findOne({ phoneNumber });
+    const googleRes = await fetch(
+      `https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${token}`
+    );
 
-    if (user) {
-      return new BadRequestError({
-        message: "Số điện thoại này đã được đăng ký",
-      }).send(res);
+    if (!googleRes.ok) {
+      return res.status(401).json({ message: "Token không hợp lệ từ Google" });
     }
+
+    const googleUser = await googleRes.json();
+
+    req.googleUser = googleUser;
 
     next();
   } catch (error) {
-    console.error(error);
-    return res.status(500).json({ name: error.name, message: error.message });
+    return res.status(500).json({ message: error.message });
   }
 };
 
-const verifySignUp = {
+const validation = {
   isDuplicateEmail,
-  isDuplicatePhoneNumber,
+  verifyGoogleToken,
 };
 
-module.exports = verifySignUp;
+module.exports = validation;
