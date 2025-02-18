@@ -1,0 +1,14 @@
+@media (max-width: 488px) {
+  .final-p-respond {
+    bottom: -20px !important;
+  }
+}
+
+@media (max-width: 408px) {
+  .final-p-respond {
+    bottom: -20px !important;
+  }
+  .final-des-respond {
+    bottom: -70px;
+  }
+}

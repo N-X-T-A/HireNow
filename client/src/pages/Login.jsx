@@ -129,7 +129,6 @@ export default function Login() {
             <GoogleOAuthProvider clientId={GG_ID}>
               <LoginMethod />
             </GoogleOAuthProvider>
-            ;
           </div>
         </div>
       </login>

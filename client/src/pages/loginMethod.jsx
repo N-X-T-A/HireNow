@@ -31,7 +31,8 @@ export default function LoginMethod() {
     const userif = sessionStorage.getItem("user");
     return userif ? JSON.parse(userif) : null;
   });
-  const hadLogin = false;
+
+  const [firstLoggin, setFisrtLoggin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
@@ -64,7 +65,10 @@ export default function LoginMethod() {
         const data = await res.json();
         console.log("User data:", data);
         sessionStorage.setItem("access_token", data.access_token);
-        setUser(data);
+
+        setUser(data.user);
+        setFisrtLoggin(data.user.isFirstLogin);
+
         setTimeout(() => {
           setIsLoading(false);
           setIsLoggedIn(true);
@@ -78,7 +82,7 @@ export default function LoginMethod() {
   });
   //Lấy token local
   // const accessToken = sessionStorage.getItem("access_token");
-  // const userif = sessionStorage.getItem("user");
+
   //multiStep
   const steps = [
     "Thông tin tài khoản",
@@ -128,22 +132,7 @@ export default function LoginMethod() {
             <div className="loader"></div>
           </div>
         ) : isLoggedIn ? (
-          hadLogin ? (
-            <div className="flex flex-col w-full h-full items-center justify-items-center justify-center">
-              <img
-                className="w-[30%] rounded-md"
-                src="/src/assets/login/dance.gif"
-                alt=""
-              />
-              <h2 className="text-2xl font-bold">Chào Thái!</h2>
-              <p className="text-gray-600">
-                Sẵn sàng để bắt đầu một công việc chưa
-              </p>
-              <button className=" bg-blue-500 text-white py-2 px-4 rounded-md">
-                Bắt đầu
-              </button>
-            </div>
-          ) : (
+          firstLoggin ? (
             <div className="flex flex-col w-full h-full items-center justify-center">
               <MultiStepForm steps={steps} currentStep={currentStep} />
               <div className="my-6 p-10 w-full min-h-[400px]">
@@ -158,6 +147,21 @@ export default function LoginMethod() {
                 currentStep={currentStep}
                 steps={steps}
               />
+            </div>
+          ) : (
+            <div className="flex flex-col w-full h-full items-center justify-items-center justify-center">
+              <img
+                className="w-[30%] rounded-md"
+                src="/src/assets/login/dance.gif"
+                alt=""
+              />
+              <h2 className="text-2xl font-bold">Chào Thái!</h2>
+              <p className="text-gray-600">
+                Sẵn sàng để bắt đầu một công việc chưa
+              </p>
+              <button className=" bg-blue-500 text-white py-2 px-4 rounded-md">
+                Bắt đầu
+              </button>
             </div>
           )
         ) : (

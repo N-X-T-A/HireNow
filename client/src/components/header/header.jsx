@@ -25,7 +25,7 @@ const Header = () => {
         <div className="container-fluid flex justify-center">
           <div className="row min-h-[80px] w-11/12">
             {/* logo */}
-            <div className="col-lg-2 flex items-center justify-center">
+            <div className="col-lg-2 flex items-center justify-start">
               <img
                 className="max-w-28 w-full "
                 src="/src/assets/home/logo.png"

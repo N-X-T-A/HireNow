@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import "../multiStepForm/MultistepForm.css";
 export default function MultiStepForm({ steps, currentStep }) {
   const [newStep, setNewStep] = useState([]);
 
@@ -50,9 +50,9 @@ export default function MultiStepForm({ steps, currentStep }) {
                 )}
               </div>
               <div
-                className={`absolute top-0 text-center mt-16 w-32 text-xs font-medium uppercase ${
+                className={`descript-step-mobile absolute top-0 text-center mt-16 w-32 text-xs font-medium uppercase ${
                   step.highlighted ? "text-gray-900" : "text-gray-400"
-                }`}
+                } `}
               >
                 {step.description}
               </div>
