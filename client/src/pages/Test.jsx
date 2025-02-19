@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { motion } from "framer-motion";
 //Lấy token
 
 // const accessToken = sessionStorage.getItem("access_token");
@@ -15,7 +17,19 @@
 // };
 
 export default function Test() {
-  return <>test</>;
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <motion.div layout onClick={() => setOpen(!open)}>
+        <motion.h2>Xin chào</motion.h2>
+        {open && (
+          <motion.div className="fixed inset-0 flex items-center justify-center bg-black/30 z-[999] w-full h-screen">
+            tôi là thái
+          </motion.div>
+        )}
+      </motion.div>
+    </>
+  );
 }
 
 // //login git
