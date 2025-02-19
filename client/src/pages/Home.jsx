@@ -1,14 +1,17 @@
 import React from "react";
 import Header from "../components/header/header";
-import { motion } from "motion/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebook,
   faInstagram,
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
-
+import { useState } from "react";
+import { motion } from "framer-motion";
 export default function Home() {
+  const [open, setOpen] = useState(false);
+  const [open1, setOpen1] = useState(false);
+
   return (
     <div>
       <Header />
@@ -21,7 +24,7 @@ export default function Home() {
             <div className="relative">
               <img
                 className="w-full  max-h-[750px] object-cover rounded-[10px]"
-                src="/src/assets/home/frame.png"
+                src="/src/assets/home/frame.webp"
                 alt=""
               />
             </div>
@@ -71,6 +74,40 @@ export default function Home() {
                   <FontAwesomeIcon icon={faInstagram} />
                   <FontAwesomeIcon icon={faTwitter} />
                 </div>
+              </div>
+            </div>
+          </div>
+          <div className="respon-m flex-1 w-full max-h-[750px] rounded-[10px]">
+            <div className="flex flex-col w-full h-full items-center gap-2">
+              {/* Hình ảnh đầu tiên */}
+              <motion.div>
+                <motion.div
+                  className="card w-full rounded-[10px] relative overflow-hidden"
+                  style={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }}
+                >
+                  <img
+                    className="w-full min-h-[375px] object-cover rounded-[10px]"
+                    src="/src/assets/home/tartical.jpg"
+                    alt="Tuyển dụng nhân sự"
+                  />
+                  <p className="!mb-0 absolute bottom-0 left-0 bg-gradient-to-t from-black to-transparent p-[20px] w-full text-white">
+                    Việc tuyển dụng nhân sự chất lượng là một yếu tố quyết định
+                    đến sự thành công của dự án
+                  </p>
+                </motion.div>
+                <motion.div className="absolute"></motion.div>
+              </motion.div>
+
+              {/* Hình ảnh thứ hai */}
+              <div
+                className="w-full rounded-[10px] relative overflow-hidden"
+                style={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }}
+              >
+                <img
+                  className="w-full max-h-[375px] object-cover rounded-[10px]"
+                  src="/src/assets/home/tarnical2.jpg"
+                  alt="Hình ảnh tuyển dụng"
+                />
               </div>
             </div>
           </div>
