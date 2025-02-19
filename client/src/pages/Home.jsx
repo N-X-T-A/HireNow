@@ -23,6 +23,7 @@ export default function Home() {
           >
             <div className="relative">
               <img
+                loading="lazy"
                 className="w-full  max-h-[750px] object-cover rounded-[10px]"
                 src="/src/assets/home/frame.webp"
                 alt=""
@@ -111,10 +112,7 @@ export default function Home() {
                   transition={{ duration: 0.3 }}
                   onClick={() => setOpen(false)}
                 >
-                  <motion.div
-                    layoutId="article-card"
-                    className="w-[1000px] h-[80%] bg-black rounded-[10px] shadow-lg overflow-hidden"
-                  >
+                  <div className="w-[1000px] h-[80%] bg-black rounded-[10px] shadow-lg overflow-hidden">
                     <motion.img
                       layoutId="article-image"
                       src="/src/assets/home/tartical.webp"
@@ -122,13 +120,13 @@ export default function Home() {
                     />
                     <motion.p
                       layoutId="article-text"
-                      className="!mb-0 text-white text-[30px] p-[10px]"
+                      className="text-white text-[30px] p-[10px]"
                     >
                       Việc tuyển dụng nhân sự chất lượng là một yếu tố quyết
                       định đến sự thành công của dự án
                     </motion.p>
-                    <motion.p
-                      className="text-white text-[15px] p-[10px]  max-h-[300px] overflow-y-auto"
+                    <div
+                      className="text-white text-[15px] p-[10px] max-h-[300px] overflow-y-auto"
                       style={{
                         scrollbarWidth: "none",
                         msOverflowStyle: "none",
@@ -173,8 +171,8 @@ export default function Home() {
                       nghiệp mới có thể đạt được những mục tiêu lớn, khẳng định
                       vị thế của mình trên thị trường và tiến xa hơn trong tương
                       lai.
-                    </motion.p>
-                  </motion.div>
+                    </div>
+                  </div>
                 </motion.div>
               )}
 
