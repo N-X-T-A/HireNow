@@ -86,7 +86,7 @@ const Intro = memo(() => {
             <motion.div
               layoutId="article-card"
               onClick={() => setOpen(!open)}
-              className={`card w-full rounded-[10px] relative overflow-hidden cursor-pointer ${
+              className={`card w-full rounded-[10px] relative overflow-hidden cursor-pointer transition ease-in-out duration-300 transform hover:-translate-y-[5px] ${
                 open ? "border-0" : "border-[2px] border-gray-300"
               } `}
               style={{
