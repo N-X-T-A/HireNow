@@ -4,12 +4,11 @@ import { faCircleRight } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
 import Slider from "react-slick";
 import { homeImages } from "../../data/data";
-import useInView from "../../contexts/useInView";
+
+import { faShieldHalved } from "@fortawesome/free-solid-svg-icons";
+
 import { useRef } from "react";
 const Sub1 = () => {
-  const ref = useRef(null);
-  const isVisible = useInView(ref);
-
   const sliderData = [
     { src: "/src/assets/home/asian.webp", label: "Nhân lực" },
     { src: "/src/assets/home/high.webp", label: "Nhân lực" },
@@ -29,7 +28,13 @@ const Sub1 = () => {
   };
   return (
     <div className="w-full bg-white flex flex-col  gap-2 mt-[100px] items-center justify-items-center justify-center">
-      <div className="w-[60%] flex flex-col gap-[20px] items-center justify-items-center justify-between">
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        viewport={{ once: true, amount: 0.3 }}
+        className="w-[60%] flex flex-col gap-[20px] items-center justify-items-center justify-between"
+      >
         <p className="!mb-0 text-[40px] font-[700] text-center">
           HireNow đã được xây dựng như thế nào?
         </p>
@@ -45,8 +50,14 @@ const Sub1 = () => {
             Liên hệ ngay <FontAwesomeIcon icon={faCircleRight} />
           </button>
         </div>
-      </div>
-      <div className="relative w-full mt-[30px]">
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+        viewport={{ once: true }}
+        className="relative w-full mt-[30px]"
+      >
         <img
           className=" w-full object-cover rounded-[30px]"
           src="/src/assets/home/Frame.png"
@@ -78,9 +89,15 @@ const Sub1 = () => {
             </span>
           </button>
         </div>
-      </div>
+      </motion.div>
       <div className="pt-[60px] w-full flex gap-3 items-center justify-items-center justify-between">
-        <div className="flex-1 flex flex-col gap-6">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true, amount: 0.3 }}
+          className="flex-1 flex flex-col gap-6"
+        >
           <p className="!mb-0 text-[40px] max-w-[600px] font-[500]">
             Mở động đội ngũ nhân viên của bạn một cách nhanh chóng.
           </p>
@@ -91,20 +108,38 @@ const Sub1 = () => {
           </p>
           <div className="pt-[40px] max-w-[600px] w-full flex gap-4 items-center justify-items-center">
             <div className=" flex-1 flex flex-col gap-2 w-[300px] h-[300px] p-[20px] rounded-[10px] bg-gray-100">
-              <div className="flex-1">
+              <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true, amount: 0.3 }}
+                className="flex-1"
+              >
                 <button className=" w-[50%] px-[20px] py-[8px] rounded-[20px] border-2 border-black">
                   Nhân viên
                 </button>
-              </div>
-              <div className="flex-1">
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                viewport={{ once: true, amount: 0.3 }}
+                className="flex-1"
+              >
                 {" "}
                 <img
                   className="max-w-[200px] flex-1"
                   src="/src/assets/home/GroupContact.png"
                   alt=""
                 />
-              </div>
-              <div className="flex-1 flex items-center justify-items-center justify-between">
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                viewport={{ once: true, amount: 0.3 }}
+                className="flex-1 flex items-center justify-items-center justify-between"
+              >
                 <p className="!mb-0 max-w-[150px] text-[20px]">
                   Bắt đầu thuê nhân viên
                 </p>
@@ -112,41 +147,46 @@ const Sub1 = () => {
                   className="!text-[40px]"
                   icon={faCircleRight}
                 />
-              </div>
+              </motion.div>
             </div>
 
-            <Slider
-              {...settings}
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              viewport={{ once: true, amount: 0.3 }}
               className="w-[300px] h-[300px] flex-1 rounded-[10px]"
             >
-              {sliderData.map((item, index) => (
-                <div key={index} className="relative min-h-[300px]">
-                  <img
-                    className="w-full h-full rounded-[10px] object-cover min-h-[300px] max-h-[300px]"
-                    src={item.src}
-                    alt={item.label}
-                  />
-                  <button className="bg-white/20 absolute top-5 left-5 w-[50%] px-[20px] py-[8px] rounded-[20px] border-2 border-white text-white">
-                    {item.label}
-                  </button>
-                </div>
-              ))}
-            </Slider>
+              <Slider {...settings}>
+                {sliderData.map((item, index) => (
+                  <div key={index} className="relative min-h-[300px]">
+                    <img
+                      className="w-full h-full rounded-[10px] object-cover min-h-[300px] max-h-[300px]"
+                      src={item.src}
+                      alt={item.label}
+                    />
+                    <button className="bg-white/20 absolute top-5 left-5 w-[50%] px-[20px] py-[8px] rounded-[20px] border-2 border-white text-white">
+                      {item.label}
+                    </button>
+                  </div>
+                ))}
+              </Slider>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
         <div className="flex-1 flex items-center justify-items-center gap-3">
           {/* Khu vực a */}
           <motion.div
-            ref={ref}
             initial={{ opacity: 0, y: 50 }}
-            animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-            transition={{ duration: 0.8 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            viewport={{ once: true, amount: 0.3 }}
             className="flex-1 bg-white rounded-[20px] p-6 shadow-md"
           >
-            <h2 className="text-black text-[24px] font-bold">
+            <h2 className="text-black text-[24px] font-[500]">
               MỞ RỘNG ĐỘI NGŨ CỦA BẠN
             </h2>
-            <p className="text-gray-600 text-sm">
+            <p className="text-gray-600 text-[15]">
               Tìm kiếm, tuyển dụng và mở rộng đội ngũ nhân viên một cách dễ
               dàng.
             </p>
@@ -159,10 +199,22 @@ const Sub1 = () => {
               <p className="text-gray-500 text-sm">DOANH NGHIỆP HÀI LÒNG</p>
             </div>
             <ul className="mt-4 text-black text-sm font-semibold">
-              <li>→ Tiếp cận nhân tài nhanh chóng</li>
-              <li>→ Tuyển dụng thông minh, hiệu quả</li>
-              <li>→ Quản lý hồ sơ ứng viên dễ dàng</li>
-              <li>→ Xây dựng đội ngũ bền vững</li>
+              <li>
+                <FontAwesomeIcon icon={faShieldHalved} /> Tiếp cận nhân tài
+                nhanh chóng
+              </li>
+              <li>
+                <FontAwesomeIcon icon={faShieldHalved} /> Tuyển dụng thông minh,
+                hiệu quả
+              </li>
+              <li>
+                <FontAwesomeIcon icon={faShieldHalved} /> Quản lý hồ sơ ứng viên
+                dễ dàng
+              </li>
+              <li>
+                <FontAwesomeIcon icon={faShieldHalved} /> Xây dựng đội ngũ bền
+                vững
+              </li>
             </ul>
             <h3 className="mt-4 text-gray-400 font-semibold text-lg">
               ĐÓ LÀ LÝ DO
@@ -173,8 +225,11 @@ const Sub1 = () => {
           </motion.div>
 
           {/* Khu vực b */}
-          <div
-            ref={ref}
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.7 }}
+            viewport={{ once: true, amount: 0.3 }}
             className="flex-1 flex flex-col gap-2 max-h-[518px] overflow-y-auto"
             style={{
               scrollbarWidth: "none",
@@ -183,18 +238,16 @@ const Sub1 = () => {
           >
             {homeImages.map((image, index) => (
               <motion.img
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1.2 }}
+                viewport={{ once: true, amount: 0.3 }}
                 key={index}
                 className="w-full h-full max-h-[255px] max-w-[383px] object-cover rounded-[20px]"
                 src={image}
-                alt={`Optimized Performance ${index + 1}`}
-                initial={{ opacity: 0, y: 50 }} // Ban đầu ẩn và dịch xuống
-                animate={
-                  isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }
-                } // Khi cuộn tới thì hiện lên
-                transition={{ duration: 0.8, delay: index * 0.2 }} // Hiệu ứng mượt hơn
               />
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>

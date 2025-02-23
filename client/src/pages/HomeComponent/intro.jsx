@@ -17,7 +17,11 @@ const Intro = memo(() => {
       {" "}
       <div className="w-full  bg-white flex rounded-[10px] gap-2">
         {/* section trái */}
-        <div
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
           className="respon-l flex-1 max-w-[800px] w-full rounded-[10px] "
           style={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }}
         >
@@ -29,9 +33,13 @@ const Intro = memo(() => {
               alt=""
             />
           </div>
-        </div>
+        </motion.div>
         {/* section giữa */}
-        <div
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          viewport={{ once: true }}
           className="respon-m flex-1 max-w-[370px] w-full p-[10px] rounded-[10px]"
           style={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }}
         >
@@ -53,10 +61,10 @@ const Intro = memo(() => {
             </div>
             <div className="w-full px-[25px]">
               <div>
-                <p className="!m-0 text-[50px] font-[700]">chuyển đổi</p>
-                <p className="!m-0 text-[40px] font-[400]">trải nghiệm</p>
+                <p className="!m-0 text-[50px] font-[700]">Chuyển đổi</p>
+                <p className="!m-0 text-[40px] font-[400]">Trải nghiệm</p>
                 <p className="!m-0 text-[35px] font-[400]">
-                  tìm kiếm việc làm.
+                  Tìm kiếm việc làm.
                 </p>
                 <p className="!m-0 text-[15px] font-[400] pt-[10px]">
                   khám phá cơ sở dữ liệu việc làm rộng lớn từ các công ty hàng
@@ -78,12 +86,16 @@ const Intro = memo(() => {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
         {/* section phải */}
         <div className="respon-m flex-1 w-full max-h-[750px] rounded-[10px]">
           <div className="flex flex-col w-full h-full items-center gap-2">
             {/* Hình ảnh đầu tiên */}
             <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: 0.2 }}
+              viewport={{ once: true }}
               layoutId="article-card"
               onClick={() => setOpen(!open)}
               className={`card w-full rounded-[10px] relative overflow-hidden cursor-pointer transition ease-in-out duration-300 transform hover:-translate-y-[5px] ${
@@ -181,7 +193,11 @@ const Intro = memo(() => {
             )}
 
             {/* Hình ảnh thứ hai */}
-            <div
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+              viewport={{ once: true }}
               className="w-full rounded-[10px] relative overflow-hidden"
               style={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }}
             >
@@ -190,7 +206,7 @@ const Intro = memo(() => {
                 src="/src/assets/home/tarnical2.webp"
                 alt="Hình ảnh tuyển dụng"
               />
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>
