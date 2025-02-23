@@ -1,8 +1,15 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleRight } from "@fortawesome/free-solid-svg-icons";
+import { motion } from "framer-motion";
 import Slider from "react-slick";
+import { homeImages } from "../../data/data";
+import useInView from "../../contexts/useInView";
+import { useRef } from "react";
 const Sub1 = () => {
+  const ref = useRef(null);
+  const isVisible = useInView(ref);
+
   const sliderData = [
     { src: "/src/assets/home/asian.webp", label: "Nhân lực" },
     { src: "/src/assets/home/high.webp", label: "Nhân lực" },
@@ -127,7 +134,68 @@ const Sub1 = () => {
             </Slider>
           </div>
         </div>
-        <div className="flex-1">a</div>
+        <div className="flex-1 flex items-center justify-items-center gap-3">
+          {/* Khu vực a */}
+          <motion.div
+            ref={ref}
+            initial={{ opacity: 0, y: 50 }}
+            animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+            transition={{ duration: 0.8 }}
+            className="flex-1 bg-white rounded-[20px] p-6 shadow-md"
+          >
+            <h2 className="text-black text-[24px] font-bold">
+              MỞ RỘNG ĐỘI NGŨ CỦA BẠN
+            </h2>
+            <p className="text-gray-600 text-sm">
+              Tìm kiếm, tuyển dụng và mở rộng đội ngũ nhân viên một cách dễ
+              dàng.
+            </p>
+            <div className="mt-4">
+              <p className="font-semibold text-lg">+1000</p>
+              <p className="text-gray-500 text-sm">ỨNG VIÊN MỚI MỖI NGÀY</p>
+            </div>
+            <div className="mt-2">
+              <p className="font-semibold text-lg">95%</p>
+              <p className="text-gray-500 text-sm">DOANH NGHIỆP HÀI LÒNG</p>
+            </div>
+            <ul className="mt-4 text-black text-sm font-semibold">
+              <li>→ Tiếp cận nhân tài nhanh chóng</li>
+              <li>→ Tuyển dụng thông minh, hiệu quả</li>
+              <li>→ Quản lý hồ sơ ứng viên dễ dàng</li>
+              <li>→ Xây dựng đội ngũ bền vững</li>
+            </ul>
+            <h3 className="mt-4 text-gray-400 font-semibold text-lg">
+              ĐÓ LÀ LÝ DO
+            </h3>
+            <h2 className="text-black text-xl font-bold">
+              TỐI ƯU HÓA TUYỂN DỤNG QUAN TRỌNG
+            </h2>
+          </motion.div>
+
+          {/* Khu vực b */}
+          <div
+            ref={ref}
+            className="flex-1 flex flex-col gap-2 max-h-[518px] overflow-y-auto"
+            style={{
+              scrollbarWidth: "none",
+              msOverflowStyle: "none",
+            }}
+          >
+            {homeImages.map((image, index) => (
+              <motion.img
+                key={index}
+                className="w-full h-full max-h-[255px] max-w-[383px] object-cover rounded-[20px]"
+                src={image}
+                alt={`Optimized Performance ${index + 1}`}
+                initial={{ opacity: 0, y: 50 }} // Ban đầu ẩn và dịch xuống
+                animate={
+                  isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }
+                } // Khi cuộn tới thì hiện lên
+                transition={{ duration: 0.8, delay: index * 0.2 }} // Hiệu ứng mượt hơn
+              />
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
