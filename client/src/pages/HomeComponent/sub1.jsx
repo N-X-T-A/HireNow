@@ -74,7 +74,7 @@ const Sub1 = () => {
         </button>
         <div className="absolute bottom-[20%] left-6 flex flex-col gap-2 max-w-[600px]">
           <p className="!mb-0 text-[40px] font-[600] text-white ">
-            Hiệu quả thay đổi trải nghiệm ứng viên của bạn
+            Thay đổi hiệu quả trải nghiệm ứng viên của bạn
           </p>
           <p className="!mb-0 text-[15px] font-[400] text-white text-justify">
             Mang đến một quy trình tuyển dụng mượt mà và chuyên nghiệp hơn. Tối

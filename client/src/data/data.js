@@ -99,3 +99,100 @@ export const jobs = [
     posted: "1 tháng trước",
   },
 ];
+export const slidesCEO = [
+  {
+    id: 1,
+    image: "/src/assets/home/ceo.jpg",
+    quote: "Nature is beautiful",
+    author: "John Doe",
+  },
+  {
+    id: 2,
+    image: "/src/assets/home/ceo1.jpg",
+    quote: "The city never sleeps",
+    author: "Jane Smith",
+  },
+  {
+    id: 3,
+    image: "/src/assets/home/ceo2.jpg",
+    quote: "Future is now",
+    author: "Tech Guru",
+  },
+  {
+    id: 4,
+    image: "/src/assets/home/ceo3.jpg",
+    quote: "Future is now",
+    author: "Tech Guru",
+  },
+  {
+    id: 5,
+    image: "/src/assets/home/ceo4.jpg",
+    quote: "Future is now",
+    author: "Tech Guru",
+  },
+  {
+    id: 6,
+    image: "/src/assets/home/ceo5.jpg",
+    quote: "Future is now",
+    author: "Tech Guru",
+  },
+];
+
+export const introData = {
+  leftImage: "/src/assets/home/frame.webp",
+  logo: "/src/assets/home/logo.png",
+  mainText: ["Chuyển đổi", "Trải nghiệm", "Tìm kiếm việc làm."],
+  subText: "khám phá cơ sở dữ liệu việc làm rộng lớn từ các công ty hàng đầu",
+  buttonText: "Lấy chỗ trống ngay",
+  socialIcons: [
+    { icon: "faFacebook", link: "#" },
+    { icon: "faInstagram", link: "#" },
+    { icon: "faTwitter", link: "#" },
+  ],
+  article: {
+    image: "/src/assets/home/tartical.webp",
+    title:
+      "Việc tuyển dụng nhân sự chất lượng là một yếu tố quyết định đến sự thành công của dự án",
+    content: `
+      Việc tuyển dụng nhân sự chất lượng là một trong những yếu tố quan trọng 
+                      Việc tuyển dụng nhân sự chất lượng là một trong những yếu tố
+                    quan trọng quyết định đến sự thành công và phát triển bền
+                    vững của doanh nghiệp. Một đội ngũ nhân sự giỏi không chỉ
+                    giúp công ty duy trì và nâng cao năng suất làm việc mà còn
+                    đóng vai trò quan trọng trong việc đổi mới, sáng tạo và tạo
+                    ra lợi thế cạnh tranh trên thị trường. Quá trình tuyển dụng
+                    không chỉ đơn giản là tìm kiếm ứng viên có năng lực chuyên
+                    môn cao, mà còn phải đảm bảo sự phù hợp giữa ứng viên với
+                    văn hóa doanh nghiệp, tầm nhìn, sứ mệnh và giá trị cốt lõi
+                    của tổ chức. Những nhân sự phù hợp không chỉ đóng góp vào
+                    hiệu suất công việc mà còn giúp xây dựng môi trường làm việc
+                    chuyên nghiệp, đoàn kết và hiệu quả, từ đó thúc đẩy tinh
+                    thần làm việc của toàn bộ đội ngũ. Một chiến lược tuyển dụng
+                    hiệu quả không chỉ dựa vào việc đánh giá năng lực qua bằng
+                    cấp hay kinh nghiệm làm việc, mà còn phải xem xét các kỹ
+                    năng mềm, khả năng thích nghi với môi trường mới và tinh
+                    thần làm việc nhóm của ứng viên. Các công ty hàng đầu hiện
+                    nay đều tập trung vào việc xây dựng quy trình tuyển dụng
+                    chuyên nghiệp, ứng dụng công nghệ AI để sàng lọc hồ sơ, đánh
+                    giá kỹ năng thực tế thông qua các bài kiểm tra chuyên sâu,
+                    phỏng vấn đa giai đoạn để đảm bảo lựa chọn được những nhân
+                    sự thực sự phù hợp. Bên cạnh đó, việc tuyển dụng nhân sự
+                    chất lượng không chỉ dừng lại ở quá trình tuyển chọn mà còn
+                    liên quan mật thiết đến việc đào tạo, phát triển và giữ chân
+                    nhân tài. Một môi trường làm việc tốt, chính sách đãi ngộ
+                    hợp lý, lộ trình thăng tiến rõ ràng sẽ là những yếu tố then
+                    chốt giúp doanh nghiệp giữ chân được những nhân viên giỏi,
+                    hạn chế tình trạng thay đổi nhân sự liên tục gây ảnh hưởng
+                    đến hoạt động kinh doanh. Cuối cùng, tuyển dụng không phải
+                    là một quá trình đơn lẻ mà là một phần quan trọng trong
+                    chiến lược phát triển dài hạn của doanh nghiệp. Một doanh
+                    nghiệp muốn thành công cần có tầm nhìn xa, không chỉ tập
+                    trung vào tuyển dụng mà còn phải đầu tư vào phát triển nhân
+                    tài, tạo điều kiện để nhân viên phát huy hết tiềm năng của
+                    mình. Chỉ khi sở hữu một đội ngũ nhân sự chất lượng, doanh
+                    nghiệp mới có thể đạt được những mục tiêu lớn, khẳng định vị
+                    thế của mình trên thị trường và tiến xa hơn trong tương lai.
+    `,
+  },
+  rightImage: "/src/assets/home/tarnical2.webp",
+};

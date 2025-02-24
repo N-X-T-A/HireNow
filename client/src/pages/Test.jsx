@@ -1,19 +1,3 @@
-import { Swiper, SwiperSlide } from "swiper/react";
-import {
-  Navigation,
-  Pagination,
-  Scrollbar,
-  A11y,
-  Autoplay,
-} from "swiper/modules";
-import LoginMethod from "./loginMethod";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/scrollbar";
-import "swiper/css";
-import "../pages/pageCss/Login.css";
-import Sub1 from "./HomeComponent/sub1";
 //Lấy token
 
 // const accessToken = sessionStorage.getItem("access_token");
@@ -30,13 +14,111 @@ import Sub1 from "./HomeComponent/sub1";
 //   alert("Đăng xuất thành công!");
 // };
 
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/effect-coverflow";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
+import {
+  Navigation,
+  Pagination,
+  Scrollbar,
+  A11y,
+  Autoplay,
+  EffectCoverflow,
+} from "swiper/modules";
+
+const slideData = [
+  {
+    id: 1,
+    image: "/src/assets/login/3.jpg",
+    quote: "Nature is beautiful",
+    author: "John Doe",
+  },
+  {
+    id: 2,
+    image: "/src/assets/login/1.png",
+    quote: "The city never sleeps",
+    author: "Jane Smith",
+  },
+  {
+    id: 3,
+    image: "/src/assets/login/2.jpg",
+    quote: "Future is now",
+    author: "Tech Guru",
+  },
+  {
+    id: 4,
+    image: "/src/assets/login/4.jpg",
+    quote: "Future is now",
+    author: "Tech Guru",
+  },
+  {
+    id: 5,
+    image: "/src/assets/home/tartical.webp",
+    quote: "Future is now",
+    author: "Tech Guru",
+  },
+  {
+    id: 6,
+    image: "/src/assets/home/tarnical2.webp",
+    quote: "Future is now",
+    author: "Tech Guru",
+  },
+];
+
 export default function Test() {
   return (
-    <>
-      <div className="h-[900px]"></div>
-
-      <Sub1 />
-    </>
+    <div className="w-full flex justify-center items-center">
+      <div className="max-w-[800px] w-full">
+        <Swiper
+          modules={[
+            Navigation,
+            Pagination,
+            Scrollbar,
+            A11y,
+            Autoplay,
+            EffectCoverflow,
+          ]}
+          effect="coverflow"
+          grabCursor={true}
+          initialSlide={1}
+          loopFillGroupWithBlank={false}
+          centeredSlides={true}
+          slidesPerView={"auto"}
+          loopAdditionalSlides={slideData.length}
+          coverflowEffect={{
+            rotate: 50,
+            stretch: 0,
+            depth: 100,
+            modifier: 1,
+            slideShadows: true,
+          }}
+          pagination={{ clickable: true }}
+          autoplay={{ delay: 3000, disableOnInteraction: false }}
+          className="mySwiper"
+        >
+          {slideData.map((slide) => (
+            <SwiperSlide key={slide.id} className="max-w-[300px]">
+              <div className="relative">
+                <img
+                  src={slide.image}
+                  alt="Slide Image"
+                  className="w-full object-cover rounded-[10px]"
+                />
+                <div className="absolute bottom-0 left-0 bg-gradient-to-t from-black to-transparent p-[10px] w-full rounded-[10px]">
+                  <p className="text-white text-[22px] font-[300]">
+                    {slide.quote}
+                  </p>
+                  <p className="text-white text-[15px]">{slide.author}</p>
+                </div>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
+    </div>
   );
 }
 

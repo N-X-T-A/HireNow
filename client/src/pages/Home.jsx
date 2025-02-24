@@ -4,6 +4,7 @@ import Sub1 from "./HomeComponent/sub1";
 
 import Intro from "./HomeComponent/intro";
 import Sub2 from "./HomeComponent/sub2";
+import Blog from "./HomeComponent/blog";
 export default function Home() {
   return (
     <div>
@@ -12,6 +13,7 @@ export default function Home() {
         <Intro />
         <Sub1 />
         <Sub2 />
+        <Blog />
       </div>
     </div>
   );
