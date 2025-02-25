@@ -1,28 +1,28 @@
 export const slideData = [
   {
     id: 1,
-    image: "/src/assets/login/3.jpg",
+    image: "/src/assets/login/3.webp",
     quote:
       "Dưới góc độ công nghệ thông tin, việc tuyển dụng nhân sự chất lượng là một yếu tố quyết định đến sự thành công của dự án. Chúng tôi tìm kiếm những ứng viên không chỉ có kỹ năng chuyên môn vững vàng mà còn có khả năng làm việc nhóm và giải quyết vấn đề sáng tạo.",
     author: "Pablo Escanor - Kỹ sư Phần mềm",
   },
   {
     id: 2,
-    image: "/src/assets/login/1.png",
+    image: "/src/assets/login/1.webp",
     quote:
       "Trong lĩnh vực tiếp thị, sự thấu hiểu khách hàng là chìa khóa dẫn đến thành công. Chúng tôi luôn tìm kiếm những chuyên gia có khả năng phân tích dữ liệu, sáng tạo chiến lược và xây dựng trải nghiệm mua sắm tuyệt vời cho khách hàng.",
     author: "Minh Nguyễn - Chuyên gia Marketing",
   },
   {
     id: 3,
-    image: "/src/assets/login/2.jpg",
+    image: "/src/assets/login/2.webp",
     quote:
       "Mỗi bức ảnh không chỉ là một khoảnh khắc, mà còn là một câu chuyện. Tôi tin rằng nhiếp ảnh không chỉ ghi lại hình ảnh mà còn truyền tải cảm xúc, mang lại giá trị nghệ thuật và kết nối mọi người thông qua những khung hình đẹp.",
     author: "Linh Trần - Nhiếp ảnh gia chuyên nghiệp",
   },
   {
     id: 4,
-    image: "/src/assets/login/4.jpg",
+    image: "/src/assets/login/4.webp",
     quote:
       "Để trở thành một diễn viên giỏi, bạn không chỉ cần tài năng mà còn phải có sự kiên trì và đam mê. Mỗi vai diễn là một thử thách mới, là cơ hội để hóa thân và truyền tải những câu chuyện đầy cảm xúc đến khán giả.",
     author: "Huy Phạm - Diễn viên",
@@ -196,3 +196,21 @@ export const introData = {
   },
   rightImage: "/src/assets/home/tarnical2.webp",
 };
+
+export const menuUserSidebar = [
+  {
+    id: 1,
+    text: "Tổng hợp",
+    path: "/User/UserHome",
+  },
+  {
+    id: 2,
+    text: "Công việc",
+    path: "/User/Jobs",
+  },
+  {
+    id: 3,
+    text: "Test",
+    path: "/User/Test",
+  },
+];

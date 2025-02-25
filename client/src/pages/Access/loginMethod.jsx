@@ -1,53 +1,44 @@
 import React from "react";
-import Header from "../components/header/header";
+import Header from "../../components/header/header";
 import {
   useGoogleLogin,
   GoogleOAuthProvider,
   GoogleLogin,
 } from "@react-oauth/google";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { jwtDecode } from "jwt-decode";
-import { Environment } from "../environments/Environment";
+import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
-import MultiStepForm from "../components/multiStepForm/MultistepForm";
-import StepperControl from "../components/multiStepForm/StepperControl";
-import Account from "../components/steps/Account";
-import JobRecommend from "../components/steps/JobRecommend";
-import Salary from "../components/steps/Salary";
-import Final from "../components/steps/Final";
-import { StepperContext } from "../contexts/StepperContext";
+import MultiStepForm from "../../components/multiStepForm/MultistepForm";
+import StepperControl from "../../components/multiStepForm/StepperControl";
+import Account from "../../components/steps/Account";
+import JobRecommend from "../../components/steps/JobRecommend";
+import Salary from "../../components/steps/Salary";
+import Final from "../../components/steps/Final";
+import { StepperContext } from "../../contexts/StepperContext";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import "swiper/css";
-import "../pages/pageCss/Login.css";
+import "../../pages/pageCss/Login.css";
 export default function LoginMethod() {
   // const GITHUB_CLIENT_ID = Environment.GITHUB_CLIENT_ID;
   // const REDIRECT_URI = "http://localhost:3000/login";
   // const GITHUB_SECRET_ID = Environment.GITHUB_SECRET_ID;
-  const [user, setUser] = useState(() => {
-    const userif = sessionStorage.getItem("user");
-    return userif ? JSON.parse(userif) : null;
-  });
+  const navigate = useNavigate();
+  const [user, setUser] = useState(null);
 
-  const [firstLoggin, setFisrtLoggin] = useState(true);
+  const [firstLoggin, setFisrtLoggin] = useState(() => {
+    return JSON.parse(sessionStorage.getItem("firstLoggin")) ?? true;
+  });
   const [isLoading, setIsLoading] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(() => {
+    return JSON.parse(sessionStorage.getItem("isLoggedIn")) ?? false;
+  });
   const [currentStep, setCurrentStep] = useState(1);
   const [userData, setUserData] = useState("");
   const [finalData, setFinalData] = useState([]);
   //login google
-  const login = () => {
-    setIsLoading(true);
-    const timeoutId = setTimeout(() => {
-      setIsLoading(false);
-      setIsLoggedIn(true);
-    }, 2000);
-
-    return () => clearTimeout(timeoutId);
-  };
   const handleGoogleLogin = useGoogleLogin({
     onSuccess: async (response) => {
       setIsLoading(true);
@@ -64,14 +55,23 @@ export default function LoginMethod() {
 
         const data = await res.json();
         console.log("User data:", data);
+
         sessionStorage.setItem("access_token", data.access_token);
+        sessionStorage.setItem("user", JSON.stringify(data.user));
+        sessionStorage.setItem(
+          "firstLoggin",
+          JSON.stringify(data.user.isFirstLogin)
+        );
+        sessionStorage.setItem("isLoggedIn", JSON.stringify(true));
 
-        setUser(data.user);
-        setFisrtLoggin(data.user.isFirstLogin);
-
+        // loading
         setTimeout(() => {
-          setIsLoading(false);
+          setUser(data.user);
+          setFisrtLoggin(data.user.isFirstLogin);
           setIsLoggedIn(true);
+          setIsLoading(false);
+
+          window.dispatchEvent(new Event("userUpdated"));
         }, 3000);
       } catch (error) {
         console.error("Lỗi đăng nhập:", error);
@@ -80,6 +80,7 @@ export default function LoginMethod() {
     },
     onError: () => console.log("Login Failed"),
   });
+
   //Lấy token local
   // const accessToken = sessionStorage.getItem("access_token");
 
@@ -108,7 +109,6 @@ export default function LoginMethod() {
   const handleClick = (action) => {
     if (action === "Tiếp theo") {
       if (currentStep === steps.length) {
-        // Khi đến bước cuối cùng, in dữ liệu ra console
         console.log("Dữ liệu cuối cùng:", userData);
         setFinalData(userData);
       } else {
@@ -149,17 +149,22 @@ export default function LoginMethod() {
               />
             </div>
           ) : (
-            <div className="flex flex-col w-full h-full items-center justify-items-center justify-center">
+            <div className="flex flex-col gap-3 w-full h-full items-center justify-items-center justify-center">
               <img
-                className="w-[30%] rounded-md"
-                src="/src/assets/login/dance.gif"
+                className="w-[30%] rounded-[100px]"
+                src={user.photoURL}
                 alt=""
               />
-              <h2 className="text-2xl font-bold">Chào Thái!</h2>
+              <h2 className="text-2xl font-bold !mb-0">
+                Chào {user.username} !
+              </h2>
               <p className="text-gray-600">
                 Sẵn sàng để bắt đầu một công việc chưa
               </p>
-              <button className=" bg-blue-500 text-white py-2 px-4 rounded-md">
+              <button
+                onClick={() => navigate("/User/UserHome")}
+                className=" bg-blue-500 text-white py-2 px-4 rounded-md"
+              >
                 Bắt đầu
               </button>
             </div>

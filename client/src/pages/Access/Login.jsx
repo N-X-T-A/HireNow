@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "../components/header/header";
+import Header from "../../components/header/header";
 import { Swiper, SwiperSlide } from "swiper/react";
 import {
   Navigation,
@@ -14,10 +14,10 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import "swiper/css";
-import "../pages/pageCss/Login.css";
+import "../pageCss/Login.css";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-import { Environment } from "../environments/Environment";
-import { slideData } from "../data/data";
+import { Environment } from "../../environments/Environment";
+import { slideData } from "../../data/data";
 export default function Login() {
   const GG_ID = Environment.GG_CLIENT_ID;
 
