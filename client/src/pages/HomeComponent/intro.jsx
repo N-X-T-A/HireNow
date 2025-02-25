@@ -62,7 +62,7 @@ const Intro = memo(() => {
             {mainText.map((text, index) => (
               <p
                 key={index}
-                className={`!m-0 text-[${50 - index * 10}px] font-[${700 - index * 300}]`}
+                className={`m-0 text-[${50 - index * 5}px] font-[${600 - index * 100}]`}
               >
                 {text}
               </p>
