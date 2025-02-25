@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../../components/header/header";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation, Navigate } from "react-router-dom";
 import NavigateBtn from "./NavigateBtn";
 const UserManager = () => {
   return (
