@@ -214,3 +214,31 @@ export const menuUserSidebar = [
     path: "/User/Test",
   },
 ];
+
+export const dataSkill = [
+  {
+    id: 1,
+    skill: "JavaScript",
+  },
+  {
+    id: 2,
+    skill: "Python",
+  },
+  {
+    id: 3,
+    skill: "React",
+  },
+  {
+    id: 4,
+    skill: "Node.js",
+  },
+
+  {
+    id: 5,
+    skill: "SQL",
+  },
+  {
+    id: 5,
+    skill: "Mongodb",
+  },
+];
