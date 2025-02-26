@@ -2,19 +2,17 @@ import React from "react";
 import Header from "../../components/header/header";
 import { Outlet, useLocation, Navigate } from "react-router-dom";
 import NavigateBtn from "./NavigateBtn";
+import withLayout from "../../layout/withLayout";
 const UserManager = () => {
   return (
     <>
-      <div className="fixed bottom-[10%] right-[-30px] transform -translate-x-1/2 -translate-y-1/2">
-        <NavigateBtn />
-      </div>
-
-      <div className="">
-        <Header />
-        <Outlet />
+      <div className="h-[1000px] max-h-[600px] flex justify-center ">
+        <div className=" w-full !max-w-[1700px]">
+          <Outlet />
+        </div>
       </div>
     </>
   );
 };
 
-export default UserManager;
+export default withLayout(UserManager);

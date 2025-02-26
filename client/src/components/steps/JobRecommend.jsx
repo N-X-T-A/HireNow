@@ -1,17 +1,24 @@
-import React from "react";
-import { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { StepperContext } from "../../contexts/StepperContext";
+
 const JobRecommend = () => {
   const { userData, setUserData } = useContext(StepperContext);
   const [formData, setFormData] = useState({
-    jobPreference: userData.jobPreference || "",
-    experience: userData.experience || "",
+    jobPreference: userData.education?.[0]?.jobPreference || "",
+    experience: userData.education?.[0]?.experience || "",
   });
+
+  useEffect(() => {
+    // Cập nhật ngay khi formData thay đổi
+    setUserData((prev) => ({
+      ...prev,
+      education: { ...formData },
+    }));
+  }, [formData, setUserData]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-    setUserData((prev) => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   return (
@@ -35,4 +42,5 @@ const JobRecommend = () => {
     </div>
   );
 };
+
 export default JobRecommend;
