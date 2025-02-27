@@ -14,10 +14,14 @@ router.post(
 );
 
 router.post("/signin", asyncHandler(AuthController.signIn));
+
+router.get("/signout", asyncHandler(AuthController.signOut));
+
 router.post(
   "/google",
   [validation.verifyGoogleToken],
   asyncHandler(AuthController.google)
 );
+router.post("/first-login", asyncHandler(AuthController.firstLogin));
 
 module.exports = router;

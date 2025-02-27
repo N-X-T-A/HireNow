@@ -4,8 +4,8 @@ const { CREATED, OK } = require("../core/success.response");
 const { AuthFailureError } = require("../core/error.response");
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
 const { generateToken } = require("../utils/generateToken");
+
 class AuthController {
   signUp = async (req, res) => {
     try {
@@ -52,6 +52,11 @@ class AuthController {
 
       const token = generateToken(user);
 
+      res.cookie("access_token", token, {
+        maxAge: 7 * 24 * 60 * 60 * 100,
+        httpOnly: true,
+      });
+
       return new OK({
         message: "Đăng nhập tài khoản thành công!",
         metadata: { token, user },
@@ -61,6 +66,11 @@ class AuthController {
         message: error.message || "Internal Server Error",
       });
     }
+  };
+
+  signOut = (req, res) => {
+    res.clearCookie("access_token");
+    res.send("cookie cleared");
   };
 
   google = async (req, res) => {
@@ -76,11 +86,21 @@ class AuthController {
       user.passwordHash = undefined;
       const userToken = generateToken(user);
 
+      res.cookie("access_token", userToken, {
+        maxAge: 7 * 24 * 60 * 60 * 100,
+        httpOnly: true,
+      });
+
       res.json({ user, token: userToken });
     } catch (error) {
       console.error("Lỗi xác thực Google:", error);
       res.status(401).json({ message: "Xác thực không hợp lệ" });
     }
+  };
+
+  firstLogin = async (req, res) => {
+    try {
+    } catch (error) {}
   };
 }
 

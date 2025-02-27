@@ -1,0 +1,48 @@
+const cloudinary = require("cloudinary").v2;
+
+cloudinary.config({
+  cloud_name: "dna4rtodi",
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+/**
+ * Uploads an image to Cloudinary in the "uploads/images" folder.
+ * @param {string} filePath - The local path of the image to upload.
+ * @returns {Promise<object>} - The uploaded image details.
+ */
+const uploadImage = async (filePath) => {
+  try {
+    const result = await cloudinary.uploader.upload(filePath, {
+      folder: "uploads/images",
+    });
+    console.log("Image upload successful:", result);
+    return result;
+  } catch (error) {
+    console.error("Error uploading image:", error);
+    throw error;
+  }
+};
+
+/**
+ * Uploads a resume to Cloudinary in the "uploads/resumes" folder.
+ * @param {string} filePath - The local path of the resume to upload.
+ * @returns {Promise<object>} - The uploaded resume details.
+ */
+const uploadResume = async (filePath) => {
+  try {
+    const result = await cloudinary.uploader.upload(filePath, {
+      folder: "uploads/resumes",
+    });
+    console.log("Resume upload successful:", result);
+    return result;
+  } catch (error) {
+    console.error("Error uploading resume:", error);
+    throw error;
+  }
+};
+
+module.exports = {
+  uploadImage,
+  uploadResume,
+};
