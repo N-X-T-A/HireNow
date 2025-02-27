@@ -3,21 +3,23 @@ const mongoose = require("mongoose");
 
 const ApplicationSchema = new mongoose.Schema(
   {
-    jobId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "JobListing",
-      required: true,
-    },
-    userId: {
+    _id: { type: mongoose.Types.ObjectId, auto: true },
+    user_id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
-    coverLetter: { type: String },
+    job_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Job",
+      required: true,
+    },
+    cover_letter: { type: String },
+    resume: { type: String },
     status: {
       type: String,
-      enum: ["Pending", "Reviewed", "Accepted", "Rejected"],
-      default: "Pending",
+      enum: ["Submitted", "Viewed", "Interview", "Rejected", "Accepted"],
+      default: "Submitted",
     },
   },
   { timestamps: true }

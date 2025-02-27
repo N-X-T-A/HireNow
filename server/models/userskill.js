@@ -1,20 +1,23 @@
 "use strict";
 const mongoose = require("mongoose");
 
-const UserSkillSchema = new mongoose.Schema(
-  {
-    userId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
-    },
-    skillId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Skill",
-      required: true,
-    },
+const UserSkillSchema = new mongoose.Schema({
+  _id: { type: mongoose.Types.ObjectId, auto: true },
+  user_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
   },
-  { timestamps: true }
-);
+  skill_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Skill",
+    required: true,
+  },
+  level: {
+    type: String,
+    enum: ["Beginner", "Intermediate", "Advanced"],
+    required: true,
+  },
+});
 
 module.exports = mongoose.model("UserSkill", UserSkillSchema);

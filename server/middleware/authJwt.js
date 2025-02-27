@@ -12,23 +12,48 @@ const catchError = (err, res) => {
   return res.status(401).send({ message: "Unauthorized!" });
 };
 
-const verifyToken = (req, res, next) => {
-  let token = req.headers["authorization"];
+// const verifyToken = (req, res, next) => {
+//   let token = req.headers["authorization"];
 
-  if (!token) {
-    return res.status(403).send({ message: "No token provided!" });
+//   if (!token) {
+//     return res.status(403).send({ message: "No token provided!" });
+//   }
+
+//   if (token.startsWith("Bearer ")) {
+//     token = token.slice(7, token.length);
+//   }
+
+//   jwt.verify(token, config.secret, (err, decoded) => {
+//     if (err) {
+//       console.log(`JWT error: ${err.message}`);
+//       return catchError(err, res);
+//     }
+//     req.user = { user_id: decoded.user_id, role: decoded.role };
+//     next();
+//   });
+// };
+
+let verifyToken = (req, res, next) => {
+  let bearerToken = null;
+  // check if bearer header exists via API request
+  let bearerHeader = req.headers["authorization"];
+  if (typeof bearerHeader !== "undefined") {
+    // authorization: bearer token12345
+    bearerToken = bearerHeader.split(" ")[1];
   }
 
-  if (token.startsWith("Bearer ")) {
-    token = token.slice(7, token.length);
-  }
+  // get cookieToken
+  let cookieToken = req.cookies.access_token;
 
-  jwt.verify(token, config.secret, (err, decoded) => {
+  // set token from bearer header token or cookieToken
+  let token = bearerToken || cookieToken;
+
+  jwt.verify(token, SECRET_KEY, (err, data) => {
     if (err) {
-      console.log(`JWT error: ${err.message}`);
-      return catchError(err, res);
+      return res.sendStatus(403); // forbidden
     }
-    req.user = { user_id: decoded.user_id, role: decoded.role };
+    req.token = token;
+    req.auth = data;
     next();
   });
 };
