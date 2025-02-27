@@ -3,7 +3,8 @@ const mongoose = require("mongoose");
 
 const SkillSchema = new mongoose.Schema(
   {
-    name: { type: String, required: true, unique: true },
+    _id: { type: mongoose.Types.ObjectId, auto: true },
+    name: { type: String, required: true },
   },
   { timestamps: true }
 );

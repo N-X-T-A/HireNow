@@ -3,16 +3,13 @@ const mongoose = require("mongoose");
 
 const CompanySchema = new mongoose.Schema(
   {
-    userId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
-    },
+    _id: { type: mongoose.Types.ObjectId, auto: true },
     name: { type: String, required: true },
     industry: { type: String },
+    location: { type: String },
     description: { type: String },
     website: { type: String },
-    logoURL: { type: String },
+    logo: { type: String },
   },
   { timestamps: true }
 );
