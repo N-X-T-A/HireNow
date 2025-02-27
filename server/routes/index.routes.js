@@ -11,5 +11,5 @@ router.use(function (req, res, next) {
 });
 
 router.use("/v1/auth", require("./auth.routes"));
-router.use("/v1/joblistings", require("./joblistings.routes"));
+
 module.exports = router;
