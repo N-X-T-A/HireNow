@@ -14,8 +14,69 @@
 //   alert("Đăng xuất thành công!");
 // };
 
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/effect-coverflow";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
+
+import { useState } from "react";
+
 export default function Test() {
-  return <>test</>;
+  const [selectedJobId, setSelectedJobId] = useState(null);
+
+  const jobs = [
+    { id: 1, job: "Google" },
+    { id: 2, job: "Netflix" },
+    { id: 3, job: "Facebook" },
+  ];
+  const jobDetails = [
+    {
+      id: 1,
+      name: "Google",
+      description: "Công ty công nghệ lớn nhất thế giới.",
+    },
+    {
+      id: 2,
+      name: "Netflix",
+      description: "Dịch vụ phát trực tuyến phổ biến.",
+    },
+    { id: 3, name: "Facebook", description: "Nền tảng mạng xã hội lớn nhất." },
+  ];
+  const selectedJob = jobDetails.find((job) => job.id === selectedJobId);
+  return (
+    <div className="flex gap-4 p-4">
+      {/* Danh sách công việc bên trái */}
+      <div className="w-1/3 bg-gray-100 p-4 rounded-lg">
+        <h2 className="text-lg font-bold mb-2">Danh sách công việc</h2>
+        <ul>
+          {jobs.map((job) => (
+            <li
+              key={job.id}
+              className={`p-2 cursor-pointer rounded ${selectedJobId === job.id ? "bg-blue-300" : "hover:bg-gray-200"}`}
+              onClick={() => setSelectedJobId(job.id)}
+            >
+              {job.job}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Chi tiết công việc bên phải */}
+      <div className="w-2/3 bg-white p-4 rounded-lg shadow">
+        <h2 className="text-lg font-bold mb-2">Chi tiết công việc</h2>
+        {selectedJob ? (
+          <div>
+            <h3 className="text-xl font-semibold">{selectedJob.name}</h3>
+            <p className="text-gray-600">{selectedJob.description}</p>
+          </div>
+        ) : (
+          <p className="text-gray-500">Chọn một công việc để xem chi tiết.</p>
+        )}
+      </div>
+    </div>
+  );
 }
 
 // //login git

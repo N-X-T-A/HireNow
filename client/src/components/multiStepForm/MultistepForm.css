@@ -1,0 +1,11 @@
+@media (max-width: 957px) {
+  .descript-step-mobile {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 414px) {
+  .descript-step-mobile {
+    display: none;
+  }
+}
