@@ -34,9 +34,6 @@ const Header = (shouldFetch) => {
     return () => window.removeEventListener("userUpdated", handleUserUpdate);
   }, [shouldFetch]);
 
-  //log test
-  console.log("current user: ", currentUser);
-
   return (
     <>
       <header className="h-max">

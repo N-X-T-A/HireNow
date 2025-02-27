@@ -20,103 +20,60 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
-import {
-  Navigation,
-  Pagination,
-  Scrollbar,
-  A11y,
-  Autoplay,
-  EffectCoverflow,
-} from "swiper/modules";
 
-const slideData = [
-  {
-    id: 1,
-    image: "/src/assets/login/3.jpg",
-    quote: "Nature is beautiful",
-    author: "John Doe",
-  },
-  {
-    id: 2,
-    image: "/src/assets/login/1.png",
-    quote: "The city never sleeps",
-    author: "Jane Smith",
-  },
-  {
-    id: 3,
-    image: "/src/assets/login/2.jpg",
-    quote: "Future is now",
-    author: "Tech Guru",
-  },
-  {
-    id: 4,
-    image: "/src/assets/login/4.jpg",
-    quote: "Future is now",
-    author: "Tech Guru",
-  },
-  {
-    id: 5,
-    image: "/src/assets/home/tartical.webp",
-    quote: "Future is now",
-    author: "Tech Guru",
-  },
-  {
-    id: 6,
-    image: "/src/assets/home/tarnical2.webp",
-    quote: "Future is now",
-    author: "Tech Guru",
-  },
-];
+import { useState } from "react";
 
 export default function Test() {
+  const [selectedJobId, setSelectedJobId] = useState(null);
+
+  const jobs = [
+    { id: 1, job: "Google" },
+    { id: 2, job: "Netflix" },
+    { id: 3, job: "Facebook" },
+  ];
+  const jobDetails = [
+    {
+      id: 1,
+      name: "Google",
+      description: "Công ty công nghệ lớn nhất thế giới.",
+    },
+    {
+      id: 2,
+      name: "Netflix",
+      description: "Dịch vụ phát trực tuyến phổ biến.",
+    },
+    { id: 3, name: "Facebook", description: "Nền tảng mạng xã hội lớn nhất." },
+  ];
+  const selectedJob = jobDetails.find((job) => job.id === selectedJobId);
   return (
-    <div className="w-full flex justify-center items-center">
-      <div className="max-w-[800px] w-full">
-        <Swiper
-          modules={[
-            Navigation,
-            Pagination,
-            Scrollbar,
-            A11y,
-            Autoplay,
-            EffectCoverflow,
-          ]}
-          effect="coverflow"
-          grabCursor={true}
-          initialSlide={1}
-          loopFillGroupWithBlank={false}
-          centeredSlides={true}
-          slidesPerView={"auto"}
-          loopAdditionalSlides={slideData.length}
-          coverflowEffect={{
-            rotate: 50,
-            stretch: 0,
-            depth: 100,
-            modifier: 1,
-            slideShadows: true,
-          }}
-          pagination={{ clickable: true }}
-          autoplay={{ delay: 3000, disableOnInteraction: false }}
-          className="mySwiper"
-        >
-          {slideData.map((slide) => (
-            <SwiperSlide key={slide.id} className="max-w-[300px]">
-              <div className="relative">
-                <img
-                  src={slide.image}
-                  alt="Slide Image"
-                  className="w-full object-cover rounded-[10px]"
-                />
-                <div className="absolute bottom-0 left-0 bg-gradient-to-t from-black to-transparent p-[10px] w-full rounded-[10px]">
-                  <p className="text-white text-[22px] font-[300]">
-                    {slide.quote}
-                  </p>
-                  <p className="text-white text-[15px]">{slide.author}</p>
-                </div>
-              </div>
-            </SwiperSlide>
+    <div className="flex gap-4 p-4">
+      {/* Danh sách công việc bên trái */}
+      <div className="w-1/3 bg-gray-100 p-4 rounded-lg">
+        <h2 className="text-lg font-bold mb-2">Danh sách công việc</h2>
+        <ul>
+          {jobs.map((job) => (
+            <li
+              key={job.id}
+              className={`p-2 cursor-pointer rounded ${selectedJobId === job.id ? "bg-blue-300" : "hover:bg-gray-200"}`}
+              onClick={() => setSelectedJobId(job.id)}
+            >
+              {job.job}
+            </li>
           ))}
-        </Swiper>
+        </ul>
+      </div>
+
+      {/* Chi tiết công việc bên phải */}
+      <div className="w-2/3 bg-white p-4 rounded-lg shadow">
+        <h2 className="text-lg font-bold mb-2">Chi tiết công việc</h2>
+        {selectedJob ? (
+          <div>
+            <h3 className="text-xl font-semibold">{selectedJob.name}</h3>
+            <p className="text-gray-600">{selectedJob.description}</p>
+          </div>
+        ) : (
+          <p className="text-gray-500">Chọn một công việc để xem chi tiết.</p>
+        )}
       </div>
     </div>
   );

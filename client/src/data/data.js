@@ -242,3 +242,94 @@ export const dataSkill = [
     skill: "Mongodb",
   },
 ];
+
+export const UserJobs = [
+  {
+    id: 1,
+    image: "/src/assets/user/google.png",
+    title: "Google Dev. Backend",
+    company: "Google",
+    skills: ["Thạc sĩ", "Remote", "Full-time"],
+    description:
+      "Google đang tìm kiếm lập trình viên backend có kinh nghiệm phát triển hệ thống microservices, tối ưu hiệu suất và bảo mật dữ liệu. Ứng viên cần có kỹ năng với Node.js, Python, và SQL.",
+    salary: "$192",
+    postedTime: "Đăng 5 ngày trước",
+  },
+  {
+    id: 2,
+    image: "/src/assets/user/microsoft.png",
+    title: "Microsoft AI Engineer",
+    company: "Microsoft",
+    skills: ["Cử nhân", "Onsite", "Part-time"],
+    description:
+      "Microsoft đang tuyển kỹ sư AI để nghiên cứu và phát triển các mô hình machine learning phục vụ ứng dụng thực tế. Yêu cầu có kinh nghiệm với TensorFlow, PyTorch, và xử lý ngôn ngữ tự nhiên.",
+    salary: "$250",
+    postedTime: "Đăng 3 ngày trước",
+  },
+  {
+    id: 3,
+    image: "/src/assets/user/netflix.png",
+    title: "Netflix Frontend Developer",
+    company: "Netflix",
+    skills: ["Trung cấp", "Remote", "Contract"],
+    description:
+      "Netflix cần tìm lập trình viên frontend có kinh nghiệm với React.js và TypeScript để phát triển UI/UX tối ưu cho nền tảng streaming.",
+    salary: "$150",
+    postedTime: "Đăng 1 tuần trước",
+  },
+  {
+    id: 4,
+    image: "/src/assets/user/amazon.png",
+    title: "AWS Cloud Architect",
+    company: "Amazon",
+    skills: ["Thạc sĩ", "Onsite", "Full-time"],
+    description:
+      "Amazon Web Services đang tìm kiếm kỹ sư giải pháp cloud có kinh nghiệm với AWS, Kubernetes, và hệ thống phân tán. Công việc yêu cầu kiến thức về bảo mật cloud và tối ưu hóa hiệu suất hệ thống.",
+    salary: "$220/hour",
+    postedTime: "Đăng 2 ngày trước",
+  },
+  {
+    id: 5,
+    image: "/src/assets/user/tesla.png",
+    title: "Tesla Embedded Software Engineer",
+    company: "Tesla",
+    skills: ["Cử nhân", "Onsite", "Full-time"],
+    description:
+      "Tesla đang tuyển kỹ sư phần mềm nhúng để làm việc trên hệ thống điều khiển xe điện. Ứng viên cần có kinh nghiệm lập trình C/C++ và hệ thống thời gian thực (RTOS).",
+    salary: "$180/hour",
+    postedTime: "Đăng 6 ngày trước",
+  },
+  {
+    id: 6,
+    image: "/src/assets/user/bloomberg.png",
+    title: "Bloomberg Data Scientist",
+    company: "Bloomberg",
+    skills: ["Tiến sĩ", "Remote", "Full-time"],
+    description:
+      "Bloomberg đang tìm kiếm chuyên gia khoa học dữ liệu để xây dựng mô hình dự báo thị trường tài chính. Yêu cầu kinh nghiệm về Python, R, và machine learning.",
+    salary: "$300/hour",
+    postedTime: "Đăng 4 ngày trước",
+  },
+  {
+    id: 7,
+    image: "/src/assets/user/airbnb.png",
+    title: "Airbnb UX Designer",
+    company: "Airbnb",
+    skills: ["Cử nhân", "Remote", "Full-time"],
+    description:
+      "Airbnb đang tìm kiếm UX Designer để thiết kế giao diện tối ưu cho trải nghiệm đặt phòng. Ứng viên cần có kỹ năng với Figma, Sketch, và nghiên cứu người dùng.",
+    salary: "$160/hour",
+    postedTime: "Đăng 3 ngày trước",
+  },
+  {
+    id: 8,
+    image: "/src/assets/user/spotify.png",
+    title: "Spotify Data Engineer",
+    company: "Spotify",
+    skills: ["Cử nhân", "Hybrid", "Full-time"],
+    description:
+      "Spotify đang tuyển kỹ sư dữ liệu có kinh nghiệm với Big Data, Spark, và hệ thống ETL để tối ưu hóa dữ liệu người dùng cho đề xuất nhạc.",
+    salary: "$190/hour",
+    postedTime: "Đăng 1 tuần trước",
+  },
+];

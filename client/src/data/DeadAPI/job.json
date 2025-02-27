@@ -1,0 +1,53 @@
+{
+  "jobs": [
+    {
+      "id": 1,
+      "title": "Frontend Developer",
+      "salary": 1000,
+      "description": "Lập trình viên frontend, làm việc với ReactJS và VueJS.",
+      "company_id": 1
+    }
+  ],
+  "jobs/:id": [
+    {
+      "id": 1,
+      "title": "Frontend Developer",
+      "salary": 1000,
+      "description": "Lập trình viên frontend, làm việc với ReactJS và VueJS.",
+      "company_id": 1
+    }
+  ],
+
+  "companies": [
+    {
+      "id": 1,
+      "name": "Google",
+      "description": "Công ty công nghệ lớn nhất thế giới."
+    },
+    {
+      "id": 2,
+      "name": "Netflix",
+      "description": "Dịch vụ phát trực tuyến phổ biến."
+    },
+    {
+      "id": 3,
+      "name": "Facebook",
+      "description": "Nền tảng mạng xã hội lớn nhất."
+    }
+  ],
+
+  "jobsDetail": [
+    {
+      "id": 1,
+      "description": "Lập trình viên frontend, làm việc với ReactJS và VueJS."
+    },
+    {
+      "id": 2,
+      "description": "Lập trình viên backend, sử dụng Node.js và Django."
+    },
+    {
+      "id": 3,
+      "description": "Làm cả frontend và backend, yêu cầu kỹ năng cao."
+    }
+  ]
+}

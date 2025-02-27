@@ -26,7 +26,9 @@ export default function LoginMethod() {
   // const REDIRECT_URI = "http://localhost:3000/login";
   // const GITHUB_SECRET_ID = Environment.GITHUB_SECRET_ID;
   const navigate = useNavigate();
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(() => {
+    return JSON.parse(sessionStorage.getItem("user")) || null;
+  });
 
   const [firstLoggin, setFisrtLoggin] = useState(() => {
     return JSON.parse(sessionStorage.getItem("firstLoggin")) ?? true;
@@ -152,11 +154,11 @@ export default function LoginMethod() {
             <div className="flex flex-col gap-3 w-full h-full items-center justify-items-center justify-center">
               <img
                 className="w-[30%] rounded-[100px]"
-                src={user.photoURL}
+                src={user?.photoURL}
                 alt=""
               />
               <h2 className="text-2xl font-bold !mb-0">
-                Chào {user.username} !
+                Chào {user?.username} !
               </h2>
               <p className="text-gray-600">
                 Sẵn sàng để bắt đầu một công việc chưa
