@@ -1,14 +1,15 @@
 "use strict";
 
-const User = require("./user.model");
-const Company = require("./company.model");
-const Job = require("./job.model");
-const Application = require("./application.model");
-const Message = require("./message.model");
-const Skill = require("./skill.model");
-const UserSkill = require("./userSkill.model");
-const UserExperience = require("./userExperience.model");
-const UserEducation = require("./userEducation.model");
+const User = require("./user");
+const Company = require("./company");
+const Job = require("./job");
+const Application = require("./application");
+const Message = require("./message");
+const Skill = require("./skill");
+const UserSkill = require("./userSkill");
+const UserExperience = require("./userExperience");
+const UserEducation = require("./userEducation");
+const JobSkill = require("./jobSkill");
 
 module.exports = {
   User,
@@ -20,4 +21,5 @@ module.exports = {
   UserSkill,
   UserExperience,
   UserEducation,
+  JobSkill,
 };

@@ -131,104 +131,13 @@ const UserPage2 = () => {
 
         {/* Phần 2 (Chiếm 7 phần) */}
         <div
-          className="hidden md:flex md:flex-[7] p-2  max-h-[900px] overflow-y-auto w-full"
+          className="hidden md:flex md:flex-[7] bg-red-300  p-2  max-h-[900px] overflow-y-auto"
           style={{
             scrollbarWidth: "none",
             msOverflowStyle: "none",
           }}
         >
-          <div
-            className="flex rounded-lg w-full"
-            style={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }}
-          >
-            <div className="flex-[7] w-full  flex flex-col border-r-2 border-gray-200">
-              <div className="flex justify-between items-center p-4 border-b-2 border-gray-200">
-                <p className="!mb-0 text-[30px] font-[500]">
-                  Google Dev. Backend
-                </p>
-                <div className="flex gap-2">
-                  <p className="!mb-0 px-2 py-1 text-[13px] rounded-xl font-[500] bg-green-200 text-green-500">
-                    Thạc sĩ
-                  </p>
-                  <p className="!mb-0 px-2 py-1 text-[13px] rounded-xl font-[500] bg-red-200 text-red-500">
-                    Remote
-                  </p>
-                  <p className="!mb-0 px-2 py-1 text-[13px] rounded-xl font-[500] bg-blue-200 text-blue-500">
-                    Full-time
-                  </p>
-                </div>
-              </div>
-              <div className="flex flex-col p-4 justify-center gap-[50px]">
-                <div className="flex flex-col justify-center item-center">
-                  <p className="font-[500]">Tóm tắt về vai trò:</p>
-                  <p className="!mb-0 font-[400]">
-                    Google Dev. Backend chịu trách nhiệm phát triển và duy trì
-                    hệ thống backend, đặc biệt là các dịch vụ microservices, đảm
-                    bảo hiệu suất cao, khả năng mở rộng và bảo mật tốt. Vị trí
-                    này yêu cầu làm việc với SQL, NoSQL để quản lý dữ liệu, lập
-                    trình với Node.js, Python để phát triển API và các dịch vụ
-                    backend. Ngoài ra, lập trình viên sẽ phối hợp chặt chẽ với
-                    các nhóm frontend, AI, DevOps để triển khai và tích hợp hệ
-                    thống một cách hiệu quả. Kinh nghiệm với Node.js, Python,
-                    SQL cùng kiến thức về microservices và bảo mật backend là
-                    những yếu tố quan trọng cho vị trí này.
-                  </p>
-                </div>
-                <div className="flex flex-col justify-center item-center">
-                  <p className="font-[500]">về trách nhiệm công việc: </p>
-                  <p className="!mb-0 font-[400]">
-                    Google Dev. Backend chịu trách nhiệm thiết kế và phát triển
-                    hệ thống backend với kiến trúc microservices, đảm bảo hiệu
-                    suất, bảo mật và khả năng mở rộng. Công việc bao gồm xây
-                    dựng và tối ưu API để giao tiếp giữa frontend, mobile app và
-                    các dịch vụ khác, quản lý cơ sở dữ liệu SQL/NoSQL, cũng như
-                    cải thiện bảo mật hệ thống thông qua các cơ chế xác thực,
-                    phân quyền và mã hóa dữ liệu. Ngoài ra, lập trình viên sẽ
-                    tích hợp hệ thống với AI, DevOps và các dịch vụ đám mây,
-                    đồng thời giám sát, debug và bảo trì để đảm bảo hệ thống
-                    hoạt động ổn định. Họ cũng cần phối hợp chặt chẽ với các
-                    nhóm kỹ thuật khác để duy trì tính nhất quán và hiệu quả của
-                    sản phẩm.
-                  </p>
-                </div>
-                <div className="flex flex-col justify-center item-center">
-                  <p className="font-[500]">Các yêu cầu kĩ năng:</p>
-                  <div className="flex gap-3">
-                    <p className="!mb-0 px-2 py-1 text-[13px] rounded-xl font-[500] bg-gray-200">
-                      Figma
-                    </p>
-                    <p className="!mb-0 px-2 py-1 text-[13px] rounded-xl font-[500] bg-gray-200">
-                      Dotnet
-                    </p>
-                    <p className="!mb-0 px-2 py-1 text-[13px] rounded-xl font-[500] bg-gray-200">
-                      Json
-                    </p>
-                    <p className="!mb-0 px-2 py-1 text-[13px] rounded-xl font-[500] bg-gray-200">
-                      Mongodb
-                    </p>
-                    <p className="!mb-0 px-2 py-1 text-[13px] rounded-xl font-[500] bg-gray-200">
-                      SSMSQL
-                    </p>
-                  </div>
-                </div>
-                <div className="flex flex-col justify-center item-center">
-                  <p className="font-[500]">về kinh nghiệm cần có: </p>
-                  <ul>
-                    <li>
-                      Có ít nhất 3 năm kinh nghiệm trong lĩnh vực phát triển
-                      phần mềm ở vị trí backend
-                    </li>
-                    <li>
-                      Đã từng tham gia ít nhất 4-5 dự án trong đó đảm nhiệm việc
-                      phát triển back-end; hoặc 2 dự án lớn (có 5 người tham gia
-                      trở lên)
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div className="flex-[3] w-full p-4 flex flex-col">a</div>
-          </div>
+          Bên phải (7 phần)
         </div>
       </div>
     </>

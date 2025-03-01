@@ -9,11 +9,6 @@ const JobSchema = new mongoose.Schema(
       ref: "Company",
       required: true,
     },
-    posted_by: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
-    },
     title: { type: String, required: true },
     description: { type: String },
     location: { type: String },
