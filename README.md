@@ -1,5 +1,5 @@
-git pull origin client
-npm i
++ git pull origin client
++ npm i
 
 
 2 terminal:
