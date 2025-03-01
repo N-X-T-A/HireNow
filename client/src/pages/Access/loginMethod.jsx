@@ -155,6 +155,7 @@ export default function LoginMethod() {
               <img
                 className="w-[30%] rounded-[100px]"
                 src={user?.photoURL}
+                crossOrigin="anonymous"
                 alt=""
               />
               <h2 className="text-2xl font-bold !mb-0">
