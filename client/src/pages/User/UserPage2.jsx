@@ -5,9 +5,13 @@ import {
   faLocationDot,
   faUserCheck,
 } from "@fortawesome/free-solid-svg-icons";
-import { SparklesIcon } from "@heroicons/react/24/solid";
+import { SparklesIcon, StarIcon } from "@heroicons/react/24/solid";
 import { UserJobs } from "../../data/data";
-import { BookmarkIcon, ClockIcon } from "@heroicons/react/24/outline";
+import {
+  BookmarkIcon,
+  ClockIcon,
+  CheckBadgeIcon,
+} from "@heroicons/react/24/outline";
 const UserPage2 = () => {
   return (
     <>
@@ -199,7 +203,7 @@ const UserPage2 = () => {
                 </div>
                 <div className="flex flex-col justify-center item-center">
                   <p className="font-[500]">về kinh nghiệm cần có: </p>
-                  <ul>
+                  <ul className="list-disc">
                     <li>
                       Có ít nhất 3 năm kinh nghiệm trong lĩnh vực phát triển
                       phần mềm ở vị trí backend
@@ -248,7 +252,70 @@ const UserPage2 = () => {
                 </div>
               </div>
             </div>
-            <div className="flex-[3] w-full p-4 flex flex-col">a</div>
+            <div className="flex-[3] w-full  flex flex-col gap-3">
+              <div className="flex w-[80%] flex-col gap-4 p-4">
+                <div className="flex justify-between items-center">
+                  {" "}
+                  <p className="!mb-0 flex items-center gap-2 text-[20px] font-[500]">
+                    Google, inc.{" "}
+                    <CheckBadgeIcon className="w-5 h-5 text-green-600" />{" "}
+                  </p>
+                  <img
+                    src="/src/assets/user/google.png"
+                    alt=""
+                    className="max-w-[50px]"
+                  />
+                </div>
+                <div>
+                  <p className="!mb-2  font-[500]">Gia nhập vào: </p>
+                  <p className="!mb-0 font-[400] text-gray-500">16/3/2022</p>
+                </div>
+                <div>
+                  <p className="!mb-2  font-[500]">Địa điểm: </p>
+                  <p className="!mb-0 font-[400] text-gray-500">
+                    24C, Trương Công Định, Quận 1, TP HCM
+                  </p>
+                </div>
+              </div>
+              <span className="border-b-[2px]"></span>
+              <div className="flex w-[80%] flex-col gap-4 p-4">
+                <div className="flex  items-center">
+                  {" "}
+                  <p className="!mb-0 flex items-center gap-2 text-[20px] font-[500]">
+                    Các thông tin khác:
+                  </p>
+                </div>
+                <div>
+                  <p className="!mb-2  font-[500] flex items-center gap-3">
+                    <StarIcon className="w-5 h-5 text-yellow-500" />
+                    <StarIcon className="w-5 h-5 text-yellow-500" />
+                    <StarIcon className="w-5 h-5 text-yellow-500" />
+                    <StarIcon className="w-5 h-5 text-yellow-500" />
+                    <StarIcon className="w-5 h-5 text-yellow-500" />
+                  </p>
+                  <p className="!mb-0 font-[400] text-gray-500">
+                    Đã xác minh thanh toán
+                  </p>
+                </div>
+                <div>
+                  <p className="!mb-2  font-[500]">
+                    $65K+ tổng số tiền đã chi trả{" "}
+                  </p>
+                  <p className="!mb-0 font-[400] text-gray-500">
+                    Đã xác minh thanh toán
+                  </p>
+                </div>
+              </div>
+              <span className="border-b-[2px]"></span>
+              <div className="flex w-[80%] flex-col gap-4 p-4">
+                <div className="flex  items-center">
+                  {" "}
+                  <p className="!mb-0 flex items-center gap-2 text-[20px] font-[500]">
+                    Về các dịch vụ:
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
