@@ -158,7 +158,13 @@ const UserPage2 = () => {
                   </p>
                 </div>
               </div>
-              <div className="flex flex-col p-4 justify-center gap-[50px]">
+              <div
+                className="flex flex-col p-4  gap-[50px] max-h-[78`0px] overflow-y-auto"
+                style={{
+                  scrollbarWidth: "none",
+                  msOverflowStyle: "none",
+                }}
+              >
                 <div className="flex flex-col justify-center item-center">
                   <p className="font-[500]">Tóm tắt về vai trò:</p>
                   <p className="!mb-0 font-[400]">
@@ -192,6 +198,35 @@ const UserPage2 = () => {
                   </p>
                 </div>
                 <div className="flex flex-col justify-center item-center">
+                  <p className="font-[500]">về kinh nghiệm cần có: </p>
+                  <ul className="list-disc">
+                    <li>
+                      Có ít nhất 3 năm kinh nghiệm trong lĩnh vực phát triển
+                      phần mềm ở vị trí backend
+                    </li>
+                    <li>
+                      Đã từng tham gia ít nhất 4-5 dự án trong đó đảm nhiệm việc
+                      phát triển back-end; hoặc 2 dự án lớn (có 5 người tham gia
+                      trở lên)
+                    </li>
+                    <li>
+                      Có kinh nghiệm phát triển API Web Services, tương tác với
+                      API và sử dụng thành thạo các công cụ lập trình như
+                      Eclipse, Netbean
+                    </li>
+                    <li>
+                      Thành thạo về Java core Back-End, xử lý tốt Multithread
+                      (Xử lý tối thiểu 1000-2000 giao dịch cùng lúc),
+                      Multi-processing, cơ chế Hash table, cơ chế xử lý file.
+                    </li>
+                    <li>
+                      Thành thạo việc xây dựng các tài liệu đặc tả kỹ thuật
+                      (Technical Specification Document), bao gồm: ERD, Database
+                      schema, swagger APIs,…
+                    </li>
+                  </ul>
+                </div>
+                <div className="flex flex-col justify-center item-center">
                   <p className="font-[500]">Các yêu cầu kĩ năng:</p>
                   <div className="flex gap-3">
                     <p className="!mb-0 px-2 py-1 text-[13px] rounded-xl font-[500] bg-gray-200">
@@ -210,20 +245,6 @@ const UserPage2 = () => {
                       SSMSQL
                     </p>
                   </div>
-                </div>
-                <div className="flex flex-col justify-center item-center">
-                  <p className="font-[500]">về kinh nghiệm cần có: </p>
-                  <ul>
-                    <li>
-                      Có ít nhất 3 năm kinh nghiệm trong lĩnh vực phát triển
-                      phần mềm ở vị trí backend
-                    </li>
-                    <li>
-                      Đã từng tham gia ít nhất 4-5 dự án trong đó đảm nhiệm việc
-                      phát triển back-end; hoặc 2 dự án lớn (có 5 người tham gia
-                      trở lên)
-                    </li>
-                  </ul>
                 </div>
               </div>
             </div>
