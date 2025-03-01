@@ -16,7 +16,10 @@ import { faYoutube } from "@fortawesome/free-brands-svg-icons";
 const Header = (shouldFetch) => {
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState(null);
-
+  const [firstLoggin, setFisrtLoggin] = useState(() => {
+    return JSON.parse(sessionStorage.getItem("firstLoggin")) ?? true;
+  });
+  const [isOpen, setIsOpen] = useState(false);
   //fetch user
   useEffect(() => {
     const fetchUser = () => {
@@ -87,12 +90,63 @@ const Header = (shouldFetch) => {
 
                       <span className="pt-1.5 text-[12px]">Nhắn tin</span>
                     </div>
-                    <div className="res-btn-loginHeader flex items-center justify-center gap-[10px] !w-max !max-w-none">
+                    <div
+                      className="relative res-btn-loginHeader flex items-center justify-center gap-[10px] !w-max !max-w-none"
+                      onClick={() => setIsOpen(!isOpen)}
+                    >
                       <img
                         src={currentUser.photoURL}
                         alt=""
                         className="w-10 h-10 rounded-full mb-[4px]  transition ease-in-out duration-300 transform hover:-translate-y-[5px]"
                       />
+                      {isOpen && (
+                        <div
+                          className="absolute top-[0%] right-0 md:top-[100%] mt-2 w-48 bg-white border shadow-lg rounded-lg p-2 z-50"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          {firstLoggin ? (
+                            <>
+                              <button
+                                className="block w-full px-4 py-2 hover:bg-gray-100"
+                                onClick={() => {
+                                  navigate("/login");
+                                }}
+                              >
+                                Tiếp tục cung cấp thông tin
+                              </button>
+                              <button
+                                className="block w-full px-4 py-2 text-red-500 hover:bg-gray-100"
+                                onClick={() => {
+                                  sessionStorage.clear();
+                                  navigate("/");
+                                  window.location.reload();
+                                }}
+                              >
+                                Đăng xuất
+                              </button>
+                            </>
+                          ) : (
+                            <>
+                              <button className="block w-full px-4 py-2 hover:bg-gray-100">
+                                Trang cá nhân
+                              </button>
+                              <button className="block w-full px-4 py-2 hover:bg-gray-100">
+                                Lưu công việc
+                              </button>
+                              <button
+                                className="block w-full px-4 py-2 text-red-500 hover:bg-gray-100"
+                                onClick={() => {
+                                  sessionStorage.clear();
+                                  navigate("/");
+                                  window.location.reload();
+                                }}
+                              >
+                                Đăng xuất
+                              </button>
+                            </>
+                          )}
+                        </div>
+                      )}
                     </div>
                   </>
                 ) : (
