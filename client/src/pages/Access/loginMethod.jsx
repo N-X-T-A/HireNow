@@ -58,7 +58,7 @@ export default function LoginMethod() {
         const data = await res.json();
         console.log("User data:", data);
 
-        sessionStorage.setItem("access_token", data.access_token);
+        sessionStorage.setItem("access_token", data.token);
         sessionStorage.setItem("user", JSON.stringify(data.user));
         sessionStorage.setItem(
           "firstLoggin",

@@ -285,7 +285,7 @@ export const UserJobs = [
     skills: ["Thạc sĩ", "Onsite", "Full-time"],
     description:
       "Amazon Web Services đang tìm kiếm kỹ sư giải pháp cloud có kinh nghiệm với AWS, Kubernetes, và hệ thống phân tán. Công việc yêu cầu kiến thức về bảo mật cloud và tối ưu hóa hiệu suất hệ thống.",
-    salary: "$220/hour",
+    salary: "$220",
     postedTime: "Đăng 2 ngày trước",
   },
   {
@@ -296,7 +296,7 @@ export const UserJobs = [
     skills: ["Cử nhân", "Onsite", "Full-time"],
     description:
       "Tesla đang tuyển kỹ sư phần mềm nhúng để làm việc trên hệ thống điều khiển xe điện. Ứng viên cần có kinh nghiệm lập trình C/C++ và hệ thống thời gian thực (RTOS).",
-    salary: "$180/hour",
+    salary: "$180",
     postedTime: "Đăng 6 ngày trước",
   },
   {
@@ -307,7 +307,7 @@ export const UserJobs = [
     skills: ["Tiến sĩ", "Remote", "Full-time"],
     description:
       "Bloomberg đang tìm kiếm chuyên gia khoa học dữ liệu để xây dựng mô hình dự báo thị trường tài chính. Yêu cầu kinh nghiệm về Python, R, và machine learning.",
-    salary: "$300/hour",
+    salary: "$300",
     postedTime: "Đăng 4 ngày trước",
   },
   {
@@ -318,7 +318,7 @@ export const UserJobs = [
     skills: ["Cử nhân", "Remote", "Full-time"],
     description:
       "Airbnb đang tìm kiếm UX Designer để thiết kế giao diện tối ưu cho trải nghiệm đặt phòng. Ứng viên cần có kỹ năng với Figma, Sketch, và nghiên cứu người dùng.",
-    salary: "$160/hour",
+    salary: "$160",
     postedTime: "Đăng 3 ngày trước",
   },
   {
@@ -329,7 +329,7 @@ export const UserJobs = [
     skills: ["Cử nhân", "Hybrid", "Full-time"],
     description:
       "Spotify đang tuyển kỹ sư dữ liệu có kinh nghiệm với Big Data, Spark, và hệ thống ETL để tối ưu hóa dữ liệu người dùng cho đề xuất nhạc.",
-    salary: "$190/hour",
+    salary: "$190",
     postedTime: "Đăng 1 tuần trước",
   },
 ];
