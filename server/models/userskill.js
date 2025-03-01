@@ -13,11 +13,6 @@ const UserSkillSchema = new mongoose.Schema({
     ref: "Skill",
     required: true,
   },
-  level: {
-    type: String,
-    enum: ["Beginner", "Intermediate", "Advanced"],
-    required: true,
-  },
 });
 
 module.exports = mongoose.model("UserSkill", UserSkillSchema);

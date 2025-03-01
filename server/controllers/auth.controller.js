@@ -2,7 +2,7 @@
 
 const { CREATED, OK } = require("../core/success.response");
 const { AuthFailureError } = require("../core/error.response");
-const User = require("../models/user");
+const { User } = require("../models");
 const bcrypt = require("bcryptjs");
 const { generateToken } = require("../utils/generateToken");
 
@@ -55,6 +55,8 @@ class AuthController {
       res.cookie("access_token", token, {
         maxAge: 7 * 24 * 60 * 60 * 100,
         httpOnly: true,
+        secure: false,
+        sameSite: "strict",
       });
 
       return new OK({
@@ -89,6 +91,8 @@ class AuthController {
       res.cookie("access_token", userToken, {
         maxAge: 7 * 24 * 60 * 60 * 100,
         httpOnly: true,
+        secure: false,
+        sameSite: "strict",
       });
 
       res.json({ user, token: userToken });

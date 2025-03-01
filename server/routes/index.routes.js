@@ -11,5 +11,7 @@ router.use(function (req, res, next) {
 });
 
 router.use("/v1/auth", require("./auth.routes"));
+router.use("/v1/user", require("./user.routes"));
+router.use("/v1/job", require("./job.routes"));
 
 module.exports = router;
