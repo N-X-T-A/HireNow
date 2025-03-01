@@ -35,35 +35,23 @@ const catchError = (err, res) => {
 
 let verifyToken = (req, res, next) => {
   let bearerToken = null;
-  // check if bearer header exists via API request
   let bearerHeader = req.headers["authorization"];
   if (typeof bearerHeader !== "undefined") {
-    // authorization: bearer token12345
     bearerToken = bearerHeader.split(" ")[1];
   }
 
-  // get cookieToken
   let cookieToken = req.cookies.access_token;
 
-  // set token from bearer header token or cookieToken
   let token = bearerToken || cookieToken;
 
   jwt.verify(token, SECRET_KEY, (err, data) => {
     if (err) {
-      return res.sendStatus(403); // forbidden
+      return res.sendStatus(403);
     }
     req.token = token;
     req.auth = data;
     next();
   });
-};
-
-const isAdmin = (req, res, next) => {
-  if (req.user && req.user.role === "Admin") {
-    next();
-  } else {
-    res.status(403).send({ message: "Bạn không có quyền hạn cần thiết." });
-  }
 };
 
 const isEmployer = (req, res, next) => {
@@ -77,7 +65,6 @@ const isEmployer = (req, res, next) => {
 const authJwt = {
   isEmployer,
   verifyToken,
-  isAdmin,
 };
 
 module.exports = authJwt;

@@ -159,7 +159,7 @@ const UserPage2 = () => {
                 </div>
               </div>
               <div
-                className="flex flex-col p-4  gap-[50px] max-h-[78`0px] overflow-y-auto"
+                className="flex flex-col p-4  gap-[50px] max-h-[780px] overflow-y-auto"
                 style={{
                   scrollbarWidth: "none",
                   msOverflowStyle: "none",
@@ -199,7 +199,7 @@ const UserPage2 = () => {
                 </div>
                 <div className="flex flex-col justify-center item-center">
                   <p className="font-[500]">về kinh nghiệm cần có: </p>
-                  <ul className="list-disc">
+                  <ul>
                     <li>
                       Có ít nhất 3 năm kinh nghiệm trong lĩnh vực phát triển
                       phần mềm ở vị trí backend

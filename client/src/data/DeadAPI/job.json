@@ -3,20 +3,51 @@
     {
       "id": 1,
       "title": "Frontend Developer",
-      "skills": ["React", "JavaScript"],
-      "description": "Chúng tôi đang tìm kiếm một Frontend Developer có kinh nghiệm với React và JavaScript. Bạn sẽ chịu trách nhiệm xây dựng giao diện người dùng hấp dẫn, tối ưu hiệu suất và đảm bảo trải nghiệm người dùng tốt nhất. Yêu cầu kinh nghiệm làm việc với Redux, Tailwind CSS hoặc Material-UI là một lợi thế."
+      "salary": 1000,
+      "description": "Lập trình viên frontend, làm việc với ReactJS và VueJS.",
+      "company_id": 1
+    }
+  ],
+  "jobs/:id": [
+    {
+      "id": 1,
+      "title": "Frontend Developer",
+      "salary": 1000,
+      "description": "Lập trình viên frontend, làm việc với ReactJS và VueJS.",
+      "company_id": 1
+    }
+  ],
+
+  "companies": [
+    {
+      "id": 1,
+      "name": "Google",
+      "description": "Công ty công nghệ lớn nhất thế giới."
     },
     {
       "id": 2,
-      "title": "Backend Developer",
-      "skills": ["Node.js", "Express"],
-      "description": "Bạn sẽ tham gia phát triển và bảo trì hệ thống backend sử dụng Node.js và Express. Công việc bao gồm thiết kế API RESTful, tối ưu hiệu suất server, quản lý database (MySQL, MongoDB) và đảm bảo bảo mật hệ thống. Kinh nghiệm với JWT, OAuth hoặc WebSocket là một điểm cộng."
+      "name": "Netflix",
+      "description": "Dịch vụ phát trực tuyến phổ biến."
     },
     {
       "id": 3,
-      "title": "Fullstack Developer",
-      "skills": ["React", "Node.js", "MongoDB"],
-      "description": "Chúng tôi đang tìm kiếm một lập trình viên Fullstack với kỹ năng React, Node.js và MongoDB. Bạn sẽ chịu trách nhiệm phát triển toàn bộ ứng dụng web, từ frontend đến backend, đảm bảo hệ thống hoạt động trơn tru và có thể mở rộng. Kinh nghiệm với Docker, GraphQL hoặc AWS là một lợi thế."
+      "name": "Facebook",
+      "description": "Nền tảng mạng xã hội lớn nhất."
+    }
+  ],
+
+  "jobsDetail": [
+    {
+      "id": 1,
+      "description": "Lập trình viên frontend, làm việc với ReactJS và VueJS."
+    },
+    {
+      "id": 2,
+      "description": "Lập trình viên backend, sử dụng Node.js và Django."
+    },
+    {
+      "id": 3,
+      "description": "Làm cả frontend và backend, yêu cầu kỹ năng cao."
     }
   ]
 }
