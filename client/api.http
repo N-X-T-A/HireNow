@@ -1,0 +1,95 @@
+# User Registration
+POST http://localhost:5000/api/v1/signup
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "password123",
+}
+
+# User Login
+POST http://localhost:5000/api/v1/signin
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "password123"
+}
+
+# User Logout
+GET http://localhost:5000/api/v1/signout
+
+# Google Login
+POST http://localhost:5000/api/v1/google
+Content-Type: application/json
+
+{
+  "token": "GOOGLE_AUTH_TOKEN_HERE"
+}
+
+### 2️⃣ User Profile
+
+# Update User Profile
+POST http://localhost:5000/api/v1/update-profile/USER_ID
+Content-Type: application/json
+
+{
+  "phone": "0987654321",
+  "education": [
+    {
+      "school": "Hanoi University",
+      "degree": "Bachelor",
+      "field": "Computer Science",
+      "startYear": 2020,
+      "endYear": 2024
+    }
+  ],
+  "skills": ["JavaScript", "Node.js", "React"],
+  "experience": [
+    {
+      "company": "Tech Company",
+      "position": "Software Engineer",
+      "startYear": 2023,
+      "endYear": null
+    }
+  ]
+}
+
+### 3️⃣ Job Listings
+
+# Get All Jobs
+GET http://localhost:5000/api/v1/job
+
+# Get Recommended Jobs for a User
+GET http://localhost:5000/api/v1/job/recommend/USER_ID_HERE
+
+# Get Job Details
+GET http://localhost:5000/api/v1/job/JOB_ID_HERE
+
+# Recruiter Creates a Job Post
+POST http://localhost:5000/api/v1/job
+Authorization: Bearer RECRUITER_ACCESS_TOKEN
+Content-Type: application/json
+
+{
+  "title": "Frontend Developer",
+  "company_id": "COMPANY_ID_HERE",
+  "location": "Hanoi",
+  "salary": "1000-1500 USD",
+  "skills": ["JavaScript", "React"],
+  "description": "Job description..."
+}
+
+# Update a Job Post
+PUT http://localhost:5000/api/v1/job/JOB_ID_HERE
+Authorization: Bearer RECRUITER_ACCESS_TOKEN
+Content-Type: application/json
+
+{
+  "title": "Senior Frontend Developer",
+  "salary": "1500-2000 USD"
+}
+
+# Delete a Job Post
+DELETE http://localhost:5000/api/v1/job/JOB_ID_HERE
+Authorization: Bearer RECRUITER_ACCESS_TOKEN

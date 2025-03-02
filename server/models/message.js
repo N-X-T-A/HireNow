@@ -1,23 +1,19 @@
 "use strict";
 const mongoose = require("mongoose");
 
-const MessageSchema = new mongoose.Schema(
-  {
-    _id: { type: mongoose.Types.ObjectId, auto: true },
-    sender_id: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
-    },
-    receiver_id: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
-    },
-    content: { type: String },
-    is_read: { type: Boolean, default: false },
+const messageSchema = new mongoose.Schema({
+  conversation_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Conversation",
+    required: true,
   },
-  { timestamps: true }
-);
+  sender_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
+  content: { type: String, required: true },
+  createdAt: { type: Date, default: Date.now, expires: "180d" }, // Tự động xoá sau 6 tháng
+});
 
-module.exports = mongoose.model("Message", MessageSchema);
+module.exports = mongoose.model("Message", messageSchema);

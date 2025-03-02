@@ -22,6 +22,5 @@ router.post(
   [validation.verifyGoogleToken],
   asyncHandler(AuthController.google)
 );
-router.post("/first-login", asyncHandler(AuthController.firstLogin));
 
 module.exports = router;

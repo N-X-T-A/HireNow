@@ -1,7 +1,7 @@
-var express = require("express");
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
 
-router.use(function (req, res, next) {
+router.use((req, res, next) => {
   res.header(
     "Access-Control-Allow-Headers",
     "authorization, Origin, Content-Type, Accept"
@@ -10,8 +10,8 @@ router.use(function (req, res, next) {
   next();
 });
 
-router.use("/v1/auth", require("./auth.routes"));
-router.use("/v1/user", require("./user.routes"));
-router.use("/v1/job", require("./job.routes"));
+router.use("/api/v1/auth", require("./auth.routes"));
+router.use("/api/v1/user", require("./user.routes"));
+router.use("/api/v1/job", require("./job.routes"));
 
 module.exports = router;

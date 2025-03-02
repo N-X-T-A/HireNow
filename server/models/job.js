@@ -16,8 +16,9 @@ const JobSchema = new mongoose.Schema(
     job_type: { type: String },
     experience_level: { type: String },
     deadline: { type: Date },
+    posted_date: { type: Date, default: Date.now },
   },
-  { timestamps: true }
+  { timestamps: false }
 );
 
 module.exports = mongoose.model("Job", JobSchema);

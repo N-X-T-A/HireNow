@@ -22,7 +22,7 @@ const UserSchema = new mongoose.Schema(
     },
     isFirstLogin: { type: Boolean, default: true },
   },
-  { timestamps: true }
+  { timestamps: false }
 );
 
 module.exports = mongoose.model("User", UserSchema);

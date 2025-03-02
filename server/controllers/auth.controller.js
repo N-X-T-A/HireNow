@@ -1,17 +1,18 @@
 "use strict";
 
 const { CREATED, OK } = require("../core/success.response");
-const { AuthFailureError } = require("../core/error.response");
+const { AuthFailureError, ForbiddenError } = require("../core/error.response");
 const { User } = require("../models");
 const bcrypt = require("bcryptjs");
-const { generateToken } = require("../utils/generateToken");
+const { generateAccessToken, generateRefreshToken } = require("../utils/token");
+const jwt = require("jsonwebtoken");
 
 class AuthController {
   signUp = async (req, res) => {
     try {
       const { username, email, password, photoURL } = req.body;
-
       const hashedPassword = await bcrypt.hash(password, 10);
+
       const newUser = new User({
         username,
         email,
@@ -23,7 +24,7 @@ class AuthController {
       newUser.passwordHash = undefined;
 
       return new CREATED({
-        message: "Đăng ký tài khoản thành công!",
+        message: "Account registered successfully!",
         metadata: newUser,
       }).send(res);
     } catch (error) {
@@ -50,18 +51,24 @@ class AuthController {
 
       user.passwordHash = undefined;
 
-      const token = generateToken(user);
+      const accessToken = generateAccessToken(user);
+      const refreshToken = generateRefreshToken(user);
 
-      res.cookie("access_token", token, {
-        maxAge: 7 * 24 * 60 * 60 * 100,
+      res.cookie("access_token", accessToken, {
+        httpOnly: true,
+        secure: false,
+        sameSite: "strict",
+      });
+
+      res.cookie("refresh_token", refreshToken, {
         httpOnly: true,
         secure: false,
         sameSite: "strict",
       });
 
       return new OK({
-        message: "Đăng nhập tài khoản thành công!",
-        metadata: { token, user },
+        message: "Login successful!",
+        metadata: { accessToken, refreshToken, user },
       }).send(res);
     } catch (error) {
       return res.status(error.statusCode || 500).json({
@@ -70,41 +77,72 @@ class AuthController {
     }
   };
 
-  signOut = (req, res) => {
-    res.clearCookie("access_token");
-    res.send("cookie cleared");
-  };
-
   google = async (req, res) => {
     try {
       const { googleUser } = req;
       const { email, name, picture } = googleUser;
+
       let user = await User.findOne({ email });
+
       if (!user) {
-        user = new User({ username: name, email, photoURL: picture });
+        user = new User({
+          username: name,
+          email,
+          photoURL: picture,
+        });
+
         await user.save();
       }
 
       user.passwordHash = undefined;
-      const userToken = generateToken(user);
+      const accessToken = generateAccessToken(user);
+      const refreshToken = generateRefreshToken(user);
 
-      res.cookie("access_token", userToken, {
-        maxAge: 7 * 24 * 60 * 60 * 100,
+      res.cookie("access_token", accessToken, {
         httpOnly: true,
         secure: false,
         sameSite: "strict",
       });
 
-      res.json({ user, token: userToken });
+      res.cookie("refresh_token", refreshToken, {
+        httpOnly: true,
+        secure: false,
+        sameSite: "strict",
+      });
+
+      res.json({ user, accessToken, refreshToken });
     } catch (error) {
-      console.error("Lỗi xác thực Google:", error);
-      res.status(401).json({ message: "Xác thực không hợp lệ" });
+      console.error("Google authentication error:", error);
+      return res.status(401).json({ message: "Invalid Google authentication" });
     }
   };
 
-  firstLogin = async (req, res) => {
+  refreshToken = async (req, res) => {
     try {
-    } catch (error) {}
+      const { refreshToken } = req.cookies;
+      if (!refreshToken)
+        return res.status(401).json({ message: "Unauthorized." });
+
+      const decoded = jwt.verify(
+        refreshToken,
+        process.env.REFRESH_TOKEN_SECRET
+      );
+      const user = await User.findById(decoded.userId);
+      if (!user) return res.status(401).json({ message: "Unauthorized." });
+
+      const newAccessToken = generateAccessToken(user);
+      res.cookie("access_token", newAccessToken, { httpOnly: true });
+
+      res.json({ accessToken: newAccessToken });
+    } catch (error) {
+      return res.status(401).json({ message: "Invalid refresh token." });
+    }
+  };
+
+  signOut = (req, res) => {
+    res.clearCookie("access_token");
+    res.clearCookie("refresh_token");
+    res.json({ message: "Logged out successfully!" });
   };
 }
 

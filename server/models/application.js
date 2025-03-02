@@ -22,7 +22,7 @@ const ApplicationSchema = new mongoose.Schema(
       default: "Submitted",
     },
   },
-  { timestamps: true }
+  { timestamps: false }
 );
 
 module.exports = mongoose.model("Application", ApplicationSchema);

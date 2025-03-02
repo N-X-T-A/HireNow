@@ -1,54 +1,121 @@
 "use strict";
 
-const { Job, UserSkill, Skill, JobSkill } = require("../models");
+const { ForbiddenError } = require("../core/error.response");
+const { Job } = require("../models");
+const jobService = require("../services/job.service");
 
 class JobController {
+  getAllJobs = async (req, res) => {
+    try {
+      const jobs = await jobService.getAllJobs();
+      res.json({ jobs });
+    } catch (err) {
+      console.error("Error fetching all jobs:", err);
+      res.status(500).json({ message: "Server error while fetching jobs!" });
+    }
+  };
+
   getRecommendedJobs = async (req, res) => {
     try {
       const userId = req.params.id;
+      const result = await jobService.getRecommendedJobs(userId);
 
-      // 🔹 Lấy danh sách kỹ năng của ứng viên
-      const userSkills = await UserSkill.find({ user_id: userId }).select(
-        "skill_id"
-      );
-
-      if (!userSkills.length) {
-        return res
-          .status(404)
-          .json({ message: "Ứng viên chưa có kỹ năng nào được lưu!" });
+      if (result.success) {
+        res.json({ jobs: result.jobs });
+      } else {
+        res.status(404).json({ message: result.message });
       }
+    } catch (err) {
+      console.error("Error fetching recommended jobs:", err);
+      res
+        .status(500)
+        .json({ message: "Server error while fetching recommended jobs!" });
+    }
+  };
 
-      const skillIds = userSkills.map((us) => us.skill_id.toString());
+  getJobDetails = async (req, res) => {
+    try {
+      const jobId = req.params.id;
+      const result = await jobService.getJobDetails(jobId);
 
-      // 🔹 Lấy danh sách công việc và công ty
-      const jobs = await Job.find()
+      if (result.success) {
+        res.json({ job: result.job });
+      } else {
+        res.status(404).json({ message: result.message });
+      }
+    } catch (err) {
+      console.error("Error fetching job details:", err);
+      res
+        .status(500)
+        .json({ message: "Server error while fetching job details!" });
+    }
+  };
+
+  createJob = async (req, res) => {
+    try {
+      const { title, skills, location, salary_range, short_description } =
+        req.body;
+      const newJob = new Job({
+        title,
+        company_id: req.user._id,
+        skills,
+        location,
+        salary_range,
+        short_description,
+        posted_date: Date.now(),
+      });
+
+      await newJob.save();
+
+      return res.status(201).send({
+        message: "Job posted successfully!",
+        metadata: newJob,
+      });
+    } catch (error) {
+      return res.status(500).json({
+        message: error.message || "Internal Server Error",
+      });
+    }
+  };
+
+  async updateJob(req, res) {
+    const { id } = req.params;
+    const recruiterId = req.user._id;
+
+    const updatedJob = await jobService.updateJob(id, recruiterId, req.body);
+    if (!updatedJob)
+      throw new ForbiddenError("You can only edit your own job posts.");
+
+    return res.status(200).send({
+      message: "Job updated successfully.",
+      metadata: updatedJob,
+    });
+  }
+
+  async deleteJob(req, res) {
+    const { id } = req.params;
+    const recruiterId = req.user._id;
+
+    const deleted = await jobService.deleteJob(id, recruiterId);
+    if (!deleted)
+      throw new ForbiddenError("You can only delete your own job posts.");
+
+    return res.status(200).send({
+      message: "Job deleted successfully.",
+    });
+  }
+
+  getPostedJobs = async (req, res) => {
+    try {
+      const { recruiterId } = req.params;
+
+      const jobs = await Job.find({ company_id: recruiterId })
         .populate("company_id", "name location")
         .lean();
 
-      // 🔹 Lấy tất cả kỹ năng của các công việc
-      const jobSkills = await JobSkill.find()
-        .populate("skill_id", "name")
-        .lean();
-
-      // 🔹 Ánh xạ JobSkill vào công việc
-      const jobMap = jobs.map((job) => {
-        const relatedSkills = jobSkills.filter(
-          (js) => js.job_id.toString() === job._id.toString()
-        );
-        return {
-          _id: job._id,
-          title: job.title,
-          company: job.company_id, // Chỉ giữ lại thông tin công ty
-          skills: relatedSkills.map((js) => js.skill_id), // Danh sách kỹ năng yêu cầu
-        };
-      });
-
-      res.json({ jobs: jobMap });
+      res.json({ jobs });
     } catch (err) {
-      console.error("Lỗi khi lấy danh sách công việc phù hợp:", err);
-      res
-        .status(500)
-        .json({ message: "Lỗi server khi tìm công việc phù hợp!" });
+      res.status(500).json({ message: "Internal Server Error" });
     }
   };
 }
