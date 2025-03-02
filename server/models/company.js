@@ -11,7 +11,7 @@ const CompanySchema = new mongoose.Schema(
     website: { type: String },
     logo: { type: String },
   },
-  { timestamps: true }
+  { timestamps: false }
 );
 
 module.exports = mongoose.model("Company", CompanySchema);

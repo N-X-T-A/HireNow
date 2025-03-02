@@ -6,7 +6,7 @@ const SkillSchema = new mongoose.Schema(
     _id: { type: mongoose.Types.ObjectId, auto: true },
     name: { type: String, required: true },
   },
-  { timestamps: true }
+  { timestamps: false }
 );
 
 module.exports = mongoose.model("Skill", SkillSchema);
