@@ -1,4 +1,4 @@
-const authJwt = require("./authJwt");
+const authJwt = require("./auth");
 const validation = require("./validation");
 
 module.exports = {
