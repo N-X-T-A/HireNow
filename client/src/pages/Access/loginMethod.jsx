@@ -115,7 +115,7 @@ export default function LoginMethod() {
     }
   };
   //log test
-
+  console.log(user?.photoURL);
   return (
     <>
       <div className="respon-r flex-1 pl-[20px] w-full">
@@ -146,8 +146,7 @@ export default function LoginMethod() {
             <div className="flex flex-col gap-3 w-full h-full items-center justify-items-center justify-center">
               <img
                 className="w-[30%] rounded-[100px]"
-                src={user?.photoURL}
-                crossOrigin="anonymous"
+                src={`${user?.photoURL}`}
                 alt=""
               />
               <h2 className="text-2xl font-bold !mb-0">

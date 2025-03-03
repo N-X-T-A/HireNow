@@ -36,6 +36,7 @@ const Header = (shouldFetch) => {
     window.addEventListener("userUpdated", handleUserUpdate);
     return () => window.removeEventListener("userUpdated", handleUserUpdate);
   }, [shouldFetch]);
+  //logtest
 
   return (
     <>
@@ -95,8 +96,7 @@ const Header = (shouldFetch) => {
                       onClick={() => setIsOpen(!isOpen)}
                     >
                       <img
-                        crossOrigin="anonymous"
-                        src={currentUser.photoURL}
+                        src={currentUser?.photoURL}
                         alt=""
                         className="w-10 h-10 rounded-full mb-[4px]  transition ease-in-out duration-300 transform hover:-translate-y-[5px]"
                       />
