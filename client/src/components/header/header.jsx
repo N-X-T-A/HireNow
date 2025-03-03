@@ -37,7 +37,7 @@ const Header = (shouldFetch) => {
     return () => window.removeEventListener("userUpdated", handleUserUpdate);
   }, [shouldFetch]);
   //logtest
-
+  const role = currentUser?.role;
   return (
     <>
       <header className="h-max">
@@ -58,97 +58,165 @@ const Header = (shouldFetch) => {
                 {/* change user here */}
                 {currentUser ? (
                   <>
-                    <div
-                      onClick={() => navigate("/User/UserHome")}
-                      className="pt-[5px] text-[#757575] flex justify-center flex-col !w-auto !max-w-none cursor-pointer transition ease-in-out duration-300 transform hover:-translate-y-[5px] hover:text-[#1E90FF] text-center"
-                    >
-                      <FontAwesomeIcon
-                        icon={faBorderAll}
-                        className="text-[22px]"
-                      />
-
-                      <span className="pt-1.5 text-[12px]">Tất cả</span>
-                    </div>
-
-                    <div
-                      onClick={() => navigate("/User/Jobs")}
-                      className="pt-[5px] text-[#757575] flex justify-center flex-col !w-auto !max-w-none cursor-pointer transition ease-in-out duration-300 transform hover:-translate-y-[5px] hover:text-[#1E90FF] text-center"
-                    >
-                      <FontAwesomeIcon
-                        icon={faBriefcase}
-                        className="text-[22px]"
-                      />
-                      <span className="pt-1.5 text-[12px]">Việc làm</span>
-                    </div>
-                    <div
-                      onClick={() => navigate("/User/Test")}
-                      className="pt-[5px] text-[#757575] flex justify-center flex-col !w-auto !max-w-none cursor-pointer transition ease-in-out duration-300 transform hover:-translate-y-[5px] hover:text-[#1E90FF] text-center"
-                    >
-                      <FontAwesomeIcon
-                        icon={faCommentDots}
-                        className="text-[22px]"
-                      />
-
-                      <span className="pt-1.5 text-[12px]">Nhắn tin</span>
-                    </div>
-                    <div
-                      className="relative res-btn-loginHeader flex items-center justify-center gap-[10px] !w-max !max-w-none"
-                      onClick={() => setIsOpen(!isOpen)}
-                    >
-                      <img
-                        src={currentUser?.photoURL}
-                        alt=""
-                        className="w-10 h-10 rounded-full mb-[4px]  transition ease-in-out duration-300 transform hover:-translate-y-[5px]"
-                      />
-                      {isOpen && (
+                    {" "}
+                    {role === "candidate" && (
+                      <>
                         <div
-                          className="absolute top-[70%] right-0 md:top-[100%] mt-2 w-48 bg-white border shadow-lg rounded-lg p-2 z-50"
-                          onClick={(e) => e.stopPropagation()}
+                          onClick={() => navigate("/User/UserHome")}
+                          className="pt-[5px] text-[#757575] flex justify-center flex-col !w-auto !max-w-none cursor-pointer transition ease-in-out duration-300 transform hover:-translate-y-[5px] hover:text-[#1E90FF] text-center"
                         >
-                          {firstLoggin ? (
-                            <>
-                              <button
-                                className="block w-full px-4 py-2 hover:bg-gray-100"
-                                onClick={() => {
-                                  navigate("/login");
-                                }}
-                              >
-                                Tiếp tục cung cấp thông tin
-                              </button>
-                              <button
-                                className="block w-full px-4 py-2 text-red-500 hover:bg-gray-100"
-                                onClick={() => {
-                                  sessionStorage.clear();
-                                  navigate("/");
-                                  window.location.reload();
-                                }}
-                              >
-                                Đăng xuất
-                              </button>
-                            </>
-                          ) : (
-                            <>
-                              <button className="block w-full px-4 py-2 hover:bg-gray-100">
-                                Trang cá nhân
-                              </button>
-                              <button className="block w-full px-4 py-2 hover:bg-gray-100">
-                                Lưu công việc
-                              </button>
-                              <button
-                                className="block w-full px-4 py-2 text-red-500 hover:bg-gray-100"
-                                onClick={() => {
-                                  sessionStorage.clear();
-                                  navigate("/");
-                                  window.location.reload();
-                                }}
-                              >
-                                Đăng xuất
-                              </button>
-                            </>
+                          <FontAwesomeIcon
+                            icon={faBorderAll}
+                            className="text-[22px]"
+                          />
+
+                          <span className="pt-1.5 text-[12px]">Tất cả</span>
+                        </div>
+
+                        <div
+                          onClick={() => navigate("/User/Jobs")}
+                          className="pt-[5px] text-[#757575] flex justify-center flex-col !w-auto !max-w-none cursor-pointer transition ease-in-out duration-300 transform hover:-translate-y-[5px] hover:text-[#1E90FF] text-center"
+                        >
+                          <FontAwesomeIcon
+                            icon={faBriefcase}
+                            className="text-[22px]"
+                          />
+                          <span className="pt-1.5 text-[12px]">Việc làm</span>
+                        </div>
+                        <div
+                          onClick={() => navigate("/User/Test")}
+                          className="pt-[5px] text-[#757575] flex justify-center flex-col !w-auto !max-w-none cursor-pointer transition ease-in-out duration-300 transform hover:-translate-y-[5px] hover:text-[#1E90FF] text-center"
+                        >
+                          <FontAwesomeIcon
+                            icon={faCommentDots}
+                            className="text-[22px]"
+                          />
+
+                          <span className="pt-1.5 text-[12px]">Nhắn tin</span>
+                        </div>
+                        <div
+                          className="relative res-btn-loginHeader flex items-center justify-center gap-[10px] !w-max !max-w-none"
+                          onClick={() => setIsOpen(!isOpen)}
+                        >
+                          <img
+                            src={currentUser?.photoURL}
+                            alt=""
+                            className="w-10 h-10 rounded-full mb-[4px]  transition ease-in-out duration-300 transform hover:-translate-y-[5px]"
+                          />
+                          {isOpen && (
+                            <div
+                              className="absolute top-[70%] right-0 md:top-[100%] mt-2 w-48 bg-white border shadow-lg rounded-lg p-2 z-50"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              {firstLoggin ? (
+                                <>
+                                  <button
+                                    className="block w-full px-4 py-2 hover:bg-gray-100"
+                                    onClick={() => {
+                                      navigate("/login");
+                                    }}
+                                  >
+                                    Tiếp tục cung cấp thông tin
+                                  </button>
+                                  <button
+                                    className="block w-full px-4 py-2 text-red-500 hover:bg-gray-100"
+                                    onClick={() => {
+                                      sessionStorage.clear();
+                                      navigate("/");
+                                      window.location.reload();
+                                    }}
+                                  >
+                                    Đăng xuất
+                                  </button>
+                                </>
+                              ) : (
+                                <>
+                                  <button className="block w-full px-4 py-2 hover:bg-gray-100">
+                                    Trang cá nhân
+                                  </button>
+                                  <button className="block w-full px-4 py-2 hover:bg-gray-100">
+                                    Lưu công việc
+                                  </button>
+                                  <button
+                                    className="block w-full px-4 py-2 text-red-500 hover:bg-gray-100"
+                                    onClick={() => {
+                                      sessionStorage.clear();
+                                      navigate("/");
+                                      window.location.reload();
+                                    }}
+                                  >
+                                    Đăng xuất
+                                  </button>
+                                </>
+                              )}
+                            </div>
                           )}
                         </div>
-                      )}
-                    </div>
+                      </>
+                    )}
+                    {role === "recruiter" && (
+                      <>
+                        <div className="pt-[5px] text-[#757575] flex justify-center flex-col !w-auto !max-w-none cursor-pointer transition ease-in-out duration-300 transform hover:-translate-y-[5px] hover:text-[#1E90FF] text-center">
+                          <FontAwesomeIcon
+                            icon={faBorderAll}
+                            className="text-[22px]"
+                          />
+
+                          <span className="pt-1.5 text-[12px]">Công việc</span>
+                        </div>
+
+                        <div className="pt-[5px] text-[#757575] flex justify-center flex-col !w-auto !max-w-none cursor-pointer transition ease-in-out duration-300 transform hover:-translate-y-[5px] hover:text-[#1E90FF] text-center">
+                          <FontAwesomeIcon
+                            icon={faBriefcase}
+                            className="text-[22px]"
+                          />
+                          <span className="pt-1.5 text-[12px]">Nhân sự</span>
+                        </div>
+                        <div className="pt-[5px] text-[#757575] flex justify-center flex-col !w-auto !max-w-none cursor-pointer transition ease-in-out duration-300 transform hover:-translate-y-[5px] hover:text-[#1E90FF] text-center">
+                          <FontAwesomeIcon
+                            icon={faCommentDots}
+                            className="text-[22px]"
+                          />
+
+                          <span className="pt-1.5 text-[12px]">Xem thêm</span>
+                        </div>
+                        <div
+                          className="relative res-btn-loginHeader flex items-center justify-center gap-[10px] !w-max !max-w-none"
+                          onClick={() => setIsOpen(!isOpen)}
+                        >
+                          <img
+                            src={currentUser?.photoURL}
+                            alt=""
+                            className="w-10 h-10 rounded-full mb-[4px]  transition ease-in-out duration-300 transform hover:-translate-y-[5px]"
+                          />
+                          {isOpen && (
+                            <div
+                              className="absolute top-[70%] right-0 md:top-[100%] mt-2 w-48 bg-white border shadow-lg rounded-lg p-2 z-50"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              <>
+                                <button className="block w-full px-4 py-2 hover:bg-gray-100">
+                                  Trang cá nhân
+                                </button>
+                                <button className="block w-full px-4 py-2 hover:bg-gray-100">
+                                  Tiến độ công việc
+                                </button>
+                                <button
+                                  className="block w-full px-4 py-2 text-red-500 hover:bg-gray-100"
+                                  onClick={() => {
+                                    sessionStorage.clear();
+                                    navigate("/");
+                                    window.location.reload();
+                                  }}
+                                >
+                                  Đăng xuất
+                                </button>
+                              </>
+                            </div>
+                          )}
+                        </div>
+                      </>
+                    )}
                   </>
                 ) : (
                   <>

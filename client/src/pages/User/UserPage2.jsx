@@ -2,13 +2,13 @@ import React from "react";
 import { useState } from "react";
 import JobList from "../../components/user/JobList";
 import JobDetail from "../../components/user/JobDetail";
-import JobHeader from "../../components/user/JobHeader";
+import JobP2Header from "../../components/user/JobP2Header";
 const UserPage2 = () => {
   //useState
   const [selectedJob, setSelectedJob] = useState(null);
   return (
     <>
-      <JobHeader />
+      <JobP2Header />
       <div className="flex w-full mt-2">
         {/* Phần 1 (Chiếm 3 phần) */}
         <JobList onSelectJob={setSelectedJob} />

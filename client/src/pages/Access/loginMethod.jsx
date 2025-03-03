@@ -3,7 +3,6 @@ import axios from "axios";
 import { useGoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
 import MultiStepForm from "../../components/multiStepForm/MultistepForm";
 import StepperControl from "../../components/multiStepForm/StepperControl";
 import Account from "../../components/steps/Account";
@@ -25,7 +24,6 @@ export default function LoginMethod() {
   const [user, setUser] = useState(() => {
     return JSON.parse(sessionStorage.getItem("user")) || null;
   });
-
   const [firstLoggin, setFisrtLoggin] = useState(() => {
     return JSON.parse(sessionStorage.getItem("firstLoggin")) ?? true;
   });
@@ -77,7 +75,16 @@ export default function LoginMethod() {
 
   //Lấy token local
   // const accessToken = sessionStorage.getItem("access_token");
-
+  //navigate
+  const handleNavigate = () => {
+    if (user.role === "candidate") {
+      navigate("/User/UserHome");
+    } else if (user.role === "recruiter") {
+      navigate("/employer/page1");
+    } else {
+      navigate("/"); // Điều hướng về trang chủ nếu không có role phù hợp
+    }
+  };
   //multiStep
   const steps = [
     "Thông tin tài khoản",
@@ -115,7 +122,6 @@ export default function LoginMethod() {
     }
   };
   //log test
-  console.log(user?.photoURL);
   return (
     <>
       <div className="respon-r flex-1 pl-[20px] w-full">
@@ -153,10 +159,12 @@ export default function LoginMethod() {
                 Chào {user?.username} !
               </h2>
               <p className="text-gray-600">
-                Sẵn sàng để bắt đầu một công việc chưa
+                {user?.role === "recruiter"
+                  ? "Sẵn sàng để tìm kiếm ứng viên tiềm năng chưa?"
+                  : "Sẵn sàng để bắt đầu một công việc chưa?"}
               </p>
               <button
-                onClick={() => navigate("/User/UserHome")}
+                onClick={handleNavigate}
                 className=" bg-blue-500 text-white py-2 px-4 rounded-md"
               >
                 Bắt đầu

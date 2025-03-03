@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import withLayout from "../../layout/withLayout";
-const UserManager = () => {
+const EmployerManager = () => {
   return (
     <>
       <div className="h-[5000px] max-h-[1025px] flex justify-center ">
@@ -13,4 +13,4 @@ const UserManager = () => {
   );
 };
 
-export default withLayout(UserManager);
+export default withLayout(EmployerManager);
