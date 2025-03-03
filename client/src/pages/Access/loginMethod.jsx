@@ -1,10 +1,6 @@
 import React from "react";
-import Header from "../../components/header/header";
-import {
-  useGoogleLogin,
-  GoogleOAuthProvider,
-  GoogleLogin,
-} from "@react-oauth/google";
+import axios from "axios";
+import { useGoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
@@ -46,18 +42,14 @@ export default function LoginMethod() {
       setIsLoading(true);
       try {
         console.log("Google Access Token:", response.access_token);
-
-        const res = await fetch("http://localhost:5000/v1/auth/google", {
+        const res = await fetch("http://localhost:5000/api/v1/auth/google", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ token: response.access_token }),
         });
-
         if (!res.ok) throw new Error("Lỗi xác thực");
-
         const data = await res.json();
         console.log("User data:", data);
-
         sessionStorage.setItem("access_token", data.token);
         sessionStorage.setItem("user", JSON.stringify(data.user));
         sessionStorage.setItem(

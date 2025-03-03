@@ -12,17 +12,22 @@ import { Environment } from "./environments/Environment";
 import UserPage1 from "./pages/User/UserPage1";
 import UserPage2 from "./pages/User/UserPage2";
 import UserPage3 from "./pages/User/UserPage3";
+import PrivateRoute from "./layout/PrivateRoute";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Router>
       <Routes>
+        {/* public route */}
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/test" element={<Test />} />
-        <Route path="/User/*" element={<UserManager />}>
-          <Route path="UserHome" element={<UserPage1 />} />
-          <Route path="Jobs" element={<UserPage2 />} />
-          <Route path="Test" element={<UserPage3 />} />
+        {/* Private route */}
+        <Route element={<PrivateRoute />}>
+          <Route path="/User/*" element={<UserManager />}>
+            <Route path="UserHome" element={<UserPage1 />} />
+            <Route path="Jobs" element={<UserPage2 />} />
+            <Route path="Test" element={<UserPage3 />} />
+          </Route>
         </Route>
       </Routes>
     </Router>

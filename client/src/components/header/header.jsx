@@ -95,13 +95,14 @@ const Header = (shouldFetch) => {
                       onClick={() => setIsOpen(!isOpen)}
                     >
                       <img
+                        crossOrigin="anonymous"
                         src={currentUser.photoURL}
                         alt=""
                         className="w-10 h-10 rounded-full mb-[4px]  transition ease-in-out duration-300 transform hover:-translate-y-[5px]"
                       />
                       {isOpen && (
                         <div
-                          className="absolute top-[0%] right-0 md:top-[100%] mt-2 w-48 bg-white border shadow-lg rounded-lg p-2 z-50"
+                          className="absolute top-[70%] right-0 md:top-[100%] mt-2 w-48 bg-white border shadow-lg rounded-lg p-2 z-50"
                           onClick={(e) => e.stopPropagation()}
                         >
                           {firstLoggin ? (

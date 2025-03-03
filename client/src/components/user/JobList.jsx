@@ -82,9 +82,9 @@ const JobList = ({ onSelectJob }) => {
               <span className="border-b-[1px] border-gray-300 w-full"></span>
               {/* salary */}
               <div className="flex items-center justify-between w-full">
-                <p className="!mb-0 text-[30px] font-[500]">
+                <p className="!mb-0 text-[20px] font-[500]">
                   {job.salary}
-                  <span className="text-[20px] font-[500] text-gray-400">
+                  <span className="text-[15px] font-[400] text-gray-400">
                     /hour
                   </span>
                 </p>
