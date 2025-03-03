@@ -98,6 +98,26 @@ export const jobs = [
     salary: "$180/tháng",
     posted: "1 tháng trước",
   },
+  {
+    id: 7,
+    company: "Vidio",
+    title: "Nhà nghiên cứu UX",
+    location: "Jakarta, Indonesia",
+    type: "Toàn thời gian",
+    category: "Truyền thông",
+    salary: "$180/tháng",
+    posted: "1 tháng trước",
+  },
+  {
+    id: 8,
+    company: "Vidio",
+    title: "Nhà nghiên cứu UX",
+    location: "Jakarta, Indonesia",
+    type: "Toàn thời gian",
+    category: "Truyền thông",
+    salary: "$180/tháng",
+    posted: "1 tháng trước",
+  },
 ];
 export const slidesCEO = [
   {
