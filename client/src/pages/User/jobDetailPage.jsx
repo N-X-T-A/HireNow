@@ -13,6 +13,7 @@ const JobDetailPage = () => {
           src="/src/assets/user/21501.jpg"
           alt=""
         />
+        {/* job card */}
         <div
           className="flex flex-col md:flex-row w-[70%] p-4 absolute bottom-[-15%] md:bottom-[-25%] bg-white rounded-[20px] justify-between items-center"
           style={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }}
@@ -51,7 +52,14 @@ const JobDetailPage = () => {
         </div>
       </div>
       <div className="w-[70%] flex justify-center  gap-3 mt-[10%] md:mt-[7%] ">
-        <div className="md:flex-[7]  flex flex-col gap-3 ">
+        {/* left section */}
+        <div
+          className="md:flex-[7]  flex flex-col gap-3 max-h-[1000px] overflow-y-auto"
+          style={{
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+          }}
+        >
           {/* description */}
           <div className="flex flex-col gap-1">
             <p className="!mb-0 text-[20px] font-[500] text-[#1E90FF]">
@@ -156,7 +164,9 @@ const JobDetailPage = () => {
             </ul>
           </div>
         </div>
+        {/* right section */}
         <div className="hidden  md:flex flex-col gap-4 md:flex-[3] p-2">
+          {/* right 1st */}
           <div className="flex flex-col gap-2 w-full p-4 rounded-lg bg-[white]">
             <div className="flex  items-center gap-2">
               <img
@@ -173,6 +183,57 @@ const JobDetailPage = () => {
             </div>
             <p className="!mb-0 text-gray-400">
               Growing software technology company
+            </p>
+            <div className="mt-2 w-full flex flex-col gap-3 justify-center items-center">
+              <p className="flex justify-between items-center w-full p-1 border-b-[1px] border-dashed">
+                Mô hình công ty{" "}
+                <span className="font-[500]  text-end">Sản phẩm</span>
+              </p>
+              <p className="flex justify-between items-center w-full p-1 border-b-[1px] border-dashed">
+                Lĩnh vực công ty{" "}
+                <span className="font-[500]  text-end">
+                  Sản Phẩm Phần Mềm và Dịch Vụ Web
+                </span>
+              </p>
+              <p className="flex justify-between items-center w-full p-1 border-b-[1px] border-dashed">
+                Quy mô công ty{" "}
+                <span className="font-[500]  text-end">51-150 nhân viên</span>
+              </p>
+              <p className="flex justify-between items-center w-full p-1 border-b-[1px] border-dashed">
+                Quốc gia <span className="font-[500]  text-end">Việt Nam</span>
+              </p>
+              <p className="flex justify-between items-center w-full p-1 border-b-[1px] border-dashed">
+                Thời gian làm việc{" "}
+                <span className="font-[500]  text-end">Thứ 2 - Thứ 6</span>
+              </p>
+            </div>
+          </div>
+          {/* right 2st */}
+          <div className="flex flex-col gap-2 w-full p-4 rounded-lg bg-[white]">
+            <p className="font-[500] !mb-0">
+              Trải nghiệm tìm kiếm thông minh hơn với Premium
+            </p>
+            <p className="!mb-0">
+              Các thành viên cao cấp có khả năng được tuyển dụng cao hơn tới 2,6
+              lần. Thêm vào đó! Đi trước với quyền truy cập độc quyền vào các
+              nhà lãnh đạo doanh nghiệp có ảnh hưởng.
+            </p>
+            <div className="flex gap-2 justify-center items-center">
+              <img
+                className="max-w-[70px]"
+                src="/src/assets/user/GroupContact.png"
+                alt=""
+              />
+              <p className="!mb-0 text-[12px] text-gray-400">
+                Hàng triệu thành viên đã sử dụng Premium
+              </p>
+            </div>
+            <button className="w-full py-2 px-4 bg-[#1E90FF] rounded-lg text-white font-[500]">
+              Thử 1 tháng Premium với giá ₫0
+            </button>
+            <p className="!mb-0 text-[12px] text-gray-400">
+              1 tháng miễn phí với hỗ trợ 24/7. Hủy bất cứ lúc nào. Chúng tôi sẽ
+              nhắc bạn 7 ngày trước khi thời gian dùng thử của bạn kết thúc
             </p>
           </div>
         </div>
