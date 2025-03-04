@@ -28,7 +28,9 @@ const JobDetail = ({ jobId }) => {
       {/* bên phải - left section */}
       <div className="flex-[7] w-full  flex flex-col border-r-2 border-gray-200 ">
         <div className="flex justify-between items-center p-4 border-b-2 border-gray-200">
-          <p className="!mb-0 text-[30px] font-[500]">{selectedJob.title}</p>
+          <p className="!mb-0 text-[30px] font-[500] cursor-pointer hover:underline">
+            {selectedJob.title}
+          </p>
           <div className="flex gap-2">
             {selectedJob?.skills?.map((skill, index) => (
               <p

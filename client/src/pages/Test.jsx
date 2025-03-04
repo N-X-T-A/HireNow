@@ -22,63 +22,78 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 
 import { useState } from "react";
+const services = [
+  {
+    title: "3D ARTIST",
+    image: "/src/assets/home/ceo.jpg",
+    tags: ["Game Design", "Environment Artist", "AI Artist", "Archviz Artist"],
+  },
+  {
+    title: "VIDEO EXPLAINER",
+    image: "/src/assets/home/ceo1.jpg",
+    tags: ["Animated Explainer", "AI explainer", "Live-action explainer"],
+  },
+  {
+    title: "GRAPHIC DESIGN",
+    image: "/src/assets/home/ceo2.jpg",
+    tags: [
+      "Illustration",
+      "Motion graphic design",
+      "User interface design",
+      "Print design",
+      "Logo Design",
+    ],
+  },
+  {
+    title: "DIGITAL MARKETING",
+    image: "/src/assets/home/ceo3.jpg",
+    tags: [
+      "Advertising",
+      "Search Engine Optimization",
+      "Affiliate Marketing",
+      "Email Marketing",
+      "Content",
+    ],
+  },
+];
 
-export default function Test() {
-  const [selectedJobId, setSelectedJobId] = useState(null);
-
-  const jobs = [
-    { id: 1, job: "Google" },
-    { id: 2, job: "Netflix" },
-    { id: 3, job: "Facebook" },
-  ];
-  const jobDetails = [
-    {
-      id: 1,
-      name: "Google",
-      description: "Công ty công nghệ lớn nhất thế giới.",
-    },
-    {
-      id: 2,
-      name: "Netflix",
-      description: "Dịch vụ phát trực tuyến phổ biến.",
-    },
-    { id: 3, name: "Facebook", description: "Nền tảng mạng xã hội lớn nhất." },
-  ];
-  const selectedJob = jobDetails.find((job) => job.id === selectedJobId);
+function ServiceCard({ service }) {
   return (
-    <div className="flex gap-4 p-4">
-      {/* Danh sách công việc bên trái */}
-      <div className="w-1/3 bg-gray-100 p-4 rounded-lg">
-        <h2 className="text-lg font-bold mb-2">Danh sách công việc</h2>
-        <ul>
-          {jobs.map((job) => (
-            <li
-              key={job.id}
-              className={`p-2 cursor-pointer rounded ${selectedJobId === job.id ? "bg-blue-300" : "hover:bg-gray-200"}`}
-              onClick={() => setSelectedJobId(job.id)}
-            >
-              {job.job}
-            </li>
-          ))}
-        </ul>
+    <div className="relative bg-white p-5 shadow-lg rounded-xl transform rotate-2">
+      <img
+        src={service.image}
+        alt={service.title}
+        className="rounded-md w-full h-40 object-cover"
+      />
+      <h3 className="text-lg font-bold mt-4">{service.title}</h3>
+      <div className="flex flex-wrap gap-2 mt-2">
+        {service.tags.map((tag, index) => (
+          <span
+            key={index}
+            className="text-xs bg-gray-200 px-3 py-1 rounded-full"
+          >
+            {tag}
+          </span>
+        ))}
       </div>
-
-      {/* Chi tiết công việc bên phải */}
-      <div className="w-2/3 bg-white p-4 rounded-lg shadow">
-        <h2 className="text-lg font-bold mb-2">Chi tiết công việc</h2>
-        {selectedJob ? (
-          <div>
-            <h3 className="text-xl font-semibold">{selectedJob.name}</h3>
-            <p className="text-gray-600">{selectedJob.description}</p>
-          </div>
-        ) : (
-          <p className="text-gray-500">Chọn một công việc để xem chi tiết.</p>
-        )}
-      </div>
+      <button className="absolute bottom-5 right-5 bg-black text-white w-8 h-8 rounded-full flex items-center justify-center">
+        →
+      </button>
     </div>
   );
 }
 
+const Test = () => {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6">
+      {services.map((service, index) => (
+        <ServiceCard key={index} service={service} />
+      ))}
+    </div>
+  );
+};
+
+export default Test;
 // //login git
 // const handleLoginGit = () => {
 //   const authUrl = `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user&redirect_uri=${REDIRECT_URI}`;

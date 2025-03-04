@@ -5,6 +5,7 @@ import { GlobeAltIcon } from "@heroicons/react/24/outline";
 import JobP1Header from "../../components/user/jobP1Header";
 import { motion } from "framer-motion";
 import { jobs } from "../../data/data";
+import { services } from "../../data/data";
 const UserPage1 = () => {
   const hoverColors = [
     "hover:bg-blue-100",
@@ -100,7 +101,8 @@ const UserPage1 = () => {
           </div>
         </motion.div>
       </div>
-      <div className="w-full flex flex-col gap-3 mt-[10%]  items-center justify-items-center justify-center">
+      <div className="w-full flex flex-col gap-3 mt-[5%]  items-center justify-items-center justify-center">
+        {/* job */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -151,6 +153,52 @@ const UserPage1 = () => {
         <button className=" transition ease-in-out duration-300 transform hover:-translate-y-[5px] flex items-center justify-items-center justify-center gap-3 px-[20px] py-[10px] bg-black rounded-[20px] text-white">
           Xem thêm <FontAwesomeIcon icon={faCircleRight} />
         </button>
+        {/* service */}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true, amount: 0.3 }}
+          className="flex flex-col items-center justify-items-center justify-center gap-2"
+        >
+          <h1 className="!mb-0 text-[45px] font-[500] max-w-[600px] text-center">
+            Các dịch vụ phổ biến
+          </h1>
+          <p>
+            Các dịch vụ hỗ trợ bên thứ 3 có thể hỗ trợ cho công việc của bạn
+          </p>
+          <div className=" grid grid-cols-1 md:grid-cols-2 gap-6 p-6 ">
+            {services.map((service, index) => (
+              <motion.div
+                initial={{ opacity: 0, y: 50, rotate: 2 }}
+                whileInView={{ opacity: 1, y: 0, rotate: 2 }}
+                transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }}
+                viewport={{ once: true, amount: 0.3 }}
+                className="relative bg-white p-5 shadow-lg rounded-xl transform rotate-2"
+              >
+                <img
+                  src={service.image}
+                  alt={service.title}
+                  className="rounded-md w-full h-40 object-cover"
+                />
+                <h3 className="text-lg font-bold mt-4">{service.title}</h3>
+                <div className="flex flex-wrap gap-2 mt-2">
+                  {service.tags.map((tag, index) => (
+                    <span
+                      key={index}
+                      className="text-xs bg-gray-200 px-3 py-1 rounded-full"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <button className="absolute bottom-5 right-5 bg-black text-white w-8 h-8 rounded-full flex items-center justify-center">
+                  →
+                </button>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </>
   );

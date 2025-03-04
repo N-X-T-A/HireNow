@@ -425,3 +425,43 @@ export const UserJobs = [
     services: ["Spotify API", "Hadoop", "Data Warehousing"],
   },
 ];
+
+export const services = [
+  {
+    title: " Lưu trữ và quản lý dữ liệu",
+    image: "/src/assets/home/data.jpg",
+    tags: [
+      "Amazon RDS, Google Cloud SQL",
+      "MongoDB Atlas",
+      "Firebase",
+      "Amazon S3, Google Cloud Storage",
+    ],
+  },
+  {
+    title: "Dịch vụ điện toán đám mây (Cloud Services)",
+    image: "/src/assets/home/840.jpg",
+    tags: [
+      "AWS (Amazon Web Services)",
+      "Microsoft Azure",
+      "Google Cloud Platform (GCP)",
+    ],
+  },
+  {
+    title: " Dịch vụ DevOps & CI/CD",
+    image: "/src/assets/home/7040951.jpg",
+    tags: [
+      "Docker, Kubernetes ",
+      "Jenkins, GitHub Actions, GitLab CI/CD",
+      "Terraform, Ansible, Puppet",
+    ],
+  },
+  {
+    title: "Dịch vụ AI & Machine Learning",
+    image: "/src/assets/home/AI.jpg",
+    tags: [
+      "OpenAI (ChatGPT, DALL·E) ",
+      "Google Vertex AI, AWS SageMaker",
+      "IBM Watson",
+    ],
+  },
+];

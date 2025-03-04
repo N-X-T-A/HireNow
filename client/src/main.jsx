@@ -15,6 +15,7 @@ import UserPage3 from "./pages/User/UserPage3";
 import PrivateRoute from "./layout/PrivateRoute";
 import EmployerManager from "./pages/employer/employerManager";
 import EmployerPage1 from "./pages/employer/employerPage1";
+import JobDetailPage from "./pages/User/jobDetailPage";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Router>
@@ -30,6 +31,7 @@ createRoot(document.getElementById("root")).render(
             <Route path="UserHome" element={<UserPage1 />} />
             <Route path="Jobs" element={<UserPage2 />} />
             <Route path="Test" element={<UserPage3 />} />
+            <Route path="Jobs/:Id" element={<JobDetailPage />} />
           </Route>
         </Route>
 
