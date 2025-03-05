@@ -11,7 +11,7 @@ class JobService {
     return jobs.map((job) => ({
       _id: job._id,
       title: job.title,
-      company: job.company_id.name,
+
       skills: job.skills,
       location: job.location,
       salary_range: job.salary_range,
