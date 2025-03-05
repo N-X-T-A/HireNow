@@ -1,7 +1,8 @@
 const cloudinary = require("cloudinary").v2;
+require("dotenv").config();
 
 cloudinary.config({
-  cloud_name: "dna4rtodi",
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
@@ -16,8 +17,8 @@ const uploadImage = async (filePath) => {
     const result = await cloudinary.uploader.upload(filePath, {
       folder: "uploads/images",
     });
-    console.log("Image upload successful:", result);
-    return result;
+    console.log("Image upload successful");
+    return result.secure_url;
   } catch (error) {
     console.error("Error uploading image:", error);
     throw error;
@@ -31,11 +32,15 @@ const uploadImage = async (filePath) => {
  */
 const uploadResume = async (filePath) => {
   try {
+    const fileName = filePath.split("/").pop();
+
     const result = await cloudinary.uploader.upload(filePath, {
       folder: "uploads/resumes",
+      public_id: fileName.split(".")[0],
     });
-    console.log("Resume upload successful:", result);
-    return result;
+
+    console.log("Resume upload successful");
+    return result.secure_url;
   } catch (error) {
     console.error("Error uploading resume:", error);
     throw error;

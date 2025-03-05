@@ -21,6 +21,11 @@ const UserSchema = new mongoose.Schema(
       default: "candidate",
     },
     isFirstLogin: { type: Boolean, default: true },
+    companyId: {
+      type: mongoose.Types.ObjectId,
+      ref: "Company",
+      default: null,
+    },
   },
   { timestamps: false }
 );

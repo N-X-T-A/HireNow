@@ -4,6 +4,13 @@ import {
   PencilIcon,
   PlusIcon,
 } from "@heroicons/react/24/solid";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faGithub,
+  faFacebook,
+  faTwitter,
+} from "@fortawesome/free-brands-svg-icons";
+
 const UserProfile = () => {
   const [user, setUser] = useState(() => {
     return JSON.parse(sessionStorage.getItem("user")) || null;
@@ -147,11 +154,7 @@ const UserProfile = () => {
                   Tôi là Thái Phương, sinh viên ngành Công nghệ Thông tin tại
                   Trường Đại học Đà Lạt. Với niềm đam mê lập trình và phát triển
                   phần mềm, tôi luôn tìm kiếm cơ hội để học hỏi và trau dồi kỹ
-                  năng. Tôi đã có kinh nghiệm thực tập tại Công ty XYZ, nơi tôi
-                  làm việc với các công nghệ hiện đại và phát triển các ứng dụng
-                  thực tế. Tôi mong muốn được làm việc trong môi trường chuyên
-                  nghiệp, nơi tôi có thể đóng góp và phát triển sự nghiệp của
-                  mình.
+                  năng.
                 </p>
               </div>
               {/* post */}
@@ -178,9 +181,6 @@ const UserProfile = () => {
                   phần mềm, tôi luôn tìm kiếm cơ hội để học hỏi và trau dồi kỹ
                   năng. Tôi đã có kinh nghiệm thực tập tại Công ty XYZ, nơi tôi
                   làm việc với các công nghệ hiện đại và phát triển các ứng dụng
-                  thực tế. Tôi mong muốn được làm việc trong môi trường chuyên
-                  nghiệp, nơi tôi có thể đóng góp và phát triển sự nghiệp của
-                  mình.
                 </p>
               </div>
             </div>
@@ -263,8 +263,51 @@ const UserProfile = () => {
         </div>
       </div>
       {/* right section */}
-      <div className="hidden md:flex md:flex-[3] bg-green-400 w-full p-4 rounded-lg">
-        b
+      <div className="hidden md:flex flex-col md:flex-[3] gap-3  w-full rounded-lg">
+        <div
+          className="w-full rounded-lg max-h-fit p-4 flex flex-col gap-2"
+          style={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }}
+        >
+          <span className="flex justify-between items-center w-full">
+            <p className="!mb-0 font-[500] text-[14px]">Liên kết mạng xã hội</p>
+            <div className="flex gap-1 p-2 justify-center items-center">
+              <PlusIcon className="w-5 h-5 p-[5px] rounded-full bg-[#1E90FF] text-white" />
+            </div>
+          </span>
+          <p className="!mb-0 cursor-pointer">
+            <FontAwesomeIcon icon={faGithub} />{" "}
+            <span className="text-blue-400">https://github.com/Ouugii</span>
+          </p>
+          <p className="!mb-0 cursor-pointer">
+            <FontAwesomeIcon icon={faFacebook} />{" "}
+            <span className="text-blue-400">https://facebook.com/Ouugii</span>
+          </p>
+          <p className="!mb-0 cursor-pointer">
+            <FontAwesomeIcon icon={faTwitter} />{" "}
+            <span className="text-blue-400">https://x.com/Ouugii</span>
+          </p>
+        </div>
+        <div
+          className="w-full rounded-lg max-h-fit flex flex-col "
+          style={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }}
+        >
+          <img
+            src="/src/assets/user/group.jpg"
+            alt=""
+            className="w-full max-h-[250px] object-cover rounded-t-lg"
+          />
+
+          <div className="w-full p-3 flex flex-col gap-2">
+            <p className="!mb-0 text-[18px] font-[500]">
+              Cùng khám phá những người "đồng nghiệp" khác.
+            </p>
+            <p className="text-[14px] text-gray-500">
+              Nền tảng được tạo ra không chỉ giúp bạn tìm kiếm việc làm mà còn
+              có thể kết nối với những người khác, thông qua đó trao đổi và trau
+              dồi thêm kinh nghiệm để có thể hoàn thiện bản thân nhé!
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -8,7 +8,6 @@ const withLayout = (WrappedComponent) => {
       <main className="min-h-screen">
         <WrappedComponent {...props} />
       </main>
-      <Footer />
     </>
   );
 };

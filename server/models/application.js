@@ -21,6 +21,7 @@ const ApplicationSchema = new mongoose.Schema(
       enum: ["Submitted", "Viewed", "Interview", "Rejected", "Accepted"],
       default: "Submitted",
     },
+    applied_date: { type: Date, default: Date.now },
   },
   { timestamps: false }
 );
