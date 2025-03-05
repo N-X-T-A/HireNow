@@ -1,7 +1,7 @@
 "use strict";
 
 const { CREATED, OK } = require("../core/success.response");
-const { AuthFailureError, ForbiddenError } = require("../core/error.response");
+const { AuthFailureError } = require("../core/error.response");
 const { User } = require("../models");
 const bcrypt = require("bcryptjs");
 const { generateAccessToken, generateRefreshToken } = require("../utils/token");
@@ -10,14 +10,13 @@ const jwt = require("jsonwebtoken");
 class AuthController {
   signUp = async (req, res) => {
     try {
-      const { username, email, password, photoURL } = req.body;
+      const { username, email, password } = req.body;
       const hashedPassword = await bcrypt.hash(password, 10);
 
       const newUser = new User({
         username,
         email,
         passwordHash: hashedPassword,
-        photoURL,
       });
 
       await newUser.save();

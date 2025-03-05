@@ -26,14 +26,14 @@ class JobService {
       return { success: false, message: "No skills found for the user!" };
     }
 
-    const jobs = await Job.find().populate("company_id", "name").lean();
+    const jobs = await Job.find().populate("company_id", "name logo").lean();
     const recommendedJobs = await Promise.all(
       jobs.map(async (job) => {
         const relatedSkills = await skillService.getJobSkills(job._id);
         return {
           _id: job._id,
           title: job.title,
-          company: job.company_id.name,
+          company: job.company_id,
           skills: relatedSkills.map((js) => js.skill_id.name),
           location: job.location,
           salary_range: job.salary_range,
@@ -51,7 +51,7 @@ class JobService {
       .populate("company_id", "name location")
       .lean();
     if (!job) return { success: false, message: "Job not found!" };
-
+    job.posted_date = undefined;
     const jobSkills = await skillService.getJobSkills(jobId);
     return {
       success: true,

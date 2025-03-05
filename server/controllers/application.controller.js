@@ -1,0 +1,71 @@
+const applicationService = require("../services/application.service");
+
+class ApplicationController {
+  async applyForJob(req, res) {
+    try {
+      if (req.user.role === "recruiter") {
+        return res.status(403).json({
+          message: "Recruiters cannot apply for jobs.",
+        });
+      }
+
+      const userId = req.user._id;
+      const { job_id, resume, cover_letter } = req.body;
+
+      const result = await applicationService.applyForJob(
+        userId,
+        job_id,
+        resume,
+        cover_letter
+      );
+
+      return res.status(201).json({
+        message: "Application submitted successfully!",
+        metadata: result,
+      });
+    } catch (error) {
+      return res.status(error.statusCode || 500).json({
+        message: error.message || "Internal Server Error",
+      });
+    }
+  }
+
+  async getAppliedJobs(req, res) {
+    try {
+      const userId = req.user._id;
+      const jobs = await applicationService.getAppliedJobs(userId);
+
+      return res.status(200).json({
+        message: "Fetched applied jobs successfully.",
+        metadata: jobs,
+      });
+    } catch (error) {
+      return res.status(error.statusCode || 500).json({
+        message: error.message || "Internal Server Error",
+      });
+    }
+  }
+
+  async getApplicantsByJob(req, res) {
+    try {
+      const recruiterId = req.user.companyId;
+      const { jobId } = req.params;
+
+      const applicants = await applicationService.getApplicantsByJob(
+        recruiterId,
+        jobId
+      );
+
+      return res.status(200).json({
+        message: "Fetched applicants successfully.",
+        metadata: applicants,
+      });
+    } catch (error) {
+      return res.status(error.statusCode || 500).json({
+        message: error.message || "Internal Server Error",
+      });
+    }
+  }
+}
+
+module.exports = new ApplicationController();

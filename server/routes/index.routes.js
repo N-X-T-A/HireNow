@@ -13,5 +13,7 @@ router.use((req, res, next) => {
 router.use("/api/v1/auth", require("./auth.routes"));
 router.use("/api/v1/user", require("./user.routes"));
 router.use("/api/v1/job", require("./job.routes"));
+router.use("/api/v1/upload", require("./upload.routes"));
+router.use("/api/v1/application", require("./application.routes"));
 
 module.exports = router;

@@ -19,7 +19,6 @@ class JobController {
     try {
       const userId = req.params.id;
       const result = await jobService.getRecommendedJobs(userId);
-
       if (result.success) {
         res.json({ jobs: result.jobs });
       } else {
@@ -57,7 +56,7 @@ class JobController {
         req.body;
       const newJob = new Job({
         title,
-        company_id: req.user._id,
+        company_id: req.user.company_id,
         skills,
         location,
         salary_range,

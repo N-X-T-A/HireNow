@@ -1,14 +1,17 @@
+### Authentication (Auth APIs)
+
 # User Registration
-POST http://localhost:5000/api/v1/signup
+POST http://localhost:5000/api/v1/auth/signup
 Content-Type: application/json
 
 {
+  "username": "Trần Phương Thái",
   "email": "user@example.com",
   "password": "password123",
 }
 
 # User Login
-POST http://localhost:5000/api/v1/signin
+POST http://localhost:5000/api/v1/auth/signin
 Content-Type: application/json
 
 {
@@ -17,45 +20,47 @@ Content-Type: application/json
 }
 
 # User Logout
-GET http://localhost:5000/api/v1/signout
+GET http://localhost:5000/api/v1/auth/signout
 
 # Google Login
-POST http://localhost:5000/api/v1/google
+POST http://localhost:5000/api/v1/auth/google
 Content-Type: application/json
 
 {
-  "token": "GOOGLE_AUTH_TOKEN_HERE"
+  "accessToken": "token",
 }
 
-### 2️⃣ User Profile
+### User Profile
 
 # Update User Profile
-POST http://localhost:5000/api/v1/update-profile/USER_ID
+POST http://localhost:5000/api/v1/user/update-profile/USER_ID_HERE
 Content-Type: application/json
 
 {
+  "name": "Nguyễn Văn A",
   "phone": "0987654321",
   "education": [
     {
-      "school": "Hanoi University",
-      "degree": "Bachelor",
-      "field": "Computer Science",
-      "startYear": 2020,
-      "endYear": 2024
+      "school": "Đại học Bách Khoa",
+      "degree": "Cử nhân",
+      "field_of_study": "Khoa học máy tính",
+      "start_year": 2019,
+      "end_year": 2023
     }
   ],
-  "skills": ["JavaScript", "Node.js", "React"],
   "experience": [
     {
-      "company": "Tech Company",
-      "position": "Software Engineer",
-      "startYear": 2023,
-      "endYear": null
+      "company": "FPT Software",
+      "title": "Software Engineer",
+      "start_date": "2023-06-01",
+      "end_date": "2024-02-01",
+      "description": "Phát triển ứng dụng web bằng ReactJS."
     }
-  ]
+  ],
+  "skills": ["67c1e258ba3d3e783ee64a95", "67c1e258ba3d3e783ee64a96"]
 }
 
-### 3️⃣ Job Listings
+### Job Listings
 
 # Get All Jobs
 GET http://localhost:5000/api/v1/job
@@ -72,12 +77,17 @@ Authorization: Bearer RECRUITER_ACCESS_TOKEN
 Content-Type: application/json
 
 {
-  "title": "Frontend Developer",
-  "company_id": "COMPANY_ID_HERE",
-  "location": "Hanoi",
-  "salary": "1000-1500 USD",
-  "skills": ["JavaScript", "React"],
-  "description": "Job description..."
+  "title": "Full Stack Developer",
+  "company_id": "65e0f5b93c8c3e12a4dfe217",
+  "location": "Ho Chi Minh, Vietnam",
+  "salary_range": "1000-1500 USD",
+  "short_description": "We are looking for a talented Full Stack Developer.",
+  "description": "This position requires experience in both frontend and backend development.",
+  "skills": [
+    "65e0f6c83c8c3e12a4dfe228",
+    "65e0f6f13c8c3e12a4dfe229",
+    "65e0f70a3c8c3e12a4dfe22a"
+  ]
 }
 
 # Update a Job Post
@@ -86,10 +96,43 @@ Authorization: Bearer RECRUITER_ACCESS_TOKEN
 Content-Type: application/json
 
 {
-  "title": "Senior Frontend Developer",
-  "salary": "1500-2000 USD"
+  "title": "Backend Developerr",
+  "company_id": "65e0f5b93c8c3e12a4dfe217",
+  "skills": [
+    "65e0f6c83c8c3e12a4dfe228",
+    "65e0f6f13c8c3e12a4dfe229"
+  ]
 }
 
 # Delete a Job Post
 DELETE http://localhost:5000/api/v1/job/JOB_ID_HERE
+Authorization: Bearer RECRUITER_ACCESS_TOKEN
+
+### Upload Image
+### Only one file (png,jpg) ./path_to_your_image.jpg
+POST http://localhost:5000/api/v1/upload/image
+Content-Type: multipart/form-data
+
+### Upload Resume
+### Only one file (pdf) path_to_your_resume.pdf
+POST http://localhost:5000/api/v1/upload/resume
+Content-Type: multipart/form-data
+
+### Apply for a job
+POST http://localhost:5000/api/v1/application
+Authorization: Bearer USER_ACCESS_TOKEN
+Content-Type: application/json
+
+{
+  "job_id": "65e0f5b93c8c3e12a4dfe217",
+  "resume": "https://res.cloudinary.com/example/uploads/resumes/abc123.pdf",
+  "cover_letter": "I am interested in this position."
+}
+
+###  Get Applied Jobs for Candidate
+GET http://localhost:5000/api/v1/application
+Authorization: Bearer USER_ACCESS_TOKEN
+
+### Get Applicants for a Job (Recruiter Only)
+GET http://localhost:5000/api/v1/application/job/job_id
 Authorization: Bearer RECRUITER_ACCESS_TOKEN
