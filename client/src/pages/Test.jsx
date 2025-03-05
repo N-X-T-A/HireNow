@@ -14,81 +14,40 @@
 //   alert("Đăng xuất thành công!");
 // };
 
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/effect-coverflow";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/scrollbar";
-
-import { useState } from "react";
-const services = [
-  {
-    title: "3D ARTIST",
-    image: "/src/assets/home/ceo.jpg",
-    tags: ["Game Design", "Environment Artist", "AI Artist", "Archviz Artist"],
-  },
-  {
-    title: "VIDEO EXPLAINER",
-    image: "/src/assets/home/ceo1.jpg",
-    tags: ["Animated Explainer", "AI explainer", "Live-action explainer"],
-  },
-  {
-    title: "GRAPHIC DESIGN",
-    image: "/src/assets/home/ceo2.jpg",
-    tags: [
-      "Illustration",
-      "Motion graphic design",
-      "User interface design",
-      "Print design",
-      "Logo Design",
-    ],
-  },
-  {
-    title: "DIGITAL MARKETING",
-    image: "/src/assets/home/ceo3.jpg",
-    tags: [
-      "Advertising",
-      "Search Engine Optimization",
-      "Affiliate Marketing",
-      "Email Marketing",
-      "Content",
-    ],
-  },
-];
-
-function ServiceCard({ service }) {
-  return (
-    <div className="relative bg-white p-5 shadow-lg rounded-xl transform rotate-2">
-      <img
-        src={service.image}
-        alt={service.title}
-        className="rounded-md w-full h-40 object-cover"
-      />
-      <h3 className="text-lg font-bold mt-4">{service.title}</h3>
-      <div className="flex flex-wrap gap-2 mt-2">
-        {service.tags.map((tag, index) => (
-          <span
-            key={index}
-            className="text-xs bg-gray-200 px-3 py-1 rounded-full"
-          >
-            {tag}
-          </span>
-        ))}
-      </div>
-      <button className="absolute bottom-5 right-5 bg-black text-white w-8 h-8 rounded-full flex items-center justify-center">
-        →
-      </button>
-    </div>
-  );
-}
+import React, { useRef } from "react";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 const Test = () => {
+  const cvRef = useRef();
+  const handleDownloadPDF = () => {
+    const input = cvRef.current;
+    html2canvas(input, { scale: 2 }).then((canvas) => {
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF("p", "mm", "a4");
+      const imgWidth = 210;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+      pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
+      pdf.save("cv.pdf");
+    });
+  };
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6">
-      {services.map((service, index) => (
-        <ServiceCard key={index} service={service} />
-      ))}
+    <div className="p-5">
+      {/* Khu vực CV */}
+      <div ref={cvRef} className="bg-white p-5 shadow-lg rounded-md">
+        <h1 className="text-xl font-bold">John Doe</h1>
+        <p>Web Developer</p>
+        <p>Email: johndoe@example.com</p>
+      </div>
+
+      {/* Nút tải xuống */}
+      <button
+        onClick={handleDownloadPDF}
+        className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md"
+      >
+        Tải xuống PDF
+      </button>
     </div>
   );
 };

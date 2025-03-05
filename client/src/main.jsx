@@ -16,6 +16,7 @@ import PrivateRoute from "./layout/PrivateRoute";
 import EmployerManager from "./pages/employer/employerManager";
 import EmployerPage1 from "./pages/employer/employerPage1";
 import JobDetailPage from "./pages/User/jobDetailPage";
+import UserProfile from "./pages/User/userProfile";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Router>
@@ -27,11 +28,13 @@ createRoot(document.getElementById("root")).render(
 
         {/* Private Employee route */}
         <Route element={<PrivateRoute allowedRoles={["candidate"]} />}>
-          <Route path="/User/*" element={<UserManager />}>
-            <Route path="UserHome" element={<UserPage1 />} />
-            <Route path="Jobs" element={<UserPage2 />} />
-            <Route path="Test" element={<UserPage3 />} />
-            <Route path="Jobs/:Id" element={<JobDetailPage />} />
+          <Route path="/user/*" element={<UserManager />}>
+            <Route path="userHome" element={<UserPage1 />} />
+            <Route path="jobs" element={<UserPage2 />} />
+            <Route path="test" element={<UserPage3 />} />
+            <Route path="jobs/:Id" element={<JobDetailPage />} />
+            <Route path="jobs/:Id" element={<JobDetailPage />} />
+            <Route path="profile" element={<UserProfile />} />
           </Route>
         </Route>
 

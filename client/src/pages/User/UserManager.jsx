@@ -4,7 +4,7 @@ import withLayout from "../../layout/withLayout";
 const UserManager = () => {
   return (
     <>
-      <div className="h-[5000px] max-h-[1025px] flex justify-center ">
+      <div className=" flex justify-center items-center">
         <div className=" w-full !max-w-[1700px]">
           <Outlet />
         </div>

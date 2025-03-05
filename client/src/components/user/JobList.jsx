@@ -14,7 +14,6 @@ const JobList = ({ onSelectJob }) => {
       try {
         const response = await axios.get("http://localhost:3001/jobs");
         setJobs(response.data);
-        console.log(response.data);
       } catch (error) {
         console.error("Lỗi khi lấy danh sách công việc:", error);
       }

@@ -62,7 +62,7 @@ const Header = (shouldFetch) => {
                     {role === "candidate" && (
                       <>
                         <div
-                          onClick={() => navigate("/User/UserHome")}
+                          onClick={() => navigate("/user/userHome")}
                           className="pt-[5px] text-[#757575] flex justify-center flex-col !w-auto !max-w-none cursor-pointer transition ease-in-out duration-300 transform hover:-translate-y-[5px] hover:text-[#1E90FF] text-center"
                         >
                           <FontAwesomeIcon
@@ -74,7 +74,7 @@ const Header = (shouldFetch) => {
                         </div>
 
                         <div
-                          onClick={() => navigate("/User/Jobs")}
+                          onClick={() => navigate("/user/jobs")}
                           className="pt-[5px] text-[#757575] flex justify-center flex-col !w-auto !max-w-none cursor-pointer transition ease-in-out duration-300 transform hover:-translate-y-[5px] hover:text-[#1E90FF] text-center"
                         >
                           <FontAwesomeIcon
@@ -84,7 +84,7 @@ const Header = (shouldFetch) => {
                           <span className="pt-1.5 text-[12px]">Việc làm</span>
                         </div>
                         <div
-                          onClick={() => navigate("/User/Test")}
+                          onClick={() => navigate("/user/test")}
                           className="pt-[5px] text-[#757575] flex justify-center flex-col !w-auto !max-w-none cursor-pointer transition ease-in-out duration-300 transform hover:-translate-y-[5px] hover:text-[#1E90FF] text-center"
                         >
                           <FontAwesomeIcon
@@ -131,7 +131,10 @@ const Header = (shouldFetch) => {
                                 </>
                               ) : (
                                 <>
-                                  <button className="block w-full px-4 py-2 hover:bg-gray-100">
+                                  <button
+                                    className="block w-full px-4 py-2 hover:bg-gray-100"
+                                    onClick={() => navigate("/user/profile")}
+                                  >
                                     Trang cá nhân
                                   </button>
                                   <button className="block w-full px-4 py-2 hover:bg-gray-100">
