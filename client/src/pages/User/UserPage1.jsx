@@ -6,6 +6,7 @@ import JobP1Header from "../../components/user/jobP1Header";
 import { motion } from "framer-motion";
 import { jobs } from "../../data/data";
 import { services } from "../../data/data";
+import { companiesPage1 } from "../../data/data";
 const UserPage1 = () => {
   const hoverColors = [
     "hover:bg-blue-100",
@@ -102,7 +103,7 @@ const UserPage1 = () => {
         </motion.div>
       </div>
       <div className="w-full flex flex-col gap-3 mt-[5%]  items-center justify-items-center justify-center">
-        {/* job */}
+        {/* job header*/}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -117,6 +118,7 @@ const UserPage1 = () => {
             Công việc đang được tìm kiếm nhiều nhất
           </h1>
         </motion.div>
+        {/* job list */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 p-6">
           {jobs.map((job, index) => (
             <motion.div
@@ -199,6 +201,55 @@ const UserPage1 = () => {
             ))}
           </div>
         </motion.div>
+        {/* companies header*/}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true, amount: 0.3 }}
+          className="flex flex-col items-center justify-items-center justify-center gap-2"
+        >
+          <h1 className="!mb-0 text-[45px] font-[500] max-w-[600px] text-center">
+            Danh sách các công ty tuyển dụng hàng đầu
+          </h1>
+        </motion.div>
+        {/* companies list */}
+        <div className="flex gap-3 flex-wrap justify-center items-center w-full">
+          {/* companies item */}
+          {companiesPage1?.map((company, index) => (
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }}
+              viewport={{ once: true, amount: 0.1 }}
+              whileHover={{
+                y: -10,
+                boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.2)",
+              }}
+              key={company.id}
+              className="md:w-1/4 flex-col gap-1 p-2 relative"
+              style={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }}
+            >
+              <img
+                src={company.bg}
+                alt=""
+                className="w-full max-h-[200px] object-cover"
+              />
+              <img
+                src={company.image}
+                alt=""
+                className="absolute max-w-[70px] left-5 top-[-1/2] -translate-y-1/2 p-[2px] rounded-full bg-white"
+              />
+              <p className="!mb-0 mt-[8%] px-2 text-[20px] font-[600]">
+                {company.company}
+              </p>
+              <p className="!mb-0 px-2 text-[15px] text-gray-400 ">VietNam</p>
+              <p className="!mb-0 px-2 text-[15px] text-gray-600 text-justify line-clamp-3">
+                {company.description}
+              </p>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </>
   );

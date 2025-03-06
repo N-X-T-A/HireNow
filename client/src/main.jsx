@@ -17,6 +17,8 @@ import EmployerManager from "./pages/employer/employerManager";
 import EmployerPage1 from "./pages/employer/employerPage1";
 import JobDetailPage from "./pages/User/jobDetailPage";
 import UserProfile from "./pages/User/userProfile";
+import { ShowProfile } from "./pages/User/showProfile";
+import ShowCompanieProfile from "./pages/User/showCompanieProfile";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Router>
@@ -35,6 +37,8 @@ createRoot(document.getElementById("root")).render(
             <Route path="jobs/:Id" element={<JobDetailPage />} />
             <Route path="jobs/:Id" element={<JobDetailPage />} />
             <Route path="profile" element={<UserProfile />} />
+            <Route path="profile-user" element={<ShowProfile />} />
+            <Route path="profile-companies" element={<ShowCompanieProfile />} />
           </Route>
         </Route>
 

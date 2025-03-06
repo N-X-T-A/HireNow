@@ -1,10 +1,12 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { CheckBadgeIcon } from "@heroicons/react/24/outline";
 import { SparklesIcon, StarIcon } from "@heroicons/react/24/solid";
 const JobDetail = ({ jobId }) => {
   //state
+  const navigate = useNavigate();
   const [selectedJob, setJobs] = useState([]);
   //fetch API
   useEffect(() => {
@@ -27,7 +29,10 @@ const JobDetail = ({ jobId }) => {
       {/* bên phải - left section */}
       <div className="flex-[7] w-full  flex flex-col border-r-2 border-gray-200 ">
         <div className="flex justify-between items-center p-4 border-b-2 border-gray-200">
-          <p className="!mb-0 text-[30px] font-[500] cursor-pointer hover:underline">
+          <p
+            onClick={() => navigate(`/user/jobs/1`)}
+            className="!mb-0 text-[30px] font-[500] cursor-pointer hover:underline"
+          >
             {selectedJob.title}
           </p>
           <div className="flex gap-2">
