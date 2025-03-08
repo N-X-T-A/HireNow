@@ -22,8 +22,14 @@ export default function LoginMethod() {
   // const GITHUB_SECRET_ID = Environment.GITHUB_SECRET_ID;
   const navigate = useNavigate();
   const [user, setUser] = useState(() => {
-    return JSON.parse(sessionStorage.getItem("user")) || null;
+    try {
+      return JSON.parse(sessionStorage.getItem("user")) || null;
+    } catch (error) {
+      console.error("Lỗi khi parse JSON từ sessionStorage:", error);
+      return null;
+    }
   });
+
   const [firstLoggin, setFisrtLoggin] = useState(() => {
     return JSON.parse(sessionStorage.getItem("firstLoggin")) ?? true;
   });
@@ -34,6 +40,51 @@ export default function LoginMethod() {
   const [currentStep, setCurrentStep] = useState(1);
   const [userData, setUserData] = useState("");
   const [finalData, setFinalData] = useState([]);
+  //login normal
+  const [formData, setFormData] = useState({ email: "", password: "" });
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+  const handleLogin = async () => {
+    if (!formData.email || !formData.password) {
+      alert("Vui lòng nhập đầy đủ email và mật khẩu!");
+      return;
+    }
+
+    setIsLoading(true);
+    try {
+      const res = await fetch("http://localhost:5000/api/v1/auth/signin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (!res.ok) throw new Error("Lỗi xác thực");
+      const data = await res.json();
+      console.log("User data:", data);
+      console.log(data.metadata.accessToken);
+      // Lưu thông tin vào sessionStorage
+      sessionStorage.setItem("access_token", data.metadata.accessToken);
+      sessionStorage.setItem("user", JSON.stringify(data.metadata.user));
+      sessionStorage.setItem(
+        "firstLoggin",
+        JSON.stringify(data.metadata.user.isFirstLogin)
+      );
+      sessionStorage.setItem("isLoggedIn", JSON.stringify(true));
+
+      // Giả lập loading trước khi cập nhật trạng thái
+      setTimeout(() => {
+        setUser(data.metadata.user);
+        setFisrtLoggin(data.metadata.user.isFirstLogin);
+        setIsLoggedIn(true);
+        setIsLoading(false);
+        window.dispatchEvent(new Event("userUpdated"));
+      }, 3000);
+    } catch (error) {
+      console.error("Lỗi đăng nhập:", error);
+      setIsLoading(false);
+    }
+  };
   //login google
   const handleGoogleLogin = useGoogleLogin({
     onSuccess: async (response) => {
@@ -180,16 +231,30 @@ export default function LoginMethod() {
                 </p>
                 <input
                   type="text"
+                  name="email"
                   placeholder="Email"
                   className="w-[70%] border-[1px] border-zinc-800 h-[40px] rounded-[10px] px-[20px] py-[10px] mt-[35px]"
+                  value={formData.email}
+                  onChange={handleChange}
                 />
                 <input
                   type="password"
+                  name="password"
                   placeholder="Mật khẩu"
-                  className="w-[70%] border-[1px] border-zinc-800 h-[40px] rounded-[10px] px-[20px] py-[10px] "
+                  className="w-[70%] border-[1px] border-zinc-800 h-[40px] rounded-[10px] px-[20px] py-[10px]"
+                  value={formData.password}
+                  onChange={handleChange}
                 />
-                <button className="w-[70%] h-[45px] rounded-[10px] px-[20px] py-[10px] bg-[black] text-white cursor-pointer  transition ease-in-out duration-300 hover:bg-[#1E90FF]">
-                  Đăng nhập
+                <button
+                  onClick={handleLogin}
+                  disabled={isLoading}
+                  className={`w-[70%] h-[45px] rounded-[10px] px-[20px] py-[10px] ${
+                    isLoading
+                      ? "bg-gray-400 cursor-not-allowed"
+                      : "bg-black hover:bg-[#1E90FF] text-white cursor-pointer transition ease-in-out duration-300"
+                  }`}
+                >
+                  {isLoading ? "Đang đăng nhập..." : "Đăng nhập"}
                 </button>
               </div>
               <div className="flex items-center w-[70%] py-[25px]">
