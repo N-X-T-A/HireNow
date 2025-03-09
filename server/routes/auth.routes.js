@@ -23,4 +23,9 @@ router.post(
   asyncHandler(AuthController.google)
 );
 
+router.post(
+  "/recruiter/register",
+  asyncHandler(AuthController.registerRecruiter)
+);
+
 module.exports = router;

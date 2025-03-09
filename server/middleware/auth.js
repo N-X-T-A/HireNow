@@ -1,26 +1,38 @@
 "use strict";
 
 const jwt = require("jsonwebtoken");
-const { AuthFailureError, ForbiddenError } = require("../core/error.response");
 const { User } = require("../models");
 
 const verifyToken = async (req, res, next) => {
   try {
-    const token = req.cookies.access_token;
-    if (!token) throw new AuthFailureError("Access token is required!");
+    const token =
+      req.cookies.access_token || req.headers.authorization?.split(" ")[1];
+
+    if (!token) {
+      return res.status(401).json({ message: "Access token is required!" });
+    }
 
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, async (err, decoded) => {
-      if (err) throw new AuthFailureError("Invalid or expired token!");
+      if (err) {
+        return res.status(401).json({ message: "Invalid or expired token!" });
+      }
+
+      if (!decoded || !decoded.id) {
+        return res.status(401).json({ message: "Invalid token data!" });
+      }
 
       const user = await User.findById(decoded.id).select("-passwordHash");
-      if (!user) throw new AuthFailureError("User not found!");
+      if (!user) {
+        return res.status(401).json({ message: "User not found!" });
+      }
 
       req.user = user;
       next();
     });
   } catch (error) {
-    return res.status(error.statusCode || 500).json({
-      message: error.message || "Internal Server Error",
+    console.error("Error in verifyToken middleware:", error);
+    return res.status(500).json({
+      message: "Internal Server Error",
     });
   }
 };

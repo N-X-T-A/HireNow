@@ -36,6 +36,21 @@ class ApplicationService {
       .select("resume cover_letter applied_date")
       .lean();
   }
+
+  async getApplicants(recruiterId) {
+    const jobs = await Job.find({ company_id: recruiterId }).select("_id");
+    const jobIds = jobs.map((job) => job._id);
+
+    if (jobIds.length === 0) {
+      throw new ForbiddenError("You do not have any job postings.");
+    }
+
+    return await Application.find({ job_id: { $in: jobIds } })
+      .populate("user_id", "username email photoURL")
+      .populate("job_id", "title")
+      .select("cover_letter resume applied_date status")
+      .lean();
+  }
 }
 
 module.exports = new ApplicationService();

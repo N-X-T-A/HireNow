@@ -18,8 +18,8 @@ const ApplicationSchema = new mongoose.Schema(
     resume: { type: String },
     status: {
       type: String,
-      enum: ["Submitted", "Viewed", "Interview", "Rejected", "Accepted"],
-      default: "Submitted",
+      enum: ["Pending", "Interview", "Rejected", "Accepted"],
+      default: "Pending",
     },
     applied_date: { type: Date, default: Date.now },
   },

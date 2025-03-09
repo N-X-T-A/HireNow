@@ -16,6 +16,7 @@ const uploadImage = async (filePath) => {
   try {
     const result = await cloudinary.uploader.upload(filePath, {
       folder: "uploads/images",
+      access_mode: "public",
     });
     console.log("Image upload successful");
     return result.secure_url;
@@ -32,14 +33,13 @@ const uploadImage = async (filePath) => {
  */
 const uploadResume = async (filePath) => {
   try {
-    const fileName = filePath.split("/").pop();
-
     const result = await cloudinary.uploader.upload(filePath, {
       folder: "uploads/resumes",
-      public_id: fileName.split(".")[0],
+      access_mode: "public",
     });
 
     console.log("Resume upload successful");
+    console.log("File URL:", result.secure_url);
     return result.secure_url;
   } catch (error) {
     console.error("Error uploading resume:", error);
