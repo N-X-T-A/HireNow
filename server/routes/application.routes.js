@@ -11,5 +11,11 @@ router.get(
   isRecruiter,
   applicationController.getApplicantsByJob
 );
+router.get(
+  "/applicants",
+  verifyToken,
+  isRecruiter,
+  applicationController.getApplicants
+);
 
 module.exports = router;

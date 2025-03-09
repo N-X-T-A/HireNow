@@ -70,25 +70,44 @@ GET http://localhost:5000/api/v1/job/recommend/USER_ID_HERE
 
 # Get Job Details
 GET http://localhost:5000/api/v1/job/JOB_ID_HERE
-
+example response:
+"    "job": {
+        "_id": "67cd8f995d37dc74b501f3ab",
+        "title": "Lập trình viên Python",
+        "company": {
+            "name": "Công ty TNHH Công nghệ ABC",
+            "logo": "https://example.com/logo.png",
+            "background_image": "https://example.com/bg.jpg",
+            "location": "Hà Nội"
+        },
+        "skills": [],
+        "location": "Hà Nội",
+        "salary_range": "$2000 - $2500",
+        "reasons_to_join": "<ul><li>Môi trường làm việc tốt</li><li>Có cơ hội thăng tiến</li><li>Lương thưởng hấp dẫn</li></ul>",
+        "required_experience": "<p>Yêu cầu tối thiểu: <strong>2 năm kinh nghiệm Python</strong></p>",
+        "responsibility": "<p>Phát triển API backend với Django</p>",
+        "description": "<p>Công ty cần tuyển lập trình viên backend Python...</p>",
+        "posted_time": "vài giây trước"
+    }"
 # Recruiter Creates a Job Post
 POST http://localhost:5000/api/v1/job
 Authorization: Bearer RECRUITER_ACCESS_TOKEN
 Content-Type: application/json
 
 {
-  "title": "Full Stack Developer",
-  "company_id": "65e0f5b93c8c3e12a4dfe217",
-  "location": "Ho Chi Minh, Vietnam",
-  "salary_range": "1000-1500 USD",
-  "short_description": "We are looking for a talented Full Stack Developer.",
-  "description": "This position requires experience in both frontend and backend development.",
+  "title": "Lập trình viên Python",
   "skills": [
-    "65e0f6c83c8c3e12a4dfe228",
-    "65e0f6f13c8c3e12a4dfe229",
-    "65e0f70a3c8c3e12a4dfe22a"
-  ]
+    "65f0a8b3e4b0f1a2d4c9a3d3",
+    "65f0a8b3e4b0f1a2d4c9a3d4"
+  ],
+  "location": "Hà Nội",
+  "salary_range": "$2000 - $2500",
+  "reasons_to_join": "<ul><li>Môi trường làm việc tốt</li><li>Có cơ hội thăng tiến</li><li>Lương thưởng hấp dẫn</li></ul>",
+  "required_experience": "<p>Yêu cầu tối thiểu: <strong>2 năm kinh nghiệm Python</strong></p>",
+  "responsibility": "<p>Phát triển API backend với Django</p>",
+  "description": "<p>Công ty cần tuyển lập trình viên backend Python...</p>"
 }
+
 
 # Update a Job Post
 PUT http://localhost:5000/api/v1/job/JOB_ID_HERE
@@ -97,7 +116,6 @@ Content-Type: application/json
 
 {
   "title": "Backend Developerr",
-  "company_id": "65e0f5b93c8c3e12a4dfe217",
   "skills": [
     "65e0f6c83c8c3e12a4dfe228",
     "65e0f6f13c8c3e12a4dfe229"
@@ -136,3 +154,19 @@ Authorization: Bearer USER_ACCESS_TOKEN
 ### Get Applicants for a Job (Recruiter Only)
 GET http://localhost:5000/api/v1/application/job/job_id
 Authorization: Bearer RECRUITER_ACCESS_TOKEN
+
+### Favorite job
+### Add favorite job
+POST http://localhost:5000/api/v1/favorite
+Authorization: Bearer USER_ACCESS_TOKEN
+
+{
+  "jobId": "67c1e258ba3d3e783ee64a91"
+}
+
+### Get favorite job
+GET http://localhost:5000/api/v1/favorite
+Authorization: Bearer USER_ACCESS_TOKEN
+### Remove favorite job
+DELETE  http://localhost:5000/api/v1/favorite/ID
+Authorization: Bearer USER_ACCESS_TOKEN

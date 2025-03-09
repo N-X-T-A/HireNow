@@ -52,15 +52,26 @@ class JobController {
 
   createJob = async (req, res) => {
     try {
-      const { title, skills, location, salary_range, short_description } =
-        req.body;
-      const newJob = new Job({
+      const {
         title,
-        company_id: req.user.company_id,
         skills,
         location,
         salary_range,
-        short_description,
+        reasons_to_join,
+        required_experience,
+        responsibility,
+        description,
+      } = req.body;
+      const newJob = new Job({
+        title,
+        company_id: req.user.companyId,
+        skills,
+        location,
+        salary_range,
+        reasons_to_join,
+        required_experience,
+        responsibility,
+        description,
         posted_date: Date.now(),
       });
 
@@ -115,6 +126,15 @@ class JobController {
       res.json({ jobs });
     } catch (err) {
       res.status(500).json({ message: "Internal Server Error" });
+    }
+  };
+
+  getAllJobsSkill = async (req, res) => {
+    try {
+      const jobs = await jobService.getAllJobsSkill();
+      res.json(jobs);
+    } catch (error) {
+      res.status(500).json({ error: "Error" });
     }
   };
 }

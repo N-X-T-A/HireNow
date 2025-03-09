@@ -6,6 +6,7 @@ const { User } = require("../models");
 const bcrypt = require("bcryptjs");
 const { generateAccessToken, generateRefreshToken } = require("../utils/token");
 const jwt = require("jsonwebtoken");
+const authService = require("../services/auth.service");
 
 class AuthController {
   signUp = async (req, res) => {
@@ -37,29 +38,15 @@ class AuthController {
   signIn = async (req, res) => {
     try {
       const { email, password } = req.body;
+      const result = await authService.login({ email, password });
 
-      const user = await User.findOne({ email });
-      if (!user) {
-        throw new AuthFailureError("Invalid email or password.");
-      }
-
-      const isPasswordValid = await bcrypt.compare(password, user.passwordHash);
-      if (!isPasswordValid) {
-        throw new AuthFailureError("Invalid email or password.");
-      }
-
-      user.passwordHash = undefined;
-
-      const accessToken = generateAccessToken(user);
-      const refreshToken = generateRefreshToken(user);
-
-      res.cookie("access_token", accessToken, {
+      res.cookie("access_token", result.accessToken, {
         httpOnly: true,
         secure: false,
         sameSite: "strict",
       });
 
-      res.cookie("refresh_token", refreshToken, {
+      res.cookie("refresh_token", result.refreshToken, {
         httpOnly: true,
         secure: false,
         sameSite: "strict",
@@ -67,7 +54,7 @@ class AuthController {
 
       return new OK({
         message: "Login successful!",
-        metadata: { accessToken, refreshToken, user },
+        metadata: result,
       }).send(res);
     } catch (error) {
       return res.status(error.statusCode || 500).json({
@@ -142,6 +129,22 @@ class AuthController {
     res.clearCookie("access_token");
     res.clearCookie("refresh_token");
     res.json({ message: "Logged out successfully!" });
+  };
+
+  registerRecruiter = async (req, res) => {
+    try {
+      const { email, password } = req.body;
+      const result = await authService.registerRecruiter({ email, password });
+
+      return new CREATED({
+        message: "Recruiter registered successfully!",
+        metadata: result,
+      }).send(res);
+    } catch (error) {
+      return res.status(error.statusCode || 500).json({
+        message: error.message || "Internal Server Error",
+      });
+    }
   };
 }
 

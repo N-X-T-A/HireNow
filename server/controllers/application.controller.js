@@ -66,6 +66,22 @@ class ApplicationController {
       });
     }
   }
+
+  async getApplicants(req, res) {
+    try {
+      const recruiterId = req.user.companyId;
+      const applicants = await applicationService.getApplicants(recruiterId);
+
+      return res.status(200).json({
+        message: "Fetched applicants successfully.",
+        metadata: applicants,
+      });
+    } catch (error) {
+      return res.status(error.statusCode || 500).json({
+        message: error.message || "Internal Server Error",
+      });
+    }
+  }
 }
 
 module.exports = new ApplicationController();
