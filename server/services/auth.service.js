@@ -27,17 +27,13 @@ class AuthService {
 
     await recruiter.save();
 
+    recruiter.passwordHash = undefined;
+
     const accessToken = generateAccessToken(recruiter);
-    const refreshToken = generateRefreshToken(recruiter);
 
     return {
-      user: {
-        email: recruiter.email,
-        role: recruiter.role,
-        companyId: newCompany._id,
-      },
+      user: recruiter,
       accessToken,
-      refreshToken,
     };
   }
 
@@ -52,15 +48,12 @@ class AuthService {
       throw new AuthFailureError("Invalid email or password.");
     }
 
+    user.passwordHash = undefined;
+
     const accessToken = generateAccessToken(user);
 
     return {
-      user: {
-        email: user.email,
-        role: user.role,
-        company: user.companyId || null,
-        isFirstLogin: user.isFirstLogin,
-      },
+      user,
       accessToken,
     };
   }
