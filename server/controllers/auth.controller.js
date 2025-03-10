@@ -46,12 +46,6 @@ class AuthController {
         sameSite: "strict",
       });
 
-      res.cookie("refresh_token", result.refreshToken, {
-        httpOnly: true,
-        secure: false,
-        sameSite: "strict",
-      });
-
       return new OK({
         message: "Login successful!",
         metadata: result,
@@ -80,9 +74,7 @@ class AuthController {
         await user.save();
       }
 
-      user.passwordHash = undefined;
       const accessToken = generateAccessToken(user);
-      const refreshToken = generateRefreshToken(user);
 
       res.cookie("access_token", accessToken, {
         httpOnly: true,
@@ -90,13 +82,7 @@ class AuthController {
         sameSite: "strict",
       });
 
-      res.cookie("refresh_token", refreshToken, {
-        httpOnly: true,
-        secure: false,
-        sameSite: "strict",
-      });
-
-      res.json({ user, accessToken, refreshToken });
+      res.json({ user, accessToken });
     } catch (error) {
       console.error("Google authentication error:", error);
       return res.status(401).json({ message: "Invalid Google authentication" });

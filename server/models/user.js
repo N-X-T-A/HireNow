@@ -4,7 +4,7 @@ const UserSchema = new mongoose.Schema(
   {
     _id: { type: mongoose.Types.ObjectId, auto: true },
     email: { type: String, required: true, unique: true },
-    passwordHash: { type: String, required: true },
+    passwordHash: { type: String },
     role: {
       type: String,
       enum: ["candidate", "recruiter"],
