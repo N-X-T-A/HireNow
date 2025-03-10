@@ -140,8 +140,8 @@ export default function LoginMethod() {
   //multiStep
   const steps = [
     "Thông tin tài khoản",
-    "Công việc phù hợp dành cho bạn",
-    "Mức lương và địa điểm",
+    "Trình độ học vấn",
+    "Kinh nghiệm",
     "Hoàn tất",
   ];
 
