@@ -89,6 +89,7 @@ export default function LoginMethod() {
   const handleGoogleLogin = useGoogleLogin({
     onSuccess: async (response) => {
       setIsLoading(true);
+      console.log("Google Access Token:", response.access_token);
       try {
         console.log("Google Access Token:", response.access_token);
         const res = await fetch("http://localhost:5000/api/v1/auth/google", {
