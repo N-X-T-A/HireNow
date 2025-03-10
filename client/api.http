@@ -170,3 +170,13 @@ Authorization: Bearer USER_ACCESS_TOKEN
 ### Remove favorite job
 DELETE  http://localhost:5000/api/v1/favorite/ID
 Authorization: Bearer USER_ACCESS_TOKEN
+
+
+### Get list job and skill for first login or update profile
+GET http://localhost:5000/api/v1/job/listings 
+Content-Type: application/json
+
+response: "id,name"
+
+GET http://localhost:5000/api/v1/job/skills/:id (id from api job/listings)
+Content-Type: application/json

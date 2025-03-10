@@ -20,6 +20,7 @@ const UserSchema = new mongoose.Schema(
       ref: "Company",
       default: null,
     },
+    isFirstLogin: { type: Boolean, default: true },
   },
   { timestamps: true }
 );

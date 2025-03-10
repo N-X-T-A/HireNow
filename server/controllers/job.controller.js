@@ -134,7 +134,17 @@ class JobController {
       const jobs = await jobService.getAllJobsSkill();
       res.json(jobs);
     } catch (error) {
-      res.status(500).json({ error: "Error" });
+      res.status(500).json({ error: "Error fetching job list" });
+    }
+  };
+
+  getSkillsByJobId = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const skills = await jobService.getSkillsByJobId(id);
+      res.json(skills);
+    } catch (error) {
+      res.status(500).json({ error: "Error fetching skill list" });
     }
   };
 }

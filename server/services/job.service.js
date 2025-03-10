@@ -2,7 +2,7 @@
 
 const moment = require("moment");
 require("moment/locale/vi");
-const { Job } = require("../models");
+const { Job, JobSkill } = require("../models");
 const skillService = require("./skill.service");
 
 class JobService {
@@ -138,8 +138,21 @@ class JobService {
   }
 
   getAllJobsSkill = async () => {
-    const jobs = await JobSkill.distinct("title");
-    return jobs.map((title) => ({ title }));
+    const jobs = await JobSkill.find().select("_id title");
+    return jobs;
+  };
+
+  getSkillsByJobId = async (jobId) => {
+    const jobSkills = await JobSkill.findById(jobId).populate(
+      "skill_id",
+      "name"
+    );
+
+    if (!jobSkills) return [];
+    return jobSkills.skill_id.map((skill) => ({
+      _id: skill._id,
+      name: skill.name,
+    }));
   };
 
   calculatePostedTime(posted_date) {
