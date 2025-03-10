@@ -12,6 +12,9 @@ const {
   isAuthenticated,
 } = require("../middleware/auth");
 
+router.get("/listings", asyncHandler(JobController.getAllJobsSkill));
+router.get("/skills/:id", asyncHandler(JobController.getSkillsByJobId));
+
 router.get("/", asyncHandler(JobController.getAllJobs));
 router.get("/recommend/:id", asyncHandler(JobController.getRecommendedJobs));
 router.get("/:id", asyncHandler(JobController.getJobDetails));
