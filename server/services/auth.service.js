@@ -27,17 +27,13 @@ class AuthService {
 
     await recruiter.save();
 
+    recruiter.passwordHash = undefined;
+
     const accessToken = generateAccessToken(recruiter);
-    const refreshToken = generateRefreshToken(recruiter);
 
     return {
-      user: {
-        email: recruiter.email,
-        role: recruiter.role,
-        companyId: newCompany._id,
-      },
+      user: recruiter,
       accessToken,
-      refreshToken,
     };
   }
 
