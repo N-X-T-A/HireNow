@@ -52,15 +52,12 @@ class AuthService {
       throw new AuthFailureError("Invalid email or password.");
     }
 
+    user.passwordHash = undefined;
+
     const accessToken = generateAccessToken(user);
 
     return {
-      user: {
-        email: user.email,
-        role: user.role,
-        company: user.companyId || null,
-        isFirstLogin: user.isFirstLogin,
-      },
+      user,
       accessToken,
     };
   }
