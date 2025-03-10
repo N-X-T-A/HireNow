@@ -4,7 +4,18 @@ import {
   BookmarkIcon,
   ShareIcon,
 } from "@heroicons/react/24/outline";
+import { motion } from "framer-motion";
+import { useState } from "react";
 const JobDetailPage = () => {
+  const [open, setOpen] = useState(false);
+  const [user, setUser] = useState(() => {
+    try {
+      return JSON.parse(sessionStorage.getItem("user")) || null;
+    } catch (error) {
+      console.error("Lỗi khi parse JSON từ sessionStorage:", error);
+      return null;
+    }
+  });
   return (
     <div className="flex flex-col justify-center items-center gap-3 bg-[#f5f5f5]">
       <div className="flex flex-col justify-center items-center relative w-full">
@@ -34,9 +45,98 @@ const JobDetailPage = () => {
             </div>
           </div>
           <div className="flex flex-col justify-center items-center gap-3">
-            <button className="px-4 py-2 w-full rounded-lg bg-[#1E90FF] text-white font-[500]">
+            <button
+              onClick={() => setOpen(!open)}
+              className="px-4 py-2 w-full rounded-lg bg-[#1E90FF] text-white font-[500]"
+            >
               Ứng tuyển ngay
             </button>
+            {/* pop up */}
+            {open && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                onClick={() => setOpen(!open)}
+                className="fixed inset-0 flex items-center justify-center bg-black/70 z-[999] w-full h-screen"
+              >
+                <motion.div
+                  initial={{ opacity: 0, y: 100 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 50 }}
+                  transition={{ duration: 0.3 }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                  }}
+                  className="md:w-[1000px] h-auto bg-white rounded-[10px] shadow-lg overflow-hidden flex flex-col md:flex-row gap-4 p-4"
+                >
+                  <img
+                    src="/src/assets/user/apply.gif"
+                    alt=""
+                    className="max-w-[300px] border-[2px] rounded-[10px]"
+                  />
+                  <div className="flex flex-col gap-3 w-full">
+                    <>
+                      <span>
+                        <p className="!mb-0 font-[600] text-[#1E90FF]">
+                          Thông tin liên hệ:
+                        </p>
+                        <div className="flex  items-center gap-2">
+                          <img
+                            src={user?.photoURL}
+                            alt=""
+                            className="w-10 h-10 rounded-full border-[2px] border-gray-200"
+                          />
+
+                          <div>
+                            <p className="!mb-0">{user?.username}</p>
+                            <p className="!mb-0 text-gray-500 text-[12px]">
+                              Dalat, LamDong, VietNam
+                            </p>
+                          </div>
+                        </div>
+                      </span>
+                      <span>
+                        <p className="!mb-0 font-[600] text-[#1E90FF]">
+                          Đăng tải CV của bạn tại đây:
+                        </p>
+                        <div className="w-full border-[1px] rounded-[10px] border-dashed border-gray-300 p-2">
+                          <div className="flex gap-2 items-center">
+                            <button className="py-1 px-4 rounded-md border-[1px] border-[#1E90FF]">
+                              Tải lên
+                            </button>
+                            <p className="!mb-0 text-gray-500">
+                              Chưa có file nào được upload
+                            </p>
+                          </div>
+                          <p className="!mb-0 font-[600] text-[13px] text-gray-500">
+                            Vui lòng chỉ upload file có filetype là .pdf, chỉ
+                            một file duy nhất
+                          </p>
+                        </div>
+                      </span>
+                      <span>
+                        <p className="!mb-0 font-[600] text-[#1E90FF]">
+                          Thêm mô tả ngắn của bạn về việc lựa chọn công việc
+                          này:
+                        </p>
+                        <div className="flex gap-2">
+                          <textarea
+                            className="border-[1px] rounded-md flex-[7] p-2"
+                            type="text"
+                            placeholder="Mô tả ngắn của bạn"
+                          />
+                          <button className="px-2 py-1 rounded-md bg-[#1E90FF] text-white">
+                            Xác nhận
+                          </button>
+                        </div>
+                      </span>
+                    </>
+                  </div>
+                </motion.div>
+              </motion.div>
+            )}
             <div className="hidden md:flex gap-2 justify-center items-center">
               <button className="rounded-lg border-[#1E90FF] border-[2px] text-[13.32px] text-[black] font-[500] flex-[3_1_1] px-4 py-2">
                 Tạo CV ngay
