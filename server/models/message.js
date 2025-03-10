@@ -13,7 +13,7 @@ const messageSchema = new mongoose.Schema({
     required: true,
   },
   content: { type: String, required: true },
-  createdAt: { type: Date, default: Date.now, expires: "180d" }, // Tự động xoá sau 6 tháng
+  createdAt: { type: Date, default: Date.now, expires: "180d" },
 });
 
 module.exports = mongoose.model("Message", messageSchema);
