@@ -53,16 +53,15 @@ class AuthService {
     }
 
     const accessToken = generateAccessToken(user);
-    const refreshToken = generateRefreshToken(user);
 
     return {
       user: {
         email: user.email,
         role: user.role,
         company: user.companyId || null,
+        isFirstLogin: user.isFirstLogin,
       },
       accessToken,
-      refreshToken,
     };
   }
 }
