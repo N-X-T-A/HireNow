@@ -17,7 +17,12 @@ const Header = (shouldFetch) => {
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState(null);
   const [firstLoggin, setFisrtLoggin] = useState(() => {
-    return JSON.parse(sessionStorage.getItem("firstLoggin")) ?? true;
+    try {
+      return JSON.parse(sessionStorage.getItem("firstLoggin")) || null;
+    } catch (error) {
+      console.error("Lỗi khi parse JSON từ sessionStorage:", error);
+      return null;
+    }
   });
   const [isOpen, setIsOpen] = useState(false);
   //fetch user
@@ -255,7 +260,10 @@ const Header = (shouldFetch) => {
                     </div>
                     <span className="border-r !w-max !max-w-none"></span>
                     <div className="res-btn-loginHeader flex items-center justify-center gap-[10px] !w-max !max-w-none ">
-                      <button className="!h-max !w-max !max-w-none px-[20px] py-[7px] rounded-[5px] text-[#1E90FF] transition ease-in-out duration-300 transform hover:-translate-y-[2px]  hover:bg-[#1E90FF]  hover:text-white">
+                      <button
+                        onClick={() => navigate("/register")}
+                        className="!h-max !w-max !max-w-none px-[20px] py-[7px] rounded-[5px] text-[#1E90FF] transition ease-in-out duration-300 transform hover:-translate-y-[2px]  hover:bg-[#1E90FF]  hover:text-white"
+                      >
                         Đăng ký ngay
                       </button>
                       <button
