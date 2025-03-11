@@ -32,14 +32,14 @@ const Profile = () => {
           {/* header profile */}
           <div className="relative w-full">
             <img
-              className="w-full max-h-[130px] rounded-t-lg object-cover"
+              className="w-full max-h-[130px]  rounded-t-lg object-cover"
               src="/src/assets/user/bgprofile1.jpg"
               alt=""
             />
             <img
               src={user?.photoURL}
               alt=""
-              className="absolute left-5 top-[-1/2] -translate-y-1/2 p-[2px] rounded-full bg-white"
+              className="absolute max-w-[100px] max-h-[100px] left-5 top-[-1/2] -translate-y-1/2 p-[2px] rounded-full bg-white"
             />
             <PencilIcon className="w-5 h-5 absolute right-5 top-5 p-[2px] rounded-full bg-white text-gray-500" />
           </div>

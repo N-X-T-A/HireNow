@@ -159,11 +159,29 @@ export default function LoginMethod() {
     }
   };
 
-  const handleClick = (action) => {
+  const handleClick = async (action) => {
     if (action === "Tiếp theo") {
       if (currentStep === steps.length) {
         console.log("Dữ liệu cuối cùng:", userData);
         setFinalData(userData);
+        const userId = user._id;
+        try {
+          const response = await axios.post(
+            `http://localhost:5000/api/v1/user/update-profile/${userId}`,
+            userData,
+            {
+              headers: {
+                Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+                "Content-Type": "application/json",
+              },
+            }
+          );
+          console.log("Cập nhật thành công:", response.data);
+          sessionStorage.setItem("isLoggedIn", JSON.stringify(false));
+          handleNavigate();
+        } catch (error) {
+          console.error("Lỗi khi cập nhật:", error.response?.data || error);
+        }
       } else {
         setCurrentStep((prev) => prev + 1);
       }

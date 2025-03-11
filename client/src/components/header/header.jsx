@@ -142,9 +142,13 @@ const Header = (shouldFetch) => {
                                   >
                                     Trang cá nhân
                                   </button>
-                                  <button className="block w-full px-4 py-2 hover:bg-gray-100">
-                                    Lưu công việc
+                                  <button
+                                    onClick={() => navigate("/user/job-apply")}
+                                    className="block w-full px-4 py-2 hover:bg-gray-100"
+                                  >
+                                    Công việc
                                   </button>
+
                                   <button
                                     className="block w-full px-4 py-2 text-red-500 hover:bg-gray-100"
                                     onClick={() => {
