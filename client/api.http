@@ -33,31 +33,32 @@ Content-Type: application/json
 ### User Profile
 
 # Update User Profile
-POST http://localhost:5000/api/v1/user/update-profile/USER_ID_HERE
+POST http://localhost:5000/api/v1/user/update-profile
+Authorization: Bearer ACCESS_TOKEN
 Content-Type: application/json
 
 {
-  "name": "Nguyễn Văn A",
+  "username": "Nguyễn Văn A",
   "phone": "0987654321",
-  "education": [
-    {
-      "school": "Đại học Bách Khoa",
-      "degree": "Cử nhân",
-      "field_of_study": "Khoa học máy tính",
-      "start_year": 2019,
-      "end_year": 2023
-    }
-  ],
-  "experience": [
-    {
-      "company": "FPT Software",
-      "title": "Software Engineer",
-      "start_date": "2023-06-01",
-      "end_date": "2024-02-01",
-      "description": "Phát triển ứng dụng web bằng ReactJS."
-    }
-  ],
-  "skills": ["67c1e258ba3d3e783ee64a95", "67c1e258ba3d3e783ee64a96"]
+  "location": "Hà Nội",
+  "bio": "Software Engineer with 2 years of experience.",
+  "photoURL": "https://example.com/avatar.jpg",
+  "education": {
+    "institution": "Đại học Bách Khoa",
+    "degree": "Cử nhân",
+    "field_of_study": "Khoa học máy tính",
+    "start_date": "2019-09-01",
+    "end_date": "2023-06-01",
+    "description": "Studied AI and Machine Learning."
+  },
+  "experience": {
+    "company_name": "FPT Software",
+    "position": "Software Engineer",
+    "start_date": "2023-06-01",
+    "end_date": "2024-02-01",
+    "description": "Developed web applications using ReactJS."
+  },
+"skills": ["65f7a1b3d1a2e3f4c5b6a701", "65f7a1b3d1a2e3f4c5b6a703"]
 }
 
 ### Job Listings
@@ -66,8 +67,8 @@ Content-Type: application/json
 GET http://localhost:5000/api/v1/job
 
 # Get Recommended Jobs for a User
-GET http://localhost:5000/api/v1/job/recommend/USER_ID_HERE
-
+GET http://localhost:5000/api/v1/job/recommend
+Authorization: Bearer ACCESS_TOKEN
 # Get Job Details
 GET http://localhost:5000/api/v1/job/JOB_ID_HERE
 example response:
