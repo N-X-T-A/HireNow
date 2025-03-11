@@ -5,7 +5,7 @@ const userService = require("../services/user.service");
 class UserController {
   updateProfile = async (req, res) => {
     try {
-      const userId = req.params.id;
+      const userId = req.user.id;
       const { name, phone, education, experience, skills } = req.body;
 
       const result = await userService.updateProfile(userId, {

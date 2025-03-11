@@ -2,7 +2,7 @@
 
 const { CREATED, OK } = require("../core/success.response");
 const { AuthFailureError } = require("../core/error.response");
-const { User } = require("../models");
+const { User, UserProfile } = require("../models");
 const bcrypt = require("bcryptjs");
 const { generateAccessToken, generateRefreshToken } = require("../utils/token");
 const jwt = require("jsonwebtoken");
@@ -15,20 +15,29 @@ class AuthController {
       const hashedPassword = await bcrypt.hash(password, 10);
 
       const newUser = new User({
-        username,
         email,
         passwordHash: hashedPassword,
       });
 
       await newUser.save();
+
+      const newProfile = new UserProfile({
+        userId: newUser._id,
+        username,
+      });
+
+      await newProfile.save();
+
+      newUser.profileId = newProfile._id;
+      await newUser.save();
+
       newUser.passwordHash = undefined;
 
-      return new CREATED({
+      return res.status(201).json({
         message: "Account registered successfully!",
-        metadata: newUser,
-      }).send(res);
+      });
     } catch (error) {
-      console.error(error);
+      console.error("Sign-up error:", error);
       return res.status(500).json({
         message: error.message || "Internal Server Error",
       });
@@ -65,12 +74,18 @@ class AuthController {
       let user = await User.findOne({ email });
 
       if (!user) {
-        user = new User({
+        user = new User({ email });
+        await user.save();
+
+        const userProfile = new UserProfile({
+          userId: user._id,
           username: name,
-          email,
           photoURL: picture,
         });
 
+        await userProfile.save();
+
+        user.profileId = userProfile._id;
         await user.save();
       }
 
