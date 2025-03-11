@@ -46,18 +46,20 @@ class JobService {
       .populate("company_id", "name logo background_image")
       .lean();
 
-    const recommendedJobs = jobs.map((job) => ({
-      _id: job._id,
-      title: job.title,
-      location: job.location,
-      salary_range: job.salary_range,
-      posted_time: this.calculatePostedTime(job.posted_date),
-      company: {
-        name: job.company_id.name,
-        logo: job.company_id.logo,
-        background_image: job.company_id.background_image,
-      },
-    }));
+    const recommendedJobs = jobs
+      .filter((job) => job.company_id)
+      .map((job) => ({
+        _id: job._id,
+        title: job.title,
+        location: job.location,
+        salary_range: job.salary_range,
+        posted_time: this.calculatePostedTime(job.posted_date),
+        company: {
+          name: job.company_id?.name,
+          logo: job.company_id?.logo,
+          background_image: job.company_id?.background_image || "",
+        },
+      }));
 
     return { success: true, jobs: recommendedJobs };
   }

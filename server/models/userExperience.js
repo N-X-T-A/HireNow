@@ -8,11 +8,11 @@ const UserExperienceSchema = new mongoose.Schema({
     ref: "User",
     required: true,
   },
-  company_name: { type: String },
-  position: { type: String },
-  start_date: { type: Date },
-  end_date: { type: Date },
-  description: { type: String },
+  company_name: { type: String, default: null },
+  position: { type: String, default: null },
+  start_date: { type: Date, default: null },
+  end_date: { type: Date, default: null },
+  description: { type: String, default: null },
 });
 
 module.exports = mongoose.model("UserExperience", UserExperienceSchema);

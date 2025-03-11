@@ -17,7 +17,7 @@ class JobController {
 
   getRecommendedJobs = async (req, res) => {
     try {
-      const userId = req.params.id;
+      const userId = req.user.id;
       const result = await jobService.getRecommendedJobs(userId);
       if (result.success) {
         res.json({ jobs: result.jobs });
