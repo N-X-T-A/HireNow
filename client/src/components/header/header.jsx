@@ -112,6 +112,7 @@ const Header = (shouldFetch) => {
                             <div
                               className="absolute top-[70%] right-0 md:top-[100%] mt-2 w-48 bg-white border shadow-lg rounded-lg p-2 z-50"
                               onClick={(e) => e.stopPropagation()}
+                              onMouseLeave={() => setIsOpen(false)}
                             >
                               {firstLoggin ? (
                                 <>
@@ -205,6 +206,7 @@ const Header = (shouldFetch) => {
                             <div
                               className="absolute top-[70%] right-0 md:top-[100%] mt-2 w-48 bg-white border shadow-lg rounded-lg p-2 z-50"
                               onClick={(e) => e.stopPropagation()}
+                              onMouseLeave={() => setIsOpen(false)}
                             >
                               <>
                                 <button className="block w-full px-4 py-2 hover:bg-gray-100">

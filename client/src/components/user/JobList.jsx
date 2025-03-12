@@ -1,13 +1,23 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import {
-  BookmarkIcon,
-  ClockIcon,
-  CheckBadgeIcon,
-} from "@heroicons/react/24/outline";
+import { ClockIcon, CheckBadgeIcon } from "@heroicons/react/24/outline";
+import { motion } from "framer-motion";
+import { BookmarkIcon } from "@heroicons/react/24/solid";
 import axios from "axios";
 const JobList = ({ onSelectJob }) => {
   const [UserJobs, setJobs] = useState([]);
+  const [isActive, setIsActive] = useState(false);
+  const [bookmarkedJobs, setBookmarkedJobs] = useState({});
+  const [onBookmark, setonBookmark] = useState(null);
+  console.log(onBookmark);
+  //saveClick
+  const handleBookmarkClick = (jobId) => {
+    setBookmarkedJobs((prev) => ({
+      ...prev,
+      [jobId]: !prev[jobId],
+    }));
+    setonBookmark(jobId);
+  };
   //fetch API
   useEffect(() => {
     const fetchJobs = async () => {
@@ -54,7 +64,29 @@ const JobList = ({ onSelectJob }) => {
                     </p>
                   </span>
                 </div>
-                <BookmarkIcon className="w-8 h-8" />
+                {bookmarkedJobs[job.id] && (
+                  <motion.div
+                    initial={{ scale: 0, opacity: 0.5 }}
+                    animate={{ scale: 2, opacity: 0 }}
+                    transition={{ duration: 0.4 }}
+                    className="absolute inset-0 bg-blue-300 rounded-full"
+                  />
+                )}
+
+                {/* Icon Bookmark */}
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation(); // Ngăn chặn việc click chọn job khi bấm bookmark
+                    handleBookmarkClick(job.id);
+                  }}
+                  className="relative z-10 p-2 rounded-full transition-all"
+                >
+                  <BookmarkIcon
+                    className={`w-10 h-10 transition-all ${
+                      bookmarkedJobs[job.id] ? "fill-blue-500" : "fill-gray-400"
+                    }`}
+                  />
+                </button>
               </div>
               {/* skill - experience */}
               <div className="flex gap-2">
