@@ -12,6 +12,7 @@ const UserEducation = require("./userEducation");
 const JobSkill = require("./jobSkill");
 const Conversation = require("./conversation");
 const Favorite = require("./favorite");
+const UserProfile = require("./userProfile");
 
 module.exports = {
   User,
@@ -26,4 +27,5 @@ module.exports = {
   JobSkill,
   Conversation,
   Favorite,
+  UserProfile,
 };

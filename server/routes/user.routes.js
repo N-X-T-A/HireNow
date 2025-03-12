@@ -4,9 +4,14 @@ const express = require("express");
 const asyncHandler = require("express-async-handler");
 
 const router = express.Router();
+const { verifyToken } = require("../middleware/auth");
 
 const UserController = require("../controllers/user.controller");
 
-router.post("/update-profile/:id", asyncHandler(UserController.updateProfile));
+router.put(
+  "/update-profile",
+  verifyToken,
+  asyncHandler(UserController.updateProfile)
+);
 
 module.exports = router;

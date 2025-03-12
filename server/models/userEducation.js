@@ -8,12 +8,12 @@ const UserEducationSchema = new mongoose.Schema({
     ref: "User",
     required: true,
   },
-  institution: { type: String },
-  degree: { type: String },
-  field_of_study: { type: String },
-  start_date: { type: Date },
-  end_date: { type: Date },
-  description: { type: String },
+  institution: { type: String, default: null },
+  degree: { type: String, default: null },
+  field_of_study: { type: String, default: null },
+  start_date: { type: Date, default: null },
+  end_date: { type: Date, default: null },
+  description: { type: String, default: null },
 });
 
 module.exports = mongoose.model("UserEducation", UserEducationSchema);
