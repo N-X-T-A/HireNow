@@ -47,7 +47,10 @@ class UserService {
       await UserSkill.insertMany(skillDocs);
     }
 
-    user.isFirstLogin = false;
+    if (user.isFirstLogin === true) {
+      user.isFirstLogin = false;
+      await user.save();
+    }
 
     return { success: true, message: "Profile updated successfully!" };
   }
