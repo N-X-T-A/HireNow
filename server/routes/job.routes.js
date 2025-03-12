@@ -16,7 +16,11 @@ router.get("/listings", asyncHandler(JobController.getAllJobsSkill));
 router.get("/skills/:id", asyncHandler(JobController.getSkillsByJobId));
 
 router.get("/", asyncHandler(JobController.getAllJobs));
-router.get("/recommend", asyncHandler(JobController.getRecommendedJobs));
+router.get(
+  "/recommend",
+  verifyToken,
+  asyncHandler(JobController.getRecommendedJobs)
+);
 router.get("/:id", asyncHandler(JobController.getJobDetails));
 router.get(
   "/posted-jobs/:recruiterId",
