@@ -1,6 +1,6 @@
 "use strict";
 
-const { UserSkill, JobSkill } = require("../models");
+const { UserSkill, Skill } = require("../models");
 
 class SkillService {
   async updateUserSkills(userId, skills) {
@@ -14,8 +14,9 @@ class SkillService {
     return await UserSkill.find({ user_id: userId }).select("skill_id");
   }
 
-  async getJobSkills(jobId) {
-    return await JobSkill.find({ job_id: jobId }).populate("skill_id", "name");
+  async getJobSkills(skillIds) {
+    const skills = await Skill.find({ _id: { $in: skillIds } }).select("name");
+    return skills.map((skill) => skill.name);
   }
 }
 
