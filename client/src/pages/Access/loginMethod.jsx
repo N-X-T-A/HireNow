@@ -100,7 +100,7 @@ export default function LoginMethod() {
         if (!res.ok) throw new Error("Lỗi xác thực");
         const data = await res.json();
         console.log("User data:", data);
-        sessionStorage.setItem("access_token", data.token);
+        sessionStorage.setItem("access_token", data.accessToken);
         sessionStorage.setItem("user", JSON.stringify(data.user));
         sessionStorage.setItem(
           "firstLoggin",
@@ -166,18 +166,20 @@ export default function LoginMethod() {
         setFinalData(userData);
         const userId = user._id;
         try {
-          const response = await axios.post(
-            `http://localhost:5000/api/v1/user/update-profile/${userId}`,
+          const response = await axios.put(
+            `http://localhost:5000/api/v1/user/update-profile`,
             userData,
             {
               headers: {
-                Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+                Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
                 "Content-Type": "application/json",
               },
             }
           );
           console.log("Cập nhật thành công:", response.data);
           sessionStorage.setItem("isLoggedIn", JSON.stringify(false));
+          sessionStorage.setItem("firstLoggin", JSON.stringify(false));
+
           handleNavigate();
         } catch (error) {
           console.error("Lỗi khi cập nhật:", error.response?.data || error);
@@ -226,7 +228,7 @@ export default function LoginMethod() {
                 alt=""
               />
               <h2 className="text-2xl font-bold !mb-0">
-                Chào {user?.username} !
+                Chào {user?.email?.slice(0, 6)} !
               </h2>
               <p className="text-gray-600">
                 {user?.role === "recruiter"
