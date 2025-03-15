@@ -2,7 +2,7 @@
 
 const moment = require("moment");
 require("moment/locale/vi");
-const { Job, JobSkill } = require("../models");
+const { Job, JobSkill, Skill } = require("../models");
 const skillService = require("./skill.service");
 
 class JobService {
@@ -11,29 +11,30 @@ class JobService {
       .populate("company_id", "name logo background_image")
       .lean();
 
-    return jobs
-      .map((job) => {
-        if (!job.company_id) {
-          console.error(
-            `LỖI: Công việc ${job._id} không có thông tin công ty!`
-          );
-          return null;
-        }
+    const jobList = await Promise.all(
+      jobs
+        .filter((job) => job.company_id)
+        .map(async (job) => {
+          const jobSkillNames = await Skill.find({
+            _id: { $in: job.skills },
+          }).select("name");
+          return {
+            _id: job._id,
+            title: job.title,
+            location: job.location,
+            salary_range: job.salary_range,
+            skills: jobSkillNames.map((skill) => skill.name),
+            posted_time: this.calculatePostedTime(job.posted_date),
+            company: {
+              name: job.company_id.name,
+              logo: job.company_id.logo || "",
+              background_image: job.company_id.background_image || "",
+            },
+          };
+        })
+    );
 
-        return {
-          _id: job._id,
-          title: job.title,
-          location: job.location,
-          salary_range: job.salary_range,
-          posted_time: this.calculatePostedTime(job.posted_date),
-          company: {
-            name: job.company_id.name,
-            logo: job.company_id.logo || "",
-            background_image: job.company_id.background_image || "",
-          },
-        };
-      })
-      .filter(Boolean);
+    return jobList;
   }
 
   async getRecommendedJobs(userId) {
@@ -46,20 +47,28 @@ class JobService {
       .populate("company_id", "name logo background_image")
       .lean();
 
-    const recommendedJobs = jobs
-      .filter((job) => job.company_id)
-      .map((job) => ({
-        _id: job._id,
-        title: job.title,
-        location: job.location,
-        salary_range: job.salary_range,
-        posted_time: this.calculatePostedTime(job.posted_date),
-        company: {
-          name: job.company_id?.name,
-          logo: job.company_id?.logo,
-          background_image: job.company_id?.background_image || "",
-        },
-      }));
+    const recommendedJobs = await Promise.all(
+      jobs
+        .filter((job) => job.company_id)
+        .map(async (job) => {
+          const jobSkillNames = await Skill.find({
+            _id: { $in: job.skills },
+          }).select("name");
+          return {
+            _id: job._id,
+            title: job.title,
+            location: job.location,
+            salary_range: job.salary_range,
+            posted_time: this.calculatePostedTime(job.posted_date),
+            skills: jobSkillNames.map((skill) => skill.name),
+            company: {
+              name: job.company_id?.name,
+              logo: job.company_id?.logo,
+              background_image: job.company_id?.background_image || "",
+            },
+          };
+        })
+    );
 
     return { success: true, jobs: recommendedJobs };
   }
@@ -71,7 +80,7 @@ class JobService {
 
     if (!job) return { success: false, message: "Job not found!" };
 
-    const jobSkills = await skillService.getJobSkills(jobId);
+    const jobSkills = await skillService.getJobSkills(job.skills);
 
     return {
       success: true,
@@ -84,7 +93,7 @@ class JobService {
           background_image: job.company_id.background_image,
           location: job.company_id.location,
         },
-        skills: jobSkills.map((js) => js.skill_id.name),
+        skills: jobSkills,
         location: job.location,
         salary_range: job.salary_range,
         reasons_to_join: job.reasons_to_join,
