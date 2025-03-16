@@ -100,6 +100,7 @@ export default function LoginMethod() {
         if (!res.ok) throw new Error("Lỗi xác thực");
         const data = await res.json();
         console.log("User data:", data);
+
         sessionStorage.setItem("access_token", data.accessToken);
         sessionStorage.setItem("user", JSON.stringify(data.user));
         sessionStorage.setItem(

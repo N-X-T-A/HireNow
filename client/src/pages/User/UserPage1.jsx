@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleRight } from "@fortawesome/free-solid-svg-icons";
 import { GlobeAltIcon } from "@heroicons/react/24/outline";
@@ -7,7 +7,25 @@ import { motion } from "framer-motion";
 import { jobs } from "../../data/data";
 import { services } from "../../data/data";
 import { companiesPage1 } from "../../data/data";
+import axios from "axios";
 const UserPage1 = () => {
+  //state
+  const [jobsList, setJobsList] = useState([]);
+
+  //API
+  const fetchJobs = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/api/v1/job");
+      setJobsList(response.data.jobs);
+      console.log(response.data.jobs);
+    } catch (error) {
+      console.error("Lỗi khi lấy danh sách công việc:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchJobs();
+  }, []);
   const hoverColors = [
     "hover:bg-blue-100",
     "hover:bg-green-100",
@@ -120,10 +138,10 @@ const UserPage1 = () => {
         </motion.div>
         {/* job list */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 p-6">
-          {jobs.map((job, index) => (
+          {jobsList?.slice(0, 8).map((job, index) => (
             <motion.div
-              key={job.id}
-              className={`bg-gray-100 pt-2 pr-2 pl-2 pb-4 border rounded-xl shadow-md transition-all duration-300 cursor-pointer ${hoverColors[index % hoverColors.length]} hover:text-white`}
+              key={job._id}
+              className={`bg-gray-100 pt-2 pr-2 pl-2 pb-4 border rounded-xl shadow-md transition-all duration-300 cursor-pointer ${hoverColors[index % hoverColors.length]} hover:text-white md:w-[400px] w-[330px]`}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }}
@@ -136,18 +154,20 @@ const UserPage1 = () => {
               <div className="p-3 rounded-xl bg-white">
                 {" "}
                 <h2 className="text-lg font-semibold text-gray-800">
-                  {job.company}
+                  {job.company.name}
                 </h2>
+                ư
                 <h3 className="text-xl font-bold text-gray-900">{job.title}</h3>
-                <p className="text-gray-500">
-                  {job.location} • {job.type}
+                <p className="text-gray-500">{job.location} • Toàn thời gian</p>
+                <p className="font-semibold text-gray-700">
+                  {job.salary_range}
                 </p>
-                <p className="text-gray-500">{job.category}</p>
-                <p className="font-semibold text-gray-700">{job.salary}</p>
                 <button className="mt-3 w-full bg-black text-white py-2 rounded-md font-medium hover:bg-gray-800">
                   Ứng tuyển
                 </button>
-                <p className="text-xs text-gray-400 mt-2">Đăng {job.posted}</p>
+                <p className="text-xs text-gray-400 mt-2">
+                  Đăng {job.posted_time}
+                </p>
               </div>
             </motion.div>
           ))}
