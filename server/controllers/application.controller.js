@@ -46,27 +46,6 @@ class ApplicationController {
     }
   }
 
-  async getApplicantsByJob(req, res) {
-    try {
-      const recruiterId = req.user.companyId;
-      const { jobId } = req.params;
-
-      const applicants = await applicationService.getApplicantsByJob(
-        recruiterId,
-        jobId
-      );
-
-      return res.status(200).json({
-        message: "Fetched applicants successfully.",
-        metadata: applicants,
-      });
-    } catch (error) {
-      return res.status(error.statusCode || 500).json({
-        message: error.message || "Internal Server Error",
-      });
-    }
-  }
-
   async getApplicants(req, res) {
     try {
       const recruiterId = req.user.companyId;
@@ -77,7 +56,9 @@ class ApplicationController {
         metadata: applicants,
       });
     } catch (error) {
-      return res.status(error.statusCode || 500).json({
+      console.error("Error in getApplicants:", error);
+
+      return res.status(500).json({
         message: error.message || "Internal Server Error",
       });
     }

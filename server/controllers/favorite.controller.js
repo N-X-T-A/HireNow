@@ -5,7 +5,7 @@ class FavoriteController {
     try {
       const result = await favoriteService.saveFavoriteJob(
         req.user._id,
-        req.body.jobId
+        req.params.jobId
       );
       return res.status(201).json({
         message: "Job added to favorites.",

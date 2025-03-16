@@ -55,7 +55,6 @@ class JobController {
       const {
         title,
         skills,
-        location,
         salary_range,
         reasons_to_join,
         required_experience,
@@ -66,7 +65,6 @@ class JobController {
         title,
         company_id: req.user.companyId,
         skills,
-        location,
         salary_range,
         reasons_to_join,
         required_experience,

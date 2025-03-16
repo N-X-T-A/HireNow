@@ -1,4 +1,4 @@
-const { Company, User } = require("../models");
+const { Company, User, IndustrySkill } = require("../models");
 const { ForbiddenError, NotFoundError } = require("../core/error.response");
 
 class CompanyService {
@@ -18,6 +18,27 @@ class CompanyService {
     Object.assign(company, updateData);
     await company.save();
 
+    return company;
+  }
+
+  async getCompanies() {
+    return await Company.find().select(
+      "name description logo background_image"
+    );
+  }
+
+  async getCompanyById(id) {
+    const company = await Company.findById(id).select("-__v").lean();
+    if (!company) return null;
+
+    if (company.industry_id) {
+      const industry = await IndustrySkill.findById(company.industry_id).select(
+        "title"
+      );
+      company.industry = industry ? industry.title : null;
+    }
+
+    delete company.industry_id;
     return company;
   }
 }

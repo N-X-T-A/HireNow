@@ -26,6 +26,34 @@ class CompanyController {
       });
     }
   };
+
+  getCompanies = async (req, res) => {
+    try {
+      const companies = await companyService.getCompanies();
+      return new OK({
+        message: "Company list retrieved successfully!",
+        metadata: companies,
+      }).send(res);
+    } catch (error) {
+      return res.status(500).json({ message: "Internal Server Error" });
+    }
+  };
+
+  getCompanyById = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const company = await companyService.getCompanyById(id);
+      if (!company) {
+        return res.status(404).json({ message: "Company not found" });
+      }
+      return new OK({
+        message: "Company details retrieved successfully!",
+        metadata: company,
+      }).send(res);
+    } catch (error) {
+      return res.status(500).json({ message: "Internal Server Error" });
+    }
+  };
 }
 
 module.exports = new CompanyController();

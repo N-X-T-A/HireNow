@@ -9,7 +9,7 @@ const Skill = require("./skill");
 const UserSkill = require("./userSkill");
 const UserExperience = require("./userExperience");
 const UserEducation = require("./userEducation");
-const JobSkill = require("./jobSkill");
+const IndustrySkill = require("./industrySkill");
 const Conversation = require("./conversation");
 const Favorite = require("./favorite");
 const UserProfile = require("./userProfile");
@@ -24,7 +24,7 @@ module.exports = {
   UserSkill,
   UserExperience,
   UserEducation,
-  JobSkill,
+  IndustrySkill,
   Conversation,
   Favorite,
   UserProfile,
