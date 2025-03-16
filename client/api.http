@@ -1,16 +1,16 @@
-### Authentication (Auth APIs)
+### User APIs
 
-# User Registration
+#### Sign Up
 POST http://localhost:5000/api/v1/auth/signup
 Content-Type: application/json
 
 {
-  "username": "Trần Phương Thái",
+  "username": "Tran Phuong Thai",
   "email": "user@example.com",
-  "password": "password123",
+  "password": "password123"
 }
 
-# User Login
+#### Sign In
 POST http://localhost:5000/api/v1/auth/signin
 Content-Type: application/json
 
@@ -19,34 +19,34 @@ Content-Type: application/json
   "password": "password123"
 }
 
-# User Logout
+#### Sign Out
 GET http://localhost:5000/api/v1/auth/signout
 
-# Google Login
+#### Google Sign-In
 POST http://localhost:5000/api/v1/auth/google
 Content-Type: application/json
 
 {
-  "accessToken": "token",
+  "accessToken": "token"
 }
 
 ### User Profile
 
-# Update User Profile
+#### Update User Profile
 POST http://localhost:5000/api/v1/user/update-profile
 Authorization: Bearer ACCESS_TOKEN
 Content-Type: application/json
 
 {
-  "username": "Nguyễn Văn A",
+  "username": "Nguyen Van A",
   "phone": "0987654321",
-  "location": "Hà Nội",
+  "location": "Hanoi",
   "bio": "Software Engineer with 2 years of experience.",
   "photoURL": "https://example.com/avatar.jpg",
   "education": {
-    "institution": "Đại học Bách Khoa",
-    "degree": "Cử nhân",
-    "field_of_study": "Khoa học máy tính",
+    "institution": "Hanoi University of Science and Technology",
+    "degree": "Bachelor",
+    "field_of_study": "Computer Science",
     "start_date": "2019-09-01",
     "end_date": "2023-06-01",
     "description": "Studied AI and Machine Learning."
@@ -58,86 +58,24 @@ Content-Type: application/json
     "end_date": "2024-02-01",
     "description": "Developed web applications using ReactJS."
   },
-"skills": ["65f7a1b3d1a2e3f4c5b6a701", "65f7a1b3d1a2e3f4c5b6a703"]
+  "skills": ["65f7a1b3d1a2e3f4c5b6a701", "65f7a1b3d1a2e3f4c5b6a703"]
 }
 
 ### Job Listings
 
-# Get All Jobs
+#### Get Job Listings
 GET http://localhost:5000/api/v1/job
 
-# Get Recommended Jobs for a User
+#### Get Recommended Jobs
 GET http://localhost:5000/api/v1/job/recommend
 Authorization: Bearer ACCESS_TOKEN
-# Get Job Details
+
+#### Get Job Details
 GET http://localhost:5000/api/v1/job/JOB_ID_HERE
-example response:
-"    "job": {
-        "_id": "67cd8f995d37dc74b501f3ab",
-        "title": "Lập trình viên Python",
-        "company": {
-            "name": "Công ty TNHH Công nghệ ABC",
-            "logo": "https://example.com/logo.png",
-            "background_image": "https://example.com/bg.jpg",
-            "location": "Hà Nội"
-        },
-        "skills": [],
-        "location": "Hà Nội",
-        "salary_range": "$2000 - $2500",
-        "reasons_to_join": "<ul><li>Môi trường làm việc tốt</li><li>Có cơ hội thăng tiến</li><li>Lương thưởng hấp dẫn</li></ul>",
-        "required_experience": "<p>Yêu cầu tối thiểu: <strong>2 năm kinh nghiệm Python</strong></p>",
-        "responsibility": "<p>Phát triển API backend với Django</p>",
-        "description": "<p>Công ty cần tuyển lập trình viên backend Python...</p>",
-        "posted_time": "vài giây trước"
-    }"
-# Recruiter Creates a Job Post
-POST http://localhost:5000/api/v1/job
-Authorization: Bearer RECRUITER_ACCESS_TOKEN
-Content-Type: application/json
 
-{
-  "title": "Lập trình viên Python",
-  "skills": [
-    "65f0a8b3e4b0f1a2d4c9a3d3",
-    "65f0a8b3e4b0f1a2d4c9a3d4"
-  ],
-  "location": "Hà Nội",
-  "salary_range": "$2000 - $2500",
-  "reasons_to_join": "<ul><li>Môi trường làm việc tốt</li><li>Có cơ hội thăng tiến</li><li>Lương thưởng hấp dẫn</li></ul>",
-  "required_experience": "<p>Yêu cầu tối thiểu: <strong>2 năm kinh nghiệm Python</strong></p>",
-  "responsibility": "<p>Phát triển API backend với Django</p>",
-  "description": "<p>Công ty cần tuyển lập trình viên backend Python...</p>"
-}
+### Job Applications
 
-
-# Update a Job Post
-PUT http://localhost:5000/api/v1/job/JOB_ID_HERE
-Authorization: Bearer RECRUITER_ACCESS_TOKEN
-Content-Type: application/json
-
-{
-  "title": "Backend Developerr",
-  "skills": [
-    "65e0f6c83c8c3e12a4dfe228",
-    "65e0f6f13c8c3e12a4dfe229"
-  ]
-}
-
-# Delete a Job Post
-DELETE http://localhost:5000/api/v1/job/JOB_ID_HERE
-Authorization: Bearer RECRUITER_ACCESS_TOKEN
-
-### Upload Image
-### Only one file (png,jpg) ./path_to_your_image.jpg
-POST http://localhost:5000/api/v1/upload/image
-Content-Type: multipart/form-data
-
-### Upload Resume
-### Only one file (pdf) path_to_your_resume.pdf
-POST http://localhost:5000/api/v1/upload/resume
-Content-Type: multipart/form-data
-
-### Apply for a job
+#### Apply for a Job
 POST http://localhost:5000/api/v1/application
 Authorization: Bearer USER_ACCESS_TOKEN
 Content-Type: application/json
@@ -148,16 +86,21 @@ Content-Type: application/json
   "cover_letter": "I am interested in this position."
 }
 
-###  Get Applied Jobs for Candidate
+#### Get List Applied Jobs
 GET http://localhost:5000/api/v1/application
 Authorization: Bearer USER_ACCESS_TOKEN
 
-### Get Applicants for a Job (Recruiter Only)
-GET http://localhost:5000/api/v1/application/job/job_id
-Authorization: Bearer RECRUITER_ACCESS_TOKEN
+### Company
 
-### Favorite job
-### Add favorite job
+#### Get Company List
+GET http://localhost:5000/api/v1/company/
+
+#### Get Company Details
+GET http://localhost:5000/api/v1/company/:id
+
+### Favorite Jobs
+
+#### Add Job to Favorites
 POST http://localhost:5000/api/v1/favorite
 Authorization: Bearer USER_ACCESS_TOKEN
 
@@ -165,19 +108,86 @@ Authorization: Bearer USER_ACCESS_TOKEN
   "jobId": "67c1e258ba3d3e783ee64a91"
 }
 
-### Get favorite job
+#### Get Favorite Jobs
 GET http://localhost:5000/api/v1/favorite
 Authorization: Bearer USER_ACCESS_TOKEN
-### Remove favorite job
-DELETE  http://localhost:5000/api/v1/favorite/ID
+
+#### Remove Job from Favorites
+DELETE http://localhost:5000/api/v1/favorite/ID
 Authorization: Bearer USER_ACCESS_TOKEN
 
+### Uploads
 
-### Get list job and skill for first login or update profile
-GET http://localhost:5000/api/v1/job/listings 
+#### Upload Image
+POST http://localhost:5000/api/v1/upload/image
+Content-Type: multipart/form-data
+
+#### Upload Resume
+POST http://localhost:5000/api/v1/upload/resume
+Content-Type: multipart/form-data
+
+### Recruiter APIs
+
+#### Create Job Posting
+POST http://localhost:5000/api/v1/job
+Authorization: Bearer RECRUITER_ACCESS_TOKEN
 Content-Type: application/json
 
-response: "id,name"
+{
+  "title": "Python Developer",
+  "skills": ["65f0a8b3e4b0f1a2d4c9a3d3", "65f0a8b3e4b0f1a2d4c9a3d4"],
+  "salary_range": "$2000 - $2500",
+  "reasons_to_join": "<ul><li>Great work environment</li><li>Opportunities for promotion</li><li>Attractive salary and benefits</li></ul>",
+  "required_experience": "<p>Minimum requirement: <strong>2 years of Python experience</strong></p>",
+  "responsibility": "<p>Develop backend APIs using Django</p>",
+  "description": "<p>Our company is looking for a backend Python developer...</p>"
+}
 
-GET http://localhost:5000/api/v1/job/skills/:id (id from api job/listings)
+#### Update Job Posting
+PUT http://localhost:5000/api/v1/job/JOB_ID_HERE
+Authorization: Bearer RECRUITER_ACCESS_TOKEN
 Content-Type: application/json
+
+{
+  "title": "Backend Developer",
+  "skills": ["65e0f6c83c8c3e12a4dfe228", "65e0f6f13c8c3e12a4dfe229"]
+}
+
+#### Delete Job Posting
+DELETE http://localhost:5000/api/v1/job/JOB_ID_HERE
+Authorization: Bearer RECRUITER_ACCESS_TOKEN
+
+#### Get Applicants for a Job
+GET http://localhost:5000/api/v1/application/job/job_id
+Authorization: Bearer RECRUITER_ACCESS_TOKEN
+
+### Company Management
+
+#### Update Company Information
+PUT http://localhost:5000/api/v1/company
+Authorization: Bearer RECRUITER_ACCESS_TOKEN
+
+{
+  "name": "ABC Technology Ltd.",
+  "industry_id": "67d28aceb386d0abcfe72960",
+  "locations": [
+      {
+        "city": "Ha Noi",
+        "detailed_location": "Tầng 3 - Dolphin Plaza, 28 Trần Bình"
+      },
+      {
+        "city": "Da Nang",
+        "detailed_location": "344 Street 2/9, Hai Chau"
+      }
+  ],
+  "description": "Specializing in software development and AI",
+  "website": "https://abc-tech.com",
+  "logo": "https://example.com/logo.png",
+  "background_image": "https://example.com/bg.jpg",
+  "size": "50-100",
+  "founded_year": 2020,
+  "social_links": {
+    "linkedin": "https://linkedin.com/company/abc-tech",
+    "facebook": "https://facebook.com/abc-tech"
+  }
+}
