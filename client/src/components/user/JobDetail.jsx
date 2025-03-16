@@ -22,8 +22,10 @@ const JobDetail = ({ jobId }) => {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/jobs/${jobId}`);
-        setJobs(response.data);
+        const response = await axios.get(
+          `http://localhost:5000/api/v1/job/${jobId}`
+        );
+        setJobs(response.data.job);
       } catch (error) {
         console.error("Lỗi khi lấy danh sách công việc:", error);
       }
@@ -31,6 +33,7 @@ const JobDetail = ({ jobId }) => {
 
     fetchJobs();
   }, [jobId]);
+
   return (
     <div
       className="flex rounded-lg w-full"
@@ -45,7 +48,7 @@ const JobDetail = ({ jobId }) => {
           >
             {selectedJob.title}
           </p>
-          <div className="flex gap-2">
+          {/* <div className="flex gap-2">
             {selectedJob?.skills?.map((skill, index) => (
               <p
                 key={index}
@@ -54,7 +57,7 @@ const JobDetail = ({ jobId }) => {
                 {skill}
               </p>
             ))}
-          </div>
+          </div> */}
         </div>
         <div
           className="flex flex-col p-4  gap-[50px] max-h-[780px] overflow-y-auto"
@@ -69,20 +72,20 @@ const JobDetail = ({ jobId }) => {
           </div>
           <div className="flex flex-col justify-center item-center">
             <p className="font-[500]">về trách nhiệm công việc: </p>
-            <p className="!mb-0 font-[400]">{selectedJob?.respon}</p>
+            <p className="!mb-0 font-[400]">{selectedJob?.responsibility}</p>
           </div>
           <div className="flex flex-col justify-center item-center">
             <p className="font-[500]">về kinh nghiệm cần có: </p>
-            <ul className="list-disc pl-5">
+            {/* <ul className="list-disc pl-5">
               {selectedJob?.requiredExperience?.map((exp, index) => (
                 <li key={index}>{exp}</li>
               ))}
-            </ul>
+            </ul> */}
           </div>
           <div className="flex flex-col justify-center item-center">
             <p className="font-[500]">Các yêu cầu kĩ năng:</p>
             <div className="flex gap-3">
-              {selectedJob?.requiredSkills?.map((skill, index) => (
+              {selectedJob?.skills?.map((skill, index) => (
                 <p
                   key={index}
                   className="!mb-0 px-2 py-1 text-[13px] rounded-xl font-[500] bg-gray-200 text-gray-700"
@@ -100,26 +103,24 @@ const JobDetail = ({ jobId }) => {
         <div className="flex w-[80%] flex-col gap-4 p-4">
           <div className="flex justify-between items-center">
             <p className="!mb-0 flex items-center gap-2 text-[20px] font-[500]">
-              {selectedJob?.company}
+              {selectedJob?.company?.name}
               <CheckBadgeIcon className="w-5 h-5 text-green-600" />
             </p>
             <img
-              src={selectedJob?.image}
+              src={selectedJob?.company?.logo}
               alt={selectedJob?.company}
               className="max-w-[50px]"
             />
           </div>
           <div>
             <p className="!mb-2 font-[500]">Gia nhập vào:</p>
-            <p className="!mb-0 font-[400] text-gray-500">
-              {selectedJob?.joinDate}
-            </p>
+            <p className="!mb-0 font-[400] text-gray-500">2020</p>
           </div>
           <div>
             <p className="!mb-2 font-[500]">Địa điểm:</p>
-            <p className="!mb-0 font-[400] text-gray-500">
+            {/* <p className="!mb-0 font-[400] text-gray-500">
               {selectedJob?.address}
-            </p>
+            </p> */}
           </div>
         </div>
 
@@ -153,7 +154,7 @@ const JobDetail = ({ jobId }) => {
         {/*dịch vụ */}
         <div className="flex w-[80%] flex-col gap-4 p-4">
           <p className="!mb-0 text-[20px] font-[500]">Về các dịch vụ:</p>
-          <div className="flex flex-wrap gap-3">
+          {/* <div className="flex flex-wrap gap-3">
             {selectedJob?.services?.map((service, index) => (
               <p
                 key={index}
@@ -162,7 +163,7 @@ const JobDetail = ({ jobId }) => {
                 {service}
               </p>
             ))}
-          </div>
+          </div> */}
           <button
             onClick={() => setOpen(!open)}
             className="text-white px-4 py-2 bg-[#1E90FF] rounded-xl mt-8"

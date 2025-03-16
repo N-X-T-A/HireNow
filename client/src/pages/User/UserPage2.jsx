@@ -6,6 +6,7 @@ import JobP2Header from "../../components/user/JobP2Header";
 const UserPage2 = () => {
   //useState
   const [selectedJob, setSelectedJob] = useState(null);
+  console.log(selectedJob);
   return (
     <>
       <JobP2Header />

@@ -11,13 +11,20 @@ import axios from "axios";
 const UserPage1 = () => {
   //state
   const [jobsList, setJobsList] = useState([]);
-
+  const [companiesList, setCompaniesList] = useState([]);
   //API
   const fetchJobs = async () => {
     try {
       const response = await axios.get("http://localhost:5000/api/v1/job");
       setJobsList(response.data.jobs);
-      console.log(response.data.jobs);
+    } catch (error) {
+      console.error("Lỗi khi lấy danh sách công việc:", error);
+    }
+  };
+  const fetchCompanies = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/api/v1/company/");
+      setCompaniesList(response.data.metadata);
     } catch (error) {
       console.error("Lỗi khi lấy danh sách công việc:", error);
     }
@@ -25,6 +32,9 @@ const UserPage1 = () => {
 
   useEffect(() => {
     fetchJobs();
+  }, []);
+  useEffect(() => {
+    fetchCompanies();
   }, []);
   const hoverColors = [
     "hover:bg-blue-100",
@@ -156,7 +166,6 @@ const UserPage1 = () => {
                 <h2 className="text-lg font-semibold text-gray-800">
                   {job.company.name}
                 </h2>
-                ư
                 <h3 className="text-xl font-bold text-gray-900">{job.title}</h3>
                 <p className="text-gray-500">{job.location} • Toàn thời gian</p>
                 <p className="font-semibold text-gray-700">
@@ -236,7 +245,7 @@ const UserPage1 = () => {
         {/* companies list */}
         <div className="flex gap-3 flex-wrap justify-center items-center w-full">
           {/* companies item */}
-          {companiesPage1?.map((company, index) => (
+          {companiesList?.map((company, index) => (
             <motion.div
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -246,22 +255,22 @@ const UserPage1 = () => {
                 y: -10,
                 boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.2)",
               }}
-              key={company.id}
+              key={company._id}
               className="md:w-1/4 flex-col gap-1 p-2 relative"
               style={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }}
             >
               <img
-                src={company.bg}
+                src={company.background_image}
                 alt=""
                 className="w-full max-h-[200px] object-cover"
               />
               <img
-                src={company.image}
+                src={company.logo}
                 alt=""
                 className="absolute max-w-[70px] left-5 top-[-1/2] -translate-y-1/2 p-[2px] rounded-full bg-white"
               />
               <p className="!mb-0 mt-[8%] px-2 text-[20px] font-[600]">
-                {company.company}
+                {company.name}
               </p>
               <p className="!mb-0 px-2 text-[15px] text-gray-400 ">VietNam</p>
               <p className="!mb-0 px-2 text-[15px] text-gray-600 text-justify line-clamp-3">

@@ -3,7 +3,7 @@ import { StepperContext } from "../../contexts/StepperContext";
 const Account = () => {
   const { userData, setUserData } = useContext(StepperContext);
   const [formData, setFormData] = useState({
-    name: userData.name || "",
+    username: userData.name || "",
     phone: userData.phone || "",
   });
   const handleChange = (e) => {
