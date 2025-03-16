@@ -4,7 +4,7 @@ const UserProfileSchema = new mongoose.Schema(
   {
     _id: { type: mongoose.Types.ObjectId, auto: true },
     userId: { type: mongoose.Types.ObjectId, ref: "User", required: true },
-    username: { type: String, required: true },
+    username: { type: String },
     phone: { type: String, default: null },
     location: { type: String, default: null },
     bio: { type: String, default: null },

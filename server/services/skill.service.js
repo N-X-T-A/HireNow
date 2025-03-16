@@ -14,7 +14,7 @@ class SkillService {
     return await UserSkill.find({ user_id: userId }).select("skill_id");
   }
 
-  async getJobSkills(skillIds) {
+  async getIndustrySkill(skillIds) {
     const skills = await Skill.find({ _id: { $in: skillIds } }).select("name");
     return skills.map((skill) => skill.name);
   }

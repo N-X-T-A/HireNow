@@ -9,6 +9,10 @@ const CompanyController = require("../controllers/company.controller");
 
 const { verifyToken } = require("../middleware/auth");
 
+router.get("/", CompanyController.getCompanies);
+
+router.get("/:id", CompanyController.getCompanyById);
+
 router.put(
   "/:id",
   [verifyToken],

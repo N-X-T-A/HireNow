@@ -1,7 +1,7 @@
 "use strict";
 const mongoose = require("mongoose");
 
-const JobSkillSchema = new mongoose.Schema({
+const IndustrySkillSchema = new mongoose.Schema({
   title: { type: String, required: true },
   skill_id: [
     {
@@ -12,4 +12,4 @@ const JobSkillSchema = new mongoose.Schema({
   ],
 });
 
-module.exports = mongoose.model("JobSkill", JobSkillSchema);
+module.exports = mongoose.model("IndustrySkill", IndustrySkillSchema);

@@ -11,7 +11,7 @@ var app = express();
 
 // Configure CORS using environment variable
 const corsOptions = {
-  origin: process.env.CLIENT || "*", // Allow requests from the specified origin or all origins by default
+  origin: [process.env.CLIENT, process.env.RECRUITER], // Allow requests from the specified origin or all origins by default
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Allowed HTTP methods
   allowedHeaders: ["Content-Type", "Authorization"], // Allowed request headers
   credentials: true, // Enable cookies and authentication headers if needed

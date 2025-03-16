@@ -23,33 +23,54 @@ class ApplicationService {
       .lean();
   }
 
-  async getApplicantsByJob(recruiterId, jobId) {
-    const job = await Job.findById(jobId);
-    if (!job || job.company_id.toString() !== recruiterId.toString()) {
-      throw new ForbiddenError(
-        "You do not have access to this job's applicants."
-      );
-    }
-
-    return await Application.find({ job_id: jobId })
-      .populate("user_id", "username email phone location photoURL")
-      .select("resume cover_letter applied_date")
-      .lean();
-  }
-
   async getApplicants(recruiterId) {
-    const jobs = await Job.find({ company_id: recruiterId }).select("_id");
-    const jobIds = jobs.map((job) => job._id);
+    try {
+      const jobs = await Job.find({ company_id: recruiterId }).select("_id");
+      if (!jobs.length) {
+        return [];
+      }
 
-    if (jobIds.length === 0) {
-      throw new ForbiddenError("You do not have any job postings.");
+      const jobIds = jobs.map((job) => job._id);
+
+      const applications = await Application.find({ job_id: { $in: jobIds } })
+        .populate({
+          path: "user_id",
+          select: "username email profileId",
+          populate: {
+            path: "profileId",
+            model: "UserProfile",
+            select: "photoURL",
+          },
+        })
+        .populate("job_id", "title")
+        .select("cover_letter resume applied_date status")
+        .lean();
+
+      return applications.map((app) => {
+        const user = app.user_id;
+        const job = app.job_id;
+
+        return {
+          _id: app._id,
+          user: {
+            _id: user._id,
+            email: user.email,
+            photo_url: user.profileId?.photoURL || null,
+          },
+          job: {
+            _id: job._id,
+            title: job.title,
+          },
+          cover_letter: app.cover_letter,
+          resume: app.resume,
+          status: app.status,
+          applied_date: app.applied_date,
+        };
+      });
+    } catch (error) {
+      console.error("Error in getApplicants:", error);
+      throw new Error("Failed to fetch applicants. Please try again later.");
     }
-
-    return await Application.find({ job_id: { $in: jobIds } })
-      .populate("user_id", "username email photoURL")
-      .populate("job_id", "title")
-      .select("cover_letter resume applied_date status")
-      .lean();
   }
 }
 

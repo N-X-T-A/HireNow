@@ -2,29 +2,30 @@
 
 const moment = require("moment");
 require("moment/locale/vi");
-const { Job, JobSkill, Skill } = require("../models");
+const { Job, IndustrySkill, Skill } = require("../models");
 const skillService = require("./skill.service");
 
 class JobService {
   async getAllJobs() {
     const jobs = await Job.find()
-      .populate("company_id", "name logo background_image")
+      .populate("company_id", "name logo background_image locations")
       .lean();
 
     const jobList = await Promise.all(
       jobs
         .filter((job) => job.company_id)
         .map(async (job) => {
-          const jobSkillNames = await Skill.find({
+          const industrySkillNames = await Skill.find({
             _id: { $in: job.skills },
           }).select("name");
+
           return {
             _id: job._id,
             title: job.title,
-            location: job.location,
             salary_range: job.salary_range,
-            skills: jobSkillNames.map((skill) => skill.name),
+            skills: industrySkillNames.map((skill) => skill.name),
             posted_time: this.calculatePostedTime(job.posted_date),
+            location: this.formatLocations(job.company_id.locations),
             company: {
               name: job.company_id.name,
               logo: job.company_id.logo || "",
@@ -44,23 +45,23 @@ class JobService {
     }
 
     const jobs = await Job.find()
-      .populate("company_id", "name logo background_image")
+      .populate("company_id", "name logo background_image locations")
       .lean();
 
     const recommendedJobs = await Promise.all(
       jobs
         .filter((job) => job.company_id)
         .map(async (job) => {
-          const jobSkillNames = await Skill.find({
+          const industrySkillNames = await Skill.find({
             _id: { $in: job.skills },
           }).select("name");
+
           return {
             _id: job._id,
             title: job.title,
-            location: job.location,
             salary_range: job.salary_range,
             posted_time: this.calculatePostedTime(job.posted_date),
-            skills: jobSkillNames.map((skill) => skill.name),
+            locations: job.company_id.locations || [],
             company: {
               name: job.company_id?.name,
               logo: job.company_id?.logo,
@@ -75,12 +76,12 @@ class JobService {
 
   async getJobDetails(jobId) {
     const job = await Job.findById(jobId)
-      .populate("company_id", "name location logo background_image")
+      .populate("company_id", "name location logo background_image locations")
       .lean();
 
     if (!job) return { success: false, message: "Job not found!" };
 
-    const jobSkills = await skillService.getJobSkills(job.skills);
+    const industrySkill = await skillService.getIndustrySkill(job.skills);
 
     return {
       success: true,
@@ -88,13 +89,13 @@ class JobService {
         _id: job._id,
         title: job.title,
         company: {
+          _id: job.company_id._id,
           name: job.company_id.name,
           logo: job.company_id.logo,
           background_image: job.company_id.background_image,
-          location: job.company_id.location,
+          locations: job.company_id.locations,
         },
-        skills: jobSkills,
-        location: job.location,
+        skills: industrySkill,
         salary_range: job.salary_range,
         reasons_to_join: job.reasons_to_join,
         required_experience: job.required_experience,
@@ -149,18 +150,18 @@ class JobService {
   }
 
   getAllJobsSkill = async () => {
-    const jobs = await JobSkill.find().select("_id title");
+    const jobs = await IndustrySkill.find().select("_id title");
     return jobs;
   };
 
   getSkillsByJobId = async (jobId) => {
-    const jobSkills = await JobSkill.findById(jobId).populate(
+    const industrySkill = await IndustrySkill.findById(jobId).populate(
       "skill_id",
       "name"
     );
 
-    if (!jobSkills) return [];
-    return jobSkills.skill_id.map((skill) => ({
+    if (!industrySkill) return [];
+    return industrySkill.skill_id.map((skill) => ({
       _id: skill._id,
       name: skill.name,
     }));
@@ -168,6 +169,16 @@ class JobService {
 
   calculatePostedTime(posted_date) {
     return moment(posted_date).fromNow();
+  }
+
+  formatLocations(locations) {
+    if (!locations || !locations.length) return "";
+
+    const uniqueCities = [...new Set(locations.map((loc) => loc.city))];
+
+    return uniqueCities.length === 1
+      ? uniqueCities[0]
+      : uniqueCities.join(" - ");
   }
 }
 

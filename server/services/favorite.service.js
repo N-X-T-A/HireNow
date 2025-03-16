@@ -1,11 +1,17 @@
-const { Favorite } = require("../models");
+const { Favorite, Job } = require("../models");
 
 class FavoriteService {
   async saveFavoriteJob(userId, jobId) {
+    const jobExists = await Job.findById(jobId);
+    if (!jobExists) {
+      throw { statusCode: 404, message: "Job not found." };
+    }
+
     const exists = await Favorite.findOne({ userId, jobId });
     if (exists) {
       throw { statusCode: 400, message: "Job is already in favorites." };
     }
+
     return await Favorite.create({ userId, jobId });
   }
 
