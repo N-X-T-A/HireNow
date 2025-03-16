@@ -5,8 +5,17 @@ const CompanySchema = new mongoose.Schema(
   {
     _id: { type: mongoose.Types.ObjectId, auto: true },
     name: { type: String, default: "" },
-    industry: { type: String },
-    location: { type: String },
+    industry_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "IndustrySkill",
+    },
+    locations: [
+      {
+        city: String,
+        detailed_location: String,
+        _id: false,
+      },
+    ],
     description: { type: String },
     website: { type: String },
     logo: { type: String },
