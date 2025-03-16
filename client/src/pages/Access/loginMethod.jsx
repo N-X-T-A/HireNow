@@ -100,7 +100,7 @@ export default function LoginMethod() {
         if (!res.ok) throw new Error("Lỗi xác thực");
         const data = await res.json();
         console.log("User data:", data);
-        sessionStorage.setItem("access_token", data.token);
+        sessionStorage.setItem("access_token", data.accessToken);
         sessionStorage.setItem("user", JSON.stringify(data.user));
         sessionStorage.setItem(
           "firstLoggin",
@@ -167,7 +167,7 @@ export default function LoginMethod() {
         const userId = user._id;
         try {
           const response = await axios.post(
-            `http://localhost:5000/api/v1/user/update-profile/${userId}`,
+            `http://localhost:5000/api/v1/user/update-profile`,
             userData,
             {
               headers: {
