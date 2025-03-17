@@ -9,7 +9,10 @@ const {
 } = require("../models");
 
 class UserService {
-  async updateProfile(userId, { name, phone, education, experience, skills }) {
+  async updateProfile(
+    userId,
+    { username, phone, education, experience, skills }
+  ) {
     const user = await User.findById(userId);
     if (!user) {
       return { success: false, message: "User not found!" };
@@ -17,9 +20,13 @@ class UserService {
 
     let profile = await UserProfile.findOne({ userId: user._id });
     if (!profile) {
-      profile = new UserProfile({ userId: user._id, username: name, phone });
+      profile = new UserProfile({
+        userId: user._id,
+        username: username,
+        phone,
+      });
     } else {
-      profile.username = name || profile.username;
+      profile.username = username || profile.username;
       profile.phone = phone || profile.phone;
     }
     await profile.save();
