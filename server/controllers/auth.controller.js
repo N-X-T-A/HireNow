@@ -47,9 +47,23 @@ class AuthController {
   signIn = async (req, res) => {
     try {
       const { email, password } = req.body;
-      const result = await authService.login({ email, password });
+      const { user, accessToken } = await authService.login({
+        email,
+        password,
+      });
 
-      res.cookie("access_token", result.accessToken, {
+      const userProfile = await UserProfile.findOne({ userId: user._id })
+        .select("username photoURL")
+        .lean();
+
+      const userData = {
+        ...user.toObject(),
+        username: userProfile?.username,
+        photoURL: userProfile?.photoURL,
+        accessToken,
+      };
+
+      res.cookie("access_token", accessToken, {
         httpOnly: true,
         secure: false,
         sameSite: "strict",
@@ -57,7 +71,7 @@ class AuthController {
 
       return new OK({
         message: "Login successful!",
-        metadata: result,
+        metadata: userData,
       }).send(res);
     } catch (error) {
       return res.status(error.statusCode || 500).json({

@@ -1,5 +1,6 @@
 const { Company, User, IndustrySkill } = require("../models");
 const { ForbiddenError, NotFoundError } = require("../core/error.response");
+const { formatLocations } = require("../utils/format");
 
 class CompanyService {
   async updateCompany(companyId, recruiterId, updateData) {
@@ -22,9 +23,18 @@ class CompanyService {
   }
 
   async getCompanies() {
-    return await Company.find().select(
-      "name description logo background_image"
-    );
+    const companies = await Company.find()
+      .select("name description logo background_image locations industry_id")
+      .populate("industry_id", "title");
+
+    return companies.map((company) => {
+      const { locations, industry_id, ...rest } = company.toObject();
+      return {
+        ...rest,
+        location: formatLocations(locations),
+        industry: industry_id?.title || "",
+      };
+    });
   }
 
   async getCompanyById(id) {
