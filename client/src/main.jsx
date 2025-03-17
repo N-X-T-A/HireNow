@@ -37,8 +37,7 @@ createRoot(document.getElementById("root")).render(
             <Route path="userHome" element={<UserPage1 />} />
             <Route path="jobs" element={<UserPage2 />} />
             <Route path="test" element={<UserPage3 />} />
-            <Route path="jobs/:Id" element={<JobDetailPage />} />
-            <Route path="jobs/:Id" element={<JobDetailPage />} />
+            <Route path="jobs/:jobId" element={<JobDetailPage />} />
             <Route path="profile" element={<UserProfile />} />
             <Route path="profile-user" element={<ShowProfile />} />
             <Route path="profile-companies" element={<ShowCompanieProfile />} />

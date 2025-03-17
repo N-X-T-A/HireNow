@@ -9,6 +9,7 @@ import parse from "html-react-parser";
 const JobDetail = ({ jobId }) => {
   //state
   const navigate = useNavigate();
+
   const [selectedJob, setJobs] = useState([]);
   const [open, setOpen] = useState(false);
   const [user, setUser] = useState(() => {
@@ -27,7 +28,6 @@ const JobDetail = ({ jobId }) => {
           `http://localhost:5000/api/v1/job/${jobId}`
         );
         setJobs(response.data.job);
-        console.log(response.data.job);
       } catch (error) {
         console.error("Lỗi khi lấy danh sách công việc:", error);
       }
@@ -45,7 +45,7 @@ const JobDetail = ({ jobId }) => {
       <div className="flex-[7] w-full  flex flex-col border-r-2 border-gray-200 ">
         <div className="flex justify-between items-center p-4 border-b-2 border-gray-200">
           <p
-            onClick={() => navigate(`/user/jobs/1`)}
+            onClick={() => navigate(`/user/jobs/${jobId}`)}
             className="!mb-0 text-[30px] font-[500] cursor-pointer hover:underline"
           >
             {selectedJob.title}

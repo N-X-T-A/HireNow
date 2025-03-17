@@ -4,10 +4,16 @@ import {
   BookmarkIcon,
   ShareIcon,
 } from "@heroicons/react/24/outline";
+import axios from "axios";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import parse from "html-react-parser";
 const JobDetailPage = () => {
+  const { jobId } = useParams();
+  console.log("jobId từ useParams:", jobId);
   const [open, setOpen] = useState(false);
+  const [jobs, setJobs] = useState([]);
   const [user, setUser] = useState(() => {
     try {
       return JSON.parse(sessionStorage.getItem("user")) || null;
@@ -16,12 +22,28 @@ const JobDetailPage = () => {
       return null;
     }
   });
+  //API fetch
+  useEffect(() => {
+    const fetchJobs = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:5000/api/v1/job/${jobId}`
+        );
+        setJobs(response.data.job);
+        console.log(response.data.job);
+      } catch (error) {
+        console.error("Lỗi khi lấy danh sách công việc:", error);
+      }
+    };
+
+    fetchJobs();
+  }, []);
   return (
     <div className="flex flex-col justify-center items-center gap-3 bg-[#f5f5f5]">
       <div className="flex flex-col justify-center items-center relative w-full">
         <img
           className="max-h-[300px] w-full object-cover"
-          src="/src/assets/user/21501.jpg"
+          src={jobs?.company?.background_image}
           alt=""
         />
         {/* job card */}
@@ -32,15 +54,15 @@ const JobDetailPage = () => {
           <div className="flex md:flex-row flex-col justify-center items-center md:gap-3">
             <img
               className="max-w-[30px] md:max-w-[90px] rounded-lg border-[1px]"
-              src="/src/assets/user/google.png"
+              src={jobs?.company?.logo}
               alt=""
             />
             <div className=" flex flex-col gap-2">
               <p className="hidden md:block !mb-0 font-[500]">
-                Công ty Công nghệ đa quốc gia Google
+                Công ty Công nghệ
               </p>
               <p className="!mb-0 text-[15px] md:text-[30px] font-[500]">
-                Google Dev. Backend
+                {jobs?.title}
               </p>
             </div>
           </div>
@@ -166,19 +188,9 @@ const JobDetailPage = () => {
               Tóm tắt về công việc
             </p>
             <p className="!mb-0 text-[15px] font-[400] text-justify">
-              Lập trình viên backend tại Google sẽ chịu trách nhiệm thiết kế,
-              phát triển và duy trì các hệ thống backend có hiệu suất cao, đảm
-              bảo khả năng mở rộng và ổn định của dịch vụ. Công việc bao gồm xây
-              dựng API RESTful và GraphQL để kết nối với frontend và các dịch vụ
-              khác trong hệ thống, tối ưu hóa hiệu suất, giảm thời gian phản hồi
-              và cải thiện trải nghiệm người dùng. Người đảm nhiệm vai trò này
-              sẽ triển khai và quản lý hệ thống trên nền tảng cloud như Google
-              Cloud Platform, sử dụng Docker và Kubernetes, đồng thời đảm bảo
-              tính bảo mật và an toàn dữ liệu thông qua việc thực hiện các biện
-              pháp chống tấn công bảo mật như SQL Injection, XSS, CSRF. Ngoài
-              ra, lập trình viên backend cần hợp tác chặt chẽ với các nhóm sản
-              phẩm, QA và frontend để đảm bảo tính đồng bộ và hiệu quả của hệ
-              thống, theo dõi logs và xử lý lỗi để duy trì sự ổn định.
+              {jobs?.description
+                ? parse(jobs.description.replace("<p>", '<p class="!mb-0">'))
+                : "Không có mô tả"}
             </p>
           </div>
           {/* description */}
@@ -186,82 +198,48 @@ const JobDetailPage = () => {
             <p className="!mb-0 text-[20px] font-[500] text-[#1E90FF]">
               Trách nhiệm trong công việc
             </p>
-            <ul className="list-disc list-inside p-4 rounded-lg bg-white text-justify space-y-3">
-              <li>Xây dựng, phát triển phần mềm/ứng dụng</li>
-              <li>
-                Tiếp nhận yêu cầu về chức năng, nội dung của phần mềm/ứng dụng.
-                Tham gia phân tích, thiết kế chi tiết các chức năng được giao
-              </li>
-              <li>
-                Trực tiếp xây dựng, phát triển phần mềm/ứng dụng theo tài liệu
-                thiết kế và framework đã được thông qua theo phân công của
-                trưởng nhóm/PM dự án
-              </li>
-              <li>
-                Làm Unit Test, tiếp nhận ý kiến của bộ phận kiểm thử, liên quan
-                khác để điều chỉnh, bổ sung đến khi phần mềm/ứng dụng được hoàn
-                thiện
-              </li>
-              <li>
-                Giám sát và kiểm tra hệ thống và các thành phần liên quan để
-                phát hiện các sự cố tiềm ấn, đưa ra giải pháp kịp thời để ngăn
-                chặn và xử lý. Tối ưu hệ thống.
-              </li>
-              <li>
-                Xây dựng các tài liệu dự án theo phân công của Trưởng nhóm/PM dự
-                án
-              </li>
-              <li>Sửa chữa, nâng cấp, bảo trì phần mềm</li>
-              <li>Tích hợp, triển khai phần mềm/ứng dụng</li>
-              <li>Các công việc khác</li>
-            </ul>
+            <div className="p-4 rounded-lg bg-white text-justify">
+              {jobs?.responsibility
+                ? parse(
+                    jobs.responsibility.replace(
+                      "<ul>",
+                      '<ul class="list-disc list-inside pl-5 space-y-3">'
+                    )
+                  )
+                : "Không có trách nhiệm công việc"}
+            </div>
           </div>
           {/* requirement */}
           <div className="flex flex-col gap-1">
             <p className="!mb-0 text-[20px] font-[500] text-[#1E90FF]">
               Yêu cầu công việc
             </p>
-            <ul className="list-disc list-inside p-4 rounded-lg bg-white text-justify space-y-3">
-              <li>Dưới 40 tuổi</li>
-              <li>Tốt nghiệp CĐ/ĐH</li>
-              <li className="font-bold">Nhân sự Backend: Dev Java Backend</li>
-              <li>
-                Tối thiểu 1 năm kinh nghiệm phát triển thực tế với Java và các
-                framework (Spring Framework, Spring Boot)
-              </li>
-              <li>
-                Kiến thức tốt về Cấu trúc Dữ liệu và Thuật toán; Chuyên môn về
-                Cơ sở dữ liệu SQL / NoSQL (Oracle, MongoDB); Kinh nghiệm với các
-                API RESTful, Microservices
-              </li>
-              <li className="font-bold">
-                Nhân sự Frontend: Dev Angular Frontend
-              </li>
-              <li>
-                Tối thiểu 1 năm kinh nghiệm làm việc với framework JS/UI –
-                Angular;
-              </li>
-              <li>Tích hợp, triển khai phần mềm/ứng dụng</li>
-            </ul>
+            <div className="p-4 rounded-lg bg-white text-justify">
+              {jobs?.required_experience
+                ? parse(
+                    jobs.required_experience.replace(
+                      "<ul>",
+                      '<ul class="list-disc list-inside pl-5 space-y-3">'
+                    )
+                  )
+                : "Không có trách nhiệm công việc"}
+            </div>
           </div>
           {/* benefit */}
           <div className="flex flex-col gap-1">
             <p className="!mb-0 text-[20px] font-[500] text-[#1E90FF]">
               Lợi ích công việc
             </p>
-            <ul className="list-disc list-inside p-4 rounded-lg bg-white text-justify space-y-3">
-              <li>Thu nhập từ 200 - 500 triệu/năm</li>
-              <li>Teambuilding, nghỉ mát hàng năm....</li>
-
-              <li>Phụ cấp điện thoại, Bảo hiểm XH, BHYT....</li>
-              <li>Phụ cấp ăn trưa 730.000đ/tháng</li>
-              <li className="font-bold">
-                Tham gia các chương trình đào tạo nâng cao chuyên môn, nghiệp vụ
-                định kỳ
-              </li>
-              <li>Khám sức khỏe hàng năm</li>
-              <li>Thời gian làm việc: Thứ 2 - thứ 6, 8h00 - 17h00</li>
-            </ul>
+            <div className="p-4 rounded-lg bg-white text-justify">
+              {jobs?.reasons_to_join
+                ? parse(
+                    jobs.reasons_to_join.replace(
+                      "<ul>",
+                      '<ul class="list-disc list-inside pl-5 space-y-3">'
+                    )
+                  )
+                : "Không có trách nhiệm công việc"}
+            </div>
           </div>
         </div>
         {/* right section */}
@@ -271,11 +249,11 @@ const JobDetailPage = () => {
             <div className="flex  items-center gap-2">
               <img
                 className="max-w-[30px] md:max-w-[90px] rounded-lg border-[1px]"
-                src="/src/assets/user/google.png"
+                src={jobs?.company?.logo}
                 alt=""
               />
               <div>
-                <p className="!mb-0 text-[20px]">Google .etc</p>
+                <p className="!mb-0 text-[20px]">{jobs?.company?.name}</p>
                 <p className="!mb-0 text-[12px] text-blue-500">
                   Xem thêm về công ty{" "}
                 </p>

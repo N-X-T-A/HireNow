@@ -84,7 +84,7 @@ const JobApplyStatus = () => {
           back: "Quay lại",
           close: "Đóng",
           last: "Hoàn tất",
-          next: "Tiếp theo ({step} / {total})",
+          nextLabelWithProgress: "Tiếp theo (Bước {step} của {steps})",
           skip: "Bỏ qua",
         }}
         callback={(data) => {
