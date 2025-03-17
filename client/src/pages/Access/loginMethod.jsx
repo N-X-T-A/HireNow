@@ -65,17 +65,17 @@ export default function LoginMethod() {
       console.log(data.metadata.accessToken);
       // Lưu thông tin vào sessionStorage
       sessionStorage.setItem("access_token", data.metadata.accessToken);
-      sessionStorage.setItem("user", JSON.stringify(data.metadata.user));
+      sessionStorage.setItem("user", JSON.stringify(data.metadata));
       sessionStorage.setItem(
         "firstLoggin",
-        JSON.stringify(data.metadata.user.isFirstLogin)
+        JSON.stringify(data.metadata.isFirstLogin)
       );
       sessionStorage.setItem("isLoggedIn", JSON.stringify(true));
 
       // Giả lập loading trước khi cập nhật trạng thái
       setTimeout(() => {
-        setUser(data.metadata.user);
-        setFisrtLoggin(data.metadata.user.isFirstLogin);
+        setUser(data.metadata);
+        setFisrtLoggin(data.metadata.isFirstLogin);
         setIsLoggedIn(true);
         setIsLoading(false);
         window.dispatchEvent(new Event("userUpdated"));
