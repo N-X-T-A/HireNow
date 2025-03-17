@@ -4,11 +4,12 @@ import { StepperContext } from "../../contexts/StepperContext";
 const JobRecommend = () => {
   const { userData, setUserData } = useContext(StepperContext);
   const [formData, setFormData] = useState({
-    school: userData.education?.[0]?.school || "",
+    institution: userData.education?.[0]?.school || "",
     degree: userData.education?.[0]?.degree || "",
     field_of_study: userData.education?.[0]?.field_of_study || "",
-    start_year: userData.education?.[0]?.start_year || "",
-    end_year: userData.education?.[0]?.end_year || "",
+    start_date: userData.education?.[0]?.start_date || "",
+    end_date: userData.education?.[0]?.end_date || "",
+    description: userData.education?.[0]?.description || "",
   });
 
   useEffect(() => {
@@ -28,7 +29,7 @@ const JobRecommend = () => {
       <p className="!mb-1">Đã tốt nghiệp tại</p>
       <input
         type="text"
-        name="school"
+        name="institution"
         placeholder="Tốt nghiệp tại"
         value={formData.school}
         onChange={handleChange}
@@ -60,9 +61,9 @@ const JobRecommend = () => {
       <p className="!mb-1">Năm bắt đầu:</p>
       <input
         type="number"
-        name="start_year"
+        name="start_date"
         placeholder="Nhập năm bắt đầu"
-        value={formData.start_year}
+        value={formData.start_date}
         onChange={handleChange}
         className="border p-2 mb-3"
       />
@@ -70,11 +71,20 @@ const JobRecommend = () => {
       <p className="!mb-1">Năm kết thúc:</p>
       <input
         type="number"
-        name="end_year"
+        name="end_date"
         placeholder="Nhập năm kết thúc"
-        value={formData.end_year}
+        value={formData.end_date}
         onChange={handleChange}
         className="border p-2 mb-3"
+      />
+
+      <p className="!mb-1">Mô tả thêm:</p>
+      <textarea
+        name="description"
+        placeholder="Nhập mô tả"
+        value={formData.description}
+        onChange={handleChange}
+        className="border p-2"
       />
     </div>
   );

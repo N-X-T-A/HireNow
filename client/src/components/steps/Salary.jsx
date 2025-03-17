@@ -12,10 +12,10 @@ const Salary = () => {
   const [skills, setSkills] = useState(userData.skills || []);
 
   const [formData, setFormData] = useState({
-    company: userData.experience?.[0]?.company || "",
-    start_date: userData.education?.[0]?.start_date || "",
-    end_date: userData.education?.[0]?.end_date || "",
-    description: userData.education?.[0]?.description || "",
+    company_name: userData.experience?.[0]?.company || "",
+    start_date: userData.experience?.[0]?.start_date || "",
+    end_date: userData.experience?.[0]?.end_date || "",
+    description: userData.experience?.[0]?.description || "",
   });
 
   // Fetch danh sách ngành nghề khi component được mount
@@ -67,7 +67,7 @@ const Salary = () => {
       <p className="!mb-1">Đã có kinh nghiệm tại</p>
       <input
         type="text"
-        name="company"
+        name="company_name"
         placeholder="Nhập tên công ty"
         value={formData.company}
         onChange={handleChange}
@@ -86,7 +86,7 @@ const Salary = () => {
           setSkills([]);
           setFormData((prev) => ({
             ...prev,
-            title: job ? job.title : "",
+            position: job ? job.title : "",
           }));
         }}
       >

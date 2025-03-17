@@ -167,12 +167,12 @@ export default function LoginMethod() {
         setFinalData(userData);
         const userId = user._id;
         try {
-          const response = await axios.post(
-            `http://localhost:5000/api/v1/user/update-profile`,
+          const response = await axios.put(
+            "http://localhost:5000/api/v1/user/update-profile",
             userData,
             {
               headers: {
-                Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+                Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
                 "Content-Type": "application/json",
               },
             }

@@ -1,9 +1,12 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { ClockIcon, CheckBadgeIcon } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
 import { BookmarkIcon } from "@heroicons/react/24/solid";
+import parse from "html-react-parser";
 import axios from "axios";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 const JobList = ({ onSelectJob }) => {
   const [UserJobs, setJobs] = useState([]);
   const [UserJobsAPI, setJobsAPI] = useState([]);
@@ -11,7 +14,7 @@ const JobList = ({ onSelectJob }) => {
   const [bookmarkedJobs, setBookmarkedJobs] = useState({});
   const [onBookmark, setonBookmark] = useState(null);
   const ACCESS_TOKEN = sessionStorage.getItem("access_token");
-
+  const [loading, setLoading] = useState(true);
   //saveClick
   const handleBookmarkClick = (jobId) => {
     setBookmarkedJobs((prev) => ({
@@ -45,10 +48,13 @@ const JobList = ({ onSelectJob }) => {
             },
           }
         );
-        setJobsAPI(response.data.jobs);
-        console.log(response.data.jobs);
+        setTimeout(() => {
+          setJobsAPI(response.data.jobs);
+          setLoading(false);
+        }, 1000);
       } catch (error) {
         console.error("Lỗi khi lấy danh sách công việc:", error);
+        setLoading(false);
       }
     };
 
@@ -65,89 +71,99 @@ const JobList = ({ onSelectJob }) => {
       <div className="w-full flex flex-col gap-3">
         {/* công việc */}
         <div className="flex flex-col gap-4">
-          {UserJobsAPI.map((job) => (
-            <div
-              key={job.id}
-              className="flex flex-col gap-2 w-full p-4 rounded-lg transition ease-in-out duration-300 transform hover:-translate-y-[5px]"
-              style={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }}
-              onClick={() => onSelectJob(job._id)}
-            >
-              {/* img - name */}
-              <div className="flex items-center justify-between">
-                <div className="flex gap-2 items-center">
-                  <img
-                    className="max-w-[50px] rounded-md border-[1px]"
-                    src={job.company.logo}
-                    alt={job.company}
-                  />
-                  <span className="flex flex-col gap-1">
-                    <p className="!mb-0 text-[20px]">{job.title}</p>
-                    <p className="!mb-0 text-gray-500 text-[13px]">
-                      {job.company.name}
-                    </p>
-                  </span>
-                </div>
-                {bookmarkedJobs[job._id] && (
-                  <motion.div
-                    initial={{ scale: 0, opacity: 0.5 }}
-                    animate={{ scale: 2, opacity: 0 }}
-                    transition={{ duration: 0.4 }}
-                    className="absolute inset-0 bg-blue-300 rounded-full"
-                  />
-                )}
-
-                {/* Icon Bookmark */}
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation(); // Ngăn chặn việc click chọn job khi bấm bookmark
-                    handleBookmarkClick(job._id);
-                  }}
-                  className="relative z-10 p-2 rounded-full transition-all"
+          {loading
+            ? Array.from({ length: 5 }).map((_, index) => (
+                <div
+                  key={index}
+                  className="flex flex-col gap-2 w-full p-4 rounded-lg"
+                  style={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }}
                 >
-                  <BookmarkIcon
-                    className={`w-10 h-10 transition-all ${
-                      bookmarkedJobs[job._id]
-                        ? "fill-blue-500"
-                        : "fill-gray-400"
-                    }`}
-                  />
-                </button>
-              </div>
-              {/* skill - experience */}
-              {/* <div className="flex gap-2">
-                {UserJobs?.skills.map((skill, index) => {
-                  const colors = [
-                    "bg-green-200 text-green-500",
-                    "bg-red-200 text-red-500",
-                    "bg-blue-200 text-blue-500",
-                  ];
-                  return (
-                    <p
-                      key={index}
-                      className={`!mb-0 px-2 py-1 text-[13px] rounded-xl font-[500] ${colors[index % colors.length]}`}
+                  <div className="flex items-center gap-2">
+                    <Skeleton circle height={50} width={50} />
+                    <div className="flex flex-col gap-1">
+                      <Skeleton width={150} height={20} />
+                      <Skeleton width={100} height={15} />
+                    </div>
+                  </div>
+                  <Skeleton count={2} height={15} />
+                  <Skeleton width="80%" height={20} />
+                </div>
+              ))
+            : UserJobsAPI.map((job) => (
+                <div
+                  key={job.id}
+                  className="flex flex-col gap-2 w-full p-4 rounded-lg transition ease-in-out duration-300 transform hover:-translate-y-[5px]"
+                  style={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }}
+                  onClick={() => onSelectJob(job._id)}
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="flex gap-2 items-center">
+                      <img
+                        className="max-w-[50px] rounded-md border-[1px]"
+                        src={job.company.logo}
+                        alt={job.company.name}
+                      />
+                      <span className="flex flex-col gap-1">
+                        <p className="!mb-0 text-[20px]">{job.title}</p>
+                        <p className="!mb-0 text-gray-500 text-[13px]">
+                          {job.company.name}
+                        </p>
+                      </span>
+                    </div>
+
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleBookmarkClick(job._id);
+                      }}
+                      className="relative z-10 p-2 rounded-full transition-all"
                     >
-                      {skill}
+                      <BookmarkIcon
+                        className={`w-10 h-10 transition-all ${bookmarkedJobs[job._id] ? "fill-blue-500" : "fill-gray-400"}`}
+                      />
+                    </button>
+                  </div>
+
+                  <div className="flex gap-2">
+                    {job?.skills.map((skill, index) => {
+                      const colors = [
+                        "bg-green-200 text-green-500",
+                        "bg-red-200 text-red-500",
+                        "bg-blue-200 text-blue-500",
+                      ];
+                      return (
+                        <p
+                          key={index}
+                          className={`!mb-0 px-2 py-1 text-[13px] rounded-xl font-[500] ${colors[index % colors.length]}`}
+                        >
+                          {skill}
+                        </p>
+                      );
+                    })}
+                  </div>
+
+                  <p className="!mb-0 w-full text-[15px] min-h-[auto] max-h-[130px] overflow-y-auto">
+                    {parse(
+                      job.reasons_to_join.replace(
+                        "<ul>",
+                        '<ul class="list-disc pl-5">'
+                      )
+                    )}
+                  </p>
+
+                  <span className="border-b-[1px] border-gray-300 w-full"></span>
+
+                  <div className="flex items-center justify-between w-full">
+                    <p className="!mb-0 text-[20px] font-[500]">
+                      {job.salary_range}
                     </p>
-                  );
-                })}
-              </div> */}
-              {/* description */}
-              {/* <p className="w-full text-[15px] line-clamp-3">
-                {UserJobs.description}
-              </p> */}
-              <span className="border-b-[1px] border-gray-300 w-full"></span>
-              {/* salary */}
-              <div className="flex items-center justify-between w-full">
-                <p className="!mb-0 text-[20px] font-[500]">
-                  {job.salary_range}
-                </p>
-                <span className="flex items-center gap-1 text-13px text-gray-400">
-                  <ClockIcon className="w-4 h-4" />
-                  <p className="!mb-0">{job.posted_time}</p>
-                </span>
-              </div>
-            </div>
-          ))}
+                    <span className="flex items-center gap-1 text-13px text-gray-400">
+                      <ClockIcon className="w-4 h-4" />
+                      <p className="!mb-0">{job.posted_time}</p>
+                    </span>
+                  </div>
+                </div>
+              ))}
         </div>
       </div>
     </div>

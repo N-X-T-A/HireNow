@@ -23,7 +23,7 @@ const Account = () => {
           <input
             onChange={handleChange}
             value={formData.name}
-            name="name"
+            name="username"
             placeholder="Họ và tên"
             className="p-1 px-2 appearance-non outline-none w-full text-gray-800"
           />

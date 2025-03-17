@@ -2,9 +2,10 @@ import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { CheckBadgeIcon } from "@heroicons/react/24/outline";
 import { SparklesIcon, StarIcon } from "@heroicons/react/24/solid";
+import { ClockIcon, CheckBadgeIcon } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
+import parse from "html-react-parser";
 const JobDetail = ({ jobId }) => {
   //state
   const navigate = useNavigate();
@@ -26,6 +27,7 @@ const JobDetail = ({ jobId }) => {
           `http://localhost:5000/api/v1/job/${jobId}`
         );
         setJobs(response.data.job);
+        console.log(response.data.job);
       } catch (error) {
         console.error("Lỗi khi lấy danh sách công việc:", error);
       }
@@ -48,16 +50,11 @@ const JobDetail = ({ jobId }) => {
           >
             {selectedJob.title}
           </p>
-          {/* <div className="flex gap-2">
-            {selectedJob?.skills?.map((skill, index) => (
-              <p
-                key={index}
-                className="!mb-0 px-2 py-1 text-[13px] rounded-xl font-[500] bg-gray-200 text-gray-700"
-              >
-                {skill}
-              </p>
-            ))}
-          </div> */}
+
+          <span className="flex items-center gap-1 text-13px text-gray-400">
+            <ClockIcon className="w-4 h-4" />
+            <p className="!mb-0">{selectedJob?.posted_time}</p>
+          </span>
         </div>
         <div
           className="flex flex-col p-4  gap-[50px] max-h-[780px] overflow-y-auto"
@@ -66,21 +63,54 @@ const JobDetail = ({ jobId }) => {
             msOverflowStyle: "none",
           }}
         >
-          <div className="flex flex-col justify-center item-center">
+          <div className="flex flex-col justify-center item-center pb-2 border-b-[1px] border-gray-200">
             <p className="font-[500]">Tóm tắt về vai trò:</p>
-            <p className="!mb-0 font-[400]">{selectedJob?.description}</p>
+            <p className="!mb-0 font-[400]">
+              {selectedJob?.description
+                ? parse(
+                    selectedJob.description.replace("<p>", '<p class="!mb-0">')
+                  )
+                : "Không có mô tả"}
+            </p>
           </div>
-          <div className="flex flex-col justify-center item-center">
+          <div className="flex flex-col justify-center item-center  pb-2  border-b-[1px] border-gray-200">
             <p className="font-[500]">về trách nhiệm công việc: </p>
-            <p className="!mb-0 font-[400]">{selectedJob?.responsibility}</p>
+            <p className="!mb-0 font-[400]">
+              {selectedJob?.responsibility
+                ? parse(
+                    selectedJob.responsibility.replace(
+                      "<ul>",
+                      '<ul class="list-disc pl-5 space-y-2">'
+                    )
+                  )
+                : "Không có trách nhiệm công việc"}
+            </p>
           </div>
-          <div className="flex flex-col justify-center item-center">
+          <div className="flex flex-col justify-center item-center pb-2   border-b-[1px] border-gray-200">
             <p className="font-[500]">về kinh nghiệm cần có: </p>
-            {/* <ul className="list-disc pl-5">
-              {selectedJob?.requiredExperience?.map((exp, index) => (
-                <li key={index}>{exp}</li>
-              ))}
-            </ul> */}
+            <p className="!mb-0 font-[400]">
+              {selectedJob?.required_experience
+                ? parse(
+                    selectedJob.required_experience.replace(
+                      "<ul>",
+                      '<ul class="list-disc pl-5 space-y-2">'
+                    )
+                  )
+                : "Không có yêu cầu kinh nghiệm"}
+            </p>
+          </div>
+          <div className="flex flex-col justify-center item-center pb-2   border-b-[1px] border-gray-200">
+            <p className="font-[500]">Lí do nên gia nhập: </p>
+            <p className="!mb-0 font-[400]">
+              {selectedJob?.reasons_to_join
+                ? parse(
+                    selectedJob.reasons_to_join.replace(
+                      "<ul>",
+                      '<ul class="list-disc pl-5 space-y-2">'
+                    )
+                  )
+                : "Không có lí do nên gia nhập"}
+            </p>
           </div>
           <div className="flex flex-col justify-center item-center">
             <p className="font-[500]">Các yêu cầu kĩ năng:</p>
@@ -118,9 +148,11 @@ const JobDetail = ({ jobId }) => {
           </div>
           <div>
             <p className="!mb-2 font-[500]">Địa điểm:</p>
-            {/* <p className="!mb-0 font-[400] text-gray-500">
-              {selectedJob?.address}
-            </p> */}
+            <p className="!mb-0 font-[400] text-gray-500">
+              {selectedJob?.company?.locations
+                ?.map((loc) => `${loc.city} - ${loc.detailed_location}`)
+                .join(", ")}
+            </p>
           </div>
         </div>
 
@@ -154,16 +186,20 @@ const JobDetail = ({ jobId }) => {
         {/*dịch vụ */}
         <div className="flex w-[80%] flex-col gap-4 p-4">
           <p className="!mb-0 text-[20px] font-[500]">Về các dịch vụ:</p>
-          {/* <div className="flex flex-wrap gap-3">
-            {selectedJob?.services?.map((service, index) => (
-              <p
-                key={index}
-                className="!mb-0 px-2 py-1 text-[13px] rounded-xl font-[500] bg-gray-200"
-              >
-                {service}
-              </p>
-            ))}
-          </div> */}
+          <div className="flex flex-wrap gap-3">
+            <p className="!mb-0 px-2 py-1 text-[13px] rounded-xl font-[500] bg-gray-200">
+              TensorFlow
+            </p>
+            <p className="!mb-0 px-2 py-1 text-[13px] rounded-xl font-[500] bg-gray-200">
+              PyTorch
+            </p>
+            <p className="!mb-0 px-2 py-1 text-[13px] rounded-xl font-[500] bg-gray-200">
+              NLP
+            </p>
+            <p className="!mb-0 px-2 py-1 text-[13px] rounded-xl font-[500] bg-gray-200">
+              Deep Learning
+            </p>
+          </div>
           <button
             onClick={() => setOpen(!open)}
             className="text-white px-4 py-2 bg-[#1E90FF] rounded-xl mt-8"
