@@ -6,10 +6,10 @@ class UserController {
   updateProfile = async (req, res) => {
     try {
       const userId = req.user.id;
-      const { name, phone, education, experience, skills } = req.body;
+      const { username, phone, education, experience, skills } = req.body;
 
       const result = await userService.updateProfile(userId, {
-        name,
+        username,
         phone,
         education,
         experience,

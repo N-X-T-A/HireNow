@@ -1,14 +1,16 @@
 "use strict";
 
-const moment = require("moment");
-require("moment/locale/vi");
 const { Job, IndustrySkill, Skill } = require("../models");
 const skillService = require("./skill.service");
+const { calculatePostedTime, formatLocations } = require("../utils/format");
 
 class JobService {
   async getAllJobs() {
     const jobs = await Job.find()
-      .populate("company_id", "name logo background_image locations")
+      .populate(
+        "company_id",
+        "name logo background_image locations reasons_to_join"
+      )
       .lean();
 
     const jobList = await Promise.all(
@@ -24,8 +26,9 @@ class JobService {
             title: job.title,
             salary_range: job.salary_range,
             skills: industrySkillNames.map((skill) => skill.name),
-            posted_time: this.calculatePostedTime(job.posted_date),
-            location: this.formatLocations(job.company_id.locations),
+            posted_time: calculatePostedTime(job.posted_date),
+            location: formatLocations(job.company_id.locations),
+            reasons_to_join: job.reasons_to_join,
             company: {
               name: job.company_id.name,
               logo: job.company_id.logo || "",
@@ -45,7 +48,10 @@ class JobService {
     }
 
     const jobs = await Job.find()
-      .populate("company_id", "name logo background_image locations")
+      .populate(
+        "company_id",
+        "name logo background_image locations reasons_to_join"
+      )
       .lean();
 
     const recommendedJobs = await Promise.all(
@@ -60,8 +66,10 @@ class JobService {
             _id: job._id,
             title: job.title,
             salary_range: job.salary_range,
-            posted_time: this.calculatePostedTime(job.posted_date),
-            locations: job.company_id.locations || [],
+            skills: industrySkillNames.map((skill) => skill.name),
+            posted_time: calculatePostedTime(job.posted_date),
+            reasons_to_join: job.reasons_to_join,
+            location: formatLocations(job.company_id.locations),
             company: {
               name: job.company_id?.name,
               logo: job.company_id?.logo,
@@ -101,7 +109,7 @@ class JobService {
         required_experience: job.required_experience,
         responsibility: job.responsibility,
         description: job.description,
-        posted_time: this.calculatePostedTime(job.posted_date),
+        posted_time: calculatePostedTime(job.posted_date),
       },
     };
   }
@@ -128,7 +136,7 @@ class JobService {
       title: updatedJob.title,
       location: updatedJob.location,
       salary_range: updatedJob.salary_range,
-      posted_time: this.calculatePostedTime(updatedJob.posted_date),
+      posted_time: calculatePostedTime(updatedJob.posted_date),
       company: {
         name: updatedJob.company_id.name,
         logo: updatedJob.company_id.logo,
@@ -166,20 +174,6 @@ class JobService {
       name: skill.name,
     }));
   };
-
-  calculatePostedTime(posted_date) {
-    return moment(posted_date).fromNow();
-  }
-
-  formatLocations(locations) {
-    if (!locations || !locations.length) return "";
-
-    const uniqueCities = [...new Set(locations.map((loc) => loc.city))];
-
-    return uniqueCities.length === 1
-      ? uniqueCities[0]
-      : uniqueCities.join(" - ");
-  }
 }
 
 module.exports = new JobService();
