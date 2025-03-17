@@ -10,11 +10,6 @@ const UserSchema = new mongoose.Schema(
       enum: ["candidate", "recruiter"],
       default: "candidate",
     },
-    profileId: {
-      type: mongoose.Types.ObjectId,
-      ref: "UserProfile",
-      default: null,
-    },
     companyId: {
       type: mongoose.Types.ObjectId,
       ref: "Company",
