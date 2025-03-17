@@ -85,7 +85,7 @@ class AuthController {
       const { googleUser } = req;
       const { email, name, picture } = googleUser;
 
-      let user = await User.findOne({ email });
+      let user = await User.findOne({ email }).lean();
 
       if (!user) {
         user = new User({ email });
@@ -103,6 +103,12 @@ class AuthController {
         await user.save();
       }
 
+      const userProfile = await UserProfile.findOne({
+        userId: user._id,
+      }).lean();
+
+      const mergedUser = { ...user, ...userProfile };
+
       const accessToken = generateAccessToken(user);
 
       res.cookie("access_token", accessToken, {
@@ -111,7 +117,7 @@ class AuthController {
         sameSite: "strict",
       });
 
-      res.json({ user, accessToken });
+      res.json({ user: mergedUser, accessToken });
     } catch (error) {
       console.error("Google authentication error:", error);
       return res.status(401).json({ message: "Invalid Google authentication" });
