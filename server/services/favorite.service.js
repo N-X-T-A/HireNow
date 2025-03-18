@@ -1,4 +1,5 @@
 const { Favorite, Job } = require("../models");
+const { formatLocations } = require("../utils/format");
 
 class FavoriteService {
   async saveFavoriteJob(userId, jobId) {
@@ -16,10 +17,34 @@ class FavoriteService {
   }
 
   async getFavoriteJobs(userId) {
-    return await Favorite.find({ userId }).populate(
-      "jobId",
-      "title companyId skills location salary shortDescription"
-    );
+    const favorites = await Favorite.find({ userId }).populate({
+      path: "jobId",
+      select: "title company_id skills salary_range",
+      populate: {
+        path: "company_id",
+        select: "name locations",
+      },
+    });
+
+    return favorites
+      .filter((fav) => fav.jobId)
+      .map((fav) => {
+        const { _id, title, company_id, skills, salary_range } = fav.jobId;
+        return {
+          _id: fav._id,
+          job_id: _id,
+          title,
+          skills,
+          salary_range,
+          company: company_id
+            ? {
+                _id: company_id._id,
+                name: company_id.name,
+                location: formatLocations(company_id.locations),
+              }
+            : null,
+        };
+      });
   }
 
   async removeFavoriteJob(userId, jobId) {

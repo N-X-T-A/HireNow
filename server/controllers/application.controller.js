@@ -34,7 +34,7 @@ class ApplicationController {
     try {
       const userId = req.user._id;
       const jobs = await applicationService.getAppliedJobs(userId);
-
+      console.log(jobs);
       return res.status(200).json({
         message: "Fetched applied jobs successfully.",
         metadata: jobs,

@@ -1,5 +1,5 @@
-const { ForbiddenError } = require("../core/error.response");
-const { Application, Job } = require("../models/");
+const { Application, Job, UserProfile, Company } = require("../models/");
+const { formatLocations } = require("../utils/format");
 
 class ApplicationService {
   async applyForJob(userId, jobId, resume, coverLetter) {
@@ -15,12 +15,49 @@ class ApplicationService {
   }
 
   async getAppliedJobs(userId) {
-    return await Application.find({ user_id: userId })
+    const applications = await Application.find({ user_id: userId })
       .populate(
         "job_id",
         "title company_id location salary_range short_description"
       )
       .lean();
+
+    const validApplications = applications.filter((app) => app.job_id);
+    const companyIds = validApplications
+      .map((app) => app.job_id.company_id)
+      .filter(Boolean);
+
+    const companies = await Company.find({ _id: { $in: companyIds } })
+      .select("name logo locations")
+      .lean();
+
+    const companyMap = companies.reduce((acc, company) => {
+      acc[company._id.toString()] = company;
+      return acc;
+    }, {});
+
+    return validApplications.map(
+      ({ _id, job_id, status, applied_date, __v }) => {
+        const company = companyMap[job_id.company_id?.toString()] || {};
+
+        return {
+          _id,
+          job_id: job_id._id,
+          title: job_id.title,
+          salary_range: job_id.salary_range,
+          short_description: job_id.short_description,
+          status,
+          applied_date,
+          __v,
+          company: {
+            _id: company._id || null,
+            name: company.name || "Unknown",
+            logo: company.logo || "",
+            locations: formatLocations(company.locations),
+          },
+        };
+      }
+    );
   }
 
   async getApplicants(recruiterId) {
@@ -33,40 +70,39 @@ class ApplicationService {
       const jobIds = jobs.map((job) => job._id);
 
       const applications = await Application.find({ job_id: { $in: jobIds } })
-        .populate({
-          path: "user_id",
-          select: "username email profileId",
-          populate: {
-            path: "profileId",
-            model: "UserProfile",
-            select: "photoURL",
-          },
-        })
+        .populate("user_id", "email")
         .populate("job_id", "title")
-        .select("cover_letter resume applied_date status")
+        .select("cover_letter resume applied_date status user_id job_id")
         .lean();
 
-      return applications.map((app) => {
-        const user = app.user_id;
-        const job = app.job_id;
+      return Promise.all(
+        applications.map(async (app) => {
+          const user = app.user_id;
+          const job = app.job_id;
 
-        return {
-          _id: app._id,
-          user: {
-            _id: user._id,
-            email: user.email,
-            photo_url: user.profileId?.photoURL || null,
-          },
-          job: {
-            _id: job._id,
-            title: job.title,
-          },
-          cover_letter: app.cover_letter,
-          resume: app.resume,
-          status: app.status,
-          applied_date: app.applied_date,
-        };
-      });
+          const userProfile = await UserProfile.findOne({ userId: user._id })
+            .select("username photoURL")
+            .lean();
+
+          return {
+            _id: app._id,
+            user: {
+              _id: user._id,
+              email: user.email,
+              photo_url: userProfile?.photoURL,
+              username: userProfile?.username,
+            },
+            job: {
+              _id: job._id,
+              title: job.title,
+            },
+            cover_letter: app.cover_letter,
+            resume: app.resume,
+            status: app.status,
+            applied_date: app.applied_date,
+          };
+        })
+      );
     } catch (error) {
       console.error("Error in getApplicants:", error);
       throw new Error("Failed to fetch applicants. Please try again later.");
