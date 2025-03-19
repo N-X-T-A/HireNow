@@ -18,6 +18,7 @@ const JobList = ({ onSelectJob }) => {
   const [onBookmark, setonBookmark] = useState(null);
   const ACCESS_TOKEN = sessionStorage.getItem("access_token");
   const [loading, setLoading] = useState(true);
+
   //bookmark
   useEffect(() => {
     const storedBookmarks =

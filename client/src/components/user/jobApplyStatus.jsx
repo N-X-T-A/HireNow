@@ -3,18 +3,21 @@ import axios from "axios";
 import { jobs } from "../../data/data";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { CheckBadgeIcon } from "@heroicons/react/24/outline";
+import { CheckBadgeIcon, XCircleIcon } from "@heroicons/react/24/outline";
 import { SparklesIcon, StarIcon } from "@heroicons/react/24/solid";
 import Joyride from "react-joyride";
-
+import parse from "html-react-parser";
 const JobApplyStatus = () => {
   //useState
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [jobsAPI, setJobsAPI] = useState([]);
   const [jobsSelect, setJobsSelect] = useState([]);
+  const [jobSave, setJobSave] = useState([]);
   const [jobID, setJobID] = useState(null);
   const [runTutorial, setRunTutorial] = useState(false);
+  const ACCESS_TOKEN = sessionStorage?.getItem("access_token");
+  const [bookmarkedJobs, setBookmarkedJobs] = useState({});
   //config tutorial
   const stepsTutorial = [
     {
@@ -42,12 +45,50 @@ const JobApplyStatus = () => {
     fetchJobs();
   }, []);
 
+  //save list
+  const fetchJobsAPI = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:5000/api/v1/favorite",
+        {
+          headers: { Authorization: `Bearer ${ACCESS_TOKEN}` },
+        }
+      );
+      setJobSave(response.data.metadata);
+    } catch (error) {
+      console.error("Lỗi khi lấy danh sách công việc:", error);
+    }
+  };
+  useEffect(() => {
+    fetchJobsAPI();
+  }, []);
+  //delete list
+  const handleDelete = async (jobId) => {
+    try {
+      await axios.delete(`http://localhost:5000/api/v1/favorite/${jobId}`, {
+        headers: { Authorization: `Bearer ${ACCESS_TOKEN}` },
+      });
+      console.log("Đã xóa bookmark");
+      setJobSave((prevJobs) => prevJobs.filter((job) => job.job_id !== jobId));
+      // const updatedBookmarks = { ...bookmarkedJobs, [jobId]: false };
+      // setBookmarkedJobs(updatedBookmarks);
+      // localStorage.setItem(
+      //   "bookmarkedJobs",
+      //   JSON.stringify(updatedBookmarks)
+      // );
+    } catch (error) {
+      console.error("Lỗi khi xóa bookmark:", error);
+    }
+  };
+
   useEffect(() => {
     const fetchJobsDetail = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/jobs/${jobID}`);
-        setJobsSelect(response.data);
-        console.log("Danh sách công việc:", response.data);
+        const response = await axios.get(
+          `http://localhost:5000/api/v1/job/${jobID}`
+        );
+        setJobsSelect(response.data.job);
+        console.log("Danh sách công việc:", response.data.job);
       } catch (error) {
         console.error("Lỗi khi lấy danh sách công việc:", error);
       }
@@ -123,10 +164,10 @@ const JobApplyStatus = () => {
                 msOverflowStyle: "none",
               }}
             >
-              {jobsAPI.map((job, index) => (
+              {jobSave.map((job, index) => (
                 <motion.div
-                  key={job.id}
-                  className={`bg-gray-100 md:w-[calc(50%-8px)]  pt-2 pr-2 pl-2 pb-4 border rounded-xl shadow-md transition-all duration-300 cursor-pointer ${hoverColors[index % hoverColors.length]} hover:text-white`}
+                  key={job._id}
+                  className={`relative bg-gray-100 md:w-[calc(50%-8px)]  pt-2 pr-2 pl-2 pb-4 border rounded-xl shadow-md transition-all duration-300 cursor-pointer ${hoverColors[index % hoverColors.length]} hover:text-white`}
                   initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }}
@@ -136,30 +177,38 @@ const JobApplyStatus = () => {
                     boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.2)",
                   }}
                 >
+                  <div className="absolute top-4 right-4 text-red-600">
+                    <XCircleIcon
+                      className="w-5 h-5"
+                      onClick={() => handleDelete(job.job_id)}
+                    />
+                  </div>
                   <div className="p-3 rounded-xl bg-white">
                     {" "}
                     <h2 className="text-lg font-semibold text-gray-800">
-                      {job.company}
+                      {job.company.name}
                     </h2>
                     <h3
                       onClick={() => {
                         setOpen(!open);
-                        setJobID(job.id);
+                        setJobID(job.job_id);
                       }}
                       className="hover:underline text-xl font-bold text-gray-900"
                     >
                       {job.title}
                     </h3>
                     <p className="text-gray-500 line-clamp-1">
-                      {job.address} • {job.skills.slice(-1)}
+                      {job.company.location} • Data scient
                     </p>
-                    <p className="text-gray-500 ">{job.services.slice(-1)}</p>
-                    <p className="font-semibold text-gray-700">{job.salary}</p>
+                    <p className="text-gray-500 ">Data Pipeline</p>
+                    <p className="font-semibold text-gray-700">
+                      {job.salary_range}
+                    </p>
                     <button className="mt-3 w-full bg-black text-white py-2 rounded-md font-medium hover:bg-gray-800">
                       Ứng tuyển
                     </button>
                     <p className="text-xs text-gray-400 mt-2">
-                      Đăng {job.postedTime}
+                      Đăng 4 ngày trước
                     </p>
                   </div>
                 </motion.div>
@@ -193,7 +242,7 @@ const JobApplyStatus = () => {
                       onClick={() => navigate(`/user/jobs/1`)}
                       className="!mb-0 text-[30px] font-[500] cursor-pointer hover:underline"
                     >
-                      {jobsSelect.title}
+                      {jobsSelect?.title}
                     </p>
                     <div className="flex gap-2">
                       {jobsSelect?.skills?.map((skill, index) => (
@@ -216,25 +265,47 @@ const JobApplyStatus = () => {
                     <div className="flex flex-col justify-center item-center">
                       <p className="font-[500]">Tóm tắt về vai trò:</p>
                       <p className="!mb-0 font-[400]">
-                        {jobsSelect?.description}
+                        {jobsSelect?.description
+                          ? parse(
+                              jobsSelect.description.replace(
+                                "<p>",
+                                '<p class="!mb-0">'
+                              )
+                            )
+                          : "Không có mô tả"}
                       </p>
                     </div>
                     <div className="flex flex-col justify-center item-center">
                       <p className="font-[500]">về trách nhiệm công việc: </p>
-                      <p className="!mb-0 font-[400]">{jobsSelect?.respon}</p>
+                      <p className="!mb-0 font-[400]">
+                        {" "}
+                        {jobsSelect?.responsibility
+                          ? parse(
+                              jobsSelect.responsibility.replace(
+                                "<ul>",
+                                '<ul class="list-disc pl-5 space-y-2">'
+                              )
+                            )
+                          : "Không có trách nhiệm công việc"}
+                      </p>
                     </div>
                     <div className="flex flex-col justify-center item-center">
                       <p className="font-[500]">về kinh nghiệm cần có: </p>
                       <ul className="list-disc pl-5">
-                        {jobsSelect?.requiredExperience?.map((exp, index) => (
-                          <li key={index}>{exp}</li>
-                        ))}
+                        {jobsSelect?.required_experience
+                          ? parse(
+                              jobsSelect.required_experience.replace(
+                                "<ul>",
+                                '<ul class="list-disc pl-5 space-y-2">'
+                              )
+                            )
+                          : "Không có yêu cầu kinh nghiệm"}
                       </ul>
                     </div>
                     <div className="flex flex-col justify-center item-center">
                       <p className="font-[500]">Các yêu cầu kĩ năng:</p>
                       <div className="flex gap-3">
-                        {jobsSelect?.requiredSkills?.map((skill, index) => (
+                        {jobsSelect?.skills?.map((skill, index) => (
                           <p
                             key={index}
                             className="!mb-0 px-2 py-1 text-[13px] rounded-xl font-[500] bg-gray-200 text-gray-700"
@@ -252,25 +323,27 @@ const JobApplyStatus = () => {
                   <div className="flex w-[80%] flex-col gap-4 p-4">
                     <div className="flex justify-between items-center">
                       <p className="!mb-0 flex items-center gap-2 text-[20px] font-[500]">
-                        {jobsSelect?.company}
+                        {jobsSelect?.company?.name}
                         <CheckBadgeIcon className="w-5 h-5 text-green-600" />
                       </p>
                       <img
-                        src={jobsSelect?.image}
+                        src={jobsSelect?.company?.logo}
                         alt={jobsSelect?.company}
                         className="max-w-[50px]"
                       />
                     </div>
                     <div>
                       <p className="!mb-2 font-[500]">Gia nhập vào:</p>
-                      <p className="!mb-0 font-[400] text-gray-500">
-                        {jobsSelect?.joinDate}
-                      </p>
+                      <p className="!mb-0 font-[400] text-gray-500">2023</p>
                     </div>
                     <div>
                       <p className="!mb-2 font-[500]">Địa điểm:</p>
                       <p className="!mb-0 font-[400] text-gray-500">
-                        {jobsSelect?.address}
+                        {jobsSelect?.company?.locations
+                          ?.map(
+                            (loc) => `${loc.city} - ${loc.detailed_location}`
+                          )
+                          .join(", ")}
                       </p>
                     </div>
                   </div>
@@ -315,14 +388,18 @@ const JobApplyStatus = () => {
                       Về các dịch vụ:
                     </p>
                     <div className="flex flex-wrap gap-3">
-                      {jobsSelect?.services?.map((service, index) => (
-                        <p
-                          key={index}
-                          className="!mb-0 px-2 py-1 text-[13px] rounded-xl font-[500] bg-gray-200"
-                        >
-                          {service}
-                        </p>
-                      ))}
+                      <p className="!mb-0 px-2 py-1 text-[13px] rounded-xl font-[500] bg-gray-200">
+                        TensorFlow
+                      </p>
+                      <p className="!mb-0 px-2 py-1 text-[13px] rounded-xl font-[500] bg-gray-200">
+                        PyTorch
+                      </p>
+                      <p className="!mb-0 px-2 py-1 text-[13px] rounded-xl font-[500] bg-gray-200">
+                        NLP
+                      </p>
+                      <p className="!mb-0 px-2 py-1 text-[13px] rounded-xl font-[500] bg-gray-200">
+                        Deep Learning
+                      </p>
                     </div>
                   </div>
                 </div>
