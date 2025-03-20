@@ -22,6 +22,20 @@ class ApplicationService {
     return await application.save();
   }
 
+  async cancelJobApplication(userId, jobId) {
+    const application = await Application.findOne({
+      user_id: userId,
+      job_id: jobId,
+    });
+
+    if (!application) {
+      throw new Error("Application not found.");
+    }
+
+    await Application.deleteOne({ user_id: userId, job_id: jobId });
+    return { message: "Application canceled successfully." };
+  }
+
   async getAppliedJobs(userId) {
     const applications = await Application.find({ user_id: userId })
       .populate(
