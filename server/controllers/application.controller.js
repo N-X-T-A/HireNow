@@ -30,6 +30,30 @@ class ApplicationController {
     }
   }
 
+  async cancelJobApplication(req, res) {
+    try {
+      if (req.user.role === "recruiter") {
+        return res.status(403).json({
+          message: "Recruiters cannot cancel applications.",
+        });
+      }
+
+      const userId = req.user._id;
+      const jobId = req.params.id;
+
+      const result = await applicationService.cancelJobApplication(
+        userId,
+        jobId
+      );
+
+      return res.status(200).json(result);
+    } catch (error) {
+      return res.status(error.statusCode || 500).json({
+        message: error.message || "Internal Server Error",
+      });
+    }
+  }
+
   async getAppliedJobs(req, res) {
     try {
       const userId = req.user._id;
