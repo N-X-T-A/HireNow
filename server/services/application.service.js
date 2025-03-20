@@ -3,6 +3,15 @@ const { formatLocations } = require("../utils/format");
 
 class ApplicationService {
   async applyForJob(userId, jobId, resume, coverLetter) {
+    const existingApplication = await Application.findOne({
+      user_id: userId,
+      job_id: jobId,
+    });
+
+    if (existingApplication) {
+      throw new Error("You have already applied for this job.");
+    }
+
     const application = new Application({
       user_id: userId,
       job_id: jobId,
@@ -10,7 +19,6 @@ class ApplicationService {
       cover_letter: coverLetter,
       applied_date: Date.now(),
     });
-
     return await application.save();
   }
 
