@@ -384,7 +384,7 @@ const JobDetail = ({ jobId }) => {
                           />
                           <button
                             onClick={handleSubmit}
-                            className={`px-2 py-1 rounded-md text-white ${
+                            className={`px-2 py-1 w-[150px] rounded-md text-white ${
                               loading
                                 ? "bg-gray-400 cursor-not-allowed"
                                 : "bg-[#1E90FF] cursor-pointer"
@@ -435,10 +435,10 @@ const JobDetail = ({ jobId }) => {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 50, opacity: 0 }}
           transition={{ duration: 0.5 }}
-          className="fixed bottom-[5%] right-[2%] "
+          className="fixed top-[5%] right-[45%] shadow-lg"
         >
           <div className="relative flex items-center justify-center">
-            <p className="!mb-0 px-4 py-1 rounded-lg border-[2px] border-green-500">
+            <p className="!mb-0 px-4 py-2 font-[600] rounded-lg text-white bg-green-500">
               Ứng tuyển thành công
             </p>
           </div>
@@ -450,11 +450,11 @@ const JobDetail = ({ jobId }) => {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 50, opacity: 0 }}
           transition={{ duration: 0.5 }}
-          className="fixed bottom-[5%] right-[2%] "
+          className="fixed top-[5%] right-[45%] shadow-lg"
         >
           <div className="relative flex items-center justify-center">
-            <p className="!mb-0 px-4 py-1 rounded-lg border-[2px] border-red-500">
-              Lỗi thử lại sau
+            <p className="!mb-0 px-4 py-2 font-[600] rounded-lg text-white bg-red-500">
+              Ứng tuyển không thành công
             </p>
           </div>
         </motion.div>

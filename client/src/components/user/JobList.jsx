@@ -15,7 +15,7 @@ const JobList = ({ onSelectJob }) => {
   const [bookmarkedJobs, setBookmarkedJobs] = useState({});
   const ACCESS_TOKEN = sessionStorage.getItem("access_token");
   const [loading, setLoading] = useState(true);
-  const [OpenNotification, setOpenNotification] = useState(true);
+  const [OpenNotification, setOpenNotification] = useState(false);
   const [OpenNotification1, setOpenNotification1] = useState(false);
 
   //bookmark
