@@ -88,7 +88,7 @@ Content-Type: application/json
 
 ### Cancel
 
-DELETE  http://localhost:5000/api/v1/application/cancel
+DELETE  http://localhost:5000/api/v1/application/job_id
 Authorization: Bearer USER_ACCESS_TOKEN
 Content-Type: application/json
 
