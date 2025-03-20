@@ -25,14 +25,14 @@ router.get(
   asyncHandler(JobController.getRecommendedJobs)
 );
 
-router.get("/:id", asyncHandler(JobController.getJobDetails));
-
 router.get(
-  "/posted-jobs/:recruiterId",
+  "/posted",
   isAuthenticated,
   isRecruiter,
   asyncHandler(JobController.getPostedJobs)
 );
+
+router.get("/:id", asyncHandler(JobController.getJobDetails));
 
 router.post(
   "/",

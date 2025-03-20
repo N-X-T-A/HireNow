@@ -1,8 +1,9 @@
 "use strict";
 
 const { ForbiddenError } = require("../core/error.response");
-const { Job } = require("../models");
+const { Job, User } = require("../models");
 const jobService = require("../services/job.service");
+const { formatLocations } = require("../utils/format");
 
 class JobController {
   getAllJobs = async (req, res) => {
@@ -88,7 +89,8 @@ class JobController {
 
   async updateJob(req, res) {
     const { id } = req.params;
-    const recruiterId = req.user._id;
+    const user = await User.findById(req.user.id).select("companyId");
+    const recruiterId = user.companyId;
 
     const updatedJob = await jobService.updateJob(id, recruiterId, req.body);
     if (!updatedJob)
@@ -102,8 +104,8 @@ class JobController {
 
   async deleteJob(req, res) {
     const { id } = req.params;
-    const recruiterId = req.user._id;
-
+    const user = await User.findById(req.user.id).select("companyId");
+    const recruiterId = user.companyId;
     const deleted = await jobService.deleteJob(id, recruiterId);
     if (!deleted)
       throw new ForbiddenError("You can only delete your own job posts.");
@@ -115,13 +117,22 @@ class JobController {
 
   getPostedJobs = async (req, res) => {
     try {
-      const { recruiterId } = req.params;
-
+      const user = await User.findById(req.user.id).select("companyId");
+      const recruiterId = user.companyId;
       const jobs = await Job.find({ company_id: recruiterId })
-        .populate("company_id", "name location")
+        .populate("company_id", "name locations")
         .lean();
 
-      res.json({ jobs });
+      const formattedJobs = jobs.map((job) => {
+        const location = formatLocations(job.company_id.locations);
+        const { company_id, ...jobWithoutCompanyId } = job;
+        return {
+          ...jobWithoutCompanyId,
+          location,
+        };
+      });
+
+      res.json({ jobs: formattedJobs });
     } catch (err) {
       res.status(500).json({ message: "Internal Server Error" });
     }
