@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleRight } from "@fortawesome/free-solid-svg-icons";
 import { GlobeAltIcon } from "@heroicons/react/24/outline";
 import JobP1Header from "../../components/user/jobP1Header";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { jobs } from "../../data/data";
 import { services } from "../../data/data";
@@ -10,6 +11,7 @@ import { companiesPage1 } from "../../data/data";
 import axios from "axios";
 const UserPage1 = () => {
   //state
+  const navigate = useNavigate();
   const [jobsList, setJobsList] = useState([]);
   const [companiesList, setCompaniesList] = useState([]);
   //API
@@ -166,7 +168,12 @@ const UserPage1 = () => {
                 <h2 className="text-lg font-semibold text-gray-800">
                   {job.company.name}
                 </h2>
-                <h3 className="text-xl font-bold text-gray-900">{job.title}</h3>
+                <h3
+                  className="text-xl font-bold text-gray-900 hover:underline"
+                  onClick={() => navigate(`/user/jobs/${job._id}`)}
+                >
+                  {job.title}
+                </h3>
                 <p className="text-gray-500">{job.location} • Toàn thời gian</p>
                 <p className="font-semibold text-gray-700">
                   {job.salary_range}

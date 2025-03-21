@@ -7,12 +7,18 @@ const UserPage2 = () => {
   //useState
   const [selectedJob, setSelectedJob] = useState(null);
   console.log(selectedJob);
+  const [sortOrder, setSortOrder] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
   return (
     <>
-      <JobP2Header />
+      <JobP2Header onSortChange={setSortOrder} setSearchTerm={setSearchTerm} />
       <div className="flex w-full mt-2">
         {/* Phần 1 (Chiếm 3 phần) */}
-        <JobList onSelectJob={setSelectedJob} />
+        <JobList
+          searchTerm={searchTerm}
+          sortOrder={sortOrder}
+          onSelectJob={setSelectedJob}
+        />
 
         {/* Phần 2 (Chiếm 7 phần) */}
         <div

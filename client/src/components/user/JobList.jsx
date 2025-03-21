@@ -8,7 +8,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-const JobList = ({ onSelectJob }) => {
+const JobList = ({ onSelectJob, sortOrder, searchTerm }) => {
   const navigate = useNavigate();
   const [UserJobsAPI, setJobsAPI] = useState([]);
   const [open, setOpen] = useState(false);
@@ -79,6 +79,8 @@ const JobList = ({ onSelectJob }) => {
   };
 
   //fetch API
+  const [originalJobs, setOriginalJobs] = useState([]);
+  const [isSorted, setIsSorted] = useState(false);
   useEffect(() => {
     const fetchJobsAPI = async () => {
       try {
@@ -91,6 +93,7 @@ const JobList = ({ onSelectJob }) => {
           }
         );
         setTimeout(() => {
+          setOriginalJobs(response.data.jobs);
           setJobsAPI(response.data.jobs);
           setLoading(false);
         }, 1000);
@@ -103,6 +106,51 @@ const JobList = ({ onSelectJob }) => {
 
     fetchJobsAPI();
   }, []);
+
+  useEffect(() => {
+    if (!sortOrder && !searchTerm) {
+      setJobsAPI(originalJobs);
+      return;
+    }
+    let filteredJobs = [...originalJobs];
+    if (searchTerm) {
+      filteredJobs = filteredJobs.filter((job) =>
+        job.title.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+    if (sortOrder) {
+      filteredJobs.sort((a, b) => {
+        switch (sortOrder) {
+          case "salary_asc":
+            return (
+              extractNumber(a.salary_range) - extractNumber(b.salary_range)
+            );
+          case "salary_desc":
+            return (
+              extractNumber(b.salary_range) - extractNumber(a.salary_range)
+            );
+          case "time_asc":
+            return new Date(a.posted_time) - new Date(b.posted_time);
+          case "time_desc":
+            return new Date(b.posted_time) - new Date(a.posted_time);
+          case "title_asc":
+            return a.title.localeCompare(b.title);
+          case "title_desc":
+            return b.title.localeCompare(a.title);
+          default:
+            return 0;
+        }
+      });
+    }
+
+    setJobsAPI(filteredJobs);
+  }, [sortOrder, searchTerm, originalJobs]);
+
+  const extractNumber = (salary) => {
+    return parseInt(salary.replace(/\D/g, ""), 10) || 0;
+  };
+
+  console.log(UserJobsAPI);
   return (
     <>
       {open && (
@@ -274,7 +322,7 @@ const JobList = ({ onSelectJob }) => {
           className="fixed bottom-[5%] right-[2%] "
         >
           <div className="relative flex items-center justify-center">
-            <p className="!mb-0 px-4 py-1 rounded-lg border-[2px] border-green-500">
+            <p className="!mb-0 px-4 py-2 font-[600] rounded-lg text-white bg-green-500">
               Lưu thành công
             </p>
           </div>
@@ -289,7 +337,7 @@ const JobList = ({ onSelectJob }) => {
           className="fixed bottom-[5%] right-[2%] "
         >
           <div className="relative flex items-center justify-center">
-            <p className="!mb-0 px-4 py-1 rounded-lg border-[2px] border-red-500">
+            <p className="!mb-0 px-4 py-2 font-[600] rounded-lg text-white bg-red-500">
               Xóa thành công
             </p>
           </div>

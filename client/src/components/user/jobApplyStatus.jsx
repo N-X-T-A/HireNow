@@ -190,7 +190,7 @@ const JobApplyStatus = () => {
                 jobSave.map((job, index) => (
                   <motion.div
                     key={job._id}
-                    className={`relative bg-gray-100 md:w-[calc(50%-8px)]  pt-2 pr-2 pl-2 pb-4 border rounded-xl shadow-md transition-all duration-300 cursor-pointer ${hoverColors[index % hoverColors.length]} hover:text-white`}
+                    className={`relative bg-gray-100 md:w-[calc(50%-8px)] h-max  pt-2 pr-2 pl-2 pb-4 border rounded-xl shadow-md transition-all duration-300 cursor-pointer ${hoverColors[index % hoverColors.length]} hover:text-white`}
                     initial={{ opacity: 0, y: 50 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }}
@@ -456,7 +456,7 @@ const JobApplyStatus = () => {
               Trạng thái ứng tuyển công việc của tôi
             </p>
             <div
-              className="p-2 rounded-lg  flex flex-wrap gap-3  max-h-[900px] overflow-y-auto"
+              className="p-2 h-full flex-1 w-full rounded-lg  flex flex-wrap gap-3  max-h-[900px] overflow-y-auto"
               style={{
                 scrollbarWidth: "none",
                 msOverflowStyle: "none",
@@ -466,7 +466,7 @@ const JobApplyStatus = () => {
                 jobsAPI.map((job, index) => (
                   <motion.div
                     key={job._id}
-                    className={`bg-gray-100 md:w-[calc(50%-8px)]  pt-2 pr-2 pl-2 pb-4 border rounded-xl shadow-md transition-all duration-300 cursor-pointer ${hoverColors[index % hoverColors.length]} hover:text-white`}
+                    className={`bg-gray-100 md:w-[calc(50%-8px)] h-max pt-2 pr-2 pl-2 pb-4 border rounded-xl shadow-md transition-all duration-300 cursor-pointer ${hoverColors[index % hoverColors.length]} hover:text-white`}
                     initial={{ opacity: 0, y: 50 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }}
@@ -492,7 +492,7 @@ const JobApplyStatus = () => {
                         {job?.title}
                       </h3>
                       <p className="text-gray-500">
-                        {job?.company?.location} • Toàn thời gian
+                        {job?.company?.locations} • Toàn thời gian
                       </p>
                       <p className="text-gray-500">Công nghệ cloud</p>
                       <p className="font-semibold text-gray-700">
