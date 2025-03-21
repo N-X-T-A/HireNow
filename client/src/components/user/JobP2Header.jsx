@@ -27,7 +27,7 @@ const JobHeader = ({ onSortChange, setSearchTerm }) => {
       title: null,
       company: null,
     };
-    newSortStates[type] = nextState; // Chỉ bật sort cho một tiêu chí
+    newSortStates[type] = nextState;
 
     setSortStates(newSortStates);
     onSortChange(nextState ? `${type}_${nextState}` : null);
@@ -57,7 +57,7 @@ const JobHeader = ({ onSortChange, setSearchTerm }) => {
         <div className="flex gap-2 items-center">
           <div
             onClick={() => handleSortClick("salary")}
-            className="relative flex justify-center items-center gap-3 pr-4 text-black "
+            className="relative flex justify-center items-center gap-3  text-black "
           >
             <button className="font-[500] relative px-4 py-2  hover:border-2 bg-[#1E90FF] text-white rounded-md overflow-hidden transition-all duration-500 ease-in-out group transform hover:-translate-y-[5px]  hover:border-black">
               <span className="absolute inset-0 bg-white border-black scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-center"></span>
@@ -69,7 +69,7 @@ const JobHeader = ({ onSortChange, setSearchTerm }) => {
           </div>
           <div
             onClick={() => handleSortClick("time")}
-            className="relative flex justify-center items-center gap-3 pr-4 text-black "
+            className="relative flex justify-center items-center gap-3  text-black "
           >
             <button className="font-[500] relative px-4 py-2  hover:border-2 bg-[#1E90FF] text-white rounded-md overflow-hidden transition-all duration-500 ease-in-out group transform hover:-translate-y-[5px]  hover:border-black">
               <span className="absolute inset-0 bg-white border-black scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-center"></span>
@@ -81,7 +81,7 @@ const JobHeader = ({ onSortChange, setSearchTerm }) => {
           </div>
           <div
             onClick={() => handleSortClick("title")}
-            className="relative flex justify-center items-center gap-3 pr-4 text-black "
+            className="relative flex justify-center items-center gap-3  text-black "
           >
             <button className="font-[500] relative px-4 py-2  hover:border-2 bg-[#1E90FF] text-white rounded-md overflow-hidden transition-all duration-500 ease-in-out group transform hover:-translate-y-[5px]  hover:border-black">
               <span className="absolute inset-0 bg-white border-black scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-center"></span>

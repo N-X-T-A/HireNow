@@ -31,7 +31,7 @@ const UserPage1 = () => {
       console.error("Lỗi khi lấy danh sách công việc:", error);
     }
   };
-
+  console.log(companiesList);
   useEffect(() => {
     fetchJobs();
   }, []);
