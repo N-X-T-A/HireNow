@@ -2,52 +2,163 @@
   "jobs": [
     {
       "id": 1,
-      "title": "Frontend Developer",
-      "salary": 1000,
-      "description": "Lập trình viên frontend, làm việc với ReactJS và VueJS.",
-      "company_id": 1
-    }
-  ],
-  "jobs/:id": [
-    {
-      "id": 1,
-      "title": "Frontend Developer",
-      "salary": 1000,
-      "description": "Lập trình viên frontend, làm việc với ReactJS và VueJS.",
-      "company_id": 1
-    }
-  ],
-
-  "companies": [
-    {
-      "id": 1,
-      "name": "Google",
-      "description": "Công ty công nghệ lớn nhất thế giới."
+      "image": "/src/assets/user/google.png",
+      "title": "Google Dev. Backend",
+      "respon":"Lập trình viên backend tại Google sẽ chịu trách nhiệm thiết kế, phát triển và duy trì các hệ thống backend có hiệu suất cao, đảm bảo khả năng mở rộng và ổn định của dịch vụ. Công việc bao gồm xây dựng API RESTful và GraphQL để kết nối với frontend và các dịch vụ khác trong hệ thống, tối ưu hóa hiệu suất, giảm thời gian phản hồi và cải thiện trải nghiệm người dùng. Người đảm nhiệm vai trò này sẽ triển khai và quản lý hệ thống trên nền tảng cloud như Google Cloud Platform, sử dụng Docker và Kubernetes, đồng thời đảm bảo tính bảo mật và an toàn dữ liệu thông qua việc thực hiện các biện pháp chống tấn công bảo mật như SQL Injection, XSS, CSRF. Ngoài ra, lập trình viên backend cần hợp tác chặt chẽ với các nhóm sản phẩm, QA và frontend để đảm bảo tính đồng bộ và hiệu quả của hệ thống, theo dõi logs và xử lý lỗi để duy trì sự ổn định.",
+      "company": "Google, Inc.",
+      "skills": ["Thạc sĩ", "Remote", "Full-time"],
+      "description": "Google đang tìm kiếm lập trình viên backend có kinh nghiệm phát triển và quản lý hệ thống microservices trong môi trường sản xuất. Ứng viên cần thành thạo Node.js, Python và SQL, đồng thời có hiểu biết sâu về kiến trúc phần mềm, tối ưu hóa hiệu suất hệ thống và đảm bảo bảo mật dữ liệu. Công việc bao gồm xây dựng các API RESTful, tích hợp với hệ thống cơ sở dữ liệu lớn, triển khai trên nền tảng cloud, cũng như tối ưu hóa truy vấn và caching để đảm bảo tốc độ phản hồi nhanh nhất. Đây là cơ hội tốt cho những ai yêu thích làm việc trong môi trường sáng tạo và có quy mô lớn.",
+      "salary": "$150K",
+      "postedTime": "Đăng 5 ngày trước",
+      "requiredSkills": ["Node.js", "Python", "SQL", "Microservices", "Docker"],
+      "requiredExperience": [
+        "Ít nhất 3 năm kinh nghiệm với Node.js và Python",
+        "Đã từng làm việc với các hệ thống microservices quy mô lớn",
+        "Kinh nghiệm tối ưu hóa truy vấn SQL và bảo mật dữ liệu"
+      ],
+      "joinDate": "01/04/2022",
+      "address": "1600 Amphitheatre Pkwy, Mountain View, CA",
+      "services": ["Google Cloud", "Kubernetes", "BigQuery"]
     },
     {
       "id": 2,
-      "name": "Netflix",
-      "description": "Dịch vụ phát trực tuyến phổ biến."
+      "image": "/src/assets/user/microsoft.png",
+      "title": "Microsoft AI Engineer",
+      "respon":"Là một kỹ sư AI tại Microsoft, ứng viên sẽ chịu trách nhiệm nghiên cứu, thiết kế và phát triển các mô hình AI/Machine Learning để giải quyết các bài toán thực tế, xử lý và phân tích dữ liệu lớn nhằm tối ưu hóa khả năng dự đoán. Công việc yêu cầu xây dựng và triển khai hệ thống AI trên nền tảng cloud, tích hợp với Azure AI và các dịch vụ Cognitive Services, đồng thời tối ưu hóa thuật toán học máy để giảm độ trễ và cải thiện độ chính xác của mô hình. Kỹ sư AI cũng sẽ hợp tác với các nhóm phát triển phần mềm để tích hợp AI vào sản phẩm và dịch vụ của Microsoft, đồng thời đánh giá, kiểm thử và triển khai các mô hình AI đảm bảo khả năng mở rộng và bảo trì dễ dàng. Việc cập nhật và áp dụng các công nghệ AI mới nhất vào dự án cũng là một phần quan trọng của công việc.",
+      "company": "Microsoft",
+      "skills": ["Cử nhân", "Onsite", "Part-time"],
+      "description": "Microsoft đang tuyển kỹ sư AI để tham gia vào quá trình nghiên cứu và phát triển các mô hình học máy (Machine Learning) tiên tiến phục vụ nhiều ứng dụng thực tế. Công việc yêu cầu ứng viên có nền tảng vững chắc về AI, xử lý dữ liệu lớn (Big Data) và kỹ thuật học sâu (Deep Learning), đặc biệt là trong các lĩnh vực như xử lý ngôn ngữ tự nhiên (NLP) và thị giác máy tính (Computer Vision). Ứng viên sẽ chịu trách nhiệm tối ưu hóa mô hình, triển khai trên cloud, và làm việc với đội ngũ kỹ sư phần mềm để tích hợp AI vào sản phẩm Microsoft. Đây là cơ hội tuyệt vời để làm việc với các chuyên gia hàng đầu trong ngành và tiếp cận với công nghệ tiên tiến nhất.",
+      "salary": "$120K",
+      "postedTime": "Đăng 3 ngày trước",
+      "requiredSkills": ["TensorFlow", "PyTorch", "NLP", "Deep Learning"],
+      "requiredExperience": [
+        "Kinh nghiệm 2+ năm với AI/Machine Learning",
+        "Thành thạo mô hình xử lý ngôn ngữ tự nhiên (NLP)",
+        "Có sản phẩm AI đã triển khai thực tế là một lợi thế"
+      ],
+      "joinDate": "15/03/2022",
+      "address": "One Microsoft Way, Redmond, WA",
+      "services": ["Azure AI", "Cognitive Services", "ML.NET"]
     },
     {
       "id": 3,
-      "name": "Facebook",
-      "description": "Nền tảng mạng xã hội lớn nhất."
-    }
-  ],
-
-  "jobsDetail": [
-    {
-      "id": 1,
-      "description": "Lập trình viên frontend, làm việc với ReactJS và VueJS."
+      "image": "/src/assets/user/netflix.png",
+      "respon":"Lập trình viên frontend tại Netflix sẽ chịu trách nhiệm phát triển và tối ưu hóa giao diện người dùng (UI) trên nền tảng web, đảm bảo hiệu suất và trải nghiệm mượt mà. Công việc bao gồm xây dựng các thành phần React.js reusable, quản lý trạng thái ứng dụng bằng Redux và làm việc với Next.js để tối ưu SEO cũng như cải thiện hiệu suất thông qua Server-Side Rendering (SSR). Người đảm nhiệm vị trí này sẽ tối ưu hóa UI/UX bằng cách nghiên cứu hành vi người dùng, phối hợp với đội ngũ backend để tích hợp API và đảm bảo dữ liệu hiển thị chính xác. Ngoài ra, lập trình viên frontend cũng cần cải tiến hệ thống caching, lazy loading để giảm thời gian tải trang, đồng thời kiểm thử và debug UI trên nhiều trình duyệt và thiết bị để đảm bảo tính nhất quán.",
+      "title": "Netflix Frontend Developer",
+      "company": "Netflix",
+      "skills": ["Trung cấp", "Remote", "Contract"],
+      "description": "Netflix đang tìm kiếm lập trình viên frontend có kinh nghiệm với React.js và TypeScript để tham gia phát triển giao diện người dùng cho nền tảng streaming hàng đầu thế giới. Ứng viên sẽ chịu trách nhiệm xây dựng các thành phần UI/UX hiện đại, tối ưu hiệu suất hiển thị và đảm bảo trải nghiệm mượt mà cho hàng triệu người dùng trên toàn cầu. Công việc bao gồm làm việc với các kỹ thuật tối ưu hóa frontend như SSR (Server-Side Rendering), lazy loading, animation mượt mà, và responsive design. Ngoài ra, ứng viên sẽ phối hợp với đội ngũ thiết kế để triển khai giao diện đẹp mắt, dễ sử dụng, cũng như tích hợp API backend để cung cấp nội dung một cách hiệu quả.",
+      "salary": "$130K",
+      "postedTime": "Đăng 1 tuần trước",
+      "requiredSkills": ["React.js", "TypeScript", "Next.js", "Redux"],
+      "requiredExperience": [
+        "Kinh nghiệm 2+ năm làm việc với React.js và TypeScript",
+        "Hiểu biết về tối ưu hiệu suất frontend",
+        "Có kinh nghiệm làm việc với các thiết kế UI phức tạp"
+      ],
+      "joinDate": "10/04/2022",
+      "address": "121 Albright Way, Los Gatos, CA",
+      "services": ["Netflix API", "GraphQL", "Styled Components"]
     },
     {
-      "id": 2,
-      "description": "Lập trình viên backend, sử dụng Node.js và Django."
+      "id": 4,
+      "image": "/src/assets/user/amazon.png",
+      "title": "AWS Cloud Architect",
+      "respon":"Kỹ sư kiến trúc cloud tại Amazon sẽ chịu trách nhiệm thiết kế hệ thống cloud phức tạp, tối ưu hóa chi phí và đảm bảo hiệu suất cao. Công việc yêu cầu xây dựng và triển khai hạ tầng AWS bằng Terraform, CloudFormation, Kubernetes, đảm bảo bảo mật hệ thống thông qua các biện pháp bảo vệ dữ liệu như IAM, VPN, Firewalls. Ngoài ra, kỹ sư cloud cần giám sát hiệu suất hệ thống, tối ưu hóa tài nguyên để giảm chi phí vận hành, hỗ trợ các nhóm phát triển trong việc triển khai ứng dụng trên cloud và khắc phục sự cố hệ thống. Việc tích hợp các công cụ logging, monitoring như AWS CloudWatch để theo dõi hoạt động của hệ thống và cập nhật các công nghệ cloud mới nhằm nâng cao hiệu quả hoạt động cũng là một phần quan trọng của công việc.",
+      "company": "Amazon",
+      "skills": ["Thạc sĩ", "Onsite", "Full-time"],
+      "description": "Amazon Web Services (AWS) đang tuyển kiến trúc sư cloud có kinh nghiệm trong việc thiết kế và triển khai các hệ thống cloud phức tạp. Công việc yêu cầu ứng viên có kiến thức sâu rộng về AWS, Kubernetes, Terraform và bảo mật hệ thống. Ứng viên sẽ chịu trách nhiệm thiết kế hạ tầng cloud cho các ứng dụng quy mô lớn, tối ưu chi phí vận hành, giám sát hiệu suất hệ thống và triển khai các giải pháp bảo mật nhằm bảo vệ dữ liệu quan trọng. Đây là vị trí lý tưởng cho những ai đam mê công nghệ điện toán đám mây và muốn làm việc trong một môi trường thử thách, sáng tạo.",
+      "salary": "$170K",
+      "postedTime": "Đăng 2 ngày trước",
+      "requiredSkills": ["AWS", "Kubernetes", "Terraform", "Cloud Security"],
+      "requiredExperience": [
+        "Kinh nghiệm triển khai hệ thống cloud phức tạp",
+        "Chứng chỉ AWS Certified Solutions Architect là một lợi thế",
+        "Thành thạo quản lý hệ thống container và bảo mật cloud"
+      ],
+      "joinDate": "05/03/2022",
+      "address": "410 Terry Ave N, Seattle, WA",
+      "services": ["AWS Lambda", "EC2", "S3", "CloudWatch"]
     },
     {
-      "id": 3,
-      "description": "Làm cả frontend và backend, yêu cầu kỹ năng cao."
+      "id": 5,
+      "image": "/src/assets/user/tesla.png",
+      "title": "Tesla Embedded Software Engineer",
+      "respon": "Kỹ sư phần mềm nhúng tại Tesla sẽ chịu trách nhiệm phát triển phần mềm nhúng cho hệ thống điều khiển xe điện, đảm bảo tính ổn định và hiệu suất cao. Công việc bao gồm viết code tối ưu bằng C/C++ để giảm thiểu độ trễ, tiết kiệm tài nguyên phần cứng, kiểm tra và debug hệ thống thời gian thực (RTOS) nhằm đảm bảo độ chính xác của các tín hiệu điều khiển. Ngoài ra, kỹ sư phần mềm nhúng cũng cần làm việc với các giao thức truyền thông như CAN, UART, SPI để kết nối các module trong xe, thực hiện kiểm tra phần mềm nhúng trên phần cứng thực tế và tích hợp phần mềm với hệ thống tự động hóa của Tesla, hỗ trợ các tính năng như Autopilot, Battery Management. Hợp tác với đội ngũ cơ khí và điện tử để đảm bảo phần mềm tương thích với phần cứng là một nhiệm vụ quan trọng.",
+      "company": "Tesla",
+      "skills": ["Cử nhân", "Onsite", "Full-time"],
+      "description": "Tesla đang tìm kiếm kỹ sư phần mềm nhúng để làm việc trên hệ thống điều khiển xe điện và các thiết bị thông minh tích hợp trong xe. Công việc bao gồm phát triển firmware cho vi điều khiển, tối ưu hóa hiệu suất hệ thống thời gian thực (RTOS), và đảm bảo độ tin cậy của phần mềm trong điều kiện vận hành khắc nghiệt. Ứng viên cần có kinh nghiệm lập trình với C/C++, hiểu biết về giao thức truyền thông như CAN, UART, SPI, và có khả năng gỡ lỗi phần mềm nhúng hiệu quả. Đây là cơ hội làm việc tại công ty dẫn đầu trong ngành công nghệ xe điện, góp phần phát triển những hệ thống đột phá cho tương lai.",
+      "salary": "$140K",
+      "postedTime": "Đăng 6 ngày trước",
+      "requiredSkills": ["C/C++", "Embedded Systems", "RTOS", "IoT"],
+      "requiredExperience": [
+        "Kinh nghiệm làm việc với hệ thống thời gian thực (RTOS)",
+        "Thành thạo lập trình nhúng trên vi điều khiển",
+        "Hiểu biết về giao thức CAN, UART, SPI"
+      ],
+      "joinDate": "20/02/2022",
+      "address": "3500 Deer Creek Road, Palo Alto, CA",
+      "services": ["Tesla Autopilot", "Battery Management", "Firmware"]
+    },
+    {
+      "id": 6,
+      "image": "/src/assets/user/bloomberg.png",
+      "title": "Bloomberg Data Scientist",
+      "respon":"Chuyên gia khoa học dữ liệu tại Bloomberg sẽ chịu trách nhiệm phát triển các mô hình khoa học dữ liệu để dự báo xu hướng tài chính, hỗ trợ các quyết định đầu tư. Công việc yêu cầu thu thập, xử lý và phân tích dữ liệu tài chính từ nhiều nguồn khác nhau để tìm ra các mẫu và mối quan hệ, xây dựng pipeline dữ liệu để tự động hóa quá trình xử lý và phân tích dữ liệu. Ngoài ra, chuyên gia này sẽ hợp tác với các chuyên gia tài chính để hiểu rõ yêu cầu, sử dụng các công cụ như Python, R, SQL để phân tích dữ liệu, xây dựng mô hình dự báo. Việc kiểm thử và cải thiện độ chính xác của mô hình, áp dụng các thuật toán Machine Learning tiên tiến, cũng như trình bày kết quả phân tích thông qua báo cáo và dashboards trực quan là những nhiệm vụ quan trọng.",
+      "company": "Bloomberg",
+      "skills": ["Tiến sĩ", "Remote", "Full-time"],
+      "description": "Bloomberg đang tìm kiếm chuyên gia khoa học dữ liệu (Data Scientist) để tham gia vào việc xây dựng mô hình dự báo thị trường tài chính. Ứng viên sẽ làm việc với lượng dữ liệu khổng lồ, áp dụng các kỹ thuật phân tích tiên tiến để nhận diện xu hướng và hỗ trợ ra quyết định trong đầu tư. Công việc yêu cầu kinh nghiệm sâu về Python, R, Machine Learning, và mô hình tài chính. Ngoài ra, ứng viên cần hiểu về xử lý dữ liệu lớn, tối ưu hóa thuật toán và triển khai mô hình dự báo trong môi trường thực tế. Đây là cơ hội để làm việc với các chuyên gia tài chính hàng đầu và phát triển sự nghiệp trong lĩnh vực khoa học dữ liệu tài chính.",
+      "salary": "$180K",
+      "postedTime": "Đăng 4 ngày trước",
+      "requiredSkills": ["Python", "R", "Machine Learning", "Financial Modeling"],
+      "requiredExperience": [
+        "Ít nhất 5 năm kinh nghiệm trong khoa học dữ liệu tài chính",
+        "Có kiến thức về xử lý dữ liệu lớn và mô hình dự báo",
+        "Thành thạo Python và R để phân tích dữ liệu"
+      ],
+      "joinDate": "12/03/2022",
+      "address": "731 Lexington Avenue, New York, NY",
+      "services": ["Bloomberg Terminal", "Quantitative Analysis", "Data Pipeline"]
+    },
+    {
+      "id": 7,
+      "image": "/src/assets/user/airbnb.png",
+      "title": "Airbnb UX Designer",
+      "respon":"Nhà thiết kế UX tại Airbnb sẽ chịu trách nhiệm nghiên cứu hành vi người dùng, thu thập phản hồi để tối ưu hóa trải nghiệm trên nền tảng Airbnb. Công việc bao gồm thiết kế wireframes, prototypes, UI/UX cho website và ứng dụng di động, phối hợp với đội ngũ phát triển frontend để đảm bảo thiết kế được triển khai chính xác. Ngoài ra, UX Designer cũng sẽ xây dựng và duy trì hệ thống thiết kế (Design System) để đảm bảo tính nhất quán, kiểm tra và đánh giá hiệu quả của UI/UX thông qua A/B Testing và phân tích dữ liệu người dùng. Việc sử dụng các công cụ như Figma, Sketch để thiết kế giao diện, đề xuất các cải tiến dựa trên dữ liệu và phản hồi từ khách hàng là một phần không thể thiếu trong công việc.",
+      "company": "Airbnb",
+      "skills": ["Cử nhân", "Remote", "Full-time"],
+      "description": "Airbnb đang tuyển UX Designer có kinh nghiệm để thiết kế trải nghiệm người dùng tối ưu cho nền tảng đặt phòng trực tuyến. Công việc yêu cầu hiểu biết sâu về nghiên cứu hành vi người dùng, tạo wireframes, prototype, và thiết kế UI trực quan, dễ sử dụng. Ứng viên sẽ làm việc với các công cụ thiết kế như Figma, Sketch, đồng thời phối hợp chặt chẽ với các nhà phát triển để triển khai giao diện hoàn chỉnh. Công việc này không chỉ yêu cầu tư duy thẩm mỹ mà còn cần khả năng phân tích dữ liệu người dùng để tối ưu hóa trải nghiệm. Đây là cơ hội tuyệt vời để đóng góp vào một nền tảng công nghệ có ảnh hưởng lớn trong ngành du lịch.",
+      "salary": "$120K",
+      "postedTime": "Đăng 3 ngày trước",
+      "requiredSkills": ["Figma", "Sketch", "User Research", "Wireframing"],
+      "requiredExperience": [
+        "Kinh nghiệm thiết kế UX/UI trên các nền tảng web và mobile",
+        "Hiểu rõ về tâm lý người dùng và trải nghiệm khách hàng",
+        "Có portfolio các dự án thiết kế UX/UI đã thực hiện"
+      ],
+      "joinDate": "18/02/2022",
+      "address": "888 Brannan St, San Francisco, CA",
+      "services": ["Airbnb Design System", "User Testing", "Prototyping"]
+    },
+    {
+      "id": 8,
+      "image": "/src/assets/user/spotify.png",
+      "title": "Spotify Data Engineer",
+      "respon": "Kỹ sư dữ liệu tại Spotify sẽ chịu trách nhiệm thiết kế và xây dựng hệ thống pipeline xử lý dữ liệu lớn (ETL) phục vụ cho các thuật toán đề xuất nhạc. Công việc yêu cầu tối ưu hóa hiệu suất truy vấn dữ liệu bằng cách sử dụng Spark, Hadoop và Data Warehousing, làm việc với các team AI/ML để cung cấp dữ liệu chất lượng cao cho mô hình Machine Learning. Ngoài ra, kỹ sư dữ liệu cũng cần quản lý, giám sát hệ thống dữ liệu, đảm bảo tính toàn vẹn, chính xác của dữ liệu, triển khai các công cụ giám sát nhằm phát hiện lỗi, giảm thiểu downtime. Nghiên cứu và ứng dụng công nghệ mới để tối ưu hóa quá trình xử lý dữ liệu, đảm bảo bảo mật dữ liệu người dùng theo các tiêu chuẩn và chính sách của Spotify cũng là một phần quan trọng của công việc.",
+      "company": "Spotify",
+      "skills": ["Cử nhân", "Hybrid", "Full-time"],
+      "description": "Spotify đang tìm kiếm kỹ sư dữ liệu (Data Engineer) để tham gia vào quá trình xây dựng và tối ưu hóa hệ thống xử lý dữ liệu lớn phục vụ cho các thuật toán đề xuất nhạc. Công việc bao gồm thiết kế, triển khai các pipeline xử lý dữ liệu (ETL), tối ưu hóa hiệu suất truy vấn dữ liệu với Spark, và làm việc với các công nghệ lưu trữ dữ liệu hiện đại. Ứng viên cần có kinh nghiệm làm việc với hệ thống phân tán, hiểu biết về Machine Learning trong đề xuất nhạc, và có khả năng tối ưu hóa luồng dữ liệu để cải thiện chất lượng gợi ý cho người dùng. Đây là cơ hội để làm việc trong môi trường sáng tạo, nơi dữ liệu đóng vai trò cốt lõi trong trải nghiệm khách hàng.",
+      "salary": "$140K",
+      "postedTime": "Đăng 1 tuần trước",
+      "requiredSkills": ["Big Data", "Spark", "ETL", "Data Pipelines"],
+      "requiredExperience": [
+        "Ít nhất 3 năm kinh nghiệm trong xử lý dữ liệu lớn",
+        "Thành thạo Spark và hệ thống ETL",
+        "Hiểu biết về mô hình đề xuất âm nhạc"
+      ],
+      "joinDate": "28/02/2022",
+      "address": "150 Greenwich St, New York, NY",
+      "services": ["Spotify API", "Hadoop", "Data Warehousing"]
     }
   ]
 }

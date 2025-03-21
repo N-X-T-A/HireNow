@@ -1,72 +1,139 @@
-import React from "react";
-import { useContext, useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import axios from "axios";
 import { StepperContext } from "../../contexts/StepperContext";
 import Multiselect from "multiselect-react-dropdown";
-import { dataSkill } from "../../data/data";
+
 const Salary = () => {
   const { userData, setUserData } = useContext(StepperContext);
-  const [option] = useState(dataSkill);
+
+  const [jobListings, setJobListings] = useState([]);
+  const [jobSkills, setJobSkills] = useState([]);
+  const [selectedJob, setSelectedJob] = useState(null);
   const [skills, setSkills] = useState(userData.skills || []);
+
   const [formData, setFormData] = useState({
-    company_name: userData.experience?.[0]?.company_name || "",
-    position: userData.experience?.[0]?.position || "",
+    company_name: userData.experience?.[0]?.company || "",
+    start_date: userData.experience?.[0]?.start_date || "",
+    end_date: userData.experience?.[0]?.end_date || "",
     description: userData.experience?.[0]?.description || "",
   });
+
+  // Fetch danh sách ngành nghề khi component được mount
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/api/v1/job/listings")
+      .then((response) => {
+        setJobListings(response.data);
+        console.log(jobListings);
+      })
+      .catch((error) =>
+        console.error("Lỗi khi fetch danh sách ngành nghề: ", error)
+      );
+  }, []);
+
+  // Khi người dùng chọn ngành nghề, fetch danh sách skill tương ứng
+  useEffect(() => {
+    if (selectedJob) {
+      axios
+        .get(`http://localhost:5000/api/v1/job/skills/${selectedJob._id}`)
+        .then((response) => {
+          setJobSkills(response.data);
+          console.log(jobSkills);
+        })
+        .catch((error) =>
+          console.error("Lỗi khi fetch danh sách kỹ năng: ", error)
+        );
+    } else {
+      setJobSkills([]);
+    }
+  }, [selectedJob]);
+  // Cập nhật context mỗi khi formData hoặc skills thay đổi
+  useEffect(() => {
+    setUserData((prev) => ({
+      ...prev,
+      experience: { ...formData },
+      skills: skills.map((skill) => skill._id),
+    }));
+  }, [formData, skills, setUserData]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  useEffect(() => {
-    setUserData((prev) => ({
-      ...prev,
-      experience: { ...formData },
-      skills,
-    }));
-  }, [formData, skills, setUserData]);
+  console.log(skills);
   return (
     <div className="flex flex-col">
       <p className="!mb-1">Đã có kinh nghiệm tại</p>
       <input
         type="text"
         name="company_name"
-        placeholder="Đã có kinh nghiệm tại"
-        value={formData.company_name}
+        placeholder="Nhập tên công ty"
+        value={formData.company}
         onChange={handleChange}
         className="border p-2 mb-3"
       />
-      <p className="!mb-1">Vị trí/ chức danh</p>
+
+      <p className="!mb-1">Chọn ngành nghề</p>
       <select
         className="border p-2 mb-3"
-        value={formData.position}
-        onChange={handleChange}
-        name="position"
+        value={selectedJob ? selectedJob._id : ""}
+        onChange={(e) => {
+          const job = jobListings.find(
+            (item) => String(item._id) === e.target.value
+          );
+          setSelectedJob(job);
+          setSkills([]);
+          setFormData((prev) => ({
+            ...prev,
+            position: job ? job.title : "",
+          }));
+        }}
       >
-        <option value="">Chọn vị trí/chức danh</option>
-        <option value="software_engineer">Software Engineer</option>
-        <option value="frontend_developer">Frontend Developer</option>
-        <option value="backend_developer">Backend Developer</option>
-        <option value="data_scientist">Data Scientist</option>
+        <option value="">Chọn ngành nghề</option>
+        {jobListings.map((job) => (
+          <option key={job._id} value={job._id}>
+            {job.title}
+          </option>
+        ))}
       </select>
+
       <p className="!mb-1">Chọn kỹ năng của bạn</p>
       <Multiselect
         className="mb-3"
-        options={option}
+        options={jobSkills}
         placeholder="Chọn kỹ năng của bạn"
-        displayValue="skill"
+        displayValue="name"
         selectedValues={skills}
         onSelect={(selectedList) => setSkills(selectedList)}
         onRemove={(selectedList) => setSkills(selectedList)}
       />
+
+      <p className="!mb-1">Ngày bắt đầu:</p>
+      <input
+        type="date"
+        name="start_date"
+        value={formData.start_date}
+        onChange={handleChange}
+        className="border p-2 mb-3"
+      />
+
+      <p className="!mb-1">Ngày kết thúc:</p>
+      <input
+        type="date"
+        name="end_date"
+        value={formData.end_date}
+        onChange={handleChange}
+        className="border p-2 mb-3"
+      />
+
       <p className="!mb-1">Mô tả thêm:</p>
       <textarea
-        type="text"
         name="description"
-        placeholder="Nhập ngành học"
+        placeholder="Nhập mô tả"
         value={formData.description}
         onChange={handleChange}
-        className="border p-2 "
+        className="border p-2"
       />
     </div>
   );

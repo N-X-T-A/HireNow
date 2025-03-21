@@ -14,71 +14,45 @@
 //   alert("Đăng xuất thành công!");
 // };
 
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/effect-coverflow";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/scrollbar";
+import React, { useRef } from "react";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
-import { useState } from "react";
+const Test = () => {
+  const cvRef = useRef();
+  const handleDownloadPDF = () => {
+    const input = cvRef.current;
+    html2canvas(input, { scale: 2 }).then((canvas) => {
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF("p", "mm", "a4");
+      const imgWidth = 210;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
-export default function Test() {
-  const [selectedJobId, setSelectedJobId] = useState(null);
-
-  const jobs = [
-    { id: 1, job: "Google" },
-    { id: 2, job: "Netflix" },
-    { id: 3, job: "Facebook" },
-  ];
-  const jobDetails = [
-    {
-      id: 1,
-      name: "Google",
-      description: "Công ty công nghệ lớn nhất thế giới.",
-    },
-    {
-      id: 2,
-      name: "Netflix",
-      description: "Dịch vụ phát trực tuyến phổ biến.",
-    },
-    { id: 3, name: "Facebook", description: "Nền tảng mạng xã hội lớn nhất." },
-  ];
-  const selectedJob = jobDetails.find((job) => job.id === selectedJobId);
+      pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
+      pdf.save("cv.pdf");
+    });
+  };
   return (
-    <div className="flex gap-4 p-4">
-      {/* Danh sách công việc bên trái */}
-      <div className="w-1/3 bg-gray-100 p-4 rounded-lg">
-        <h2 className="text-lg font-bold mb-2">Danh sách công việc</h2>
-        <ul>
-          {jobs.map((job) => (
-            <li
-              key={job.id}
-              className={`p-2 cursor-pointer rounded ${selectedJobId === job.id ? "bg-blue-300" : "hover:bg-gray-200"}`}
-              onClick={() => setSelectedJobId(job.id)}
-            >
-              {job.job}
-            </li>
-          ))}
-        </ul>
+    <div className="p-5">
+      {/* Khu vực CV */}
+      <div ref={cvRef} className="bg-white p-5 shadow-lg rounded-md">
+        <h1 className="text-xl font-bold">John Doe</h1>
+        <p>Web Developer</p>
+        <p>Email: johndoe@example.com</p>
       </div>
 
-      {/* Chi tiết công việc bên phải */}
-      <div className="w-2/3 bg-white p-4 rounded-lg shadow">
-        <h2 className="text-lg font-bold mb-2">Chi tiết công việc</h2>
-        {selectedJob ? (
-          <div>
-            <h3 className="text-xl font-semibold">{selectedJob.name}</h3>
-            <p className="text-gray-600">{selectedJob.description}</p>
-          </div>
-        ) : (
-          <p className="text-gray-500">Chọn một công việc để xem chi tiết.</p>
-        )}
-      </div>
+      {/* Nút tải xuống */}
+      <button
+        onClick={handleDownloadPDF}
+        className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md"
+      >
+        Tải xuống PDF
+      </button>
     </div>
   );
-}
+};
 
+export default Test;
 // //login git
 // const handleLoginGit = () => {
 //   const authUrl = `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user&redirect_uri=${REDIRECT_URI}`;

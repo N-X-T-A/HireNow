@@ -40,7 +40,7 @@ const Sub2 = () => {
         </h1>
       </motion.div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
-        {jobs.map((job, index) => (
+        {jobs.slice(0, 6).map((job, index) => (
           <motion.div
             key={job.id}
             className={`bg-gray-100 pt-2 pr-2 pl-2 pb-4 border rounded-xl shadow-md transition-all duration-300 cursor-pointer ${hoverColors[index % hoverColors.length]} hover:text-white`}

@@ -1,13 +1,8 @@
 import React from "react";
-import Header from "../../components/header/header";
-import {
-  useGoogleLogin,
-  GoogleOAuthProvider,
-  GoogleLogin,
-} from "@react-oauth/google";
+import axios from "axios";
+import { useGoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
 import MultiStepForm from "../../components/multiStepForm/MultistepForm";
 import StepperControl from "../../components/multiStepForm/StepperControl";
 import Account from "../../components/steps/Account";
@@ -27,7 +22,12 @@ export default function LoginMethod() {
   // const GITHUB_SECRET_ID = Environment.GITHUB_SECRET_ID;
   const navigate = useNavigate();
   const [user, setUser] = useState(() => {
-    return JSON.parse(sessionStorage.getItem("user")) || null;
+    try {
+      return JSON.parse(sessionStorage.getItem("user")) || null;
+    } catch (error) {
+      console.error("Lỗi khi parse JSON từ sessionStorage:", error);
+      return null;
+    }
   });
 
   const [firstLoggin, setFisrtLoggin] = useState(() => {
@@ -40,25 +40,68 @@ export default function LoginMethod() {
   const [currentStep, setCurrentStep] = useState(1);
   const [userData, setUserData] = useState("");
   const [finalData, setFinalData] = useState([]);
+  //login normal
+  const [formData, setFormData] = useState({ email: "", password: "" });
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+  const handleLogin = async () => {
+    if (!formData.email || !formData.password) {
+      alert("Vui lòng nhập đầy đủ email và mật khẩu!");
+      return;
+    }
+
+    setIsLoading(true);
+    try {
+      const res = await fetch("http://localhost:5000/api/v1/auth/signin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (!res.ok) throw new Error("Lỗi xác thực");
+      const data = await res.json();
+      console.log("User data:", data);
+      console.log(data.metadata.accessToken);
+      // Lưu thông tin vào sessionStorage
+      sessionStorage.setItem("access_token", data.metadata.accessToken);
+      sessionStorage.setItem("user", JSON.stringify(data.metadata));
+      sessionStorage.setItem(
+        "firstLoggin",
+        JSON.stringify(data.metadata.isFirstLogin)
+      );
+      sessionStorage.setItem("isLoggedIn", JSON.stringify(true));
+
+      // Giả lập loading trước khi cập nhật trạng thái
+      setTimeout(() => {
+        setUser(data.metadata);
+        setFisrtLoggin(data.metadata.isFirstLogin);
+        setIsLoggedIn(true);
+        setIsLoading(false);
+        window.dispatchEvent(new Event("userUpdated"));
+      }, 3000);
+    } catch (error) {
+      console.error("Lỗi đăng nhập:", error);
+      setIsLoading(false);
+    }
+  };
   //login google
   const handleGoogleLogin = useGoogleLogin({
     onSuccess: async (response) => {
       setIsLoading(true);
+      console.log("Google Access Token:", response.access_token);
       try {
         console.log("Google Access Token:", response.access_token);
-
-        const res = await fetch("http://localhost:5000/v1/auth/google", {
+        const res = await fetch("http://localhost:5000/api/v1/auth/google", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ token: response.access_token }),
         });
-
         if (!res.ok) throw new Error("Lỗi xác thực");
-
         const data = await res.json();
         console.log("User data:", data);
 
-        sessionStorage.setItem("access_token", data.access_token);
+        sessionStorage.setItem("access_token", data.accessToken);
         sessionStorage.setItem("user", JSON.stringify(data.user));
         sessionStorage.setItem(
           "firstLoggin",
@@ -85,12 +128,21 @@ export default function LoginMethod() {
 
   //Lấy token local
   // const accessToken = sessionStorage.getItem("access_token");
-
+  //navigate
+  const handleNavigate = () => {
+    if (user.role === "candidate") {
+      navigate("/User/UserHome");
+    } else if (user.role === "recruiter") {
+      navigate("/employer/page1");
+    } else {
+      navigate("/"); // Điều hướng về trang chủ nếu không có role phù hợp
+    }
+  };
   //multiStep
   const steps = [
     "Thông tin tài khoản",
-    "Công việc phù hợp dành cho bạn",
-    "Mức lương và địa điểm",
+    "Trình độ học vấn",
+    "Kinh nghiệm",
     "Hoàn tất",
   ];
 
@@ -108,11 +160,30 @@ export default function LoginMethod() {
     }
   };
 
-  const handleClick = (action) => {
+  const handleClick = async (action) => {
     if (action === "Tiếp theo") {
       if (currentStep === steps.length) {
         console.log("Dữ liệu cuối cùng:", userData);
         setFinalData(userData);
+        const userId = user._id;
+        try {
+          const response = await axios.put(
+            "http://localhost:5000/api/v1/user/update-profile",
+            userData,
+            {
+              headers: {
+                Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
+                "Content-Type": "application/json",
+              },
+            }
+          );
+          console.log("Cập nhật thành công:", response.data);
+          sessionStorage.setItem("isLoggedIn", JSON.stringify(false));
+          sessionStorage.setItem("firstLoggin", JSON.stringify(false));
+          handleNavigate();
+        } catch (error) {
+          console.error("Lỗi khi cập nhật:", error.response?.data || error);
+        }
       } else {
         setCurrentStep((prev) => prev + 1);
       }
@@ -123,7 +194,6 @@ export default function LoginMethod() {
     }
   };
   //log test
-
   return (
     <>
       <div className="respon-r flex-1 pl-[20px] w-full">
@@ -154,17 +224,19 @@ export default function LoginMethod() {
             <div className="flex flex-col gap-3 w-full h-full items-center justify-items-center justify-center">
               <img
                 className="w-[30%] rounded-[100px]"
-                src={user?.photoURL}
+                src={`${user?.photoURL}`}
                 alt=""
               />
               <h2 className="text-2xl font-bold !mb-0">
                 Chào {user?.username} !
               </h2>
               <p className="text-gray-600">
-                Sẵn sàng để bắt đầu một công việc chưa
+                {user?.role === "recruiter"
+                  ? "Sẵn sàng để tìm kiếm ứng viên tiềm năng chưa?"
+                  : "Sẵn sàng để bắt đầu một công việc chưa?"}
               </p>
               <button
-                onClick={() => navigate("/User/UserHome")}
+                onClick={handleNavigate}
                 className=" bg-blue-500 text-white py-2 px-4 rounded-md"
               >
                 Bắt đầu
@@ -180,16 +252,30 @@ export default function LoginMethod() {
                 </p>
                 <input
                   type="text"
+                  name="email"
                   placeholder="Email"
                   className="w-[70%] border-[1px] border-zinc-800 h-[40px] rounded-[10px] px-[20px] py-[10px] mt-[35px]"
+                  value={formData.email}
+                  onChange={handleChange}
                 />
                 <input
                   type="password"
+                  name="password"
                   placeholder="Mật khẩu"
-                  className="w-[70%] border-[1px] border-zinc-800 h-[40px] rounded-[10px] px-[20px] py-[10px] "
+                  className="w-[70%] border-[1px] border-zinc-800 h-[40px] rounded-[10px] px-[20px] py-[10px]"
+                  value={formData.password}
+                  onChange={handleChange}
                 />
-                <button className="w-[70%] h-[45px] rounded-[10px] px-[20px] py-[10px] bg-[black] text-white cursor-pointer  transition ease-in-out duration-300 hover:bg-[#1E90FF]">
-                  Đăng nhập
+                <button
+                  onClick={handleLogin}
+                  disabled={isLoading}
+                  className={`w-[70%] h-[45px] rounded-[10px] px-[20px] py-[10px] ${
+                    isLoading
+                      ? "bg-gray-400 cursor-not-allowed"
+                      : "bg-black hover:bg-[#1E90FF] text-white cursor-pointer transition ease-in-out duration-300"
+                  }`}
+                >
+                  {isLoading ? "Đang đăng nhập..." : "Đăng nhập"}
                 </button>
               </div>
               <div className="flex items-center w-[70%] py-[25px]">

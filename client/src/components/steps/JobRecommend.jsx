@@ -4,7 +4,7 @@ import { StepperContext } from "../../contexts/StepperContext";
 const JobRecommend = () => {
   const { userData, setUserData } = useContext(StepperContext);
   const [formData, setFormData] = useState({
-    institution: userData.education?.[0]?.institution || "",
+    institution: userData.education?.[0]?.school || "",
     degree: userData.education?.[0]?.degree || "",
     field_of_study: userData.education?.[0]?.field_of_study || "",
     start_date: userData.education?.[0]?.start_date || "",
@@ -31,7 +31,7 @@ const JobRecommend = () => {
         type="text"
         name="institution"
         placeholder="Tốt nghiệp tại"
-        value={formData.institution}
+        value={formData.school}
         onChange={handleChange}
         className="border p-2 mb-3"
       />
@@ -58,14 +58,33 @@ const JobRecommend = () => {
         className="border p-2 mb-3"
       />
 
-      <p className="!mb-1">Mô tả thêm:</p>
-      <textarea
-        type="text"
-        name="description"
-        placeholder="Nhập ngành học"
-        value={formData.description}
+      <p className="!mb-1">Năm bắt đầu:</p>
+      <input
+        type="number"
+        name="start_date"
+        placeholder="Nhập năm bắt đầu"
+        value={formData.start_date}
         onChange={handleChange}
         className="border p-2 mb-3"
+      />
+
+      <p className="!mb-1">Năm kết thúc:</p>
+      <input
+        type="number"
+        name="end_date"
+        placeholder="Nhập năm kết thúc"
+        value={formData.end_date}
+        onChange={handleChange}
+        className="border p-2 mb-3"
+      />
+
+      <p className="!mb-1">Mô tả thêm:</p>
+      <textarea
+        name="description"
+        placeholder="Nhập mô tả"
+        value={formData.description}
+        onChange={handleChange}
+        className="border p-2"
       />
     </div>
   );
