@@ -11,13 +11,14 @@ const JobApplyStatus = () => {
   //useState
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const [openBaymax, setOpenBaymax] = useState(false);
   const [jobsAPI, setJobsAPI] = useState([]);
   const [jobsSelect, setJobsSelect] = useState([]);
   const [jobSave, setJobSave] = useState([]);
   const [jobID, setJobID] = useState(null);
   const [runTutorial, setRunTutorial] = useState(false);
   const ACCESS_TOKEN = sessionStorage?.getItem("access_token");
-  const [bookmarkedJobs, setBookmarkedJobs] = useState({});
+  const [showButton, setShowButton] = useState(false);
   //config tutorial
   const stepsTutorial = [
     {
@@ -35,10 +36,20 @@ const JobApplyStatus = () => {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/jobs`);
-        setJobsAPI(response.data);
+        const response = await axios.get(
+          `http://localhost:5000/api/v1/application`,
+          {
+            headers: {
+              Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
+            },
+          }
+        );
+
+        setJobsAPI(response.data.metadata);
+        console.log(response.data.metadata);
       } catch (error) {
         console.error("Lỗi khi lấy danh sách công việc:", error);
+        setOpenBaymax(true);
       }
     };
 
@@ -57,6 +68,7 @@ const JobApplyStatus = () => {
       setJobSave(response.data.metadata);
     } catch (error) {
       console.error("Lỗi khi lấy danh sách công việc:", error);
+      setOpenBaymax(true);
     }
   };
   useEffect(() => {
@@ -70,17 +82,27 @@ const JobApplyStatus = () => {
       });
       console.log("Đã xóa bookmark");
       setJobSave((prevJobs) => prevJobs.filter((job) => job.job_id !== jobId));
-      // const updatedBookmarks = { ...bookmarkedJobs, [jobId]: false };
-      // setBookmarkedJobs(updatedBookmarks);
-      // localStorage.setItem(
-      //   "bookmarkedJobs",
-      //   JSON.stringify(updatedBookmarks)
-      // );
     } catch (error) {
       console.error("Lỗi khi xóa bookmark:", error);
     }
   };
 
+  const deleteApplication = async (id) => {
+    try {
+      const response = await axios.delete(
+        `http://localhost:5000/api/v1/application/${id}`,
+        { headers: { Authorization: `Bearer ${ACCESS_TOKEN}` } }
+      );
+      console.log("Xóa thành công:", response.data);
+      setJobsAPI((prevJobs) => prevJobs.filter((job) => job.job_id !== id));
+      setOpen(false);
+      return response.data;
+    } catch (error) {
+      console.error("Lỗi khi xóa:", error);
+      throw error;
+    }
+  };
+  //API fetch detail
   useEffect(() => {
     const fetchJobsDetail = async () => {
       try {
@@ -99,7 +121,7 @@ const JobApplyStatus = () => {
 
   const hoverColors = [
     "hover:bg-blue-100",
-    "hover:bg-green-100",
+
     "hover:bg-red-100",
     "hover:bg-yellow-100",
     "hover:bg-purple-100",
@@ -192,6 +214,7 @@ const JobApplyStatus = () => {
                       onClick={() => {
                         setOpen(!open);
                         setJobID(job.job_id);
+                        setShowButton(false);
                       }}
                       className="hover:underline text-xl font-bold text-gray-900"
                     >
@@ -401,6 +424,15 @@ const JobApplyStatus = () => {
                         Deep Learning
                       </p>
                     </div>
+
+                    {showButton && (
+                      <button
+                        onClick={() => deleteApplication(jobsSelect?._id)}
+                        className="text-white px-4 py-2 bg-red-500 rounded-xl mt-8"
+                      >
+                        Hủy ứng tuyển
+                      </button>
+                    )}
                   </div>
                 </div>
               </motion.div>
@@ -422,9 +454,9 @@ const JobApplyStatus = () => {
                 msOverflowStyle: "none",
               }}
             >
-              {jobs.map((job, index) => (
+              {jobsAPI.map((job, index) => (
                 <motion.div
-                  key={job.id}
+                  key={job._id}
                   className={`bg-gray-100 md:w-[calc(50%-8px)]  pt-2 pr-2 pl-2 pb-4 border rounded-xl shadow-md transition-all duration-300 cursor-pointer ${hoverColors[index % hoverColors.length]} hover:text-white`}
                   initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -438,24 +470,36 @@ const JobApplyStatus = () => {
                   <div className="p-3 rounded-xl bg-white">
                     {" "}
                     <h2 className="text-lg font-semibold text-gray-800">
-                      {job.company}
+                      {job?.company?.name}
                     </h2>
-                    <h3 className="text-xl font-bold text-gray-900">
-                      {job.title}
+                    <h3
+                      onClick={() => {
+                        setOpen(!open);
+                        setJobID(job.job_id);
+                        setShowButton(true);
+                      }}
+                      className="hover:underline text-xl font-bold text-gray-900"
+                    >
+                      {job?.title}
                     </h3>
                     <p className="text-gray-500">
-                      {job.location} • {job.type}
+                      {job?.company?.location} • Toàn thời gian
                     </p>
-                    <p className="text-gray-500">{job.category}</p>
-                    <p className="font-semibold text-gray-700">{job.salary}</p>
+                    <p className="text-gray-500">Công nghệ cloud</p>
+                    <p className="font-semibold text-gray-700">
+                      {job?.salary_range}
+                    </p>
                     <button
-                      className="mt-3 w-full bg-orange-300 text-white py-2 rounded-md font-medium cursor-not-allowed opacity-70"
+                      className="mt-3 w-full bg-green-300 text-white py-2 rounded-md font-medium cursor-not-allowed opacity-70"
                       disabled
                     >
-                      Đang chờ xét duyệt...
+                      {job?.status}
                     </button>
                     <p className="text-xs text-gray-400 mt-2">
-                      Đăng {job.posted}
+                      Ứng tuyển lúc -{" "}
+                      {new Date(job.applied_date).toLocaleString("vi-VN", {
+                        timeZone: "Asia/Ho_Chi_Minh",
+                      })}
                     </p>
                   </div>
                 </motion.div>
@@ -464,6 +508,47 @@ const JobApplyStatus = () => {
           </div>
         </div>
       </div>
+      {openBaymax && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+          onClick={() => setOpen(!open)}
+          className="fixed inset-0 flex items-center justify-center bg-black/70 z-[999] w-full h-screen"
+        >
+          <motion.div
+            initial={{ opacity: 0, y: 100 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 50 }}
+            transition={{ duration: 0.3 }}
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+            className="md:w-[600px] h-auto bg-white rounded-[10px] shadow-lg overflow-hidden flex flex-col md:flex-row gap-4 p-2"
+          >
+            <img
+              src="/src/assets/user/baymax.gif"
+              alt=""
+              className="rounded-[10px]"
+            />
+            <div className="w-full flex flex-col justify-center items-center">
+              <p className="!mb-0 text-[20px] font-[600]">
+                Opps! Baymax hết pin mất rồi
+              </p>
+              <p className="!mb-0 text-[20px] font-[600]">
+                đăng nhập lại nhé!!
+              </p>
+              <button
+                onClick={() => navigate("/login")}
+                className="px-4 py-2 rounded-lg text-[15px] mt-4 font-[600] bg-[#1E90FF] text-white"
+              >
+                Đăng nhập
+              </button>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
     </>
   );
 };

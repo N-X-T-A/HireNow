@@ -179,6 +179,7 @@ export default function LoginMethod() {
           );
           console.log("Cập nhật thành công:", response.data);
           sessionStorage.setItem("isLoggedIn", JSON.stringify(false));
+          sessionStorage.setItem("firstLoggin", JSON.stringify(false));
           handleNavigate();
         } catch (error) {
           console.error("Lỗi khi cập nhật:", error.response?.data || error);

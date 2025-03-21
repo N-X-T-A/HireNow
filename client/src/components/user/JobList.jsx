@@ -10,14 +10,13 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 const JobList = ({ onSelectJob }) => {
   const navigate = useNavigate();
-  const [UserJobs, setJobs] = useState([]);
   const [UserJobsAPI, setJobsAPI] = useState([]);
   const [open, setOpen] = useState(false);
-  const [isActive, setIsActive] = useState(false);
   const [bookmarkedJobs, setBookmarkedJobs] = useState({});
-  const [onBookmark, setonBookmark] = useState(null);
   const ACCESS_TOKEN = sessionStorage.getItem("access_token");
   const [loading, setLoading] = useState(true);
+  const [OpenNotification, setOpenNotification] = useState(false);
+  const [OpenNotification1, setOpenNotification1] = useState(false);
 
   //bookmark
   useEffect(() => {
@@ -52,6 +51,10 @@ const JobList = ({ onSelectJob }) => {
           "bookmarkedJobs",
           JSON.stringify(updatedBookmarks)
         );
+        setOpenNotification(true);
+        setTimeout(() => {
+          setOpenNotification(false);
+        }, 2000);
       } else {
         await axios.delete(`http://localhost:5000/api/v1/favorite/${jobId}`, {
           headers: { Authorization: `Bearer ${token}` },
@@ -65,6 +68,10 @@ const JobList = ({ onSelectJob }) => {
           "bookmarkedJobs",
           JSON.stringify(updatedBookmarks)
         );
+        setOpenNotification1(true);
+        setTimeout(() => {
+          setOpenNotification1(false);
+        }, 2000);
       }
     } catch (error) {
       console.error("Lỗi khi cập nhật bookmark:", error);
@@ -255,6 +262,36 @@ const JobList = ({ onSelectJob }) => {
           </div>
         </div>
       </div>
+      {OpenNotification && (
+        <motion.div
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: 50, opacity: 0 }}
+          transition={{ duration: 0.5 }}
+          className="fixed bottom-[5%] right-[2%] "
+        >
+          <div className="relative flex items-center justify-center">
+            <p className="!mb-0 px-4 py-1 rounded-lg border-[2px] border-green-500">
+              Lưu thành công
+            </p>
+          </div>
+        </motion.div>
+      )}
+      {OpenNotification1 && (
+        <motion.div
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: 50, opacity: 0 }}
+          transition={{ duration: 0.5 }}
+          className="fixed bottom-[5%] right-[2%] "
+        >
+          <div className="relative flex items-center justify-center">
+            <p className="!mb-0 px-4 py-1 rounded-lg border-[2px] border-red-500">
+              Xóa thành công
+            </p>
+          </div>
+        </motion.div>
+      )}
     </>
   );
 };
