@@ -7,6 +7,8 @@ router.post("/", verifyToken, applicationController.applyForJob);
 
 router.get("/", verifyToken, applicationController.getAppliedJobs);
 
+router.delete("/:id", verifyToken, applicationController.cancelJobApplication);
+
 router.get(
   "/applicants",
   verifyToken,
