@@ -173,69 +173,77 @@ const JobApplyStatus = () => {
           {/* left */}
           <div
             id="left-panel"
-            className="flex-1  p-2 rounded-lg"
+            className="flex-1  p-2 rounded-lg flex flex-col"
             style={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }}
           >
-            <p className="!mb-0 text-[14px] font-[600]">
+            <p className="!mb-0 text-[20px] font-[600]">
               Tất cả công việc đã lưu
             </p>
             <div
-              className="p-2 w-full rounded-lg  flex flex-wrap gap-3  max-h-[900px] overflow-y-auto"
+              className="p-2 h-full flex-1 w-full rounded-lg  flex flex-wrap gap-3  max-h-[900px] overflow-y-auto"
               style={{
                 scrollbarWidth: "none",
                 msOverflowStyle: "none",
               }}
             >
-              {jobSave.map((job, index) => (
-                <motion.div
-                  key={job._id}
-                  className={`relative bg-gray-100 md:w-[calc(50%-8px)]  pt-2 pr-2 pl-2 pb-4 border rounded-xl shadow-md transition-all duration-300 cursor-pointer ${hoverColors[index % hoverColors.length]} hover:text-white`}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }}
-                  viewport={{ once: true, amount: 0.1 }}
-                  whileHover={{
-                    y: -10,
-                    boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.2)",
-                  }}
-                >
-                  <div className="absolute top-4 right-4 text-red-600">
-                    <XCircleIcon
-                      className="w-5 h-5"
-                      onClick={() => handleDelete(job.job_id)}
-                    />
-                  </div>
-                  <div className="p-3 rounded-xl bg-white">
-                    {" "}
-                    <h2 className="text-lg font-semibold text-gray-800">
-                      {job.company.name}
-                    </h2>
-                    <h3
-                      onClick={() => {
-                        setOpen(!open);
-                        setJobID(job.job_id);
-                        setShowButton(false);
-                      }}
-                      className="hover:underline text-xl font-bold text-gray-900"
-                    >
-                      {job.title}
-                    </h3>
-                    <p className="text-gray-500 line-clamp-1">
-                      {job.company.location} • Data scient
-                    </p>
-                    <p className="text-gray-500 ">Data Pipeline</p>
-                    <p className="font-semibold text-gray-700">
-                      {job.salary_range}
-                    </p>
-                    <button className="mt-3 w-full bg-black text-white py-2 rounded-md font-medium hover:bg-gray-800">
-                      Ứng tuyển
-                    </button>
-                    <p className="text-xs text-gray-400 mt-2">
-                      Đăng 4 ngày trước
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
+              {jobSave.length > 0 ? (
+                jobSave.map((job, index) => (
+                  <motion.div
+                    key={job._id}
+                    className={`relative bg-gray-100 md:w-[calc(50%-8px)]  pt-2 pr-2 pl-2 pb-4 border rounded-xl shadow-md transition-all duration-300 cursor-pointer ${hoverColors[index % hoverColors.length]} hover:text-white`}
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }}
+                    viewport={{ once: true, amount: 0.1 }}
+                    whileHover={{
+                      y: -10,
+                      boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.2)",
+                    }}
+                  >
+                    <div className="absolute top-4 right-4 text-red-600">
+                      <XCircleIcon
+                        className="w-5 h-5"
+                        onClick={() => handleDelete(job.job_id)}
+                      />
+                    </div>
+                    <div className="p-3 rounded-xl bg-white">
+                      {" "}
+                      <h2 className="text-lg font-semibold text-gray-800">
+                        {job.company.name}
+                      </h2>
+                      <h3
+                        onClick={() => {
+                          setOpen(!open);
+                          setJobID(job.job_id);
+                          setShowButton(false);
+                        }}
+                        className="hover:underline text-xl font-bold text-gray-900"
+                      >
+                        {job.title}
+                      </h3>
+                      <p className="text-gray-500 line-clamp-1">
+                        {job.company.location} • Data scient
+                      </p>
+                      <p className="text-gray-500 ">Data Pipeline</p>
+                      <p className="font-semibold text-gray-700">
+                        {job.salary_range}
+                      </p>
+                      <button className="mt-3 w-full bg-black text-white py-2 rounded-md font-medium hover:bg-gray-800">
+                        Ứng tuyển
+                      </button>
+                      <p className="text-xs text-gray-400 mt-2">
+                        Đăng 4 ngày trước
+                      </p>
+                    </div>
+                  </motion.div>
+                ))
+              ) : (
+                <div className="w-full flex-1 h-full flex justify-center items-center  p-2 border-dashed border-[3px] rounded-lg">
+                  <p className="!mb-0 text-[20px] font-[600] text-gray-400">
+                    Chưa có công việc đang lưu nào
+                  </p>
+                </div>
+              )}
             </div>
           </div>
           {/* pop up */}
@@ -441,69 +449,77 @@ const JobApplyStatus = () => {
           {/* right */}
           <div
             id="right-panel"
-            className="flex-1  p-2 rounded-lg"
+            className="flex-1 flex flex-col p-2 rounded-lg "
             style={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }}
           >
-            <p className="!mb-0 text-[14px] font-[600]">
+            <p className="!mb-0 text-[20px] font-[600]">
               Trạng thái ứng tuyển công việc của tôi
             </p>
             <div
-              className="p-2 w-full rounded-lg  flex flex-wrap gap-3  max-h-[900px] overflow-y-auto"
+              className="p-2 rounded-lg  flex flex-wrap gap-3  max-h-[900px] overflow-y-auto"
               style={{
                 scrollbarWidth: "none",
                 msOverflowStyle: "none",
               }}
             >
-              {jobsAPI.map((job, index) => (
-                <motion.div
-                  key={job._id}
-                  className={`bg-gray-100 md:w-[calc(50%-8px)]  pt-2 pr-2 pl-2 pb-4 border rounded-xl shadow-md transition-all duration-300 cursor-pointer ${hoverColors[index % hoverColors.length]} hover:text-white`}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }}
-                  viewport={{ once: true, amount: 0.1 }}
-                  whileHover={{
-                    y: -10,
-                    boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.2)",
-                  }}
-                >
-                  <div className="p-3 rounded-xl bg-white">
-                    {" "}
-                    <h2 className="text-lg font-semibold text-gray-800">
-                      {job?.company?.name}
-                    </h2>
-                    <h3
-                      onClick={() => {
-                        setOpen(!open);
-                        setJobID(job.job_id);
-                        setShowButton(true);
-                      }}
-                      className="hover:underline text-xl font-bold text-gray-900"
-                    >
-                      {job?.title}
-                    </h3>
-                    <p className="text-gray-500">
-                      {job?.company?.location} • Toàn thời gian
-                    </p>
-                    <p className="text-gray-500">Công nghệ cloud</p>
-                    <p className="font-semibold text-gray-700">
-                      {job?.salary_range}
-                    </p>
-                    <button
-                      className="mt-3 w-full bg-green-300 text-white py-2 rounded-md font-medium cursor-not-allowed opacity-70"
-                      disabled
-                    >
-                      {job?.status}
-                    </button>
-                    <p className="text-xs text-gray-400 mt-2">
-                      Ứng tuyển lúc -{" "}
-                      {new Date(job.applied_date).toLocaleString("vi-VN", {
-                        timeZone: "Asia/Ho_Chi_Minh",
-                      })}
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
+              {jobsAPI.length > 0 ? (
+                jobsAPI.map((job, index) => (
+                  <motion.div
+                    key={job._id}
+                    className={`bg-gray-100 md:w-[calc(50%-8px)]  pt-2 pr-2 pl-2 pb-4 border rounded-xl shadow-md transition-all duration-300 cursor-pointer ${hoverColors[index % hoverColors.length]} hover:text-white`}
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }}
+                    viewport={{ once: true, amount: 0.1 }}
+                    whileHover={{
+                      y: -10,
+                      boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.2)",
+                    }}
+                  >
+                    <div className="p-3 rounded-xl bg-white">
+                      {" "}
+                      <h2 className="text-lg font-semibold text-gray-800">
+                        {job?.company?.name}
+                      </h2>
+                      <h3
+                        onClick={() => {
+                          setOpen(!open);
+                          setJobID(job.job_id);
+                          setShowButton(true);
+                        }}
+                        className="hover:underline text-xl font-bold text-gray-900"
+                      >
+                        {job?.title}
+                      </h3>
+                      <p className="text-gray-500">
+                        {job?.company?.location} • Toàn thời gian
+                      </p>
+                      <p className="text-gray-500">Công nghệ cloud</p>
+                      <p className="font-semibold text-gray-700">
+                        {job?.salary_range}
+                      </p>
+                      <button
+                        className="mt-3 w-full bg-green-300 text-white py-2 rounded-md font-medium cursor-not-allowed opacity-70"
+                        disabled
+                      >
+                        {job?.status}
+                      </button>
+                      <p className="text-xs text-gray-400 mt-2">
+                        Ứng tuyển lúc -{" "}
+                        {new Date(job.applied_date).toLocaleString("vi-VN", {
+                          timeZone: "Asia/Ho_Chi_Minh",
+                        })}
+                      </p>
+                    </div>
+                  </motion.div>
+                ))
+              ) : (
+                <div className="w-full flex-1 h-full flex justify-center items-center  p-2 border-dashed border-[3px] rounded-lg">
+                  <p className="!mb-0 text-[20px] font-[600] text-gray-400">
+                    Chưa có công việc đang ứng tuyển nào
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -540,7 +556,10 @@ const JobApplyStatus = () => {
                 đăng nhập lại nhé!!
               </p>
               <button
-                onClick={() => navigate("/login")}
+                onClick={() => {
+                  sessionStorage.clear();
+                  navigate("/login");
+                }}
                 className="px-4 py-2 rounded-lg text-[15px] mt-4 font-[600] bg-[#1E90FF] text-white"
               >
                 Đăng nhập

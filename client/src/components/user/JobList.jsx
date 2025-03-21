@@ -137,7 +137,10 @@ const JobList = ({ onSelectJob }) => {
                 đăng nhập lại nhé!!
               </p>
               <button
-                onClick={() => navigate("/login")}
+                onClick={() => {
+                  sessionStorage.clear();
+                  navigate("/login");
+                }}
                 className="px-4 py-2 rounded-lg text-[15px] mt-4 font-[600] bg-[#1E90FF] text-white"
               >
                 Đăng nhập
