@@ -195,9 +195,9 @@ const Profile = () => {
           style={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }}
         >
           <div className="w-full flex flex-col  rounded-lg p-2 border-[2px] border-dashed ">
-            {/* experiecne header */}
-            <div className="justify-between items-center flex gap-2 w-full">
-              <div className="flex flex-col gap-1 p-2">
+            {/* education header */}
+            <div className="  flex flex-col gap-1  w-full">
+              <div className="flex  gap-2 p-2 justify-between items-center">
                 <span>
                   <p className="!mb-0 font-[500] text-[15px]">
                     Kinh nghiệm của bạn
@@ -206,12 +206,28 @@ const Profile = () => {
                     Tìm hiểu thêm
                   </p>
                 </span>
+                <div className="flex gap-1 p-2 justify-center items-center">
+                  <PlusIcon className="w-5 h-5 p-[5px] rounded-full bg-[#1E90FF] text-white" />
+                </div>
               </div>
-              <div className="flex gap-1 p-2 justify-center items-center">
-                <PlusIcon className="w-5 h-5 p-[5px] rounded-full bg-[#1E90FF] text-white" />
+              <div className="p-2 flex gap-1 ">
+                <img
+                  className="w-[40px] h-[40px] rounded-lg"
+                  src="/src/assets/user/companies.png"
+                  alt=""
+                />
+                <span className="!mb-0 flex flex-col justify-center ">
+                  <p className="!mb-0 font-[600] text-[15px]">LocMinh ielts</p>
+                  <p className="!mb-0 font-[400] text-[12px] text-gray-400">
+                    Ban quản lí và sáng tạo nội dung
+                  </p>
+                  <p className="!mb-0 font-[600] text-[10px] text-gray-400">
+                    2019-2025
+                  </p>
+                </span>
               </div>
             </div>
-            {/* list experiecne */}
+            {/* list education */}
           </div>
         </div>
         {/* education */}
@@ -221,19 +237,37 @@ const Profile = () => {
         >
           <div className="w-full flex flex-col  rounded-lg p-2 border-[2px] border-dashed ">
             {/* education header */}
-            <div className="justify-between items-center flex gap-2 w-full">
-              <div className="flex flex-col gap-1 p-2">
+            <div className="  flex flex-col gap-1  w-full">
+              <div className="flex  gap-2 p-2 justify-between items-center">
                 <span>
                   <p className="!mb-0 font-[500] text-[15px]">
-                    Học vấn của bạn
+                    Trình độ học vấn của bạn
                   </p>
                   <p className="!mb-0 text-[13px] text-blue-600">
                     Tìm hiểu thêm
                   </p>
                 </span>
+                <div className="flex gap-1 p-2 justify-center items-center">
+                  <PlusIcon className="w-5 h-5 p-[5px] rounded-full bg-[#1E90FF] text-white" />
+                </div>
               </div>
-              <div className="flex gap-1 p-2 justify-center items-center">
-                <PlusIcon className="w-5 h-5 p-[5px] rounded-full bg-[#1E90FF] text-white" />
+              <div className="p-2 flex gap-1 ">
+                <img
+                  className="w-[40px] h-[40px] rounded-lg"
+                  src="/src/assets/user/school.png"
+                  alt=""
+                />
+                <span className="!mb-0 flex flex-col justify-center ">
+                  <p className="!mb-0 font-[600] text-[15px]">
+                    Trường Đại Học Đà Lạt
+                  </p>
+                  <p className="!mb-0 font-[400] text-[12px] text-gray-400">
+                    Chuyển ngành phần mềm, web-app
+                  </p>
+                  <p className="!mb-0 font-[600] text-[10px] text-gray-400">
+                    2019-2025
+                  </p>
+                </span>
               </div>
             </div>
             {/* list education */}
@@ -245,23 +279,26 @@ const Profile = () => {
           style={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }}
         >
           <div className="w-full flex flex-col  rounded-lg p-2 border-[2px] border-dashed ">
-            {/* skill header */}
-            <div className="justify-between items-center flex gap-2 w-full">
-              <div className="flex flex-col gap-1 p-2">
+            {/* experiecne header */}
+            <div className="  flex flex-col gap-1  w-full">
+              <div className="flex  gap-2 p-2 justify-between items-center">
                 <span>
                   <p className="!mb-0 font-[500] text-[15px]">
-                    Kỹ năng của bạn
+                    Kinh nghiệm của bạn
                   </p>
                   <p className="!mb-0 text-[13px] text-blue-600">
                     Tìm hiểu thêm
                   </p>
                 </span>
+                <div className="flex gap-1 p-2 justify-center items-center">
+                  <PlusIcon className="w-5 h-5 p-[5px] rounded-full bg-[#1E90FF] text-white" />
+                </div>
               </div>
-              <div className="flex gap-1 p-2 justify-center items-center">
-                <PlusIcon className="w-5 h-5 p-[5px] rounded-full bg-[#1E90FF] text-white" />
-              </div>
+              <p className="!mb-0 p-2 font-[500] text-[15px]">
+                Font-end development
+              </p>
+              <p className="!mb-0 p-2 font-[500] text-[15px]">Designer</p>
             </div>
-            {/* list skill */}
           </div>
         </div>
       </div>
@@ -322,7 +359,7 @@ const Profile = () => {
           </p>
           {/* people */}
           <div
-            className="px-4 pb-4 flex flex-col gap-2  items-center max-h-[400px] overflow-y-auto"
+            className="px-4 pb-4 flex flex-col gap-2  items-center max-h-[520px] overflow-y-auto"
             style={{
               scrollbarWidth: "none",
               msOverflowStyle: "none",
