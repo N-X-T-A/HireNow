@@ -206,6 +206,26 @@ export default function LoginMethod() {
       }
     }
   };
+
+  const handleClick1 = async (action) => {
+    if (action === "Tiếp theo") {
+      if (currentStep === RecuiterStep.length) {
+        setFinalData(userData);
+
+        try {
+          console.log("Cập nhật thành công:", userData);
+        } catch (error) {
+          console.error("Lỗi khi cập nhật");
+        }
+      } else {
+        setCurrentStep((prev) => prev + 1);
+      }
+    } else {
+      if (currentStep > 1) {
+        setCurrentStep((prev) => prev - 1);
+      }
+    }
+  };
   //log test
   return (
     <>
@@ -218,7 +238,7 @@ export default function LoginMethod() {
           </div>
         ) : isLoggedIn ? (
           firstLoggin ? (
-            user?.role === "candidate" ? (
+            user?.role === "recruiter" ? (
               <div className="flex flex-col w-full h-full items-center justify-center">
                 <MultiStepForm steps={RecuiterStep} currentStep={currentStep} />
                 <div
@@ -235,7 +255,7 @@ export default function LoginMethod() {
                   </StepperContext.Provider>
                 </div>
                 <StepperControl
-                  handleClick={handleClick}
+                  handleClick={handleClick1}
                   currentStep={currentStep}
                   steps={RecuiterStep}
                 />

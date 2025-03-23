@@ -73,96 +73,69 @@ export const CompaniesProfileUserShow = () => {
               <div className="justify-between items-center flex gap-2 w-full">
                 <div className="flex flex-col gap-1 p-2">
                   <span>
-                    <p className="!mb-0 font-[500] text-[15px]">Về chúng tôi</p>
-                  </span>
-                  <p className="!mb-0 text-gray-400">
-                    Google là một tập đoàn công nghệ đa quốc gia của Mỹ, nổi
-                    tiếng với công cụ tìm kiếm Google Search, hệ điều hành
-                    Android, trình duyệt Chrome, và nền tảng YouTube. Thành lập
-                    năm 1998 bởi Larry Page và Sergey Brin, Google đã phát triển
-                    thành một trong những công ty công nghệ lớn nhất thế giới,
-                    thuộc sở hữu của Alphabet Inc. Công ty tập trung vào trí tuệ
-                    nhân tạo, điện toán đám mây, quảng cáo trực tuyến và phần
-                    cứng như điện thoại Pixel. Với sứ mệnh “sắp xếp thông tin
-                    của thế giới và làm cho nó trở nên hữu ích, dễ tiếp cận,”
-                    Google đóng vai trò quan trọng trong cuộc sống số hiện đại.
-                  </p>
-                </div>
-              </div>
-              {/* list experiecne */}
-            </div>
-          </div>
-          {/* Activity */}
-          <div
-            className="w-full rounded-lg p-2"
-            style={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }}
-          >
-            <div className="w-full flex flex-col  rounded-lg p-2 border-[2px] border-dashed ">
-              {/* activity header */}
-              <div className="justify-between items-center flex gap-2 w-full">
-                <div className="flex flex-col gap-1 p-2">
-                  <span>
-                    <p className="!mb-0 font-[500] text-[15px]">Hoạt động</p>
-                    <p className="!mb-0 text-[13px] text-blue-600">
-                      Tìm hiểu thêm
-                    </p>
-                  </span>
-                </div>
-              </div>
-              {/* list post */}
-              <div
-                className="p-2 flex md:flex-row flex-col max-h-[400px] overflow-y-auto gap-2 md:max-w-[1109px] md:overflow-x-auto"
-                style={{
-                  scrollbarWidth: "none",
-                  msOverflowStyle: "none",
-                }}
-              >
-                {/* post */}
-                <div className="flex flex-col gap-2  p-2 rounded-lg border-[1px] md:min-w-[500px] max-w-[500px]">
-                  <div className="flex gap-2 items-center">
-                    <img
-                      src="/src/assets/user/companies.webp"
-                      alt=""
-                      className="w-10 h-10 rounded-full object-cover"
-                    />
-                    <div className="flex flex-col ">
-                      <p className="!mb-0 text-[14px] font-[500]">Google etc</p>
-                      <p className="!mb-0 text-[14px] font-[500] text-gray-500">
-                        2 ngày trước
+                    {" "}
+                    <span>
+                      <p className="!mb-0 font-[500] text-[15px]">
+                        Về chúng tôi
                       </p>
-                    </div>
-                  </div>
-                  {/* content post */}
-                  <p className="p-2 !mb-0 w-full text-justify line-clamp-7">
-                    Tôi là Hải, sinh viên ngành Công nghệ Thông tin tại Trường
-                    Đại học Đà Lạt. Với niềm đam mê lập trình và phát triển phần
-                    mềm, tôi luôn tìm kiếm cơ hội để học hỏi và trau dồi kỹ
-                    năng.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          {/* experiecne */}
-          <div
-            className="w-full rounded-lg p-2"
-            style={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }}
-          >
-            <div className="w-full flex flex-col  rounded-lg p-2 border-[2px] border-dashed ">
-              {/* experiecne header */}
-              <div className="justify-between items-center flex gap-2 w-full">
-                <div className="flex flex-col gap-1 p-2">
-                  <span>
-                    <p className="!mb-0 font-[500] text-[15px]">
-                      Kinh nghiệm của Hải
-                    </p>
-                    <p className="!mb-0 text-[13px] text-blue-600">
-                      Tìm hiểu thêm
+                    </span>
+                    <p className="!mb-0 text-gray-400">
+                      Google là một tập đoàn công nghệ đa quốc gia của Mỹ, nổi
+                      tiếng với công cụ tìm kiếm Google Search, hệ điều hành
+                      Android, trình duyệt Chrome, và nền tảng YouTube. Thành
+                      lập năm 1998 bởi Larry Page và Sergey Brin, Google đã phát
+                      triển thành một trong những công ty công nghệ lớn nhất thế
+                      giới, thuộc sở hữu của Alphabet Inc. Công ty tập trung vào
+                      trí tuệ nhân tạo, điện toán đám mây, quảng cáo trực tuyến
+                      và phần cứng như điện thoại Pixel. Với sứ mệnh “sắp xếp
+                      thông tin của thế giới và làm cho nó trở nên hữu ích, dễ
+                      tiếp cận,” Google đóng vai trò quan trọng trong cuộc sống
+                      số hiện đại.
                     </p>
                   </span>
-                  <p className="!mb-0 text-gray-400">
-                    Trống, thông tin về kinh nghiệm của Hải sẽ xuất hiện ở đây
-                  </p>
+                  <span>
+                    {" "}
+                    <span>
+                      <p className="!mb-0 font-[500] text-[15px]">Website</p>
+                    </span>
+                    <p className="!mb-0 text-blue-700">
+                      http://www.marvell.com
+                    </p>
+                  </span>
+                  <span>
+                    {" "}
+                    <span>
+                      <p className="!mb-0 font-[500] text-[15px]">Gia nhập:</p>
+                    </span>
+                    <p className="!mb-0 text-gray-400">22/2/2020</p>
+                  </span>
+                  <span>
+                    <span>
+                      <p className="!mb-0 font-[500] text-[15px]">
+                        Ngành công nghiệp:
+                      </p>
+                    </span>
+                    <p className="!mb-0 text-gray-400">
+                      Công nghệ thông tin, Cloud
+                    </p>
+                  </span>
+                  <span>
+                    <span>
+                      <p className="!mb-0 font-[500] text-[15px]">
+                        Phạm vi công ty:
+                      </p>
+                    </span>
+                    <p className="!mb-0 text-gray-400">10000-50000 Nhân viên</p>
+                  </span>
+                  <span>
+                    <span>
+                      <p className="!mb-0 font-[500] text-[15px]">
+                        Các địa chỉ:
+                      </p>
+                    </span>
+                    <p className="!mb-0 text-gray-400">CA, Watsinton</p>
+                    <p className="!mb-0 text-gray-400">Vietnam, HaNoi</p>
+                  </span>
                 </div>
               </div>
               {/* list experiecne */}
@@ -179,43 +152,149 @@ export const CompaniesProfileUserShow = () => {
                 <div className="flex flex-col gap-1 p-2">
                   <span>
                     <p className="!mb-0 font-[500] text-[15px]">
-                      Học vấn của Hải
+                      Điểm nổi bật của công ty
                     </p>
                     <p className="!mb-0 text-[13px] text-blue-600">
                       Tìm hiểu thêm
                     </p>
                   </span>
-                  <p className="!mb-0 text-gray-400">
-                    Trống, thông tin về học vấn của Hải sẽ xuất hiện ở đây
-                  </p>
-                </div>
-              </div>
-              {/* list education */}
-            </div>
-          </div>
-          {/* skill */}
-          <div
-            className="w-full rounded-lg p-2"
-            style={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }}
-          >
-            <div className="w-full flex flex-col  rounded-lg p-2 border-[2px] border-dashed ">
-              {/* skill header */}
-              <div className="justify-between items-center flex gap-2 w-full">
-                <div className="flex flex-col gap-1 p-2">
-                  <span>
-                    <p className="!mb-0 font-[500] text-[15px]">
-                      Kỹ năng của Hải
-                    </p>
-                    <p className="!mb-0 text-[13px] text-blue-600">
-                      Tìm hiểu thêm
-                    </p>
+                  {/* post */}
+                  <span className="flex flex-col gap-2 max-h-[590px] overflow-y-auto">
+                    <div className="w-full">
+                      <div className="flex w-full border rounded-lg  p-4 bg-white">
+                        {/* Hình ảnh */}
+                        <img
+                          src="/src/assets/user/companies3.jpg"
+                          alt="Team Meeting"
+                          className="w-1/3 h-auto rounded-lg object-cover"
+                        />
+
+                        {/* Nội dung */}
+                        <div className="w-2/3 pl-4">
+                          <h3 className="text-lg font-bold">
+                            Our People, Our Culture, Our Technology
+                          </h3>
+                          <p className="text-sm text-gray-700 mt-2">
+                            We are passionate about people who love technology.
+                            Our people innovate with creativity while being a
+                            part of an open environment dedicated to building a
+                            legacy.
+                          </p>
+                          <p className="text-sm text-gray-700 mt-2">
+                            We have a diverse employee population ranging from
+                            entry-level individuals to experienced
+                            professionals...
+                          </p>
+
+                          {/* Liên kết */}
+                          <a
+                            href="#"
+                            className="mt-3 inline-flex items-center text-blue-600 hover:underline"
+                          >
+                            <svg
+                              className="w-4 h-4 mr-1"
+                              fill="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path d="M10.59 13.41L9.17 12l6-6 6 6-1.41 1.41L16 9.83V20h-2V9.83l-4.59 4.58z"></path>
+                            </svg>
+                            Learn more about careers at Marvell
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    {/*  */}
+                    <div className="w-full">
+                      <div className="flex w-full border rounded-lg  p-4 bg-white">
+                        {/* Hình ảnh */}
+                        <img
+                          src="/src/assets/user/companies3.jpg"
+                          alt="Team Meeting"
+                          className="w-1/3 h-auto rounded-lg object-cover"
+                        />
+
+                        {/* Nội dung */}
+                        <div className="w-2/3 pl-4">
+                          <h3 className="text-lg font-bold">
+                            Our People, Our Culture, Our Technology
+                          </h3>
+                          <p className="text-sm text-gray-700 mt-2">
+                            We are passionate about people who love technology.
+                            Our people innovate with creativity while being a
+                            part of an open environment dedicated to building a
+                            legacy.
+                          </p>
+                          <p className="text-sm text-gray-700 mt-2">
+                            We have a diverse employee population ranging from
+                            entry-level individuals to experienced
+                            professionals...
+                          </p>
+
+                          {/* Liên kết */}
+                          <a
+                            href="#"
+                            className="mt-3 inline-flex items-center text-blue-600 hover:underline"
+                          >
+                            <svg
+                              className="w-4 h-4 mr-1"
+                              fill="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path d="M10.59 13.41L9.17 12l6-6 6 6-1.41 1.41L16 9.83V20h-2V9.83l-4.59 4.58z"></path>
+                            </svg>
+                            Learn more about careers at Marvell
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    {/*  */}
+                    <div className="w-full">
+                      <div className="flex w-full border rounded-lg  p-4 bg-white">
+                        {/* Hình ảnh */}
+                        <img
+                          src="/src/assets/user/companies3.jpg"
+                          alt="Team Meeting"
+                          className="w-1/3 h-auto rounded-lg object-cover"
+                        />
+
+                        {/* Nội dung */}
+                        <div className="w-2/3 pl-4">
+                          <h3 className="text-lg font-bold">
+                            Our People, Our Culture, Our Technology
+                          </h3>
+                          <p className="text-sm text-gray-700 mt-2">
+                            We are passionate about people who love technology.
+                            Our people innovate with creativity while being a
+                            part of an open environment dedicated to building a
+                            legacy.
+                          </p>
+                          <p className="text-sm text-gray-700 mt-2">
+                            We have a diverse employee population ranging from
+                            entry-level individuals to experienced
+                            professionals...
+                          </p>
+
+                          {/* Liên kết */}
+                          <a
+                            href="#"
+                            className="mt-3 inline-flex items-center text-blue-600 hover:underline"
+                          >
+                            <svg
+                              className="w-4 h-4 mr-1"
+                              fill="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path d="M10.59 13.41L9.17 12l6-6 6 6-1.41 1.41L16 9.83V20h-2V9.83l-4.59 4.58z"></path>
+                            </svg>
+                            Learn more about careers at Marvell
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    {/*  */}
                   </span>
-                  <p className="!mb-0 text-gray-400">
-                    Trống, thông tin về kỹ năng của Hải sẽ xuất hiện ở đây
-                  </p>
                 </div>
               </div>
-              {/* list skill */}
             </div>
           </div>
         </div>

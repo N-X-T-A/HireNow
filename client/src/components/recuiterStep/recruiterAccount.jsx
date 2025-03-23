@@ -7,6 +7,7 @@ export const RecruiterAccount = () => {
   const [formData, setFormData] = useState({
     username: userData.name || "",
     industry_id: userData.industry_id || "",
+    description: userData.description || "",
   });
 
   const Citytest = ["Ha Noi", "Ho Chi Minh", "Da Nang", "Hai Phong"];
@@ -128,6 +129,18 @@ export const RecruiterAccount = () => {
             Thêm địa điểm
           </button>
         </div>
+      </div>
+      <div className="w-full mx-2 flex-1">
+        <div className="font-bold h-6 mt-3 text-gray-500 text-xs leading-8 uppercase">
+          Mô tả thêm
+        </div>
+        <textarea
+          name="description"
+          placeholder="Nhập mô tả"
+          value={formData.description}
+          onChange={handleChange}
+          className="border p-2 w-full"
+        />
       </div>
     </div>
   );
