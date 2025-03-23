@@ -17,8 +17,7 @@ const Salary = () => {
     end_date: userData.experience?.[0]?.end_date || "",
     description: userData.experience?.[0]?.description || "",
   });
-
-  // Fetch danh sách ngành nghề khi component được mount
+  //Api fetch
   useEffect(() => {
     axios
       .get("http://localhost:5000/api/v1/job/listings")
@@ -31,7 +30,6 @@ const Salary = () => {
       );
   }, []);
 
-  // Khi người dùng chọn ngành nghề, fetch danh sách skill tương ứng
   useEffect(() => {
     if (selectedJob) {
       axios
@@ -47,7 +45,7 @@ const Salary = () => {
       setJobSkills([]);
     }
   }, [selectedJob]);
-  // Cập nhật context mỗi khi formData hoặc skills thay đổi
+  // Cập nhật context
   useEffect(() => {
     setUserData((prev) => ({
       ...prev,

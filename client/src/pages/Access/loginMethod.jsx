@@ -16,6 +16,8 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import "swiper/css";
 import "../../pages/pageCss/Login.css";
+import { RecruiterAccount } from "../../components/recuiterStep/recruiterAccount";
+import { RecruiterSocial } from "../../components/recuiterStep/recruiterSocial";
 export default function LoginMethod() {
   // const GITHUB_CLIENT_ID = Environment.GITHUB_CLIENT_ID;
   // const REDIRECT_URI = "http://localhost:3000/login";
@@ -145,7 +147,7 @@ export default function LoginMethod() {
     "Kinh nghiệm",
     "Hoàn tất",
   ];
-
+  const RecuiterStep = ["Thông tin Công ty", "Chi tiết", "Hoàn tất"];
   const displayStep = (step) => {
     switch (step) {
       case 1:
@@ -155,6 +157,17 @@ export default function LoginMethod() {
       case 3:
         return <Salary />;
       case 4:
+        return <Final />;
+      default:
+    }
+  };
+  const displayRecruiterStep = (step) => {
+    switch (step) {
+      case 1:
+        return <RecruiterAccount />;
+      case 2:
+        return <RecruiterSocial />;
+      case 3:
         return <Final />;
       default:
     }
@@ -205,21 +218,45 @@ export default function LoginMethod() {
           </div>
         ) : isLoggedIn ? (
           firstLoggin ? (
-            <div className="flex flex-col w-full h-full items-center justify-center">
-              <MultiStepForm steps={steps} currentStep={currentStep} />
-              <div className="my-6 p-10 w-full min-h-[400px]">
-                <StepperContext.Provider
-                  value={{ userData, setUserData, finalData, setFinalData }}
+            user?.role === "candidate" ? (
+              <div className="flex flex-col w-full h-full items-center justify-center">
+                <MultiStepForm steps={RecuiterStep} currentStep={currentStep} />
+                <div
+                  className="my-6 p-10 w-full min-h-[400px] max-h-[450px] overflow-y-auto"
+                  style={{
+                    scrollbarWidth: "none",
+                    msOverflowStyle: "none",
+                  }}
                 >
-                  {displayStep(currentStep)}
-                </StepperContext.Provider>
+                  <StepperContext.Provider
+                    value={{ userData, setUserData, finalData, setFinalData }}
+                  >
+                    {displayRecruiterStep(currentStep)}
+                  </StepperContext.Provider>
+                </div>
+                <StepperControl
+                  handleClick={handleClick}
+                  currentStep={currentStep}
+                  steps={RecuiterStep}
+                />
               </div>
-              <StepperControl
-                handleClick={handleClick}
-                currentStep={currentStep}
-                steps={steps}
-              />
-            </div>
+            ) : (
+              <div className="flex flex-col w-full h-full items-center justify-center">
+                <MultiStepForm steps={steps} currentStep={currentStep} />
+                <div className="my-6 p-10 w-full min-h-[400px]">
+                  <StepperContext.Provider
+                    value={{ userData, setUserData, finalData, setFinalData }}
+                  >
+                    {displayStep(currentStep)}
+                  </StepperContext.Provider>
+                </div>
+                <StepperControl
+                  handleClick={handleClick}
+                  currentStep={currentStep}
+                  steps={steps}
+                />
+              </div>
+            )
           ) : (
             <div className="flex flex-col gap-3 w-full h-full items-center justify-items-center justify-center">
               <img
