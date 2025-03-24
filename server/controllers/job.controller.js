@@ -115,6 +115,46 @@ class JobController {
     });
   }
 
+  getJobByCompanyId = async (req, res) => {
+    try {
+      const { id } = req.params;
+
+      const jobs = await Job.find({ company_id: id })
+        .populate("company_id", "name logo background_image locations") // Lấy thông tin công ty
+        .lean();
+
+      if (!jobs.length) {
+        return res
+          .status(404)
+          .json({ message: "No jobs found for this company." });
+      }
+
+      const formattedJobs = jobs.map((job) => ({
+        _id: job._id,
+        title: job.title,
+        salary_range: job.salary_range,
+        skills: job.skills,
+        posted_time: `${Math.floor(
+          (Date.now() - job.posted_date) / (1000 * 60 * 60 * 24)
+        )} ngày trước`, // Tính số ngày từ khi đăng
+        location: job.company_id.locations.length
+          ? job.company_id.locations[0].city
+          : "N/A",
+        reasons_to_join: job.reasons_to_join,
+        company: {
+          name: job.company_id.name,
+          logo: job.company_id.logo,
+          background_image: job.company_id.background_image,
+        },
+      }));
+
+      res.json({ jobs: formattedJobs });
+    } catch (error) {
+      console.error("Error fetching jobs by company ID:", error);
+      res.status(500).json({ message: "Internal Server Error" });
+    }
+  };
+
   getPostedJobs = async (req, res) => {
     try {
       const user = await User.findById(req.user.id).select("companyId");

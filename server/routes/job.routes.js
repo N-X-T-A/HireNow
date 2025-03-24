@@ -32,6 +32,8 @@ router.get(
   asyncHandler(JobController.getPostedJobs)
 );
 
+router.get("/company/:id", asyncHandler(JobController.getJobByCompanyId));
+
 router.get("/:id", asyncHandler(JobController.getJobDetails));
 
 router.post(
