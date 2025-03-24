@@ -40,7 +40,7 @@ createRoot(document.getElementById("root")).render(
             <Route path="jobs/:jobId" element={<JobDetailPage />} />
             <Route path="profile" element={<UserProfile />} />
             <Route path="profile-user" element={<ShowProfile />} />
-            <Route path="profile-companies" element={<ShowCompanieProfile />} />
+            <Route path="company/:ComId" element={<ShowCompanieProfile />} />
             <Route path="job-apply" element={<JobApply />} />
           </Route>
         </Route>

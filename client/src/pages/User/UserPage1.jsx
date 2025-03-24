@@ -276,7 +276,10 @@ const UserPage1 = () => {
                 alt=""
                 className="absolute max-w-[70px] left-5 top-[-1/2] -translate-y-1/2 p-[2px] rounded-full bg-white"
               />
-              <p className="!mb-0 mt-[8%] px-2 text-[20px] font-[600]">
+              <p
+                onClick={() => navigate(`/user/company/${company._id}`)}
+                className="!mb-0 cursor-pointer mt-[8%] px-2 text-[20px] font-[600]"
+              >
                 {company.name}
               </p>
               <p className="!mb-0 px-2 text-[15px] text-gray-400 ">VietNam</p>

@@ -716,3 +716,60 @@ export const companiesPage1 = [
     services: ["Spotify API", "Hadoop", "Data Warehousing"],
   },
 ];
+
+export const Companyjobs = [
+  {
+    title: "Physical Design Engineer Intern - Bachelors",
+    company: "Marvell Technology",
+    location: "Ho Chi Minh City",
+    time: "2 weeks ago",
+  },
+  {
+    title: "Staff Engineer, Design Verification",
+    company: "Marvell Technology",
+    location: "Ho Chi Minh City",
+    time: "2 days ago",
+  },
+  {
+    title: "Hardware Design Verification Intern (SYN/STA) -",
+    company: "Marvell Technology",
+    location: "Ho Chi Minh City",
+    time: "2 days ago",
+  },
+  {
+    title: "Physical Design Engineer Intern - Bachelors",
+    company: "Marvell Technology",
+    location: "Ho Chi Minh City",
+    time: "2 weeks ago",
+  },
+  {
+    title: "Staff Engineer, Design Verification",
+    company: "Marvell Technology",
+    location: "Ho Chi Minh City",
+    time: "2 days ago",
+  },
+  {
+    title: "Hardware Design Verification Intern (SYN/STA) -",
+    company: "Marvell Technology",
+    location: "Ho Chi Minh City",
+    time: "2 days ago",
+  },
+  {
+    title: "Physical Design Engineer Intern - Bachelors",
+    company: "Marvell Technology",
+    location: "Ho Chi Minh City",
+    time: "2 weeks ago",
+  },
+  {
+    title: "Staff Engineer, Design Verification",
+    company: "Marvell Technology",
+    location: "Ho Chi Minh City",
+    time: "2 days ago",
+  },
+  {
+    title: "Hardware Design Verification Intern (SYN/STA) -",
+    company: "Marvell Technology",
+    location: "Ho Chi Minh City",
+    time: "2 days ago",
+  },
+];
