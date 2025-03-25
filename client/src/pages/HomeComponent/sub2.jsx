@@ -25,7 +25,7 @@ const Sub2 = () => {
   ];
   return (
     <div className="w-full bg-white flex flex-col  gap-2 mt-[100px] items-center justify-items-center justify-center">
-      <motion.div
+      {/* <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
@@ -74,7 +74,7 @@ const Sub2 = () => {
       </div>
       <button className=" transition ease-in-out duration-300 transform hover:-translate-y-[5px] flex items-center justify-items-center justify-center gap-3 px-[20px] py-[10px] bg-black rounded-[20px] text-white">
         Xem thêm <FontAwesomeIcon icon={faCircleRight} />
-      </button>
+      </button> */}
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}

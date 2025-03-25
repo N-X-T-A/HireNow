@@ -10,6 +10,7 @@ import {
   faGlobe,
   faBorderAll,
   faCommentDots,
+  faBell,
 } from "@fortawesome/free-solid-svg-icons";
 import { faYoutube } from "@fortawesome/free-brands-svg-icons";
 
@@ -25,6 +26,21 @@ const Header = (shouldFetch) => {
     }
   });
   const [isOpen, setIsOpen] = useState(false);
+  //notification
+  const [notifications, setNotifications] = useState([]);
+  const [showPopup, setShowPopup] = useState(false);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setNotifications([{ id: 1, message: "Bạn có thông báo mới!" }]);
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const handleClickNotification = () => {
+    setShowPopup(!showPopup);
+    setNotifications([]); // Xóa thông báo sau khi click
+  };
+
   //fetch user
   useEffect(() => {
     const fetchUser = () => {
@@ -77,7 +93,6 @@ const Header = (shouldFetch) => {
 
                           <span className="pt-1.5 text-[12px]">Tất cả</span>
                         </div>
-
                         <div
                           onClick={() => navigate("/user/jobs")}
                           className="pt-[5px] text-[#757575] flex justify-center flex-col !w-auto !max-w-none cursor-pointer transition ease-in-out duration-300 transform hover:-translate-y-[5px] hover:text-[#1E90FF] text-center"
@@ -99,6 +114,48 @@ const Header = (shouldFetch) => {
 
                           <span className="pt-1.5 text-[12px]">Nhắn tin</span>
                         </div>
+                        {/* notification */}
+                        <div
+                          onClick={handleClickNotification}
+                          className=" relative pt-[5px] text-[#757575] flex justify-center flex-col !w-auto !max-w-none cursor-pointer transition ease-in-out duration-300 transform hover:-translate-y-[5px] hover:text-[#1E90FF] text-center "
+                        >
+                          <FontAwesomeIcon
+                            icon={faBell}
+                            className="text-[22px]"
+                          />
+                          {notifications.length > 0 && (
+                            <span className="absolute top-0 right-5 w-2 h-2 bg-red-500 rounded-full z-[2]"></span>
+                          )}
+                          <span className="pt-1.5 text-[12px]">Thông báo</span>
+                        </div>
+                        {showPopup && (
+                          <div className="absolute  right-[8%] top-[7%] mt-2 !w-[300px] bg-white border shadow-lg rounded-lg p-2 z-[100000]">
+                            <h4 className="font-bold text-gray-700">
+                              Thông báo
+                            </h4>
+                            {notifications.length === 0 ? (
+                              <p className="text-gray-500 text-sm">
+                                Không có thông báo mới
+                              </p>
+                            ) : (
+                              notifications.map((item) => (
+                                <p
+                                  key={item.id}
+                                  className="text-sm text-gray-800"
+                                >
+                                  {item.message}
+                                </p>
+                              ))
+                            )}
+                            <button
+                              onClick={() => setShowPopup(false)}
+                              className="mt-2 text-blue-500 text-sm"
+                            >
+                              Đóng
+                            </button>
+                          </div>
+                        )}
+                        {/* avatar */}
                         <div
                           className="relative res-btn-loginHeader flex items-center justify-center gap-[10px] !w-max !max-w-none"
                           onClick={() => setIsOpen(!isOpen)}

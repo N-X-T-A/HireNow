@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   CheckBadgeIcon,
@@ -13,12 +13,66 @@ import {
   faFacebook,
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
-
+import { motion } from "framer-motion";
 const Profile = () => {
   const [user, setUser] = useState(() => {
     return JSON.parse(sessionStorage.getItem("user")) || null;
   });
   const navigate = useNavigate();
+  //test input
+  const [open, setOpen] = useState(false);
+  const [open1, setOpen1] = useState(false);
+
+  const [formData, setFormData] = useState({
+    company: "",
+    position: "",
+    duration: "",
+  });
+  const [formData1, setFormData1] = useState({
+    status: "",
+  });
+  const [workList, setWorkList] = useState([]);
+  const [statusList, setStatusList] = useState([]);
+
+  useEffect(() => {
+    const storedData = sessionStorage.getItem("workExperience");
+    if (storedData) {
+      setWorkList(JSON.parse(storedData));
+    }
+  }, []);
+
+  useEffect(() => {
+    const storedData = sessionStorage.getItem("postStatus");
+    if (storedData) {
+      setWorkList(JSON.parse(storedData));
+    }
+  }, []);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSave = () => {
+    if (!formData.company || !formData.position || !formData.duration) return;
+
+    const updatedList = [...workList, formData];
+    setWorkList(updatedList);
+    sessionStorage.setItem("workExperience", JSON.stringify(updatedList));
+    setFormData({ company: "", position: "", duration: "" });
+  };
+  const handleSave1 = () => {
+    if (!formData.status) return;
+
+    const updatedList = [...statusList, formData1];
+    setStatusList(updatedList);
+    sessionStorage.setItem("postStatus", JSON.stringify(updatedList));
+    setFormData1({ status: "" });
+  };
+  const handleClear = () => {
+    sessionStorage.removeItem("workExperience");
+    setWorkList([]);
+  };
+
   return (
     <div className="  w-full flex gap-3 justify-center">
       {/* left section */}
@@ -91,9 +145,57 @@ const Profile = () => {
                 </span>
               </div>
               <div className="flex gap-1 p-2 justify-center items-center">
-                <button className="px-4 py-2 rounded-[20px] bg-[#1E90FF] text-[white] font-[500] text-[14px]">
+                <button
+                  onClick={() => setOpen1(!open1)}
+                  className="px-4 py-2 rounded-[20px] bg-[#1E90FF] text-[white] font-[500] text-[14px]"
+                >
                   Tạo bài viết ngay
                 </button>
+                {/* testinput */}
+                {open1 && (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    onClick={() => setOpen1(!open1)}
+                    className="fixed inset-0 flex items-center justify-center bg-black/70 z-[999] w-full h-screen"
+                  >
+                    <motion.div
+                      initial={{ opacity: 0, y: 100 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 50 }}
+                      transition={{ duration: 0.3 }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                      }}
+                      className="md:w-[1000px] h-auto bg-white rounded-[10px] shadow-lg overflow-hidden   p-4"
+                    >
+                      <h2 className="text-xl font-bold mb-4">Thêm bài viết</h2>
+                      <input
+                        type="textArea"
+                        name="company"
+                        placeholder="Nội dung bài viết"
+                        value={formData.status}
+                        onChange={handleChange}
+                        className="w-full p-2 border rounded mb-2"
+                      />
+
+                      <button
+                        onClick={handleSave1}
+                        className="bg-blue-500 text-white px-4 py-2 rounded mr-2"
+                      >
+                        Lưu
+                      </button>
+                      <button
+                        onClick={handleClear}
+                        className="bg-red-500 text-white px-4 py-2 rounded"
+                      >
+                        Xóa tất cả
+                      </button>
+                    </motion.div>
+                  </motion.div>
+                )}
                 <PencilIcon className="w-5 h-5 p-[5px] rounded-full bg-[#1E90FF] text-white" />
               </div>
             </div>
@@ -195,7 +297,7 @@ const Profile = () => {
           style={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }}
         >
           <div className="w-full flex flex-col  rounded-lg p-2 border-[2px] border-dashed ">
-            {/* education header */}
+            {/* experiecne header */}
             <div className="  flex flex-col gap-1  w-full">
               <div className="flex  gap-2 p-2 justify-between items-center">
                 <span>
@@ -206,10 +308,95 @@ const Profile = () => {
                     Tìm hiểu thêm
                   </p>
                 </span>
-                <div className="flex gap-1 p-2 justify-center items-center">
+                <div
+                  onClick={() => setOpen(!open)}
+                  className="flex gap-1 p-2 justify-center items-center"
+                >
                   <PlusIcon className="w-5 h-5 p-[5px] rounded-full bg-[#1E90FF] text-white" />
                 </div>
+                {/* testinput */}
+                {open && (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    onClick={() => setOpen(!open)}
+                    className="fixed inset-0 flex items-center justify-center bg-black/70 z-[999] w-full h-screen"
+                  >
+                    <motion.div
+                      initial={{ opacity: 0, y: 100 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 50 }}
+                      transition={{ duration: 0.3 }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                      }}
+                      className="md:w-[1000px] h-auto bg-white rounded-[10px] shadow-lg overflow-hidden   p-4"
+                    >
+                      <h2 className="text-xl font-bold mb-4">
+                        Thêm Kinh Nghiệm Làm Việc
+                      </h2>
+                      <input
+                        type="text"
+                        name="company"
+                        placeholder="Tên công ty"
+                        value={formData.company}
+                        onChange={handleChange}
+                        className="w-full p-2 border rounded mb-2"
+                      />
+                      <input
+                        type="text"
+                        name="position"
+                        placeholder="Chức vụ"
+                        value={formData.position}
+                        onChange={handleChange}
+                        className="w-full p-2 border rounded mb-2"
+                      />
+                      <input
+                        type="text"
+                        name="duration"
+                        placeholder="Thời gian làm việc (VD: 2019-2025)"
+                        value={formData.duration}
+                        onChange={handleChange}
+                        className="w-full p-2 border rounded mb-2"
+                      />
+                      <button
+                        onClick={handleSave}
+                        className="bg-blue-500 text-white px-4 py-2 rounded mr-2"
+                      >
+                        Lưu
+                      </button>
+                      <button
+                        onClick={handleClear}
+                        className="bg-red-500 text-white px-4 py-2 rounded"
+                      >
+                        Xóa tất cả
+                      </button>
+                    </motion.div>
+                  </motion.div>
+                )}
               </div>
+              {workList.map((work, index) => (
+                <div key={index} className="p-2 flex gap-1 ">
+                  <img
+                    className="w-[40px] h-[40px] rounded-lg"
+                    src="/src/assets/user/companies.png"
+                    alt=""
+                  />
+                  <span className="!mb-0 flex flex-col justify-center ">
+                    <p className="!mb-0 font-[600] text-[15px]">
+                      {work.company}
+                    </p>
+                    <p className="!mb-0 font-[400] text-[12px] text-gray-400">
+                      {work.position}
+                    </p>
+                    <p className="!mb-0 font-[600] text-[10px] text-gray-400">
+                      {work.duration}
+                    </p>
+                  </span>
+                </div>
+              ))}
               <div className="p-2 flex gap-1 ">
                 <img
                   className="w-[40px] h-[40px] rounded-lg"
