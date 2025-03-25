@@ -1,6 +1,6 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { StepperContext } from "../../contexts/StepperContext";
-const Account = () => {
+const Account = ({ setIsStepValid }) => {
   const { userData, setUserData } = useContext(StepperContext);
   const [formData, setFormData] = useState({
     username: userData.name || "",
@@ -9,10 +9,16 @@ const Account = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-
     setUserData((prev) => ({ ...prev, [name]: value }));
   };
   console.log(userData);
+
+  //kiem tra du lieu hop le
+  useEffect(() => {
+    setIsStepValid(
+      formData.username.trim() !== "" && formData.phone.trim() !== ""
+    );
+  }, [formData, setIsStepValid]);
   return (
     <div className="flex flex-col">
       <div className="w-full mx-2 flex-1">

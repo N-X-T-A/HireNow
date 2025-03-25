@@ -148,16 +148,17 @@ export default function LoginMethod() {
     "Hoàn tất",
   ];
   const RecuiterStep = ["Thông tin Công ty", "Chi tiết", "Hoàn tất"];
+  const [isStepValid, setIsStepValid] = useState(false);
   const displayStep = (step) => {
     switch (step) {
       case 1:
-        return <Account />;
+        return <Account setIsStepValid={setIsStepValid} />;
       case 2:
-        return <JobRecommend />;
+        return <JobRecommend setIsStepValid={setIsStepValid} />;
       case 3:
-        return <Salary />;
+        return <Salary setIsStepValid={setIsStepValid} />;
       case 4:
-        return <Final />;
+        return <Final setIsStepValid={setIsStepValid} />;
       default:
     }
   };
@@ -175,6 +176,7 @@ export default function LoginMethod() {
 
   const handleClick = async (action) => {
     if (action === "Tiếp theo") {
+      if (!isStepValid) return;
       if (currentStep === steps.length) {
         console.log("Dữ liệu cuối cùng:", userData);
         setFinalData(userData);
@@ -274,6 +276,7 @@ export default function LoginMethod() {
                   handleClick={handleClick}
                   currentStep={currentStep}
                   steps={steps}
+                  isStepValid={isStepValid}
                 />
               </div>
             )

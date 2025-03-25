@@ -3,7 +3,7 @@ import axios from "axios";
 import { StepperContext } from "../../contexts/StepperContext";
 import Multiselect from "multiselect-react-dropdown";
 
-const Salary = () => {
+const Salary = ({ setIsStepValid }) => {
   const { userData, setUserData } = useContext(StepperContext);
 
   const [jobListings, setJobListings] = useState([]);
@@ -58,7 +58,17 @@ const Salary = () => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
-
+  // Kiểm tra dữ liệu hợp lệ
+  useEffect(() => {
+    setIsStepValid(
+      formData.company_name.trim() !== "" &&
+        formData.start_date.trim() !== "" &&
+        formData.end_date.trim() !== "" &&
+        formData.position.trim() !== "" &&
+        skills.length > 0 &&
+        formData.description.trim() !== ""
+    );
+  }, [formData, skills, setIsStepValid]);
   console.log(skills);
   return (
     <div className="flex flex-col">

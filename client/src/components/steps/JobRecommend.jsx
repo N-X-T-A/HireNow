@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { StepperContext } from "../../contexts/StepperContext";
 
-const JobRecommend = () => {
+const JobRecommend = ({ setIsStepValid }) => {
   const { userData, setUserData } = useContext(StepperContext);
   const [formData, setFormData] = useState({
     institution: userData.education?.[0]?.school || "",
@@ -12,6 +12,7 @@ const JobRecommend = () => {
     description: userData.education?.[0]?.description || "",
   });
 
+  //
   useEffect(() => {
     setUserData((prev) => ({
       ...prev,
@@ -23,6 +24,18 @@ const JobRecommend = () => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
+
+  //kiem tra
+  useEffect(() => {
+    setIsStepValid(
+      formData.institution.trim() !== "" &&
+        formData.degree.trim() !== "" &&
+        formData.field_of_study.trim() !== "" &&
+        formData.start_date.trim() !== "" &&
+        formData.end_date.trim() !== "" &&
+        formData.description.trim() !== ""
+    );
+  }, [formData, setIsStepValid]);
 
   return (
     <div className="flex flex-col ">

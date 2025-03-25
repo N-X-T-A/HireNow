@@ -1,6 +1,6 @@
 import React from "react";
 
-const StepperControl = ({ handleClick, currentStep, steps }) => {
+const StepperControl = ({ handleClick, currentStep, steps, isStepValid }) => {
   return (
     <div className="container flex justify-around mt-4 mb-8">
       {/* back button */}
@@ -13,7 +13,9 @@ const StepperControl = ({ handleClick, currentStep, steps }) => {
       {/* next button */}
       <button
         onClick={() => handleClick("Tiếp theo")}
-        className="bg-[#1E90FF] text-white uppercase py-2 px-4 rounded-xl font-semibold cursor-pointer  hover:bg-slate-700 hover:text-white transition duration-200 ease-in-out"
+        className={`bg-[#1E90FF] text-white uppercase py-2 px-4 rounded-xl font-semibold 
+          ${!isStepValid ? "opacity-50 !cursor-not-allowed" : "hover:bg-slate-700 hover:text-white cursor-pointer"}`}
+        disabled={!isStepValid}
       >
         {currentStep == steps.length - 1 ? "Xác nhận" : "Tiếp theo"}
       </button>
