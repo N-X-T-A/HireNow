@@ -42,6 +42,7 @@ export default function LoginMethod() {
   const [currentStep, setCurrentStep] = useState(1);
   const [userData, setUserData] = useState("");
   const [finalData, setFinalData] = useState([]);
+  const [isStepValid, setIsStepValid] = useState(false);
   //login normal
   const [formData, setFormData] = useState({ email: "", password: "" });
   const handleChange = (e) => {
@@ -148,7 +149,7 @@ export default function LoginMethod() {
     "Hoàn tất",
   ];
   const RecuiterStep = ["Thông tin Công ty", "Chi tiết", "Hoàn tất"];
-  const [isStepValid, setIsStepValid] = useState(false);
+
   const displayStep = (step) => {
     switch (step) {
       case 1:
