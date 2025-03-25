@@ -1,20 +1,28 @@
 "use strict";
 const express = require("express");
 const router = express.Router();
-
 const ChatController = require("../controllers/chat.controller");
 const asyncHandler = require("express-async-handler");
+const { verifyToken } = require("../middleware/auth");
 
-router.post("/start", asyncHandler(ChatController.startConversation));
-router.get(
-  "/conversations/:userId/:role",
-  asyncHandler(ChatController.getConversations)
-);
+router.post("/message", verifyToken, asyncHandler(ChatController.sendMessage));
+
 router.get(
   "/messages/:conversation_id",
+  verifyToken,
   asyncHandler(ChatController.getMessages)
 );
-router.post("/send", asyncHandler(ChatController.sendMessage));
-router.put("/edit", asyncHandler(ChatController.editMessage));
+
+router.get(
+  "/conversations",
+  verifyToken,
+  asyncHandler(ChatController.getConversations)
+);
+
+router.post(
+  "/messages/read",
+  verifyToken,
+  asyncHandler(ChatController.markMessagesAsRead)
+);
 
 module.exports = router;

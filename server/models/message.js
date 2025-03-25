@@ -13,6 +13,7 @@ const messageSchema = new mongoose.Schema({
     required: true,
   },
   content: { type: String, required: true },
+  is_read: { type: Boolean, default: false },
   createdAt: { type: Date, default: Date.now, expires: "180d" },
 });
 

@@ -17,5 +17,6 @@ router.use("/api/v1/upload", require("./upload.routes"));
 router.use("/api/v1/application", require("./application.routes"));
 router.use("/api/v1/favorite", require("./favorite.routes"));
 router.use("/api/v1/company", require("./company.routes"));
+router.use("/api/v1/chat", require("./chat.routes"));
 
 module.exports = router;
