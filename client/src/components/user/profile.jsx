@@ -21,28 +21,17 @@ const Profile = () => {
   const navigate = useNavigate();
   //test input
   const [open, setOpen] = useState(false);
-  const [open1, setOpen1] = useState(false);
 
   const [formData, setFormData] = useState({
     company: "",
     position: "",
     duration: "",
   });
-  const [formData1, setFormData1] = useState({
-    status: "",
-  });
+
   const [workList, setWorkList] = useState([]);
-  const [statusList, setStatusList] = useState([]);
 
   useEffect(() => {
     const storedData = sessionStorage.getItem("workExperience");
-    if (storedData) {
-      setWorkList(JSON.parse(storedData));
-    }
-  }, []);
-
-  useEffect(() => {
-    const storedData = sessionStorage.getItem("postStatus");
     if (storedData) {
       setWorkList(JSON.parse(storedData));
     }
@@ -60,19 +49,44 @@ const Profile = () => {
     sessionStorage.setItem("workExperience", JSON.stringify(updatedList));
     setFormData({ company: "", position: "", duration: "" });
   };
-  const handleSave1 = () => {
-    if (!formData.status) return;
 
-    const updatedList = [...statusList, formData1];
-    setStatusList(updatedList);
-    sessionStorage.setItem("postStatus", JSON.stringify(updatedList));
-    setFormData1({ status: "" });
-  };
   const handleClear = () => {
     sessionStorage.removeItem("workExperience");
     setWorkList([]);
   };
 
+  //posst
+  const [open1, setOpen1] = useState(false);
+
+  const [formData1, setFormData1] = useState({
+    statusPost: "",
+  });
+
+  const [statusList, setStatusList] = useState([]);
+
+  useEffect(() => {
+    const storedData1 = sessionStorage.getItem("postStatus");
+    if (storedData1) {
+      setStatusList(JSON.parse(storedData1));
+    }
+  }, []);
+
+  const handleChange1 = (e) => {
+    setFormData1({ ...formData1, [e.target.name]: e.target.value });
+  };
+
+  const handleSave1 = () => {
+    if (!formData1.statusPost) return;
+
+    const updatedList1 = [...statusList, formData1];
+    setStatusList(updatedList1);
+    sessionStorage.setItem("postStatus", JSON.stringify(updatedList1));
+    setFormData1({ statusPost: "" });
+  };
+  const handleClear1 = () => {
+    sessionStorage.removeItem("postStatus");
+    setStatusList([]);
+  };
   return (
     <div className="  w-full flex gap-3 justify-center">
       {/* left section */}
@@ -174,10 +188,10 @@ const Profile = () => {
                       <h2 className="text-xl font-bold mb-4">Thêm bài viết</h2>
                       <input
                         type="textArea"
-                        name="company"
+                        name="statusPost"
                         placeholder="Nội dung bài viết"
-                        value={formData.status}
-                        onChange={handleChange}
+                        value={formData1.statusPost}
+                        onChange={handleChange1}
                         className="w-full p-2 border rounded mb-2"
                       />
 
@@ -188,7 +202,7 @@ const Profile = () => {
                         Lưu
                       </button>
                       <button
-                        onClick={handleClear}
+                        onClick={handleClear1}
                         className="bg-red-500 text-white px-4 py-2 rounded"
                       >
                         Xóa tất cả
@@ -196,6 +210,7 @@ const Profile = () => {
                     </motion.div>
                   </motion.div>
                 )}
+
                 <PencilIcon className="w-5 h-5 p-[5px] rounded-full bg-[#1E90FF] text-white" />
               </div>
             </div>
@@ -207,6 +222,34 @@ const Profile = () => {
                 msOverflowStyle: "none",
               }}
             >
+              {/* post */}
+              {statusList.map((stat, index) => (
+                <div
+                  key={index}
+                  className="flex flex-col gap-2  p-2 rounded-lg border-[1px] md:min-w-[500px] max-w-[500px]"
+                >
+                  <div className="flex gap-2 items-center">
+                    <img
+                      src={user?.photoURL}
+                      alt=""
+                      className="w-10 h-10 rounded-full"
+                    />
+                    <div className="flex flex-col ">
+                      <p className="!mb-0 text-[14px] font-[500]">
+                        {user?.username}
+                      </p>
+                      <p className="!mb-0 text-[14px] font-[500] text-gray-500">
+                        vừa xong
+                      </p>
+                    </div>
+                  </div>
+                  {/* content post */}
+                  <p className="p-2 !mb-0 w-full text-justify line-clamp-7">
+                    {stat.statusPost}
+                  </p>
+                </div>
+              ))}
+
               {/* post */}
               <div className="flex flex-col gap-2  p-2 rounded-lg border-[1px] md:min-w-[500px] max-w-[500px]">
                 <div className="flex gap-2 items-center">
@@ -471,7 +514,7 @@ const Profile = () => {
               <div className="flex  gap-2 p-2 justify-between items-center">
                 <span>
                   <p className="!mb-0 font-[500] text-[15px]">
-                    Kinh nghiệm của bạn
+                    Kỹ năng của bạn
                   </p>
                   <p className="!mb-0 text-[13px] text-blue-600">
                     Tìm hiểu thêm

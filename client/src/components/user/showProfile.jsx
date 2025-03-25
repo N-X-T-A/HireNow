@@ -7,6 +7,7 @@ import {
   faFacebook,
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
+import JobP3Header from "./jobP3Header";
 
 const ShowProfileComponent = () => {
   return (
@@ -53,9 +54,6 @@ const ShowProfileComponent = () => {
                   </p>
                 </div>
                 <div className="flex flex-col gap-2">
-                  <button className="px-4 py-2 rounded-[20px] bg-[#1E90FF] text-[white] font-[500] ">
-                    Nhắn tin
-                  </button>
                   <button className="px-4 py-2 rounded-[20px] border-[1px] border-[#1E90FF] text-[#1E90FF] font-[500] ">
                     Link
                   </button>
@@ -205,9 +203,6 @@ const ShowProfileComponent = () => {
               <p className="!mb-0 font-[500] text-[14px]">
                 Liên kết mạng xã hội
               </p>
-              <div className="flex gap-1 p-2 justify-center items-center">
-                <PlusIcon className="w-5 h-5 p-[5px] rounded-full bg-[#1E90FF] text-white" />
-              </div>
             </span>
             <p className="!mb-0 cursor-pointer">
               <FontAwesomeIcon icon={faGithub} />{" "}

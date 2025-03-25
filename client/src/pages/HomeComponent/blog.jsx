@@ -25,7 +25,7 @@ const Blog = () => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
         viewport={{ once: true, amount: 0.3 }}
-        className="w-full flex items-center justify-items-center justify-center justify-between "
+        className="w-full flex items-center justify-items-center  justify-between "
       >
         <div className="flex gap-2">
           <button className="relative px-[20px] py-[10px] border-2 bg-black text-white rounded-[20px]  overflow-hidden transition-all duration-500 ease-in-out group transform hover:-translate-y-[5px]  hover:border-black">

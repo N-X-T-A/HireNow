@@ -21,6 +21,7 @@ import { ShowProfile } from "./pages/User/showProfile";
 import ShowCompanieProfile from "./pages/User/showCompanieProfile";
 import Register from "./pages/Access/register";
 import JobApply from "./pages/User/jobApply";
+import Blogs from "./pages/Blogs";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Router>
@@ -30,6 +31,7 @@ createRoot(document.getElementById("root")).render(
         <Route path="/login" element={<Login />} />
         <Route path="/test" element={<Test />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/blogs" element={<Blogs />} />
 
         {/* Private Employee route */}
         <Route element={<PrivateRoute allowedRoles={["candidate"]} />}>

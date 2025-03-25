@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { PaperAirplaneIcon } from "@heroicons/react/24/outline";
 const ChatDetail = ({ selectedConversation, messages, onSendMessage }) => {
   const [message, setMessage] = useState("");
 
@@ -10,7 +10,7 @@ const ChatDetail = ({ selectedConversation, messages, onSendMessage }) => {
   };
 
   return (
-    <div className="flex flex-col h-full overflow-hidden">
+    <div className="flex flex-col border-2 p-4 h-full overflow-hidden">
       <div className="flex items-center gap-4 p-4 border-b bg-white">
         <img
           src={selectedConversation.partner.photoURL}
@@ -27,18 +27,22 @@ const ChatDetail = ({ selectedConversation, messages, onSendMessage }) => {
         </div>
       </div>
 
-      <div className="flex-1 overflow-y-auto p-4">
+      <div className=" flex-1 overflow-y-auto p-4">
         {messages.length > 0 ? (
           messages.map((msg, index) => (
             <div
               key={msg._id}
-              className={`mb-2.5 p-2.5 rounded-md max-w-xs ${msg.sender_id === selectedConversation.partner._id ? "bg-gray-100" : "bg-blue-100"}`}
+              className={` rounded-md w-full  ${msg.sender_id === selectedConversation.partner._id ? "text-left" : "text-right"}`}
             >
-              <p>{msg.content}</p>
+              <p
+                className={`inline-block p-3 rounded-lg ${msg.sender_id === selectedConversation.partner._id ? "bg-gray-100" : "bg-blue-100"}`}
+              >
+                {msg.content}
+              </p>
             </div>
           ))
         ) : (
-          <p className="text-gray-500 text-center">No messages yet</p>
+          <p className="text-gray-500 text-center">Chưa có tin nhắn nào</p>
         )}
       </div>
 
@@ -46,14 +50,14 @@ const ChatDetail = ({ selectedConversation, messages, onSendMessage }) => {
         <textarea
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          placeholder="Type a message"
-          className="flex-1 p-2 border-none rounded-md focus:border-none focus:outline-none resize-none"
+          placeholder="Nhập tin nhắn"
+          className="flex-[9] p-2 border-1 rounded-md focus:border-2 focus:outline-none resize-none"
         />
         <button
           onClick={handleSendMessage}
-          className="p-2 bg-blue-500 text-white rounded"
+          className="p-2 flex-[1] bg-blue-500 text-white flex items-center justify-center rounded h-full"
         >
-          Send
+          <PaperAirplaneIcon className="w-6 h-6" />
         </button>
       </div>
     </div>
