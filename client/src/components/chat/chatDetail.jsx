@@ -1,68 +1,61 @@
-import { useState, useEffect } from "react";
+import React, { useState } from "react";
 
-const ChatDetail = ({ chatId }) => {
-  const [messages, setMessages] = useState([]);
-  const [newMessage, setNewMessage] = useState("");
+const ChatDetail = ({ selectedConversation, messages, onSendMessage }) => {
+  const [message, setMessage] = useState("");
 
-  useEffect(() => {
-    if (chatId) {
-      setMessages([
-        { id: 1, text: "Xin chào!", sender: "user" },
-        { id: 2, text: "Chào bạn!", sender: "me" },
-      ]);
-    }
-  }, [chatId]);
-
-  const sendMessage = () => {
-    if (newMessage.trim()) {
-      setMessages([
-        ...messages,
-        { id: Date.now(), text: newMessage, sender: "me" },
-      ]);
-      setNewMessage("");
-    }
+  const handleSendMessage = () => {
+    if (!message.trim()) return;
+    onSendMessage(message);
+    setMessage("");
   };
 
   return (
-    <div
-      className="w-full flex flex-col rounded-lg"
-      style={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }}
-    >
-      {chatId ? (
-        <>
-          <div className="flex-1 overflow-y-auto">
-            {messages.map((msg) => (
-              <div
-                key={msg.id}
-                className={`p-2 my-1 ${msg.sender === "me" ? "text-right" : "text-left"}`}
-              >
-                <span
-                  className={`inline-block p-2 rounded-lg ${msg.sender === "me" ? "bg-blue-500 text-white" : "bg-gray-200"}`}
-                >
-                  {msg.text}
-                </span>
-              </div>
-            ))}
-          </div>
-          <div className="p-2 border-t flex">
-            <input
-              type="text"
-              value={newMessage}
-              onChange={(e) => setNewMessage(e.target.value)}
-              className="flex-1 p-2 border rounded"
-              placeholder="Nhập tin nhắn..."
-            />
-            <button
-              onClick={sendMessage}
-              className="ml-2 p-2 bg-blue-500 text-white rounded"
+    <div className="flex flex-col h-full overflow-hidden">
+      <div className="flex items-center gap-4 p-4 border-b bg-white">
+        <img
+          src={selectedConversation.partner.photoURL}
+          alt={selectedConversation.partner.username}
+          className="w-12 h-12 rounded-full"
+        />
+        <div className="flex flex-col">
+          <p className="text-lg font-semibold">
+            {selectedConversation.partner.username}
+          </p>
+          <p className="text-sm text-gray-500">
+            {selectedConversation.partner.email}
+          </p>
+        </div>
+      </div>
+
+      <div className="flex-1 overflow-y-auto p-4">
+        {messages.length > 0 ? (
+          messages.map((msg, index) => (
+            <div
+              key={msg._id}
+              className={`mb-2.5 p-2.5 rounded-md max-w-xs ${msg.sender_id === selectedConversation.partner._id ? "bg-gray-100" : "bg-blue-100"}`}
             >
-              Gửi
-            </button>
-          </div>
-        </>
-      ) : (
-        <div className="text-center p-4">Chọn cuộc trò chuyện</div>
-      )}
+              <p>{msg.content}</p>
+            </div>
+          ))
+        ) : (
+          <p className="text-gray-500 text-center">No messages yet</p>
+        )}
+      </div>
+
+      <div className="p-4 flex items-center gap-2 border-t-1">
+        <textarea
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          placeholder="Type a message"
+          className="flex-1 p-2 border-none rounded-md focus:border-none focus:outline-none resize-none"
+        />
+        <button
+          onClick={handleSendMessage}
+          className="p-2 bg-blue-500 text-white rounded"
+        >
+          Send
+        </button>
+      </div>
     </div>
   );
 };

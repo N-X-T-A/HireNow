@@ -1,5 +1,5 @@
 "use strict";
-const { Conversation, Message, UserProfile } = require("../models");
+const { Conversation, Message, UserProfile, User } = require("../models");
 
 class ChatService {
   async sendMessage(conversation_id, sender_id, content) {
@@ -38,11 +38,14 @@ class ChatService {
   }
 
   async getConversations(user_id) {
+    const user = await User.findById(user_id).lean();
+    if (!user) return [];
+
     const conversations = await Conversation.find({
       $or: [{ applicant_id: user_id }, { recruiter_id: user_id }],
     })
       .populate("applicant_id", "_id")
-      .populate("recruiter_id", "_id")
+      .populate("recruiter_id", "_id companyId")
       .sort({ last_message_time: -1 })
       .lean();
 
@@ -63,10 +66,29 @@ class ChatService {
       return acc;
     }, {});
 
+    let companyMap = {};
+    if (user.role === "candidate") {
+      const recruiters = conversations.map((conv) => conv.recruiter_id._id);
+      const companies = await User.find({ _id: { $in: recruiters } })
+        .populate("companyId", "name")
+        .lean();
+      companyMap = companies.reduce((acc, recruiter) => {
+        acc[recruiter._id.toString()] = recruiter.companyId
+          ? recruiter.companyId.name
+          : "Unknown Company";
+        return acc;
+      }, {});
+    }
+
     return conversations.map((conv) => {
       const isRecruiter = conv.recruiter_id._id.toString() === user_id;
       const partner = isRecruiter ? conv.applicant_id : conv.recruiter_id;
       const partnerProfile = profileMap[partner._id.toString()] || {};
+
+      let partnerName = partnerProfile.username || "Unknown";
+      if (!isRecruiter && user.role === "candidate") {
+        partnerName = companyMap[partner._id.toString()] || "Unknown Company";
+      }
 
       return {
         _id: conv._id,
@@ -75,7 +97,7 @@ class ChatService {
         unread_count: conv.unread_count,
         partner: {
           _id: partner._id,
-          username: partnerProfile.username || "Unknown",
+          username: partnerName,
           photoURL:
             partnerProfile.photoURL ||
             "https://res.cloudinary.com/dna4rtodi/image/upload/v1738904017/avatar_dzjb7j.png",

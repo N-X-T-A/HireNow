@@ -1,57 +1,49 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
-const ChatList = ({ onSelectChat }) => {
-  const [chats, setChats] = useState([
-    {
-      id: 1,
-      image: "/src/assets/login/3.webp",
-      lastMessage: "Xin chào!",
-      name: "Nguyễn Văn A",
-    },
-    {
-      id: 2,
-      image: "/src/assets/login/1.webp",
-      lastMessage: "Xin chào!",
-      name: "Trần Thị B",
-    },
-    {
-      id: 3,
-      image: "/src/assets/login/2.webp",
-      lastMessage: "Xin chào!",
-      name: "Trần Thị C",
-    },
-    {
-      id: 4,
-      image: "/src/assets/login/4.webp",
-      lastMessage: "Xin chào!",
-      name: "Trần Thị D",
-    },
-  ]);
+const ChatList = ({ conversations, onSelectUser }) => {
+  const [search, setSearch] = useState("");
+
+  const filteredConversations = conversations.filter((conversation) =>
+    conversation.partner.username.toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
-    <div
-      className="h-[800px] rounded-lg"
-      style={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }}
-    >
-      <div className="">
-        {chats.map((chat) => (
-          <div
-            key={chat.id}
-            onClick={() => onSelectChat(chat.id)}
-            className="p-3 flex gap-4 items-center border-b hover:bg-gray-100 cursor-pointer"
-          >
-            <img
-              src={chat.image}
-              alt=""
-              className="w-14 h-14 rounded-full object-cover"
-            />
-            <span className="flex flex-col gap-2 ">
-              <p className="!mb-0">{chat.name}</p>
-              <p className="!mb-0 text-gray-500">{chat.lastMessage}</p>
-            </span>
-          </div>
-        ))}
-      </div>
+    <div className="w-full h-full bg-white shadow-md rounded-lg p-4 flex flex-col">
+      <input
+        type="text"
+        placeholder="Search..."
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        className="w-full p-2 border rounded-md mb-4"
+      />
+
+      <ul className="flex-1 overflow-y-auto space-y-2">
+        {filteredConversations.length > 0 ? (
+          filteredConversations.map((conversation) => (
+            <li
+              key={conversation._id}
+              className="flex items-center gap-3 p-2 border-b cursor-pointer hover:bg-gray-100"
+              onClick={() => onSelectUser(conversation)}
+            >
+              <img
+                src={conversation.partner.photoURL}
+                alt={conversation.partner.username}
+                className="w-10 h-10 rounded-full"
+              />
+              <div className="flex-1">
+                <p className="font-semibold">{conversation.partner.username}</p>
+                <p className="text-sm text-gray-500 line-clamp-2">
+                  {conversation.last_message}
+                </p>
+              </div>
+            </li>
+          ))
+        ) : (
+          <p className="text-gray-500 text-center mt-4">
+            No conversations found
+          </p>
+        )}
+      </ul>
     </div>
   );
 };
