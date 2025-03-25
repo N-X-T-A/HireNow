@@ -1,4 +1,11 @@
-const { Application, Job, UserProfile, Company } = require("../models/");
+const {
+  Application,
+  Job,
+  UserProfile,
+  Company,
+  Conversation,
+  Message,
+} = require("../models/");
 const { formatLocations } = require("../utils/format");
 
 class ApplicationService {
@@ -129,6 +136,60 @@ class ApplicationService {
       console.error("Error in getApplicants:", error);
       throw new Error("Failed to fetch applicants. Please try again later.");
     }
+  }
+
+  async updateApplicationStatus(applicationId, status, recruiterId) {
+    const validStatuses = ["Pending", "Interview", "Rejected", "Accepted"];
+    if (!validStatuses.includes(status)) {
+      throw { statusCode: 400, message: "Invalid status value provided." };
+    }
+
+    const messageContent = {
+      Interview:
+        "You have been selected for an interview. Please check your email for details.",
+      Accepted: "Congratulations! You have been accepted. Welcome aboard.",
+      Rejected:
+        "Unfortunately, you were not selected. We wish you the best in your future endeavors.",
+    };
+
+    const application = await Application.findById(applicationId).populate(
+      "user_id"
+    );
+    if (!application) {
+      throw { statusCode: 404, message: "Application not found" };
+    }
+
+    application.status = status;
+    await application.save();
+
+    const candidateId = application.user_id._id;
+
+    let conversation = await Conversation.findOne({
+      applicant_id: candidateId,
+      recruiter_id: recruiterId,
+    });
+
+    if (!conversation) {
+      conversation = await Conversation.create({
+        applicant_id: candidateId,
+        recruiter_id: recruiterId,
+        last_message: "",
+      });
+    }
+
+    if (status !== "Pending") {
+      const newMessage = await Message.create({
+        conversation_id: conversation._id,
+        sender_id: recruiterId,
+        content: messageContent[status],
+      });
+
+      conversation.last_message = messageContent[status];
+      conversation.last_message_time = newMessage.createdAt;
+      await conversation.save();
+    }
+
+    return application;
   }
 }
 

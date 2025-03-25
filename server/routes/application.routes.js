@@ -16,4 +16,11 @@ router.get(
   applicationController.getApplicants
 );
 
+router.put(
+  "/update-status",
+  verifyToken,
+  isRecruiter,
+  applicationController.updateApplicationStatus
+);
+
 module.exports = router;

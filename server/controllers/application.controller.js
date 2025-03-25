@@ -87,6 +87,34 @@ class ApplicationController {
       });
     }
   }
+
+  async updateApplicationStatus(req, res) {
+    try {
+      if (req.user.role !== "recruiter") {
+        return res.status(403).json({
+          message: "Only recruiters can update application statuses.",
+        });
+      }
+
+      const { applicationId, status } = req.body;
+
+      const updatedApplication =
+        await applicationService.updateApplicationStatus(
+          applicationId,
+          status,
+          req.user.id
+        );
+
+      res.status(200).json({
+        message: "Application status updated successfully!",
+        metadata: updatedApplication,
+      });
+    } catch (error) {
+      res.status(error.statusCode || 500).json({
+        message: error.message || "Internal Server Error",
+      });
+    }
+  }
 }
 
 module.exports = new ApplicationController();
