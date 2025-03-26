@@ -1,0 +1,31 @@
+.custom-quill .ql-container {
+  border: none !important;
+  font-size: 14px !important;
+  font-family: "Roboto Condensed";
+}
+
+.custom-quill .ql-toolbar {
+  border: none !important;
+  background: white !important;
+  border-bottom: 1px solid #d1d5db !important;
+  font-family: "Roboto Condensed";
+}
+
+.custom-quill .ql-editor {
+  min-height: 150px !important;
+  font-size: 14px !important;
+  padding: 10px !important;
+  font-family: "Roboto Condensed";
+}
+
+.ql-editor.ql-blank {
+  height: 231px;
+}
+
+.ql-editor {
+  height: 231px;
+}
+
+.ql-toolbar.ql-snow {
+  background: none !important;
+}
