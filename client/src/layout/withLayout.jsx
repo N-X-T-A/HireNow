@@ -1,4 +1,4 @@
-import Footer from "../components/footer";
+import Foot from "../components/Foot/foot";
 import Header from "../components/header/header";
 
 const withLayout = (WrappedComponent) => {

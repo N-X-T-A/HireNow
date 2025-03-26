@@ -291,7 +291,10 @@ const Header = (shouldFetch) => {
                   </>
                 ) : (
                   <>
-                    <div className="pt-[5px] text-[#757575] flex justify-center flex-col !w-auto !max-w-none cursor-pointer transition ease-in-out duration-300 transform hover:-translate-y-[5px] hover:text-[#1E90FF] text-center">
+                    <div
+                      onClick={() => navigate("/blogs")}
+                      className="pt-[5px] text-[#757575] flex justify-center flex-col !w-auto !max-w-none cursor-pointer transition ease-in-out duration-300 transform hover:-translate-y-[5px] hover:text-[#1E90FF] text-center"
+                    >
                       <FontAwesomeIcon
                         icon={faNewspaper}
                         className="text-[22px]"
@@ -299,29 +302,6 @@ const Header = (shouldFetch) => {
                       <span className="pt-1.5 text-[12px]">Bài viết</span>
                     </div>
 
-                    <div className="pt-[5px] text-[#757575] flex justify-center flex-col !w-auto !max-w-none cursor-pointer transition ease-in-out duration-300 transform hover:-translate-y-[5px] hover:text-[#1E90FF] text-center">
-                      <FontAwesomeIcon icon={faUser} className="text-[22px]" />
-                      <span className="pt-1.5 text-[12px]">Mọi người</span>
-                    </div>
-                    <div className="pt-[5px] text-[#757575] flex justify-center flex-col !w-auto !max-w-none cursor-pointer transition ease-in-out duration-300 transform hover:-translate-y-[5px] hover:text-[#1E90FF] text-center">
-                      <FontAwesomeIcon
-                        icon={faYoutube}
-                        className="text-[22px]"
-                      />
-                      <span className="pt-1.5 text-[12px]">Khóa học</span>
-                    </div>
-                    <div className="pt-[5px] text-[#757575] flex justify-center flex-col !w-auto !max-w-none cursor-pointer transition ease-in-out duration-300 transform hover:-translate-y-[5px] hover:text-[#1E90FF] text-center">
-                      <FontAwesomeIcon
-                        icon={faBriefcase}
-                        className="text-[22px]"
-                      />
-                      <span className="pt-1.5 text-[12px]">Việc làm</span>
-                    </div>
-                    <div className=" pt-[5px] text-[#757575] flex justify-center flex-col !w-auto !max-w-none cursor-pointer transition ease-in-out duration-300 transform hover:-translate-y-[5px] hover:text-[#1E90FF] text-center">
-                      <FontAwesomeIcon icon={faGlobe} className="text-[22px]" />
-                      <span className="pt-1.5 text-[12px]">Thị trường</span>
-                    </div>
-                    <span className="border-r !w-max !max-w-none"></span>
                     <div className="res-btn-loginHeader flex items-center justify-center gap-[10px] !w-max !max-w-none ">
                       <button
                         onClick={() => navigate("/register")}

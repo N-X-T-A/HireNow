@@ -773,3 +773,87 @@ export const Companyjobs = [
     time: "2 days ago",
   },
 ];
+
+export const blogPosts = [
+  {
+    id: 1,
+    title: " Cách phát hiện gian lận tuyển dụng.",
+    author: "Olivia Rhye",
+    date: "20 Tháng 1, 2024",
+    description:
+      " Phát hiện gian lận trong tuyển dụng là một vấn đề quan trọng để bảo vệ ứng viên cũng như doanh nghiệp. Dưới đây là một số cách để nhận biết và phòng tránh gian lận trong tuyển dụng. Phát hiện gian lận trong tuyển dụng là một vấn đề quan trọng để bảo vệ ứng viên cũng như doanh nghiệp.",
+    tags: ["Thiết kế", "Nghiên cứu", "Phỏng vấn"],
+    image: "/src/assets/home/artical.jpg",
+  },
+  {
+    id: 2,
+    title: "Sự theo đuổi không ngừng cho sự hoàn hảo trong thiết kế sản phẩm",
+    author: "Phoenix Baker",
+    date: "19 Tháng 1, 2024",
+    description:
+      "Tôi bắt đầu nhận thấy rằng có sự khác biệt rõ ràng giữa thiết kế sản phẩm được làm tốt...",
+    tags: ["Thiết kế", "Nghiên cứu"],
+    image: "/src/assets/home/2242.jpg",
+  },
+  {
+    id: 3,
+    title: "Cách điều hành doanh nghiệp thành công cùng đối tác của bạn",
+    author: "Lana Steiner",
+    date: "18 Tháng 1, 2024",
+    description:
+      "Việc khởi nghiệp cùng vợ/chồng hoặc người yêu là một trải nghiệm thú vị nhưng cũng đầy thử thách...",
+    tags: ["Kinh doanh", "Nghiên cứu"],
+    image: "/src/assets/home/2412.jpg",
+  },
+  {
+    id: 4,
+    title: "Tại sao thực phẩm quan trọng – Phòng ngừa và điều trị bệnh",
+    author: "Lana Steiner",
+    date: "18 Tháng 1, 2024",
+    description:
+      "Ăn nhiều rau và ít thịt đã được chứng minh là giúp kéo dài tuổi thọ và cải thiện sức khỏe...",
+    tags: ["Sức khỏe", "Nghiên cứu"],
+    image: "/src/assets/home/3765.jpg",
+  },
+  {
+    id: 5,
+    title: "Lịch sử không ngừng mở rộng – Hillview của Made by Hand",
+    author: "Alec Whitten",
+    date: "17 Tháng 1, 2024",
+    description:
+      "Một tòa nhà đơn độc nằm trên ngọn đồi ở Hillview, một nhà kho lịch sử 240 năm tuổi...",
+    tags: ["Thiết kế", "Kiến trúc"],
+    image: "/src/assets/home/21501.jpg",
+  },
+  {
+    id: 6,
+    title: "Cognitive Dissonance Theory: Khóa học cấp tốc cho nhà thiết kế UX",
+    author: "Demi Wilkinson",
+    date: "16 Tháng 1, 2024",
+    description:
+      "Chúng ta thường nghĩ về bản thân theo một cách nhất định, nhưng đôi khi hành động của chúng ta lại không đồng nhất...",
+    tags: ["Sản phẩm", "Nghiên cứu", "Khung làm việc"],
+    image: "/src/assets/home/high.webp",
+  },
+  {
+    id: 7,
+    title:
+      "Làm thế nào công việc từ xa cải thiện đáng kể kỹ năng thiết kế của tôi",
+    author: "Candice Wu",
+    date: "15 Tháng 1, 2024",
+    description:
+      "Làm việc từ xa không chỉ khả thi mà còn có thể mang lại nhiều lợi ích...",
+    tags: ["Thiết kế", "Nghiên cứu"],
+    image: "/src/assets/home/tartical.webp",
+  },
+  {
+    id: 8,
+    title: "Cải thiện kỹ năng thiết kế UI và phát triển 'con mắt' thẩm mỹ",
+    author: "Drew Cano",
+    date: "13 Tháng 1, 2024",
+    description:
+      "Ngành thiết kế luôn phát triển, nhưng một con mắt thẩm mỹ tốt luôn là vô giá...",
+    tags: ["Thiết kế", "Công cụ", "Nghiên cứu"],
+    image: "/src/assets/home/working2.webp",
+  },
+];

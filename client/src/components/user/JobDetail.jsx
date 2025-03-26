@@ -6,6 +6,7 @@ import { SparklesIcon, StarIcon } from "@heroicons/react/24/solid";
 import { ClockIcon, CheckBadgeIcon } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
 import parse from "html-react-parser";
+import { jobs } from "../../data/data";
 const JobDetail = ({ jobId }) => {
   //state
   const navigate = useNavigate();
@@ -115,7 +116,7 @@ const JobDetail = ({ jobId }) => {
 
     fetchJobs();
   }, [jobId]);
-
+  console.log(selectedJob);
   return (
     <>
       <div
@@ -216,7 +217,12 @@ const JobDetail = ({ jobId }) => {
           {/* Thông tin công ty */}
           <div className="flex w-[80%] flex-col gap-4 p-4">
             <div className="flex justify-between items-center">
-              <p className="!mb-0 flex items-center gap-2 text-[20px] font-[500]">
+              <p
+                onClick={() =>
+                  navigate(`/user/company/${selectedJob?.company?._id}`)
+                }
+                className="cursor-pointer !mb-0 flex items-center gap-2 text-[20px] font-[500]"
+              >
                 {selectedJob?.company?.name}
                 <CheckBadgeIcon className="w-5 h-5 text-green-600" />
               </p>

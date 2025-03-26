@@ -8,7 +8,7 @@ const ChatList = ({ conversations, onSelectUser }) => {
   );
 
   return (
-    <div className="w-full h-full bg-white shadow-md rounded-lg p-4 flex flex-col">
+    <div className="w-full  bg-white border-2 h-[800px]  rounded-lg p-4 flex flex-col">
       <input
         type="text"
         placeholder="Search..."

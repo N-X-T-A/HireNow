@@ -127,6 +127,8 @@ const JobApplyStatus = () => {
     "hover:bg-purple-100",
     "hover:bg-pink-100",
   ];
+
+  console.log(jobsAPI);
   return (
     <>
       <div
@@ -498,12 +500,26 @@ const JobApplyStatus = () => {
                       <p className="font-semibold text-gray-700">
                         {job?.salary_range}
                       </p>
-                      <button
-                        className="mt-3 w-full bg-green-300 text-white py-2 rounded-md font-medium cursor-not-allowed opacity-70"
-                        disabled
-                      >
-                        {job?.status}
-                      </button>
+                      <span className="flex gap-2 items-center justify-center">
+                        <p className="!mb-0 text-black font-[600]">
+                          Trạng thái:
+                        </p>
+                        <button
+                          className={` !mb-0 flex-1 w-full text-white py-2 rounded-md font-medium ${
+                            job?.status === "Pending"
+                              ? "bg-yellow-400"
+                              : job?.status === "Interview"
+                                ? "bg-blue-500"
+                                : job?.status === "Rejected"
+                                  ? "bg-red-500"
+                                  : job?.status === "Accepted"
+                                    ? "bg-green-500"
+                                    : "bg-gray-300"
+                          }`}
+                        >
+                          {job?.status}
+                        </button>
+                      </span>
                       <p className="text-xs text-gray-400 mt-2">
                         Ứng tuyển lúc -{" "}
                         {new Date(job.applied_date).toLocaleString("vi-VN", {

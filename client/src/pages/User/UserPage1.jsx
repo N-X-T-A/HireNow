@@ -12,6 +12,9 @@ import axios from "axios";
 const UserPage1 = () => {
   //state
   const navigate = useNavigate();
+  const [user, setUser] = useState(() => {
+    return JSON.parse(sessionStorage.getItem("user")) || null;
+  });
   const [jobsList, setJobsList] = useState([]);
   const [companiesList, setCompaniesList] = useState([]);
   //API
@@ -76,7 +79,9 @@ const UserPage1 = () => {
                 {" "}
                 <p className="!mb-0">
                   Chào mừng trở lại,{" "}
-                  <span className="text-[20px] font-bold">Thái</span>
+                  <span className="text-[20px] font-bold">
+                    {user?.username}
+                  </span>
                 </p>
               </div>
               <p className="!mb-0">
@@ -263,7 +268,7 @@ const UserPage1 = () => {
                 boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.2)",
               }}
               key={company._id}
-              className="md:w-1/4 flex-col gap-1 p-2 relative"
+              className="md:w-1/4 flex-col gap-1 p-2 relative "
               style={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }}
             >
               <img
@@ -283,7 +288,7 @@ const UserPage1 = () => {
                 {company.name}
               </p>
               <p className="!mb-0 px-2 text-[15px] text-gray-400 ">VietNam</p>
-              <p className="!mb-0 px-2 text-[15px] text-gray-600 text-justify line-clamp-3">
+              <p className="!mb-0 min-h-[50px] px-2 text-[15px] text-gray-600 text-justify line-clamp-3">
                 {company.description}
               </p>
             </motion.div>

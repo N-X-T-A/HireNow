@@ -92,9 +92,6 @@ export const CompaniesProfileUserShow = () => {
                   ))}
                 </div>
                 <div className="flex flex-col gap-2">
-                  <button className="px-4 py-2 rounded-[20px] bg-[#1E90FF] text-[white] font-[500] ">
-                    Nhắn tin
-                  </button>
                   <button className="px-4 py-2 rounded-[20px] border-[1px] border-[#1E90FF] text-[#1E90FF] font-[500] ">
                     Link
                   </button>
