@@ -28,6 +28,4 @@ router.post(
   asyncHandler(AuthController.registerRecruiter)
 );
 
-router.post("/recruiter/signin", asyncHandler(AuthController.signInRecruiter));
-
 module.exports = router;
