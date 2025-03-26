@@ -159,7 +159,7 @@ const JobDetail = ({ jobId }) => {
               </p>
             </div>
             <div className="flex flex-col justify-center item-center  pb-2  border-b-[1px] border-gray-200">
-              <p className="font-[500]">về trách nhiệm công việc: </p>
+              <p className="font-[500]">Về trách nhiệm công việc: </p>
               <p className="!mb-0 font-[400]">
                 {selectedJob?.responsibility
                   ? parse(
@@ -172,7 +172,7 @@ const JobDetail = ({ jobId }) => {
               </p>
             </div>
             <div className="flex flex-col justify-center item-center pb-2   border-b-[1px] border-gray-200">
-              <p className="font-[500]">về kinh nghiệm cần có: </p>
+              <p className="font-[500]">Về kinh nghiệm cần có: </p>
               <p className="!mb-0 font-[400]">
                 {selectedJob?.required_experience
                   ? parse(

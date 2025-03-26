@@ -1,19 +1,24 @@
 import React from "react";
 import withLayout from "../layout/withLayout";
 import { blogPosts } from "../data/data";
+import { useNavigate } from "react-router-dom";
 const Blogs = () => {
+  const navigate = useNavigate();
   return (
     <div className=" container w-full !max-w-[1700px] p-[10px]  py-2">
       {/* Tiêu đề */}
       <h2 className="text-3xl font-[600] mb-6">Bài viết gần đây</h2>
       <div className="flex gap-5  border-b pb-10">
-        <div className="flex-[6]">
+        <div className="flex-1">
           <img
             src={blogPosts[0].image}
             alt={blogPosts[0].title}
             className="w-full h-80 object-cover rounded-lg"
           />
-          <h3 className="cursor-pointer pt-2 text-[25px] font-semibold">
+          <h3
+            onClick={() => navigate("/blogs/:id")}
+            className="cursor-pointer pt-2 text-[25px] font-semibold"
+          >
             {blogPosts[0].title}
           </h3>
           <p className="text-sm text-gray-500">
@@ -30,9 +35,10 @@ const Blogs = () => {
               </span>
             ))}
           </div>
+          <p className="mt-3 text-blue-600">Xem ngay</p>
         </div>
 
-        <div className="flex-[4] flex flex-col gap-4">
+        <div className="flex-1 flex flex-col gap-4">
           {blogPosts.slice(1, 4).map((post) => (
             <div key={post.id} className="flex gap-4">
               <img

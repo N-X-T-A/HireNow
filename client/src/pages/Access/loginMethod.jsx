@@ -366,7 +366,7 @@ export default function LoginMethod() {
                   Đăng nhập bằng Google
                 </button>
 
-                <button
+                {/* <button
                   onClick={handleGoogleLogin}
                   className="flex items-center justify-items-center justify-center gap-[10px] w-full h-[45px] rounded-[10px] px-[20px] py-[10px] border-[1px] border-zinc-800 text-black cursor-pointer  transition ease-in-out duration-300 "
                 >
@@ -384,7 +384,7 @@ export default function LoginMethod() {
                     className="w-full max-w-[20px]"
                   />
                   Đăng nhập bằng Facebook
-                </button>
+                </button> */}
               </div>
               <p className="pt-[20px] text-[10px] w-[70%] text-right text-gray-400 cursor-pointer hover:bg-gradient-to-r hover:from-[#1E90FF] hover:via-green-400 hover:to-blue-900 hover:bg-clip-text hover:text-transparent">
                 inc, vietnam 19-1-25, by Yung_Ah

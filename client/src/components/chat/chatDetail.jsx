@@ -27,7 +27,7 @@ const ChatDetail = ({ selectedConversation, messages, onSendMessage }) => {
         </div>
       </div>
 
-      <div className=" flex-1 overflow-y-auto p-4">
+      <div className=" flex-1 overflow-y-auto max-h-[525px] p-4">
         {messages.length > 0 ? (
           messages.map((msg, index) => (
             <div

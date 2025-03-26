@@ -22,17 +22,19 @@ const ChatList = ({ conversations, onSelectUser }) => {
           filteredConversations.map((conversation) => (
             <li
               key={conversation._id}
-              className="flex items-center gap-3 p-2 border-b cursor-pointer hover:bg-gray-100"
+              className="flex items-center gap-3 p-4 border-b cursor-pointer hover:bg-gray-100"
               onClick={() => onSelectUser(conversation)}
             >
               <img
                 src={conversation.partner.photoURL}
                 alt={conversation.partner.username}
-                className="w-10 h-10 rounded-full"
+                className="w-10 h-10 rounded-full "
               />
               <div className="flex-1">
-                <p className="font-semibold">{conversation.partner.username}</p>
-                <p className="text-sm text-gray-500 line-clamp-2">
+                <p className=" !mb-1 font-semibold">
+                  {conversation.partner.username}
+                </p>
+                <p className="!mb-0 text-sm text-gray-500 line-clamp-2">
                   {conversation.last_message}
                 </p>
               </div>

@@ -2,7 +2,11 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleRight } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+
 const Blog = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="w-full bg-white flex flex-col  gap-5 mt-[100px] items-center justify-items-center justify-center">
       <motion.div
@@ -47,7 +51,10 @@ const Blog = () => {
             </span>
           </button>
         </div>
-        <button className="px-[20px] py-[10px] border-2 bg-black text-white rounded-[20px]">
+        <button
+          onClick={() => navigate("/blogs")}
+          className="px-[20px] py-[10px] border-2 bg-black text-white rounded-[20px]"
+        >
           Xem thêm <FontAwesomeIcon icon={faCircleRight} />
         </button>
       </motion.div>

@@ -163,7 +163,7 @@ const Profile = () => {
                   onClick={() => setOpen1(!open1)}
                   className="px-4 py-2 rounded-[20px] bg-[#1E90FF] text-[white] font-[500] text-[14px]"
                 >
-                  Tạo bài viết ngay
+                  Thêm trạng thái của bạn
                 </button>
                 {/* testinput */}
                 {open1 && (
