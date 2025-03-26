@@ -112,7 +112,6 @@ export default function LoginMethod() {
         );
         sessionStorage.setItem("isLoggedIn", JSON.stringify(true));
 
-        // loading
         setTimeout(() => {
           setUser(data.user);
           setFisrtLoggin(data.user.isFirstLogin);
