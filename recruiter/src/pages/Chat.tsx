@@ -12,11 +12,38 @@ import {
   markMessagesAsRead,
 } from "../api/chatApi";
 
+// Import socket utils
+import { connectSocket, getSocket, disconnectSocket } from "../utils/socket";
+
 export default function Chats() {
   const [conversations, setConversations] = useState<Conversation[]>([]);
   const [selectedConversation, setSelectedConversation] =
     useState<Conversation | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
+
+  useEffect(() => {
+    // Kết nối socket
+    const token = localStorage.getItem("accessToken");
+    if (token) connectSocket(token);
+
+    const socket = getSocket();
+    if (socket) {
+      socket.on("connect", () => console.log("Socket connected"));
+      socket.on("disconnect", () => console.log("Socket disconnected"));
+
+      socket.on("newMessage", (newMessage: Message) => {
+        if (newMessage.conversation_id === selectedConversation?._id) {
+          setMessages((prevMessages) => [...prevMessages, newMessage]);
+        }
+        getConversations();
+      });
+    }
+
+    // Ngắt kết nối khi rời khỏi trang
+    return () => {
+      disconnectSocket();
+    };
+  }, [selectedConversation]);
 
   const getConversations = async (conversationId?: string) => {
     try {
@@ -58,6 +85,11 @@ export default function Chats() {
     if (selectedConversation) {
       getMessages();
       markMessagesAsRead(selectedConversation._id);
+
+      const socket = getSocket();
+      if (socket) {
+        socket.emit("joinConversation", selectedConversation._id);
+      }
     }
   }, [selectedConversation]);
 
@@ -66,7 +98,11 @@ export default function Chats() {
 
     try {
       const newMessage = await sendMessage(selectedConversation._id, content);
-      setMessages((prevMessages) => [...prevMessages, newMessage]);
+
+      const socket = getSocket();
+      if (socket) {
+        socket.emit("sendMessage", newMessage);
+      }
     } catch (error) {
       console.error("Error sending message:", error);
     }

@@ -8,11 +8,31 @@ import {
   fetchConversations,
   markMessagesAsRead,
 } from "../../apis/chatApi";
+import { connectSocket, disconnectSocket, getSocket } from "../../utils/socket";
 
 const UserPage3 = () => {
   const [conversations, setConversations] = useState([]);
   const [selectedConversation, setSelectedConversation] = useState(null);
   const [messages, setMessages] = useState([]);
+
+  useEffect(() => {
+    const token = sessionStorage.getItem("access_token");
+    const socket = connectSocket(token);
+
+    socket.on("newMessage", (newMessage) => {
+      setMessages((prevMessages) => [...prevMessages, newMessage]);
+    });
+
+    socket.on("messagesRead", ({ conversation_id }) => {
+      if (selectedConversation?._id === conversation_id) {
+        getMessages(conversation_id);
+      }
+    });
+
+    return () => {
+      disconnectSocket();
+    };
+  }, [selectedConversation]);
 
   const getConversations = async (conversationId) => {
     try {
@@ -54,6 +74,11 @@ const UserPage3 = () => {
     if (selectedConversation) {
       getMessages();
       markMessagesAsRead(selectedConversation._id);
+
+      const socket = getSocket();
+      if (socket) {
+        socket.emit("joinConversation", selectedConversation._id);
+      }
     }
   }, [selectedConversation]);
 
@@ -62,7 +87,11 @@ const UserPage3 = () => {
 
     try {
       const newMessage = await sendMessage(selectedConversation._id, content);
-      setMessages((prevMessages) => [...prevMessages, newMessage]);
+
+      const socket = getSocket();
+      if (socket) {
+        socket.emit("sendMessage", newMessage);
+      }
     } catch (error) {
       console.error("Error sending message:", error);
     }

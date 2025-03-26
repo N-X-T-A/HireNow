@@ -19,6 +19,7 @@ export interface Message {
   sender_id: string;
   content: string;
   createdAt: string;
+  conversation_id: string;
 }
 
 export const fetchConversations = async (): Promise<Conversation[]> => {
