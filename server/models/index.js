@@ -13,6 +13,8 @@ const IndustrySkill = require("./industrySkill");
 const Conversation = require("./conversation");
 const Favorite = require("./favorite");
 const UserProfile = require("./userProfile");
+const Blog = require("./blog");
+const Tag = require("./tag");
 
 module.exports = {
   User,
@@ -28,4 +30,6 @@ module.exports = {
   Conversation,
   Favorite,
   UserProfile,
+  Blog,
+  Tag,
 };
