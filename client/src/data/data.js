@@ -142,19 +142,19 @@ export const slidesCEO = [
     id: 4,
     image: "/src/assets/home/ceo3.jpg",
     quote: "Future is now",
-    author: "Tech Guru",
+    author: "garo",
   },
   {
     id: 5,
     image: "/src/assets/home/ceo4.jpg",
     quote: "Future is now",
-    author: "Tech Guru",
+    author: "Hương Uyên",
   },
   {
     id: 6,
     image: "/src/assets/home/ceo5.jpg",
     quote: "Future is now",
-    author: "Tech Guru",
+    author: "Tường an",
   },
 ];
 
@@ -808,7 +808,7 @@ export const blogPosts = [
   {
     id: 4,
     title: "Tại sao thực phẩm quan trọng – Phòng ngừa và điều trị bệnh",
-    author: "Lana Steiner",
+    author: "alse",
     date: "18 Tháng 1, 2024",
     description:
       "Ăn nhiều rau và ít thịt đã được chứng minh là giúp kéo dài tuổi thọ và cải thiện sức khỏe...",
@@ -818,7 +818,7 @@ export const blogPosts = [
   {
     id: 5,
     title: "Lịch sử không ngừng mở rộng – Hillview của Made by Hand",
-    author: "Alec Whitten",
+    author: "Alec ",
     date: "17 Tháng 1, 2024",
     description:
       "Một tòa nhà đơn độc nằm trên ngọn đồi ở Hillview, một nhà kho lịch sử 240 năm tuổi...",
@@ -828,7 +828,7 @@ export const blogPosts = [
   {
     id: 6,
     title: "Cognitive Dissonance Theory: Khóa học cấp tốc cho nhà thiết kế UX",
-    author: "Demi Wilkinson",
+    author: " Wilkinn",
     date: "16 Tháng 1, 2024",
     description:
       "Chúng ta thường nghĩ về bản thân theo một cách nhất định, nhưng đôi khi hành động của chúng ta lại không đồng nhất...",
@@ -839,7 +839,7 @@ export const blogPosts = [
     id: 7,
     title:
       "Làm thế nào công việc từ xa cải thiện đáng kể kỹ năng thiết kế của tôi",
-    author: "Candice Wu",
+    author: "CaWu",
     date: "15 Tháng 1, 2024",
     description:
       "Làm việc từ xa không chỉ khả thi mà còn có thể mang lại nhiều lợi ích...",

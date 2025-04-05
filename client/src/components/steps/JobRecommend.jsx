@@ -38,7 +38,7 @@ const JobRecommend = ({ setIsStepValid }) => {
   }, [formData, setIsStepValid]);
 
   return (
-    <div className="flex flex-col ">
+    <div className="flex flex-col max-h-[400px] overflow-y-auto">
       <p className="!mb-1">Đã tốt nghiệp tại</p>
       <input
         type="text"
@@ -97,7 +97,7 @@ const JobRecommend = ({ setIsStepValid }) => {
         placeholder="Nhập mô tả"
         value={formData.description}
         onChange={handleChange}
-        className="border p-2"
+        className="border p-6"
       />
     </div>
   );
