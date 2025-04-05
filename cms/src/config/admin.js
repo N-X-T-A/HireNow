@@ -2,7 +2,8 @@ import AdminJS from "adminjs";
 import AdminJSExpress from "@adminjs/express";
 import { Resource, Database } from "@adminjs/mongoose";
 import { componentLoader } from "#component/component-loader.js";
-import { boxResource } from "#resources/box.js";
+import { blogResource } from "#resources/blog.js";
+import { TagResource } from "#resources/tag.js";
 
 AdminJS.registerAdapter({
   Resource: Resource,
@@ -12,24 +13,11 @@ AdminJS.registerAdapter({
 const adminJS = new AdminJS({
   componentLoader,
   branding: {
-    companyName: "Titan CorporationVN",
+    companyName: "HireNow",
     styles: "#public/styles/global.css",
   },
-  resources: [boxResource],
+  resources: [blogResource, TagResource],
   rootPath: "/admin",
-  locale: {
-    translations: {
-      en: {
-        resources: {
-          box: {
-            properties: {
-              box_type_id: "Box Type",
-            },
-          },
-        },
-      },
-    },
-  },
 });
 
 const adminRouter = AdminJSExpress.buildAuthenticatedRouter(adminJS, {
