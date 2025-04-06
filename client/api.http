@@ -96,6 +96,12 @@ Content-Type: application/json
 GET http://localhost:5000/api/v1/application
 Authorization: Bearer USER_ACCESS_TOKEN
 
+### Blog
+### Get Blog
+GET http://localhost:5000/api/v1/blog
+### Get Blog details
+GET http://localhost:5000/api/v1/blog/id
+
 ### Company
 
 #### Get Company List
