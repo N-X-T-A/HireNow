@@ -44,7 +44,7 @@ const Blogs = () => {
               <img
                 src={post.image}
                 alt={post.title}
-                className="w-32 h-40 object-cover rounded-lg"
+                className="w-40 h-40 object-cover rounded-lg"
               />
               <div>
                 <h3 className="text-lg font-semibold">{post.title}</h3>
@@ -71,6 +71,12 @@ const Blogs = () => {
 
       {/* Danh sách bài viết toàn bộ */}
       <h2 className="text-3xl font-[600] mt-8">Toàn bộ bài viết</h2>
+      <div className="flex gap-2">
+        <span className="px-2 py-1 rounded-full bg-gray-200">Tất cả</span>
+        <span className="px-2 py-1 rounded-full bg-gray-200">Tin mới</span>
+        <span className="px-2 py-1 rounded-full bg-gray-200">Sự kiện</span>
+        <span className="px-2 py-1 rounded-full bg-gray-200">Tuyển dụng</span>
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
         {blogPosts.map((post) => (
           <div
