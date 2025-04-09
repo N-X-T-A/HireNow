@@ -24,6 +24,8 @@ import JobApply from "./pages/User/jobApply";
 import Blogs from "./pages/Blogs";
 import BlogDetail from "./pages/BlogDetail";
 import NotFound from "./pages/NotFound";
+import RegisterRecruiter from "./pages/Access/registerRecruiter";
+import EmployerIntro from "./pages/employerIntro";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Router>
@@ -33,6 +35,8 @@ createRoot(document.getElementById("root")).render(
         <Route path="/login" element={<Login />} />
         <Route path="/test" element={<Test />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/register-recruiter" element={<RegisterRecruiter />} />
+        <Route path="/Recruiter-introduction" element={<EmployerIntro />} />
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/blogs/:id" element={<BlogDetail />} />
         <Route path="*" element={<NotFound />} />
