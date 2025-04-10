@@ -26,16 +26,21 @@ export default function SignInForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
+
       if (!response.ok) {
         throw new Error("Failed to sign in");
       }
+
       const data = await response.json();
       localStorage.setItem("accessToken", data.metadata.accessToken);
       localStorage.setItem("recruiter", JSON.stringify(data.metadata));
+      localStorage.setItem("isFirstLogin", data.metadata.isFirstLogin);
+
       setAlert({
         variant: "success",
         message: "Sign in successful! Redirecting...",
       });
+
       setTimeout(() => navigate("/"), 2000);
     } catch (error) {
       console.error("Login error:", error);

@@ -11,6 +11,11 @@ import ApplicantsTables from "./pages/Tables/ApplicantsTables";
 import JoblistingTables from "./pages/Tables/JobListingTables";
 import ProtectedRoute from "./components/common/ProtectedRoute";
 import Chats from "./pages/Chat";
+import PaymentPage from "./pages/Payment/PaymentPage";
+import ServicePlans from "./pages/Payment/ServicePlans";
+import FirstLogin from "./pages/AuthPages/FirstLogin";
+import AuthRedirectRoute from "./components/common/AuthRedirectRoute";
+import FirstLoginRoute from "./components/common/FirstLoginRoute";
 
 export default function App() {
   return (
@@ -28,10 +33,18 @@ export default function App() {
               <Route path="/job-listing" element={<JoblistingTables />} />
               <Route path="/chat" element={<Chats />} />
             </Route>
+            <Route path="/plans" element={<ServicePlans />} />
+            <Route path="/payment/:slugId" element={<PaymentPage />} />
           </Route>
           {/* Auth Layout */}
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/signup" element={<SignUp />} />
+          <Route element={<AuthRedirectRoute />}>
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/signup" element={<SignUp />} />
+          </Route>
+          <Route
+            path="/first-login"
+            element={<FirstLoginRoute element={<FirstLogin />} />}
+          />
 
           {/* Fallback Route */}
           <Route path="*" element={<NotFound />} />
