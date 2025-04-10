@@ -43,11 +43,11 @@ class JobService {
             },
             tag:
               job.company_id.servicePackage === "premium"
-                ? "PREMIUM"
+                ? "Super hot"
                 : job.company_id.servicePackage === "feature"
-                ? "FEATURE"
+                ? "Hot"
                 : job.company_id.servicePackage === "basic"
-                ? "BASIC"
+                ? ""
                 : "",
           };
         })
@@ -99,11 +99,11 @@ class JobService {
             },
             tag:
               job.company_id.servicePackage === "premium"
-                ? "PREMIUM"
+                ? "Super hot"
                 : job.company_id.servicePackage === "feature"
-                ? "FEATURE"
+                ? "Hot"
                 : job.company_id.servicePackage === "basic"
-                ? "BASIC"
+                ? ""
                 : "",
           };
         })
