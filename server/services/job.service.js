@@ -9,13 +9,20 @@ class JobService {
     const jobs = await Job.find()
       .populate(
         "company_id",
-        "name logo background_image locations reasons_to_join"
+        "name logo background_image locations reasons_to_join servicePackage"
       )
       .lean();
+
+    const priority = { basic: 1, feature: 2, premium: 3 }; // Priority order from low to high
 
     const jobList = await Promise.all(
       jobs
         .filter((job) => job.company_id)
+        .sort(
+          (a, b) =>
+            priority[b.company_id.servicePackage] -
+            priority[a.company_id.servicePackage]
+        ) // Sorting by servicePackage
         .map(async (job) => {
           const industrySkillNames = await Skill.find({
             _id: { $in: job.skills },
@@ -34,6 +41,14 @@ class JobService {
               logo: job.company_id.logo || "",
               background_image: job.company_id.background_image || "",
             },
+            tag:
+              job.company_id.servicePackage === "premium"
+                ? "PREMIUM"
+                : job.company_id.servicePackage === "feature"
+                ? "FEATURE"
+                : job.company_id.servicePackage === "basic"
+                ? "BASIC"
+                : "",
           };
         })
     );
@@ -50,13 +65,20 @@ class JobService {
     const jobs = await Job.find()
       .populate(
         "company_id",
-        "name logo background_image locations reasons_to_join"
+        "name logo background_image locations reasons_to_join servicePackage"
       )
       .lean();
+
+    const priority = { basic: 1, feature: 2, premium: 3 }; // Priority order from low to high
 
     const recommendedJobs = await Promise.all(
       jobs
         .filter((job) => job.company_id)
+        .sort(
+          (a, b) =>
+            priority[b.company_id.servicePackage] -
+            priority[a.company_id.servicePackage]
+        ) // Sorting by servicePackage
         .map(async (job) => {
           const industrySkillNames = await Skill.find({
             _id: { $in: job.skills },
@@ -75,6 +97,14 @@ class JobService {
               logo: job.company_id?.logo,
               background_image: job.company_id?.background_image || "",
             },
+            tag:
+              job.company_id.servicePackage === "premium"
+                ? "PREMIUM"
+                : job.company_id.servicePackage === "feature"
+                ? "FEATURE"
+                : job.company_id.servicePackage === "basic"
+                ? "BASIC"
+                : "",
           };
         })
     );

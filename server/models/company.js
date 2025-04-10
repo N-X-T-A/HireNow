@@ -26,6 +26,11 @@ const CompanySchema = new mongoose.Schema(
       linkedin: { type: String },
       facebook: { type: String },
     },
+    servicePackage: {
+      type: String,
+      enum: ["none", "basic", "featured", "premium"],
+      default: "none",
+    },
   },
   { timestamps: false }
 );

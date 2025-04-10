@@ -4,6 +4,7 @@ const { ForbiddenError } = require("../core/error.response");
 const { Job, User } = require("../models");
 const jobService = require("../services/job.service");
 const { formatLocations } = require("../utils/format");
+const { updateJobStatistics } = require("../utils/statisticsUpdater");
 
 class JobController {
   getAllJobs = async (req, res) => {
@@ -75,6 +76,8 @@ class JobController {
       });
 
       await newJob.save();
+
+      await updateJobStatistics(req.user.companyId, "createJob");
 
       return res.status(201).send({
         message: "Job posted successfully!",

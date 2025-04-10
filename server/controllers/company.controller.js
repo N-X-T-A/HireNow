@@ -1,14 +1,11 @@
 const { OK } = require("../core/success.response");
 const companyService = require("../services/company.service");
-const { Company } = require("../models");
 
 class CompanyController {
   updateCompany = async (req, res) => {
     try {
       const { id } = req.params;
-      console.log(id);
       const recruiterId = req.user._id;
-      console.log(recruiterId);
 
       const updatedCompany = await companyService.updateCompany(
         id,

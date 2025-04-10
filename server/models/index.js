@@ -15,6 +15,9 @@ const Favorite = require("./favorite");
 const UserProfile = require("./userProfile");
 const Blog = require("./blog");
 const Tag = require("./tag");
+const Payment = require("./payment");
+const Plan = require("./plan");
+const Statistics = require("./statistics");
 
 module.exports = {
   User,
@@ -32,4 +35,7 @@ module.exports = {
   UserProfile,
   Blog,
   Tag,
+  Payment,
+  Plan,
+  Statistics,
 };

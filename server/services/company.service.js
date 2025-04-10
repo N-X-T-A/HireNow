@@ -19,6 +19,11 @@ class CompanyService {
     Object.assign(company, updateData);
     await company.save();
 
+    if (recruiter.isFirstLogin) {
+      recruiter.isFirstLogin = false;
+      await recruiter.save();
+    }
+
     return company;
   }
 

@@ -19,5 +19,8 @@ router.use("/api/v1/favorite", require("./favorite.routes"));
 router.use("/api/v1/company", require("./company.routes"));
 router.use("/api/v1/chat", require("./chat.routes"));
 router.use("/api/v1/blog", require("./blog.routes"));
+router.use("/api/v1/payment", require("./payment.routes"));
+router.use("/api/v1/plans", require("./plan.routes"));
+router.use("/api/v1/statistics", require("./statistics.routes"));
 
 module.exports = router;

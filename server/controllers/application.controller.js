@@ -1,4 +1,6 @@
+const { Job } = require("../models");
 const applicationService = require("../services/application.service");
+const { updateJobStatistics } = require("../utils/statisticsUpdater");
 
 class ApplicationController {
   async applyForJob(req, res) {
@@ -12,12 +14,23 @@ class ApplicationController {
       const userId = req.user._id;
       const { job_id, resume, cover_letter } = req.body;
 
+      const job = await Job.findById(job_id);
+      if (!job) {
+        return res.status(404).json({
+          message: "Job not found.",
+        });
+      }
+
+      const companyId = job.company_id;
+
       const result = await applicationService.applyForJob(
         userId,
         job_id,
         resume,
         cover_letter
       );
+
+      await updateJobStatistics(companyId, "applyForJob");
 
       return res.status(201).json({
         message: "Application submitted successfully!",
