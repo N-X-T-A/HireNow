@@ -4,7 +4,18 @@ const { Job, IndustrySkill, Skill } = require("../models");
 const skillService = require("./skill.service");
 const { calculatePostedTime, formatLocations } = require("../utils/format");
 
+const PACKAGE_PRIORITY = { basic: 1, feature: 2, premium: 3 };
+const PACKAGE_TAGS = {
+  basic: "",
+  feature: "Hot",
+  premium: "Super hot",
+};
+
 class JobService {
+  getTagByServicePackage(packageName) {
+    return PACKAGE_TAGS[packageName] || "";
+  }
+
   async getAllJobs() {
     const jobs = await Job.find()
       .populate(
@@ -13,16 +24,14 @@ class JobService {
       )
       .lean();
 
-    const priority = { basic: 1, feature: 2, premium: 3 }; // Priority order from low to high
-
     const jobList = await Promise.all(
       jobs
         .filter((job) => job.company_id)
         .sort(
           (a, b) =>
-            priority[b.company_id.servicePackage] -
-            priority[a.company_id.servicePackage]
-        ) // Sorting by servicePackage
+            PACKAGE_PRIORITY[b.company_id.servicePackage] -
+            PACKAGE_PRIORITY[a.company_id.servicePackage]
+        )
         .map(async (job) => {
           const industrySkillNames = await Skill.find({
             _id: { $in: job.skills },
@@ -41,14 +50,7 @@ class JobService {
               logo: job.company_id.logo || "",
               background_image: job.company_id.background_image || "",
             },
-            tag:
-              job.company_id.servicePackage === "premium"
-                ? "Super hot"
-                : job.company_id.servicePackage === "feature"
-                ? "Hot"
-                : job.company_id.servicePackage === "basic"
-                ? ""
-                : "",
+            tag: this.getTagByServicePackage(job.company_id.servicePackage),
           };
         })
     );
@@ -69,16 +71,14 @@ class JobService {
       )
       .lean();
 
-    const priority = { basic: 1, feature: 2, premium: 3 }; // Priority order from low to high
-
     const recommendedJobs = await Promise.all(
       jobs
         .filter((job) => job.company_id)
         .sort(
           (a, b) =>
-            priority[b.company_id.servicePackage] -
-            priority[a.company_id.servicePackage]
-        ) // Sorting by servicePackage
+            PACKAGE_PRIORITY[b.company_id.servicePackage] -
+            PACKAGE_PRIORITY[a.company_id.servicePackage]
+        )
         .map(async (job) => {
           const industrySkillNames = await Skill.find({
             _id: { $in: job.skills },
@@ -97,14 +97,7 @@ class JobService {
               logo: job.company_id?.logo,
               background_image: job.company_id?.background_image || "",
             },
-            tag:
-              job.company_id.servicePackage === "premium"
-                ? "Super hot"
-                : job.company_id.servicePackage === "feature"
-                ? "Hot"
-                : job.company_id.servicePackage === "basic"
-                ? ""
-                : "",
+            tag: this.getTagByServicePackage(job.company_id.servicePackage),
           };
         })
     );
