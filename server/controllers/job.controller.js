@@ -123,7 +123,7 @@ class JobController {
       const { id } = req.params;
 
       const jobs = await Job.find({ company_id: id })
-        .populate("company_id", "name logo background_image locations") // Lấy thông tin công ty
+        .populate("company_id", "name logo background_image locations")
         .lean();
 
       if (!jobs.length) {

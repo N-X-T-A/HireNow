@@ -22,8 +22,9 @@ class UserController {
         return res.status(404).json({ message: result.message });
       }
     } catch (err) {
-      console.error("Lỗi cập nhật hồ sơ:", err);
-      res.status(500).json({ message: "Đã xảy ra lỗi khi cập nhật hồ sơ!" });
+      res
+        .status(500)
+        .json({ message: "An error occurred while updating the profile!" });
     }
   };
 }

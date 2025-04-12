@@ -10,7 +10,7 @@ class AuthService {
   async registerRecruiter({ email, password }) {
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      throw new BadRequestError("Email đã được sử dụng.");
+      throw new BadRequestError("Email has already been used");
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);

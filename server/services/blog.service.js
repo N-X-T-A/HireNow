@@ -3,7 +3,7 @@ const { Blog } = require("../models");
 
 class BlogService {
   async getAllBlogs() {
-    return await Blog.find({}, { description: 0 }).populate("tags", "name"); // chỉ lấy tên tag
+    return await Blog.find({}, { description: 0 }).populate("tags", "name");
   }
 
   async getBlogById(id) {
