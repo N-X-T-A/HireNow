@@ -6,6 +6,7 @@ import Intro from "./HomeComponent/intro";
 import Sub2 from "./HomeComponent/sub2";
 import Blog from "./HomeComponent/blog";
 import withLayout from "../layout/withLayout";
+import Blog_com from "./HomeComponent/blog_com";
 const Home = () => {
   return (
     <div>
@@ -13,7 +14,7 @@ const Home = () => {
         <Intro />
         <Sub1 />
         <Sub2 />
-        <Blog />
+        <Blog_com />
       </div>
     </div>
   );

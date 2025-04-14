@@ -1,118 +1,105 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import withLayout from "../layout/withLayout";
+import { useParams } from "react-router-dom";
+import parse from "html-react-parser";
+import axios from "axios";
 const BlogDetail = () => {
+  const { id } = useParams();
+  const [Blog, SetBlog] = useState([]);
+  const [imageUrl, setImageUrl] = useState("");
+  const [toc, setToc] = useState([]);
+
+  console.log(id);
+  //fetch API
+  useEffect(() => {
+    const fetchJob = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:5000/api/v1/blog/${id}`
+        );
+        const blogData = response.data;
+
+        // Tạo div tạm để xử lý HTML
+        const tempDiv = document.createElement("div");
+        tempDiv.innerHTML = blogData.description;
+
+        // Tìm tất cả thẻ h2
+        const headings = Array.from(tempDiv.querySelectorAll("h2"));
+        const tocItems = headings.map((heading, index) => {
+          const id = `section-${index}`;
+          heading.setAttribute("id", id);
+          return {
+            id,
+            text: heading.innerText,
+          };
+        });
+
+        // Cập nhật lại description với id đã gán
+        blogData.description = tempDiv.innerHTML;
+
+        SetBlog(blogData);
+        setImageUrl(blogData.image);
+        setToc(tocItems);
+      } catch (err) {
+        console.log("Lỗi fetch blog:", err);
+      }
+    };
+
+    fetchJob();
+  }, [id]);
+
+  //clcik
+  const handleScrollTo = (id) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
+  console.log(Blog);
   return (
-    <div>
-      {" "}
-      <div className="container w-full !max-w-[1200px] p-[10px]  py-2">
-        <div className="flex flex-col gap-4 items-center">
-          <span className="flex gap-2 w-full items-center justify-center">
-            <p className="!mb-0 rounded-full text-white px-2 py-1 bg-gray-400 text-[15px]">
-              Bài đăng mới
-            </p>
-            <p className="!mb-0 text-[15px]">20 Tháng 1, 2025</p>
-          </span>
-          <h2 className="text-[30px]">Cách phát hiện gian lận tuyển dụng</h2>
-          <p className="!mb-0 text-sm text-gray-500">
-            Trong thời đại số hóa, gian lận tuyển dụng ngày càng trở nên tinh
-            vi, gây ảnh hưởng lớn đến ứng viên và doanh nghiệp. Dưới đây là một
-            số dấu hiệu nhận biết và cách phòng tránh để bảo vệ bản thân khỏi
-            các chiêu trò lừa đảo tuyển dụng.Nếu nhà tuyển dụng yêu cầu bạn đóng
-            một khoản tiền để xét duyệt hồ sơ, đào tạo, hoặc đảm bảo vị trí làm
-            việc, rất có thể đây là một trò lừa đảo. Các công ty uy tín không
-            bao giờ yêu cầu ứng viên trả tiền khi ứng tuyển.
+    <div className="flex flex-col gap-4 container w-full !max-w-[1700px] p-[10px]  py-2">
+      <div
+        className="w-full h-[400px] bg-fixed bg-center bg-no-repeat bg-cover relative"
+        style={{
+          backgroundImage: `url(${imageUrl})`,
+        }}
+      >
+        <div className="absolute inset-0 bg-black opacity-30"></div>
+        <div className="absolute inset-0 flex flex-col  justify-center text-white px-4 text-left">
+          {" "}
+          <h2 className="text-[50px] font-bold mb-4 drop-shadow-lg">
+            {Blog.title}
+          </h2>
+          <p className="text-[13px]  w-[60%] mb-6 drop-shadow-md">
+            {Blog.short_title}
           </p>
-          <img
-            className="h-[400px] w-full object-cover"
-            src="/src/assets/home/artical.jpg"
-            alt=""
-          />
-          <span className="w-full">
-            <h2 className="text-[20px]">
-              Mô tả công việc quá chung chung hoặc hứa hẹn thu nhập "khủng"
-            </h2>
-            <p className="!mb-1 text-sm text-gray-500">
-              Một trong những dấu hiệu dễ nhận biết nhất là khi nhà tuyển dụng
-              yêu cầu ứng viên nộp phí trước khi nhận việc. Điều này thường được
-              ngụy trang dưới nhiều hình thức như phí xét duyệt hồ sơ, phí đào
-              tạo, tiền đặt cọc để giữ chỗ hoặc phí mua đồng phục. Trên thực tế,
-              những công ty uy tín không bao giờ yêu cầu ứng viên trả bất kỳ
-              khoản tiền nào trong quá trình tuyển dụng. Những lời hứa như "chỉ
-              cần đóng một khoản nhỏ là có thể nhận việc ngay" thường chỉ là bẫy
-              để lấy tiền của những người nhẹ dạ cả tin. Khi gặp trường hợp này,
-              tốt nhất là bạn nên đặt nghi vấn và tìm hiểu kỹ trước khi quyết
-              định.
-            </p>
-            <p className="!mb-0 text-sm text-gray-500">
-              Một yếu tố khác cần chú ý là mức lương và đãi ngộ không thực tế.
-              Nếu một công việc đăng tuyển mà không yêu cầu kinh nghiệm nhưng
-              lại hứa hẹn thu nhập cao bất thường, hãy cân nhắc. Ví dụ, những
-              tin tuyển dụng kiểu "Chỉ cần làm việc 2-3 giờ/ngày, lương 50
-              triệu/tháng, không yêu cầu kỹ năng" thường là dấu hiệu của lừa
-              đảo. Những công việc thực tế luôn có yêu cầu rõ ràng về trình độ
-              và trách nhiệm cụ thể. Nếu mức lương và quyền lợi vượt xa so với
-              mặt bằng chung mà không có lý do hợp lý, rất có thể đây là một
-              hình thức lừa đảo nhằm thu hút sự quan tâm của ứng viên nhẹ dạ.
-            </p>
-          </span>
-          <span className="w-full">
-            <h2 className="text-[20px]">
-              Ngoài ra, bạn cũng nên kiểm tra kỹ thông tin của công ty trước khi
-              ứng tuyển.
-            </h2>
-            <p className="!mb-1 text-sm text-gray-500">
-              Một trong những dấu hiệu dễ nhận biết nhất là khi nhà tuyển dụng
-              yêu cầu ứng viên nộp phí trước khi nhận việc. Điều này thường được
-              ngụy trang dưới nhiều hình thức như phí xét duyệt hồ sơ, phí đào
-              tạo, tiền đặt cọc để giữ chỗ hoặc phí mua đồng phục. Trên thực tế,
-              những công ty uy tín không bao giờ yêu cầu ứng viên trả bất kỳ
-              khoản tiền nào trong quá trình tuyển dụng. Những lời hứa như "chỉ
-              cần đóng một khoản nhỏ là có thể nhận việc ngay" thường chỉ là bẫy
-              để lấy tiền của những người nhẹ dạ cả tin. Khi gặp trường hợp này,
-              tốt nhất là bạn nên đặt nghi vấn và tìm hiểu kỹ trước khi quyết
-              định.
-            </p>
-            <p className="!mb-0 text-sm text-gray-500">
-              Một yếu tố khác cần chú ý là mức lương và đãi ngộ không thực tế.
-              Nếu một công việc đăng tuyển mà không yêu cầu kinh nghiệm nhưng
-              lại hứa hẹn thu nhập cao bất thường, hãy cân nhắc. Ví dụ, những
-              tin tuyển dụng kiểu "Chỉ cần làm việc 2-3 giờ/ngày, lương 50
-              triệu/tháng, không yêu cầu kỹ năng" thường là dấu hiệu của lừa
-              đảo. Những công việc thực tế luôn có yêu cầu rõ ràng về trình độ
-              và trách nhiệm cụ thể. Nếu mức lương và quyền lợi vượt xa so với
-              mặt bằng chung mà không có lý do hợp lý, rất có thể đây là một
-              hình thức lừa đảo nhằm thu hút sự quan tâm của ứng viên nhẹ dạ.
-            </p>
-          </span>
-          <span className="w-full">
-            <h2 className="text-[20px]">
-              Một yếu tố khác cần chú ý là mức lương và đãi ngộ không thực tế
-            </h2>
-            <p className="!mb-1 text-sm text-gray-500">
-              Một trong những dấu hiệu dễ nhận biết nhất là khi nhà tuyển dụng
-              yêu cầu ứng viên nộp phí trước khi nhận việc. Điều này thường được
-              ngụy trang dưới nhiều hình thức như phí xét duyệt hồ sơ, phí đào
-              tạo, tiền đặt cọc để giữ chỗ hoặc phí mua đồng phục. Trên thực tế,
-              những công ty uy tín không bao giờ yêu cầu ứng viên trả bất kỳ
-              khoản tiền nào trong quá trình tuyển dụng. Những lời hứa như "chỉ
-              cần đóng một khoản nhỏ là có thể nhận việc ngay" thường chỉ là bẫy
-              để lấy tiền của những người nhẹ dạ cả tin. Khi gặp trường hợp này,
-              tốt nhất là bạn nên đặt nghi vấn và tìm hiểu kỹ trước khi quyết
-              định.
-            </p>
-            <p className="!mb-0 text-sm text-gray-500">
-              Một yếu tố khác cần chú ý là mức lương và đãi ngộ không thực tế.
-              Nếu một công việc đăng tuyển mà không yêu cầu kinh nghiệm nhưng
-              lại hứa hẹn thu nhập cao bất thường, hãy cân nhắc. Ví dụ, những
-              tin tuyển dụng kiểu "Chỉ cần làm việc 2-3 giờ/ngày, lương 50
-              triệu/tháng, không yêu cầu kỹ năng" thường là dấu hiệu của lừa
-              đảo. Những công việc thực tế luôn có yêu cầu rõ ràng về trình độ
-              và trách nhiệm cụ thể. Nếu mức lương và quyền lợi vượt xa so với
-              mặt bằng chung mà không có lý do hợp lý, rất có thể đây là một
-              hình thức lừa đảo nhằm thu hút sự quan tâm của ứng viên nhẹ dạ.
-            </p>
-          </span>
         </div>
+      </div>
+      <div className="flex gap-4">
+        <span className="flex-[7]">
+          {Blog?.description
+            ? parse(
+                Blog.description.replace("<ul>", '<ul class="list-disc pl-5">')
+              )
+            : "Đang tải nội dung..."}
+        </span>
+        <span className="flex-[3]">
+          <div className="border p-4 rounded shadow bg-white">
+            <h3 className="text-lg font-bold mb-2">Mục Lục</h3>
+            <ul className="space-y-2 list-decimal list-inside cursor-pointer">
+              {toc.map((item) => (
+                <li
+                  key={item.id}
+                  className="text-blue-600 hover:underline"
+                  onClick={() => handleScrollTo(item.id)}
+                >
+                  {item.text}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </span>
       </div>
     </div>
   );
