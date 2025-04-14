@@ -23,9 +23,10 @@ jobs:
       PAYPAL_CLIENT_SECRET: ${{ secrets.PAYPAL_CLIENT_SECRET }}
 
     steps:
-      - name: Clone repository
+      - name: Clone repository manually
         run: |
-          git clone https://github.com/${{ github.repository }} .
+          git clone https://github.com/${{ github.repository }} repo
+          cd repo
           git checkout ${{ github.ref_name }}
 
       - name: Install Node.js
@@ -35,6 +36,7 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+        working-directory: ./repo
 
       - name: Create .env file from GitHub Secrets
         run: |
@@ -52,6 +54,8 @@ jobs:
           echo "GOOGLE_CLIENT_SECRET=$GOOGLE_CLIENT_SECRET" >> .env
           echo "PAYPAL_CLIENT_ID=$PAYPAL_CLIENT_ID" >> .env
           echo "PAYPAL_CLIENT_SECRET=$PAYPAL_CLIENT_SECRET" >> .env
+        working-directory: ./repo
 
       - name: Start app
         run: npm start
+        working-directory: ./repo
