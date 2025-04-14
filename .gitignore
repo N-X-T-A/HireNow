@@ -1,0 +1,46 @@
+# Common: Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Common: Node and build artifacts
+node_modules/
+dist/
+dist-ssr/
+build/
+*.local
+
+# Common: Environment files
+.env
+
+# Common: Editor directories and files
+.vscode/
+!.vscode/extensions.json
+.idea/
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.swp
+*.swo
+Thumbs.db
+
+# Common: Lock files
+package-lock.json
+yarn.lock
+
+# Common: DB or temp admin files
+db.json/
+.adminjs/
+
+# Client-specific
+client/src/pages/Test.jsx
+
+# Server-specific
+.sequelizerc
