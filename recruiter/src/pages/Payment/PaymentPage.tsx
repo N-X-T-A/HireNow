@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import Alert from "../../components/ui/alert/Alert";
+import { SERVICE_URL } from "../../api/config";
 
 interface Plan {
   name: string;
@@ -23,7 +24,7 @@ export default function PaymentPage() {
 
   useEffect(() => {
     if (slugId) {
-      fetch(`http://localhost:5000/api/v1/plans/${slugId}`)
+      fetch(`${SERVICE_URL}/plans/${slugId}`)
         .then((res) => {
           if (res.status === 404) {
             navigate("*");
@@ -110,19 +111,16 @@ export default function PaymentPage() {
                     const details = await actions.order.capture();
                     setPaymentStatus("success");
 
-                    await fetch(
-                      "http://localhost:5000/api/v1/payment/confirm",
-                      {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({
-                          companyId,
-                          amount: price,
-                          servicePackage: plan?.slugId,
-                          paymentDetails: details,
-                        }),
-                      }
-                    );
+                    await fetch(`${SERVICE_URL}/payment/confirm`, {
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify({
+                        companyId,
+                        amount: price,
+                        servicePackage: plan?.slugId,
+                        paymentDetails: details,
+                      }),
+                    });
 
                     setTimeout(() => navigate("/"), 2000);
                   }

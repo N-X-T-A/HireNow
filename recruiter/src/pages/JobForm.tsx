@@ -9,6 +9,7 @@ import MultiSelect from "../components/form/MultiSelect";
 import BulletListInput from "../components/form/input/BulletListInput";
 import Alert from "../components/ui/alert/Alert";
 import apiFetch from "../utils/api";
+import { SERVICE_URL } from "../api/config";
 
 export default function JobForm() {
   const [formData, setFormData] = useState({
@@ -37,9 +38,7 @@ export default function JobForm() {
     const fetchSkills = async () => {
       try {
         const id = "67d28aceb386d0abcfe72960";
-        const data = await apiFetch(
-          `http://localhost:5000/api/v1/job/skills/${id}`
-        );
+        const data = await apiFetch(`${SERVICE_URL}/job/skills/${id}`);
         const options = data.map((skill: { _id: string; name: string }) => ({
           value: skill._id,
           text: skill.name,
@@ -116,7 +115,7 @@ export default function JobForm() {
     };
 
     try {
-      await apiFetch("http://localhost:5000/api/v1/job", {
+      await apiFetch(`${SERVICE_URL}/job`, {
         method: "POST",
         body: JSON.stringify(submittedData),
       });

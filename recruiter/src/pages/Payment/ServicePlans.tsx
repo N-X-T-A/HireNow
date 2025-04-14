@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import Alert from "../../components/ui/alert/Alert";
+import { SERVICE_URL } from "../../api/config";
 
 interface Plan {
   name: string;
@@ -27,7 +28,7 @@ export default function ServicePlans() {
   useEffect(() => {
     const fetchPlans = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/v1/plans");
+        const res = await fetch(`${SERVICE_URL}/plans`);
         if (!res.ok) throw new Error("Failed to fetch plans");
         const data = await res.json();
         setPlans(data);
@@ -45,9 +46,7 @@ export default function ServicePlans() {
         localStorage.setItem("companyId", companyId._id);
 
         try {
-          const res = await fetch(
-            `http://localhost:5000/api/v1/company/${companyId._id}`
-          );
+          const res = await fetch(`${SERVICE_URL}/company/${companyId._id}`);
           if (!res.ok) throw new Error("Failed to fetch company data");
           const data: ServicePackage = await res.json();
           setCurrentPackage(data.metadata.servicePackage);

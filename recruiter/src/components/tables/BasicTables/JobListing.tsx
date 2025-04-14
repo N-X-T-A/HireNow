@@ -17,8 +17,9 @@ import Input from "../../form/input/InputField";
 import TextArea from "../../form/input/TextArea";
 import apiFetch from "../../../utils/api";
 import BulletListInput from "../../form/input/BulletListInput";
+import { SERVICE_URL } from "../../../api/config";
 
-const API_URL = "http://localhost:5000/api/v1/job";
+const API_URL = `${SERVICE_URL}/job`;
 
 interface Job {
   _id: string;

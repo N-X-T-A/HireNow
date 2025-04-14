@@ -1,4 +1,5 @@
-const API_URL = "http://localhost:5000/api/v1/application";
+import { SERVICE_URL } from "./config";
+
 const TOKEN = localStorage.getItem("accessToken");
 
 export interface User {
@@ -24,7 +25,7 @@ export interface Applicant {
 }
 
 export async function fetchApplicants(): Promise<Applicant[]> {
-  const response = await fetch(`${API_URL}/applicants`, {
+  const response = await fetch(`${SERVICE_URL}/applicants`, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${TOKEN}`,
@@ -44,7 +45,7 @@ export async function updateApplicantStatus(
   applicantId: string,
   newStatus: Applicant["status"]
 ): Promise<void> {
-  const response = await fetch(`${API_URL}/update-status`, {
+  const response = await fetch(`${SERVICE_URL}/update-status`, {
     method: "PUT",
     headers: {
       Authorization: `Bearer ${TOKEN}`,

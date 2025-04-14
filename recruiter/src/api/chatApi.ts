@@ -1,4 +1,5 @@
-const API_URL = "http://localhost:5000/api/v1/chat";
+import { SERVICE_URL } from "./config";
+
 const TOKEN = localStorage.getItem("accessToken");
 
 export interface Conversation {
@@ -23,7 +24,7 @@ export interface Message {
 }
 
 export const fetchConversations = async (): Promise<Conversation[]> => {
-  const response = await fetch(`${API_URL}/conversations`, {
+  const response = await fetch(`${SERVICE_URL}/chat/conversations`, {
     headers: {
       Authorization: `Bearer ${TOKEN}`,
       "Content-Type": "application/json",
@@ -41,7 +42,7 @@ export const fetchConversations = async (): Promise<Conversation[]> => {
 export const fetchMessages = async (
   conversationId: string
 ): Promise<Message[]> => {
-  const response = await fetch(`${API_URL}/messages/${conversationId}`, {
+  const response = await fetch(`${SERVICE_URL}/messages/${conversationId}`, {
     headers: {
       Authorization: `Bearer ${TOKEN}`,
       "Content-Type": "application/json",
@@ -60,7 +61,7 @@ export const sendMessage = async (
   conversation_id: string,
   content: string
 ): Promise<Message> => {
-  const response = await fetch(`${API_URL}/message`, {
+  const response = await fetch(`${SERVICE_URL}/message`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${TOKEN}`,
@@ -78,7 +79,7 @@ export const sendMessage = async (
 };
 
 export const markMessagesAsRead = async (conversationId: string) => {
-  const response = await fetch(`${API_URL}/messages/read`, {
+  const response = await fetch(`${SERVICE_URL}/messages/read`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${TOKEN}`,

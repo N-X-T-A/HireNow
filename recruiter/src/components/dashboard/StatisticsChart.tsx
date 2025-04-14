@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
 import { ApexOptions } from "apexcharts";
 import ChartTab from "../common/ChartTab";
+import { SERVICE_URL } from "../../api/config";
 
 export default function StatisticsChart() {
   const [tab, setTab] = useState<"monthly" | "quarterly" | "annually">(
@@ -19,15 +20,12 @@ export default function StatisticsChart() {
       }
 
       try {
-        const response = await fetch(
-          "http://localhost:5000/api/v1/statistics",
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-            },
-          }
-        );
+        const response = await fetch(`${SERVICE_URL}/statistics`, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
         const data = await response.json();
         setChartData(data.metadata);
 

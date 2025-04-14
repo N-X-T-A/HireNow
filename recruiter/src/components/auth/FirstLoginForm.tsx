@@ -3,6 +3,7 @@ import Label from "../form/Label";
 import Input from "../form/input/InputField";
 import Select from "../form/Select";
 import { useNavigate } from "react-router";
+import { SERVICE_URL } from "../../api/config";
 
 export default function FirstLoginForm() {
   const [step, setStep] = useState(1);
@@ -23,7 +24,7 @@ export default function FirstLoginForm() {
   useEffect(() => {
     const fetchIndustries = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/v1/job/listings");
+        const res = await fetch(`${SERVICE_URL}/job/listings`);
         if (!res.ok) throw new Error("Network response was not ok");
         const data = await res.json();
         const formatted = data.map((item: any) => ({
