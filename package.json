@@ -1,0 +1,29 @@
+{
+  "name": "hirenow",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "install-server": "cd backend && npm install",
+    "start-server": "cd backend && node app.js",
+    "install-client": "cd client && npm install",
+    "build-client": "cd client && npm run build",
+    "start-client": "cd client && npm run start",
+    "install-recruiter": "cd backend && npm install",
+    "start-recruiter": "cd backend && node app.js",
+    "install-cms": "cd backend && npm install",
+    "start-cms": "cd backend && node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/N-X-T-A/HireNow.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/N-X-T-A/HireNow/issues"
+  },
+  "homepage": "https://github.com/N-X-T-A/HireNow#readme"
+}
