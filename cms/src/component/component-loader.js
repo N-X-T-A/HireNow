@@ -28,6 +28,10 @@ const Component = {
     "TagList",
     path.join(__dirname, "./Tag/TagList.jsx")
   ),
+  MainDashboard: componentLoader.add(
+    "MainDashboard",
+    path.join(__dirname, "./Dashboard/MainDashboard.jsx")
+  ),
 };
 
 export { componentLoader, Component };

@@ -3,7 +3,6 @@ import dotenv from "dotenv";
 import { connectDB } from "#config/db.js";
 import adminRouter from "#config/admin.js";
 
-
 dotenv.config();
 
 const PORT = process.env.APP_PORT || 8000;
@@ -13,7 +12,8 @@ const app = express();
 connectDB();
 
 app.use("/admin", adminRouter);
+app.use("/static", express.static("public"));
 
 app.listen(PORT, () => {
-    console.log(`🚀 AdminJS is running on http://${HOST}:${PORT}/admin/login`);
+  console.log(`🚀 AdminJS is running on http://${HOST}:${PORT}/admin/login`);
 });
