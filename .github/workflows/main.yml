@@ -23,12 +23,15 @@ jobs:
       PAYPAL_CLIENT_SECRET: ${{ secrets.PAYPAL_CLIENT_SECRET }}
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Clone repository
+        run: |
+          git clone https://github.com/${{ github.repository }} .
+          git checkout ${{ github.ref_name }}
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: "18"
+      - name: Install Node.js
+        run: |
+          curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+          sudo apt-get install -y nodejs
 
       - name: Install dependencies
         run: npm install
@@ -50,5 +53,5 @@ jobs:
           echo "PAYPAL_CLIENT_ID=$PAYPAL_CLIENT_ID" >> .env
           echo "PAYPAL_CLIENT_SECRET=$PAYPAL_CLIENT_SECRET" >> .env
 
-      - name: Run app
-        run: node index.js
+      - name: Start app
+        run: npm start
