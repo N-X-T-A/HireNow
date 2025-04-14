@@ -23,7 +23,7 @@ jobs:
       PAYPAL_CLIENT_SECRET: ${{ secrets.PAYPAL_CLIENT_SECRET }}
 
     steps:
-      - uses: actions/checkout@v3  # Lấy mã nguồn từ repository
+      - uses: actions/checkout@v1  # Lấy mã nguồn từ repository
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
