@@ -26,9 +26,11 @@ import BlogDetail from "./pages/BlogDetail";
 import NotFound from "./pages/NotFound";
 import RegisterRecruiter from "./pages/Access/registerRecruiter";
 import EmployerIntro from "./pages/employerIntro";
+import ScrollToTop from "./layout/ScrollToTop";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Router>
+      <ScrollToTop />
       <Routes>
         {/* public route */}
         <Route path="/" element={<Home />} />

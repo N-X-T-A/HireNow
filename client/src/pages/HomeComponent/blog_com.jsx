@@ -86,12 +86,16 @@ const Blog_com = () => {
             }}
           >
             <img
+              onClick={() => navigate(`/blogs/${job._id}`)}
               src={job.image}
               alt=""
               className="rounded-t-md h-[180px] object-cover"
             />
             <div className="cursor-pointer flex gap-2 flex-col border-[1px] border-gray-300 p-2 pt-4 rounded-b-md">
-              <p className="!mb-0 font-bold text-justify min-h-[70px]">
+              <p
+                onClick={() => navigate(`/blogs/${job._id}`)}
+                className="!mb-0 font-bold text-justify min-h-[70px]"
+              >
                 {job.title}
               </p>
               <p className="!mb-0 text-justify line-clamp-4 min-h-[96px]">
