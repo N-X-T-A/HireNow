@@ -10,7 +10,7 @@
     "install-cms": "cd cms && npm install",
     "start-server": "cd server && node index.js",
     "start-client": "cd client && npm run dev",
-    "start-recruiter": "cd recruiter && npm run dev",
+    "start-recruiter": "cd recruiter && npm run build",
     "start-cms": "cd cms && npm run dev"
   },
   "repository": {
