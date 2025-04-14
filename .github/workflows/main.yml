@@ -23,38 +23,43 @@ jobs:
       PAYPAL_CLIENT_SECRET: ${{ secrets.PAYPAL_CLIENT_SECRET }}
 
     steps:
+      # Clone the repository manually
       - name: Clone repository manually
         run: |
           git clone https://github.com/${{ github.repository }} .
           git checkout ${{ github.ref_name }}
 
+      # Install Node.js
       - name: Install Node.js
         run: |
           curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
           sudo apt-get install -y nodejs
 
+      # Install dependencies
       - name: Install dependencies
         run: npm install
         working-directory: ./server
 
+      # Create .env file from GitHub Secrets
       - name: Create .env file from GitHub Secrets
         run: |
-          echo "APP_PORT=$APP_PORT" >> .env
-          echo "CLOUDINARY_API_KEY=$CLOUDINARY_API_KEY" >> .env
-          echo "CLOUDINARY_API_SECRET=$CLOUDINARY_API_SECRET" >> .env
-          echo "CLOUDINARY_CLOUD_NAME=$CLOUDINARY_CLOUD_NAME" >> .env
-          echo "JWT_SECRET=$JWT_SECRET" >> .env
-          echo "ACCESS_TOKEN_SECRET=$ACCESS_TOKEN_SECRET" >> .env
-          echo "REFRESH_TOKEN_SECRET=$REFRESH_TOKEN_SECRET" >> .env
-          echo "CLIENT=$CLIENT" >> .env
-          echo "RECRUITER=$RECRUITER" >> .env
-          echo "MONGO_URI=$MONGO_URI" >> .env
-          echo "GOOGLE_CLIENT_ID=$GOOGLE_CLIENT_ID" >> .env
-          echo "GOOGLE_CLIENT_SECRET=$GOOGLE_CLIENT_SECRET" >> .env
-          echo "PAYPAL_CLIENT_ID=$PAYPAL_CLIENT_ID" >> .env
-          echo "PAYPAL_CLIENT_SECRET=$PAYPAL_CLIENT_SECRET" >> .env
+          echo "APP_PORT=$APP_PORT" >> ./server/.env
+          echo "CLOUDINARY_API_KEY=$CLOUDINARY_API_KEY" >> ./server/.env
+          echo "CLOUDINARY_API_SECRET=$CLOUDINARY_API_SECRET" >> ./server/.env
+          echo "CLOUDINARY_CLOUD_NAME=$CLOUDINARY_CLOUD_NAME" >> ./server/.env
+          echo "JWT_SECRET=$JWT_SECRET" >> ./server/.env
+          echo "ACCESS_TOKEN_SECRET=$ACCESS_TOKEN_SECRET" >> ./server/.env
+          echo "REFRESH_TOKEN_SECRET=$REFRESH_TOKEN_SECRET" >> ./server/.env
+          echo "CLIENT=$CLIENT" >> ./server/.env
+          echo "RECRUITER=$RECRUITER" >> ./server/.env
+          echo "MONGO_URI=$MONGO_URI" >> ./server/.env
+          echo "GOOGLE_CLIENT_ID=$GOOGLE_CLIENT_ID" >> ./server/.env
+          echo "GOOGLE_CLIENT_SECRET=$GOOGLE_CLIENT_SECRET" >> ./server/.env
+          echo "PAYPAL_CLIENT_ID=$PAYPAL_CLIENT_ID" >> ./server/.env
+          echo "PAYPAL_CLIENT_SECRET=$PAYPAL_CLIENT_SECRET" >> ./server/.env
         working-directory: ./server
 
+      # Start the app using npm start
       - name: Start app
         run: npm start
         working-directory: ./server
