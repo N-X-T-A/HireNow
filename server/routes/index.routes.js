@@ -10,6 +10,10 @@ router.use((req, res, next) => {
   next();
 });
 
+router.get("/", (req, res) => {
+  res.send("<h2>Hello World</h2>");
+});
+
 router.use("/api/v1/auth", require("./auth.routes"));
 router.use("/api/v1/user", require("./user.routes"));
 router.use("/api/v1/job", require("./job.routes"));
