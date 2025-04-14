@@ -4,15 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "install-server": "cd backend && npm install",
-    "start-server": "cd backend && node app.js",
+    "install-server": "cd server && npm install",
     "install-client": "cd client && npm install",
-    "build-client": "cd client && npm run build",
-    "start-client": "cd client && npm run start",
-    "install-recruiter": "cd backend && npm install",
-    "start-recruiter": "cd backend && node app.js",
-    "install-cms": "cd backend && npm install",
-    "start-cms": "cd backend && node app.js"
+    "install-recruiter": "cd recruiter && npm install",
+    "install-cms": "cd cms && npm install",
+    "start-server": "cd server && node index.js",
+    "start-client": "cd client && npm run dev",
+    "start-recruiter": "cd recruiter && npm run dev",
+    "start-cms": "cd cms && npm run dev"
   },
   "repository": {
     "type": "git",
