@@ -8,7 +8,7 @@ export const connectDB = async () => {
       throw new Error("DB_URI is undefined. Check your .env file!");
     }
 
-    await mongoose.connect("mongodb://localhost:27017/hirenow", {
+    await mongoose.connect(process.env.DB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
