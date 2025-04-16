@@ -4,6 +4,8 @@ import { Resource, Database } from "@adminjs/mongoose";
 import { Component, componentLoader } from "#component/component-loader.js";
 import { blogResource } from "#resources/blog.js";
 import { TagResource } from "#resources/tag.js";
+import dotenv from "dotenv";
+dotenv.config();
 
 AdminJS.registerAdapter({
   Resource: Resource,
@@ -26,7 +28,7 @@ const adminJS = new AdminJS({
 
 const adminRouter = AdminJSExpress.buildAuthenticatedRouter(adminJS, {
   authenticate: async (email, password) => {
-    if (email === "admin@example.com" && password === "1") {
+    if (email === process.env.EMAIL && password === process.env.PASSWORD) {
       return { email };
     }
     return null;
