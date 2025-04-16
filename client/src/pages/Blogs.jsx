@@ -83,7 +83,7 @@ const Blogs = () => {
             <div className="absolute bottom-0 left-0 p-6 text-white z-10">
               <h2
                 onClick={() => navigate(`/blogs/${item._id}`)}
-                className="text-3xl font-bold drop-shadow-md"
+                className="cursor-pointer text-3xl font-bold drop-shadow-md"
               >
                 {item.title}
               </h2>
@@ -134,7 +134,7 @@ const Blogs = () => {
       <h2 className="text-3xl font-[600] mt-8">Toàn bộ bài viết</h2>
 
       <div className="flex gap-2">
-        <div className="flex-[7] flex flex-wrap -mx-2">
+        <div className="flex-[7] flex flex-wrap -mx-2 cursor-pointer">
           {filteredPosts.map((post) => (
             <div key={post._id} className="w-1/2 px-2 mb-4">
               <div className="bg-white shadow-md rounded-lg overflow-hidden">

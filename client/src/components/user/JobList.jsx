@@ -1,154 +1,26 @@
 import React from "react";
-import { useEffect, useState, useRef } from "react";
-import { ClockIcon, CheckBadgeIcon } from "@heroicons/react/24/outline";
+
+import { ClockIcon } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
 import { BookmarkIcon } from "@heroicons/react/24/solid";
 import parse from "html-react-parser";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-const JobList = ({ onSelectJob, sortOrder, searchTerm }) => {
+
+const JobList = ({
+  onSelectJob,
+  sortOrder,
+  searchTerm,
+  UserJobsAPI,
+  bookmarkedJobs,
+  open,
+  loading,
+  OpenNotification,
+  OpenNotification1,
+  handleBookmarkClick,
+}) => {
   const navigate = useNavigate();
-  const [UserJobsAPI, setJobsAPI] = useState([]);
-  const [open, setOpen] = useState(false);
-  const [bookmarkedJobs, setBookmarkedJobs] = useState({});
-  const ACCESS_TOKEN = sessionStorage.getItem("access_token");
-  const [loading, setLoading] = useState(true);
-  const [OpenNotification, setOpenNotification] = useState(false);
-  const [OpenNotification1, setOpenNotification1] = useState(false);
-
-  //bookmark
-  useEffect(() => {
-    const storedBookmarks =
-      JSON.parse(localStorage.getItem("bookmarkedJobs")) || {};
-    setBookmarkedJobs(storedBookmarks);
-  }, []);
-
-  const handleBookmarkClick = async (jobId) => {
-    const isBookmarked = !!bookmarkedJobs[jobId];
-    const token = sessionStorage.getItem("access_token");
-
-    if (!token) {
-      alert("Bạn cần đăng nhập để sử dụng chức năng này!");
-      return;
-    }
-
-    try {
-      if (!isBookmarked) {
-        await axios.post(
-          `http://localhost:5000/api/v1/favorite/${jobId}`,
-          {},
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
-        console.log("Đã thêm bookmark");
-
-        const updatedBookmarks = { ...bookmarkedJobs, [jobId]: true };
-        setBookmarkedJobs(updatedBookmarks);
-        localStorage.setItem(
-          "bookmarkedJobs",
-          JSON.stringify(updatedBookmarks)
-        );
-        setOpenNotification(true);
-        setTimeout(() => {
-          setOpenNotification(false);
-        }, 2000);
-      } else {
-        await axios.delete(`http://localhost:5000/api/v1/favorite/${jobId}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        console.log("Đã xóa bookmark");
-
-        const updatedBookmarks = { ...bookmarkedJobs };
-        delete updatedBookmarks[jobId];
-        setBookmarkedJobs(updatedBookmarks);
-        localStorage.setItem(
-          "bookmarkedJobs",
-          JSON.stringify(updatedBookmarks)
-        );
-        setOpenNotification1(true);
-        setTimeout(() => {
-          setOpenNotification1(false);
-        }, 2000);
-      }
-    } catch (error) {
-      console.error("Lỗi khi cập nhật bookmark:", error);
-    }
-  };
-
-  //fetch API
-  const [originalJobs, setOriginalJobs] = useState([]);
-  const [isSorted, setIsSorted] = useState(false);
-  useEffect(() => {
-    const fetchJobsAPI = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:5000/api/v1/job/recommend",
-          {
-            headers: {
-              Authorization: `Bearer ${ACCESS_TOKEN}`,
-            },
-          }
-        );
-        setTimeout(() => {
-          setOriginalJobs(response.data.jobs);
-          setJobsAPI(response.data.jobs);
-          setLoading(false);
-        }, 1000);
-      } catch (error) {
-        console.error("Lỗi khi lấy danh sách công việc:", error);
-        setLoading(false);
-        setOpen(true);
-      }
-    };
-
-    fetchJobsAPI();
-  }, []);
-
-  useEffect(() => {
-    if (!sortOrder && !searchTerm) {
-      setJobsAPI(originalJobs);
-      return;
-    }
-    let filteredJobs = [...originalJobs];
-    if (searchTerm) {
-      filteredJobs = filteredJobs.filter((job) =>
-        job.title.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-    }
-    if (sortOrder) {
-      filteredJobs.sort((a, b) => {
-        switch (sortOrder) {
-          case "salary_asc":
-            return (
-              extractNumber(a.salary_range) - extractNumber(b.salary_range)
-            );
-          case "salary_desc":
-            return (
-              extractNumber(b.salary_range) - extractNumber(a.salary_range)
-            );
-          case "time_asc":
-            return new Date(a.posted_time) - new Date(b.posted_time);
-          case "time_desc":
-            return new Date(b.posted_time) - new Date(a.posted_time);
-          case "title_asc":
-            return a.title.localeCompare(b.title);
-          case "title_desc":
-            return b.title.localeCompare(a.title);
-          default:
-            return 0;
-        }
-      });
-    }
-
-    setJobsAPI(filteredJobs);
-  }, [sortOrder, searchTerm, originalJobs]);
-
-  const extractNumber = (salary) => {
-    return parseInt(salary.replace(/\D/g, ""), 10) || 0;
-  };
 
   console.log(UserJobsAPI);
   return (
@@ -228,10 +100,21 @@ const JobList = ({ onSelectJob, sortOrder, searchTerm }) => {
               : UserJobsAPI.map((job) => (
                   <div
                     key={job.id}
-                    className="flex flex-col gap-2 w-full p-4 rounded-lg transition ease-in-out duration-300 transform hover:-translate-y-[5px]"
+                    className="relative  flex flex-col gap-2 w-full p-4 rounded-lg transition ease-in-out duration-300 transform hover:-translate-y-[5px]"
                     style={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }}
                     onClick={() => onSelectJob(job._id)}
                   >
+                    {job.tag && (
+                      <span
+                        className={`absolute top-2 right-2 px-3 py-1 text-[12px] font-bold rounded-full z-20 animate-pulse ${
+                          job.tag.toLowerCase() === "super hot"
+                            ? "bg-red-600 text-white shadow-md"
+                            : "bg-gray-200 text-gray-700"
+                        }`}
+                      >
+                        {job.tag === "Super hot" ? "🔥 Super hot" : job.tag}
+                      </span>
+                    )}
                     <div className="flex items-center justify-between">
                       <div className="flex gap-2 items-center">
                         <img
