@@ -25,7 +25,7 @@ export interface Applicant {
 }
 
 export async function fetchApplicants(): Promise<Applicant[]> {
-  const response = await fetch(`${SERVICE_URL}/applicants`, {
+  const response = await fetch(`${SERVICE_URL}/application/applicants`, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${TOKEN}`,

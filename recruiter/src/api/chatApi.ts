@@ -42,12 +42,15 @@ export const fetchConversations = async (): Promise<Conversation[]> => {
 export const fetchMessages = async (
   conversationId: string
 ): Promise<Message[]> => {
-  const response = await fetch(`${SERVICE_URL}/messages/${conversationId}`, {
-    headers: {
-      Authorization: `Bearer ${TOKEN}`,
-      "Content-Type": "application/json",
-    },
-  });
+  const response = await fetch(
+    `${SERVICE_URL}/chat/messages/${conversationId}`,
+    {
+      headers: {
+        Authorization: `Bearer ${TOKEN}`,
+        "Content-Type": "application/json",
+      },
+    }
+  );
 
   if (!response.ok) {
     throw new Error("Failed to fetch messages");
@@ -61,7 +64,7 @@ export const sendMessage = async (
   conversation_id: string,
   content: string
 ): Promise<Message> => {
-  const response = await fetch(`${SERVICE_URL}/message`, {
+  const response = await fetch(`${SERVICE_URL}/chat/message`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${TOKEN}`,
@@ -79,7 +82,7 @@ export const sendMessage = async (
 };
 
 export const markMessagesAsRead = async (conversationId: string) => {
-  const response = await fetch(`${SERVICE_URL}/messages/read`, {
+  const response = await fetch(`${SERVICE_URL}/chat/messages/read`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${TOKEN}`,

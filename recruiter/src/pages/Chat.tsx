@@ -12,7 +12,6 @@ import {
   markMessagesAsRead,
 } from "../api/chatApi";
 
-// Import socket utils
 import { connectSocket, getSocket, disconnectSocket } from "../utils/socket";
 
 export default function Chats() {
@@ -22,7 +21,6 @@ export default function Chats() {
   const [messages, setMessages] = useState<Message[]>([]);
 
   useEffect(() => {
-    // Kết nối socket
     const token = localStorage.getItem("accessToken");
     if (token) connectSocket(token);
 
@@ -31,6 +29,7 @@ export default function Chats() {
       socket.on("connect", () => console.log("Socket connected"));
       socket.on("disconnect", () => console.log("Socket disconnected"));
 
+      socket.off("newMessage");
       socket.on("newMessage", (newMessage: Message) => {
         if (newMessage.conversation_id === selectedConversation?._id) {
           setMessages((prevMessages) => [...prevMessages, newMessage]);
@@ -39,7 +38,6 @@ export default function Chats() {
       });
     }
 
-    // Ngắt kết nối khi rời khỏi trang
     return () => {
       disconnectSocket();
     };
@@ -99,10 +97,7 @@ export default function Chats() {
     try {
       const newMessage = await sendMessage(selectedConversation._id, content);
 
-      const socket = getSocket();
-      if (socket) {
-        socket.emit("sendMessage", newMessage);
-      }
+      setMessages((prevMessages) => [...prevMessages, newMessage]);
     } catch (error) {
       console.error("Error sending message:", error);
     }
