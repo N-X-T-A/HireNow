@@ -5,6 +5,7 @@ import { Component, componentLoader } from "#component/component-loader.js";
 import { blogResource } from "#resources/blog.js";
 import { TagResource } from "#resources/tag.js";
 import dotenv from "dotenv";
+import { PlanResource } from "#resources/plan.js";
 dotenv.config();
 
 AdminJS.registerAdapter({
@@ -21,7 +22,7 @@ const adminJS = new AdminJS({
     favicon: "/static/images/favicon.ico",
     softwareBrothers: false,
   },
-  resources: [blogResource, TagResource],
+  resources: [blogResource, TagResource, PlanResource],
   rootPath: "/admin",
   dashboard: { component: Component.MainDashboard },
 });
