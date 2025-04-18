@@ -3,14 +3,13 @@ import withLayout from "../layout/withLayout";
 import { useParams } from "react-router-dom";
 import parse from "html-react-parser";
 import axios from "axios";
+
 const BlogDetail = () => {
   const { id } = useParams();
   const [Blog, SetBlog] = useState([]);
   const [imageUrl, setImageUrl] = useState("");
   const [toc, setToc] = useState([]);
 
-  console.log(id);
-  //fetch API
   useEffect(() => {
     const fetchJob = async () => {
       try {
@@ -19,11 +18,9 @@ const BlogDetail = () => {
         );
         const blogData = response.data;
 
-        // Tạo div tạm để xử lý HTML
         const tempDiv = document.createElement("div");
         tempDiv.innerHTML = blogData.description;
 
-        // Tìm tất cả thẻ h2
         const headings = Array.from(tempDiv.querySelectorAll("h2"));
         const tocItems = headings.map((heading, index) => {
           const id = `section-${index}`;
@@ -34,7 +31,6 @@ const BlogDetail = () => {
           };
         });
 
-        // Cập nhật lại description với id đã gán
         blogData.description = tempDiv.innerHTML;
 
         SetBlog(blogData);
@@ -48,7 +44,6 @@ const BlogDetail = () => {
     fetchJob();
   }, [id]);
 
-  //clcik
   const handleScrollTo = (id) => {
     const el = document.getElementById(id);
     if (el) {
@@ -56,9 +51,8 @@ const BlogDetail = () => {
     }
   };
 
-  console.log(Blog);
   return (
-    <div className="flex flex-col gap-4 container w-full !max-w-[1700px] p-[10px]  py-2">
+    <div className="flex flex-col gap-4 container w-full !max-w-[1700px] p-[10px] py-2">
       <div
         className="w-full h-[400px] bg-fixed bg-center bg-no-repeat bg-cover relative"
         style={{
@@ -66,32 +60,33 @@ const BlogDetail = () => {
         }}
       >
         <div className="absolute inset-0 bg-black opacity-30"></div>
-        <div className="absolute inset-0 flex flex-col  justify-center text-white px-4 text-left">
-          {" "}
-          <h2 className="text-[50px] font-bold mb-4 drop-shadow-lg">
+        <div className="absolute inset-0 flex flex-col justify-center text-white px-4 text-left">
+          <h2 className="text-[60px] font-bold mb-4 drop-shadow-lg">
             {Blog.title}
           </h2>
-          <p className="text-[13px]  w-[60%] mb-6 drop-shadow-md">
+          <p className="text-[22px] w-[70%] mb-6 drop-shadow-md">
             {Blog.short_title}
           </p>
         </div>
       </div>
+
       <div className="flex gap-4">
-        <span className="flex-[7]">
+        <div className="flex-[7] text-xl leading-relaxed">
           {Blog?.description
             ? parse(
                 Blog.description.replace("<ul>", '<ul class="list-disc pl-5">')
               )
             : "Đang tải nội dung..."}
-        </span>
-        <span className="flex-[3]">
-          <div className="border p-4 rounded shadow bg-white">
-            <h3 className="text-lg font-bold mb-2">Mục Lục</h3>
-            <ul className="space-y-2 list-decimal list-inside cursor-pointer">
+        </div>
+
+        <div className="flex-[3]">
+          <div className="border p-4 rounded shadow bg-white sticky top-10">
+            <h3 className="text-2xl font-bold mb-4">Mục Lục</h3>
+            <ul className="space-y-2 cursor-pointer">
               {toc.map((item) => (
                 <li
                   key={item.id}
-                  className="text-blue-600 hover:underline"
+                  className="text-blue-600 hover:underline text-base lg:text-lg"
                   onClick={() => handleScrollTo(item.id)}
                 >
                   {item.text}
@@ -99,7 +94,7 @@ const BlogDetail = () => {
               ))}
             </ul>
           </div>
-        </span>
+        </div>
       </div>
     </div>
   );
