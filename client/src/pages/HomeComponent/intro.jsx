@@ -8,6 +8,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { motion } from "framer-motion";
 import { introData } from "../../data/data";
+import RotatingText from "../../components/text/RoatingText";
 
 const Intro = memo(() => {
   const [open, setOpen] = useState(false);
@@ -21,7 +22,13 @@ const Intro = memo(() => {
     article,
     rightImage,
   } = introData;
-
+  const texts = [
+    "Dream job",
+    "High-paying job",
+    "Remote job",
+    "Stable job",
+    "Perfect job",
+  ];
   return (
     <div className="w-full bg-white flex rounded-[10px] gap-2">
       {/* Left Section */}
@@ -59,18 +66,23 @@ const Intro = memo(() => {
             <img className="max-w-28 w-full" src={logo} alt="Logo" />
           </div>
           <div className="w-full px-[25px]">
-            {mainText.map((text, index) => (
-              <p
-                key={index}
-                className={`m-0 text-[${50 - index * 5}px] font-[${600 - index * 100}]`}
-              >
-                {text}
-              </p>
-            ))}
-            <p className="!m-0 text-[15px] font-[400] pt-[10px]">{subText}</p>
-            <button className="mt-[10px] w-[70%] h-[45px] rounded-[10px] px-[20px] py-[10px] bg-[#1E90FF] text-white cursor-pointer transition ease-in-out duration-300 hover:bg-black">
-              {buttonText}
-            </button>
+            <h3 className="my-0 mx-2">
+              <span className="inline">With HireNow, you can find a </span>
+              <span className="inline-flex">
+                <RotatingText
+                  texts={texts}
+                  mainClassName="px-2 sm:px-2 md:px-3 bg-[#1E90FF] text-white overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg mx-2"
+                  staggerFrom={"last"}
+                  initial={{ y: "100%" }}
+                  animate={{ y: 0 }}
+                  exit={{ y: "-120%" }}
+                  staggerDuration={0.025}
+                  splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
+                  transition={{ type: "spring", damping: 30, stiffness: 400 }}
+                  rotationInterval={3000}
+                />
+              </span>
+            </h3>
           </div>
           <div className="w-full px-[25px] mb-[20px]">
             <p className="!m-0 text-[15px] font-[400]">
