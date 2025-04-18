@@ -7,7 +7,7 @@ interface Plan {
   name: string;
   price: number;
   features: string[];
-  label?: string;
+  isPopular?: boolean;
   slugId: string;
 }
 
@@ -90,9 +90,9 @@ export default function ServicePlans() {
                 }`}
                 onClick={() => handleSelect(plan)}
               >
-                {plan.label && (
+                {plan.isPopular && (
                   <div className="absolute top-4 right-4 bg-green-600 text-white text-sm px-4 py-1 rounded-full">
-                    {plan.label}
+                    POPULAR
                   </div>
                 )}
                 <h3 className="text-2xl font-bold capitalize mb-4 text-gray-900">
