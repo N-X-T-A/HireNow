@@ -145,9 +145,6 @@ const UserPage1Com = ({ jobsList, companiesList, user, hoverColors }) => {
                 <p className="font-semibold text-gray-700">
                   {job.salary_range}
                 </p>
-                <button className="mt-3 w-full bg-black text-white py-2 rounded-md font-medium hover:bg-gray-800">
-                  Ứng tuyển
-                </button>
                 <p className="text-xs text-gray-400 mt-2">
                   Đăng {job.posted_time}
                 </p>

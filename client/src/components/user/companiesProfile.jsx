@@ -11,7 +11,7 @@ import {
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Companyjobs } from "../../data/data";
-export const CompaniesProfileUserShow = () => {
+export const CompaniesProfileUserShow = ({ company, error, loading }) => {
   //
   const socialIcons = {
     facebook: faFacebook,
@@ -22,28 +22,7 @@ export const CompaniesProfileUserShow = () => {
   //
 
   //state
-  const { ComId } = useParams();
   const [activeTabs, setActiveTabs] = useState(0);
-  const [company, setCompany] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  useEffect(() => {
-    const fetchCompanyDetails = async () => {
-      try {
-        const response = await axios.get(
-          `http://localhost:5000/api/v1/company/${ComId}`
-        );
-        setCompany(response.data.metadata);
-      } catch (err) {
-        setError("Không thể tải thông tin công ty.");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchCompanyDetails();
-  }, [ComId]);
-  console.log(company);
   if (loading) return <p>Đang tải...</p>;
   if (error) return <p>{error}</p>;
   return (
