@@ -1,7 +1,5 @@
 import { SERVICE_URL } from "./config";
 
-const TOKEN = localStorage.getItem("accessToken");
-
 export interface User {
   _id: string;
   email: string;
@@ -24,11 +22,20 @@ export interface Applicant {
   applied_date: string;
 }
 
+function getToken() {
+  return localStorage.getItem("accessToken");
+}
+
 export async function fetchApplicants(): Promise<Applicant[]> {
+  const token = getToken();
+  if (!token) {
+    throw new Error("No token available");
+  }
+
   const response = await fetch(`${SERVICE_URL}/application/applicants`, {
     method: "GET",
     headers: {
-      Authorization: `Bearer ${TOKEN}`,
+      Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
   });
@@ -45,10 +52,15 @@ export async function updateApplicantStatus(
   applicantId: string,
   newStatus: Applicant["status"]
 ): Promise<void> {
+  const token = getToken();
+  if (!token) {
+    throw new Error("No token available");
+  }
+
   const response = await fetch(`${SERVICE_URL}/update-status`, {
     method: "PUT",
     headers: {
-      Authorization: `Bearer ${TOKEN}`,
+      Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({

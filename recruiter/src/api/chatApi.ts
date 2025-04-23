@@ -1,7 +1,5 @@
 import { SERVICE_URL } from "./config";
 
-const TOKEN = localStorage.getItem("accessToken");
-
 export interface Conversation {
   _id: string;
   last_message: string;
@@ -23,10 +21,19 @@ export interface Message {
   conversation_id: string;
 }
 
+function getToken() {
+  return localStorage.getItem("accessToken");
+}
+
 export const fetchConversations = async (): Promise<Conversation[]> => {
+  const token = getToken();
+  if (!token) {
+    throw new Error("No token available");
+  }
+
   const response = await fetch(`${SERVICE_URL}/chat/conversations`, {
     headers: {
-      Authorization: `Bearer ${TOKEN}`,
+      Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
   });
@@ -42,11 +49,16 @@ export const fetchConversations = async (): Promise<Conversation[]> => {
 export const fetchMessages = async (
   conversationId: string
 ): Promise<Message[]> => {
+  const token = getToken();
+  if (!token) {
+    throw new Error("No token available");
+  }
+
   const response = await fetch(
     `${SERVICE_URL}/chat/messages/${conversationId}`,
     {
       headers: {
-        Authorization: `Bearer ${TOKEN}`,
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
     }
@@ -64,10 +76,15 @@ export const sendMessage = async (
   conversation_id: string,
   content: string
 ): Promise<Message> => {
+  const token = getToken();
+  if (!token) {
+    throw new Error("No token available");
+  }
+
   const response = await fetch(`${SERVICE_URL}/chat/message`, {
     method: "POST",
     headers: {
-      Authorization: `Bearer ${TOKEN}`,
+      Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ conversation_id, content }),
@@ -82,10 +99,15 @@ export const sendMessage = async (
 };
 
 export const markMessagesAsRead = async (conversationId: string) => {
+  const token = getToken();
+  if (!token) {
+    throw new Error("No token available");
+  }
+
   const response = await fetch(`${SERVICE_URL}/chat/messages/read`, {
     method: "POST",
     headers: {
-      Authorization: `Bearer ${TOKEN}`,
+      Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ conversation_id: conversationId }),
