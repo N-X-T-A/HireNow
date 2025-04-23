@@ -20,6 +20,13 @@ export const fetchJobsAll = async () => {
 };
 
 export const fetchJobsAPIApplication = async () => {
+  const token = sessionStorage.getItem("access_token");
+  const axiosInstance = axios.create({
+    baseURL: "http://localhost:5000/api/v1/",
+    headers: {
+      Authorization: token ? `Bearer ${token}` : "",
+    },
+  });
   try {
     const response = await axiosInstance.get("application");
     return response.data.metadata;
