@@ -1,11 +1,28 @@
 import axios from "axios";
 const API_URL = "http://localhost:5000/api/v1/";
 const getToken = () => sessionStorage.getItem("access_token");
+const token = sessionStorage.getItem("access_token");
+const axiosInstance = axios.create({
+  baseURL: "http://localhost:5000/api/v1/",
+  headers: {
+    Authorization: token ? `Bearer ${getToken()}` : "",
+  },
+});
 
 export const fetchJobsAll = async () => {
   try {
     const response = await axios.get(`${API_URL}job`);
     return response.data.jobs;
+  } catch (error) {
+    console.error("Lỗi khi lấy danh sách công việc:", error);
+    throw error;
+  }
+};
+
+export const fetchJobsAPIApplication = async () => {
+  try {
+    const response = await axiosInstance.get("application");
+    return response.data.metadata;
   } catch (error) {
     console.error("Lỗi khi lấy danh sách công việc:", error);
     throw error;
