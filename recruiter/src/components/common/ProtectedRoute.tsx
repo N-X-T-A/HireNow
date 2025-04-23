@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
 import { Navigate, Outlet } from "react-router";
+import { jwtDecode } from "jwt-decode";
+
+type JWTPayload = {
+  exp: number;
+};
 
 export default function ProtectedRoute() {
   const [authChecked, setAuthChecked] = useState(false);
@@ -11,6 +16,25 @@ export default function ProtectedRoute() {
     const isFirstLogin = localStorage.getItem("isFirstLogin") === "true";
 
     if (!token || !recruiterData) {
+      setRedirectTo("/signin");
+      setAuthChecked(true);
+      return;
+    }
+
+    try {
+      const decoded = jwtDecode<JWTPayload>(token);
+      if (decoded.exp * 1000 < Date.now()) {
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("recruiter");
+        localStorage.removeItem("isFirstLogin");
+        setRedirectTo("/signin");
+        setAuthChecked(true);
+        return;
+      }
+    } catch {
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("recruiter");
+      localStorage.removeItem("isFirstLogin");
       setRedirectTo("/signin");
       setAuthChecked(true);
       return;
@@ -30,8 +54,7 @@ export default function ProtectedRoute() {
       } else {
         setRedirectTo(null);
       }
-    } catch (err) {
-      console.error("Failed to parse recruiter data:", err);
+    } catch {
       localStorage.removeItem("accessToken");
       localStorage.removeItem("recruiter");
       localStorage.removeItem("isFirstLogin");
