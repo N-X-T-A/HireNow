@@ -18,6 +18,7 @@ import "swiper/css";
 import "../../pages/pageCss/Login.css";
 import { RecruiterAccount } from "../../components/recuiterStep/recruiterAccount";
 import { RecruiterSocial } from "../../components/recuiterStep/recruiterSocial";
+import { useLanguage } from "../../hooks/useLanguage";
 export default function LoginMethod() {
   // const GITHUB_CLIENT_ID = Environment.GITHUB_CLIENT_ID;
   // const REDIRECT_URI = "http://localhost:3000/login";
@@ -31,7 +32,7 @@ export default function LoginMethod() {
       return null;
     }
   });
-
+  const { translations } = useLanguage();
   const [firstLoggin, setFisrtLoggin] = useState(() => {
     return JSON.parse(sessionStorage.getItem("firstLoggin")) ?? true;
   });
@@ -142,12 +143,11 @@ export default function LoginMethod() {
   };
   //multiStep
   const steps = [
-    "Thông tin tài khoản",
-    "Trình độ học vấn",
-    "Kinh nghiệm",
-    "Hoàn tất",
+    translations["steps.account"],
+    translations["steps.education"],
+    translations["steps.experience"],
+    translations["steps.complete"],
   ];
-  const RecuiterStep = ["Thông tin Công ty", "Chi tiết", "Hoàn tất"];
 
   const displayStep = (step) => {
     switch (step) {
@@ -345,10 +345,10 @@ export default function LoginMethod() {
               </div>
               <div className="flex items-center justify-center w-[70%]">
                 <p className="text-center !m-0">
-                  Chưa có tài khoản?{" "}
+                  Chưa có tài khoản?
                   <span className="relative cursor-pointer bg-gradient-to-r from-[#1E90FF] via-green-400 to-blue-900 bg-clip-text text-transparent after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-gradient-to-r after:from-[#1E90FF] after:via-green-400 after:to-blue-900 after:transition-all after:duration-300 hover:after:w-[90%]">
-                    đăng ký{" "}
-                  </span>{" "}
+                    đăng ký
+                  </span>
                   ngay
                 </p>
               </div>

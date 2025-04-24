@@ -61,17 +61,16 @@ const BlogDetail = () => {
       >
         <div className="absolute inset-0 bg-black opacity-30"></div>
         <div className="absolute inset-0 flex flex-col justify-center text-white px-4 text-left">
-          <h2 className="text-[60px] font-bold mb-4 drop-shadow-lg">
+          <h2 className="text-[40px] font-bold  drop-shadow-lg">
             {Blog.title}
           </h2>
-          <p className="text-[22px] w-[70%] mb-6 drop-shadow-md">
-            {Blog.short_title}
-          </p>
         </div>
       </div>
 
       <div className="flex gap-4">
         <div className="flex-[7] text-xl leading-relaxed">
+          <p className="text-[18px] mb-6 drop-shadow-md">{Blog.short_title}</p>
+
           {Blog?.description
             ? parse(
                 Blog.description.replace("<ul>", '<ul class="list-disc pl-5">')
@@ -80,7 +79,7 @@ const BlogDetail = () => {
         </div>
 
         <div className="flex-[3]">
-          <div className="border p-4 rounded shadow bg-white sticky top-10">
+          <div className="border p-4 rounded shadow bg-white sticky top-24">
             <h3 className="text-2xl font-bold mb-4">Mục Lục</h3>
             <ul className="space-y-2 cursor-pointer">
               {toc.map((item) => (

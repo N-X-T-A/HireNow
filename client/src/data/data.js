@@ -154,7 +154,7 @@ export const slidesCEO = [
     id: 6,
     image: "/src/assets/home/ceo5.jpg",
     quote: "Future is now",
-    author: "Tường an",
+    author: "garo",
   },
 ];
 

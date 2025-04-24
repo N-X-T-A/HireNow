@@ -11,8 +11,9 @@ import {
   faBorderAll,
   faCommentDots,
   faBell,
+  faLanguage,
 } from "@fortawesome/free-solid-svg-icons";
-import { faYoutube } from "@fortawesome/free-brands-svg-icons";
+import { useLanguage } from "../../hooks/useLanguage";
 
 const Header = (shouldFetch) => {
   const navigate = useNavigate();
@@ -26,22 +27,40 @@ const Header = (shouldFetch) => {
     }
   });
   const [isOpen, setIsOpen] = useState(false);
+  const { language, changeLanguage, translations } = useLanguage();
+  const [showLanguageDropdown, setShowLanguageDropdown] = useState(false);
+  const [currentLanguage, setCurrentLanguage] = useState(language);
+
+  useEffect(() => {
+    setCurrentLanguage(language);
+  }, [language]);
+
+  const languageMap = {
+    vi: "Tiếng Việt",
+    en: "English",
+  };
+  const handleLanguageChange = (newLang) => {
+    if (newLang !== currentLanguage) {
+      changeLanguage(newLang); // Call changeLanguage to reload the page and change the language
+      setShowLanguageDropdown(false); // Close the dropdown after selection
+    }
+  };
+
   //notification
   const [notifications, setNotifications] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
   useEffect(() => {
     const timer = setTimeout(() => {
-      setNotifications([{ id: 1, message: "Bạn có thông báo mới!" }]);
+      setNotifications([{ id: 1, message: "" }]);
     }, 3000);
     return () => clearTimeout(timer);
   }, []);
 
   const handleClickNotification = () => {
     setShowPopup(!showPopup);
-    setNotifications([]); // Xóa thông báo sau khi click
+    setNotifications([]);
   };
 
-  //fetch user
   useEffect(() => {
     const fetchUser = () => {
       try {
@@ -61,11 +80,11 @@ const Header = (shouldFetch) => {
   const role = currentUser?.role;
   return (
     <>
-      <header className="h-max">
+      <header className="h-max sticky top-0 z-50 bg-white shadow">
         <div className="container-fluid flex justify-center">
           <div className="row min-h-[80px] w-11/12">
             {/* logo */}
-            <div className="col-lg-2 flex items-center justify-start">
+            <div className="col-lg-2 flex items-center justify-start cursor-pointer">
               <img
                 className="max-w-28 w-full "
                 src="/src/assets/home/logo.png"
@@ -91,7 +110,9 @@ const Header = (shouldFetch) => {
                             className="text-[22px]"
                           />
 
-                          <span className="pt-1.5 text-[12px]">Tất cả</span>
+                          <span className="pt-1.5 text-[12px]">
+                            {translations["all"]}
+                          </span>
                         </div>
                         <div
                           onClick={() => navigate("/user/jobs")}
@@ -101,7 +122,9 @@ const Header = (shouldFetch) => {
                             icon={faBriefcase}
                             className="text-[22px]"
                           />
-                          <span className="pt-1.5 text-[12px]">Việc làm</span>
+                          <span className="pt-1.5 text-[12px]">
+                            {translations["jobs"]}
+                          </span>
                         </div>
                         <div
                           onClick={() => navigate("/user/test")}
@@ -112,7 +135,9 @@ const Header = (shouldFetch) => {
                             className="text-[22px]"
                           />
 
-                          <span className="pt-1.5 text-[12px]">Nhắn tin</span>
+                          <span className="pt-1.5 text-[12px]">
+                            {translations["messages"]}
+                          </span>
                         </div>
                         {/* notification */}
                         <div
@@ -126,16 +151,54 @@ const Header = (shouldFetch) => {
                           {notifications.length > 0 && (
                             <span className="absolute top-0 right-5 w-2 h-2 bg-red-500 rounded-full z-[2]"></span>
                           )}
-                          <span className="pt-1.5 text-[12px]">Thông báo</span>
+                          <span className="pt-1.5 text-[12px]">
+                            {translations["notifications"]}
+                          </span>
                         </div>
+
+                        <div
+                          className="relative pt-[5px] text-[#757575] flex justify-center flex-col !w-auto !max-w-none cursor-pointer transition ease-in-out duration-300 transform hover:-translate-y-[5px] hover:text-[#1E90FF] text-center"
+                          onClick={() =>
+                            setShowLanguageDropdown(!showLanguageDropdown)
+                          }
+                        >
+                          <FontAwesomeIcon
+                            icon={faLanguage}
+                            className="text-[22px]"
+                          />
+                          <span className="pt-1.5 text-[12px]">
+                            {languageMap[language]}
+                          </span>
+
+                          {showLanguageDropdown && (
+                            <div className="absolute top-[100%] right-0 mt-2 w-40 bg-white border rounded-lg shadow-lg z-50">
+                              {Object.entries(languageMap).map(
+                                ([code, label]) => (
+                                  <button
+                                    key={code}
+                                    className={`block w-full px-4 py-2 text-left hover:bg-gray-100 ${
+                                      currentLanguage === code
+                                        ? "bg-gray-100 font-semibold"
+                                        : ""
+                                    }`}
+                                    onClick={() => handleLanguageChange(code)}
+                                  >
+                                    {label}
+                                  </button>
+                                )
+                              )}
+                            </div>
+                          )}
+                        </div>
+
                         {showPopup && (
                           <div className="absolute  right-[8%] top-[7%] mt-2 !w-[300px] bg-white border shadow-lg rounded-lg p-2 z-[100000]">
                             <h4 className="font-bold text-gray-700">
-                              Thông báo
+                              {translations["notifications"]}
                             </h4>
                             {notifications.length === 0 ? (
                               <p className="text-gray-500 text-sm">
-                                Không có thông báo mới
+                                {translations["noNotifications"]}
                               </p>
                             ) : (
                               notifications.map((item) => (
@@ -151,7 +214,7 @@ const Header = (shouldFetch) => {
                               onClick={() => setShowPopup(false)}
                               className="mt-2 text-blue-500 text-sm"
                             >
-                              Đóng
+                              {translations["close"]}
                             </button>
                           </div>
                         )}
@@ -179,7 +242,7 @@ const Header = (shouldFetch) => {
                                       navigate("/login");
                                     }}
                                   >
-                                    Tiếp tục cung cấp thông tin
+                                    {translations["continueProvidingInfo"]}
                                   </button>
                                   <button
                                     className="block w-full px-4 py-2 text-red-500 hover:bg-gray-100"
@@ -189,7 +252,7 @@ const Header = (shouldFetch) => {
                                       window.location.reload();
                                     }}
                                   >
-                                    Đăng xuất
+                                    {translations["logout"]}
                                   </button>
                                 </>
                               ) : (
@@ -198,13 +261,13 @@ const Header = (shouldFetch) => {
                                     className="block w-full px-4 py-2 hover:bg-gray-100"
                                     onClick={() => navigate("/user/profile")}
                                   >
-                                    Trang cá nhân
+                                    {translations["profile"]}
                                   </button>
                                   <button
                                     onClick={() => navigate("/user/job-apply")}
                                     className="block w-full px-4 py-2 hover:bg-gray-100"
                                   >
-                                    Công việc
+                                    {translations["jobs"]}
                                   </button>
 
                                   <button
@@ -215,7 +278,7 @@ const Header = (shouldFetch) => {
                                       window.location.reload();
                                     }}
                                   >
-                                    Đăng xuất
+                                    {translations["logout"]}
                                   </button>
                                 </>
                               )}
@@ -232,7 +295,9 @@ const Header = (shouldFetch) => {
                             className="text-[22px]"
                           />
 
-                          <span className="pt-1.5 text-[12px]">Công việc</span>
+                          <span className="pt-1.5 text-[12px]">
+                            {translations["jobs"]}
+                          </span>
                         </div>
 
                         <div className="pt-[5px] text-[#757575] flex justify-center flex-col !w-auto !max-w-none cursor-pointer transition ease-in-out duration-300 transform hover:-translate-y-[5px] hover:text-[#1E90FF] text-center">
@@ -240,7 +305,9 @@ const Header = (shouldFetch) => {
                             icon={faBriefcase}
                             className="text-[22px]"
                           />
-                          <span className="pt-1.5 text-[12px]">Nhân sự</span>
+                          <span className="pt-1.5 text-[12px]">
+                            {translations["humanResources"]}
+                          </span>
                         </div>
                         <div className="pt-[5px] text-[#757575] flex justify-center flex-col !w-auto !max-w-none cursor-pointer transition ease-in-out duration-300 transform hover:-translate-y-[5px] hover:text-[#1E90FF] text-center">
                           <FontAwesomeIcon
@@ -248,7 +315,9 @@ const Header = (shouldFetch) => {
                             className="text-[22px]"
                           />
 
-                          <span className="pt-1.5 text-[12px]">Xem thêm</span>
+                          <span className="pt-1.5 text-[12px]">
+                            {translations["seeMore"]}
+                          </span>
                         </div>
                         <div
                           className="relative res-btn-loginHeader flex items-center justify-center gap-[10px] !w-max !max-w-none"
@@ -267,10 +336,10 @@ const Header = (shouldFetch) => {
                             >
                               <>
                                 <button className="block w-full px-4 py-2 hover:bg-gray-100">
-                                  Trang cá nhân
+                                  {translations["profile"]}
                                 </button>
                                 <button className="block w-full px-4 py-2 hover:bg-gray-100">
-                                  Tiến độ công việc
+                                  {translations["jobProgress"]}
                                 </button>
                                 <button
                                   className="block w-full px-4 py-2 text-red-500 hover:bg-gray-100"
@@ -280,7 +349,7 @@ const Header = (shouldFetch) => {
                                     window.location.reload();
                                   }}
                                 >
-                                  Đăng xuất
+                                  {translations["logout"]}
                                 </button>
                               </>
                             </div>
@@ -299,7 +368,42 @@ const Header = (shouldFetch) => {
                         icon={faNewspaper}
                         className="text-[22px]"
                       />
-                      <span className="pt-1.5 text-[12px]">Bài viết</span>
+                      <span className="pt-1.5 text-[12px]">
+                        {translations["articles"]}
+                      </span>
+                    </div>
+
+                    <div
+                      className="relative pt-[5px] text-[#757575] flex justify-center flex-col !w-auto !max-w-none cursor-pointer transition ease-in-out duration-300 transform hover:-translate-y-[5px] hover:text-[#1E90FF] text-center"
+                      onClick={() =>
+                        setShowLanguageDropdown(!showLanguageDropdown)
+                      }
+                    >
+                      <FontAwesomeIcon
+                        icon={faLanguage}
+                        className="text-[22px]"
+                      />
+                      <span className="pt-1.5 text-[12px]">
+                        {languageMap[currentLanguage]}
+                      </span>
+
+                      {showLanguageDropdown && (
+                        <div className="absolute top-[100%] right-0 mt-2 w-40 bg-white border rounded-lg shadow-lg z-50">
+                          {Object.entries(languageMap).map(([code, label]) => (
+                            <button
+                              key={code}
+                              className={`block w-full px-4 py-2 text-left hover:bg-gray-100 ${
+                                currentLanguage === code
+                                  ? "bg-gray-100 font-semibold"
+                                  : ""
+                              }`}
+                              onClick={() => changeLanguage(code)}
+                            >
+                              {label}
+                            </button>
+                          ))}
+                        </div>
+                      )}
                     </div>
 
                     <div className="res-btn-loginHeader flex items-center justify-center gap-[10px] !w-max !max-w-none ">
@@ -307,13 +411,13 @@ const Header = (shouldFetch) => {
                         onClick={() => navigate("/register")}
                         className="!h-max !w-max !max-w-none px-[20px] py-[7px] rounded-[5px] text-[#1E90FF] transition ease-in-out duration-300 transform hover:-translate-y-[2px]  hover:bg-[#1E90FF]  hover:text-white"
                       >
-                        Đăng ký ngay
+                        {translations["signup"]}
                       </button>
                       <button
                         onClick={() => navigate("/login")}
                         className=" !h-max !w-max !max-w-none px-[20px] py-[7px] rounded-[5px] bg-[#1E90FF] text-[#FFFFFF] transition ease-in-out duration-300 transform hover:-translate-y-[2px] hover:px-[19px] hover:py-[6px] hover:text-[#1E90FF]  hover:bg-white hover:border hover:border-[#1E90FF]"
                       >
-                        Đăng nhập
+                        {translations["login"]}
                       </button>
                     </div>
                   </>
