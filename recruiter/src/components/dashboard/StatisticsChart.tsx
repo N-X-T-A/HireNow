@@ -118,7 +118,9 @@ export default function StatisticsChart() {
       <div className="max-w-full overflow-x-auto custom-scrollbar">
         <div className="min-w-[1000px] xl:min-w-full">
           {!chartData ? (
-            <Loader />
+            <div className="h-[310px] flex justify-center items-center">
+              <Loader />
+            </div>
           ) : (
             <Chart
               options={options}
