@@ -7,20 +7,24 @@ import Checkbox from "../form/input/Checkbox";
 import Button from "../ui/button/Button";
 import Alert from "../ui/alert/Alert";
 import { SERVICE_URL } from "../../api/config";
+import Loader from "../ui/loader/Loader";
 
 export default function SignInForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState<{
     variant: "success" | "error";
     message: string;
   } | null>(null);
+
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const response = await fetch(`${SERVICE_URL}/auth/signin`, {
         method: "POST",
@@ -49,6 +53,8 @@ export default function SignInForm() {
         variant: "error",
         message: "Failed to sign in. Please check your credentials.",
       });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -123,11 +129,17 @@ export default function SignInForm() {
               </div>
               <div>
                 <Button
-                  className="w-full"
+                  className="w-full flex items-center justify-center"
                   size="sm"
-                  onClick={() => handleSubmit}
+                  disabled={loading}
                 >
-                  Sign in
+                  {loading ? (
+                    <div className="flex items-center justify-center gap-2">
+                      <Loader />
+                    </div>
+                  ) : (
+                    "Sign in"
+                  )}
                 </Button>
               </div>
             </div>

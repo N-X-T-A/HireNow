@@ -19,6 +19,9 @@ export default function Chats() {
   const [selectedConversation, setSelectedConversation] =
     useState<Conversation | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
+  const [loadingConversations, setLoadingConversations] =
+    useState<boolean>(true);
+  const [loadingMessages, setLoadingMessages] = useState<boolean>(false);
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
@@ -45,6 +48,7 @@ export default function Chats() {
 
   const getConversations = async (conversationId?: string) => {
     try {
+      setLoadingConversations(true);
       const data = await fetchConversations();
       setConversations(data);
 
@@ -61,17 +65,22 @@ export default function Chats() {
     } catch (error) {
       console.error("Error fetching conversations:", error);
       setConversations([]);
+    } finally {
+      setLoadingConversations(false);
     }
   };
 
   const getMessages = async () => {
     if (!selectedConversation) return;
     try {
+      setLoadingMessages(true);
       const data = await fetchMessages(selectedConversation._id);
       setMessages(data);
     } catch (error) {
       console.warn("No messages found, waiting for the first message.");
       setMessages([]);
+    } finally {
+      setLoadingMessages(false);
     }
   };
 
@@ -113,6 +122,7 @@ export default function Chats() {
           <ChatList
             conversations={conversations}
             onSelectUser={setSelectedConversation}
+            loading={loadingConversations}
           />
         </div>
 
@@ -122,6 +132,7 @@ export default function Chats() {
               selectedConversation={selectedConversation}
               messages={messages}
               onSendMessage={handleSendMessage}
+              loading={loadingMessages}
             />
           ) : (
             <div className="h-full flex items-center justify-center">

@@ -1,12 +1,18 @@
 import React, { useState } from "react";
 import { Conversation } from "../../api/chatApi";
+import Loader from "../ui/loader/Loader";
 
 interface ChatListProps {
   conversations: Conversation[];
   onSelectUser: (conversation: Conversation) => void;
+  loading: boolean;
 }
 
-const ChatList: React.FC<ChatListProps> = ({ conversations, onSelectUser }) => {
+const ChatList: React.FC<ChatListProps> = ({
+  conversations,
+  onSelectUser,
+  loading,
+}) => {
   const [search, setSearch] = useState("");
 
   const filteredConversations = conversations.filter((conversation) =>
@@ -24,7 +30,11 @@ const ChatList: React.FC<ChatListProps> = ({ conversations, onSelectUser }) => {
       />
 
       <ul className="flex-1 overflow-y-auto space-y-2">
-        {filteredConversations.length > 0 ? (
+        {loading ? (
+          <div className="flex justify-center items-center h-40">
+            <Loader />
+          </div>
+        ) : filteredConversations.length > 0 ? (
           filteredConversations.map((conversation) => (
             <li
               key={conversation._id}
