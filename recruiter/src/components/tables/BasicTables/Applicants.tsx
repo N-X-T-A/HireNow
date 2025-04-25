@@ -17,6 +17,7 @@ import {
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Select from "../../form/Select";
+import Loader from "../../ui/loader/Loader";
 
 type SortOrder = "asc" | "desc";
 type StatusFilter = "All" | "Pending" | "Accepted" | "Interview" | "Rejected";
@@ -277,7 +278,13 @@ export default function ApplicantsTable() {
 
               <TableBody className="divide-y divide-gray-100 dark:divide-white/[0.05]">
                 {loading ? (
-                  <></>
+                  <TableRow>
+                    <TableCell colSpan={6} className="text-center py-10">
+                      <div className="flex justify-center">
+                        <Loader />
+                      </div>
+                    </TableCell>
+                  </TableRow>
                 ) : sortedData.length === 0 ? (
                   <TableRow>
                     <TableCell
