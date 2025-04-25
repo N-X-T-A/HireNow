@@ -38,6 +38,14 @@ export default function StatisticsChart() {
     fetchStatistics();
   }, []);
 
+  if (!chartData) {
+    return (
+      <div className="flex justify-center items-center h-[310px] bg-white dark:bg-white/[0.03] rounded-2xl border border-gray-200 dark:border-gray-800">
+        <Loader />
+      </div>
+    );
+  }
+
   const currentData = chartData[tab];
 
   const options: ApexOptions = {
@@ -108,16 +116,16 @@ export default function StatisticsChart() {
       </div>
 
       <div className="max-w-full overflow-x-auto custom-scrollbar">
-        <div className="min-w-[1000px] xl:min-w-full">
-          {chartData ? (
+        <div className="min-w-[1000px] xl:min-w-full h-[310px] flex items-center justify-center">
+          {!chartData ? (
+            <Loader />
+          ) : (
             <Chart
               options={options}
               series={currentData.series}
               type="area"
               height={310}
             />
-          ) : (
-            <Loader />
           )}
         </div>
       </div>
