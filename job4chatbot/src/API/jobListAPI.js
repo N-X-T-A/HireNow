@@ -1,5 +1,5 @@
 import axios from "axios";
-const API_URL = "http://localhost:5000/api/v1/";
+const API_URL = "https://hirenow-server.onrender.com/api/v1/";
 
 export const fetchJobsAll = async () => {
   try {
