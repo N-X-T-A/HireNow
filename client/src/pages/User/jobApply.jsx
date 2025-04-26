@@ -1,40 +1,22 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { fetchJobsAPIApplication } from "../../apis/jobAPI";
-import { jobs } from "../../data/data";
-import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
-import { CheckBadgeIcon, XCircleIcon } from "@heroicons/react/24/outline";
-import { SparklesIcon, StarIcon } from "@heroicons/react/24/solid";
-import Joyride from "react-joyride";
-import parse from "html-react-parser";
+import {
+  fetchJobsAPIApplication,
+  fetchJobAPIFavorite,
+  fetchJobAPIFavoriteDelete,
+  fetchJobAPIdetail,
+  fetchJobAPIApplicationDelete,
+} from "../../apis/jobAPI";
 import JobApplyStatusCom from "../../components/user/jobApplyStatusCom";
 
 const JobApply = () => {
   //config
-  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [openBaymax, setOpenBaymax] = useState(false);
   const [jobsAPI, setJobsAPI] = useState([]);
   const [jobsSelect, setJobsSelect] = useState([]);
   const [jobSave, setJobSave] = useState([]);
   const [jobID, setJobID] = useState(null);
-  const [runTutorial, setRunTutorial] = useState(false);
-  const ACCESS_TOKEN = sessionStorage?.getItem("access_token");
-  const [showButton, setShowButton] = useState(false);
-  //config tutorial
-  const stepsTutorial = [
-    {
-      target: "#left-panel",
-      content: "Đây là danh sách công việc đã lưu của bạn.",
-      placement: "right",
-    },
-    {
-      target: "#right-panel",
-      content: "Đây là trạng thái ứng tuyển của bạn.",
-      placement: "left",
-    },
-  ];
+
   //API
   useEffect(() => {
     const fetchJobs = async () => {
@@ -53,13 +35,8 @@ const JobApply = () => {
   //save list
   const fetchJobsAPI = async () => {
     try {
-      const response = await axios.get(
-        "http://localhost:5000/api/v1/favorite",
-        {
-          headers: { Authorization: `Bearer ${ACCESS_TOKEN}` },
-        }
-      );
-      setJobSave(response.data.metadata);
+      const response = await fetchJobAPIFavorite();
+      setJobSave(response);
     } catch (error) {
       console.error("Lỗi khi lấy danh sách công việc:", error);
       setOpenBaymax(true);
@@ -68,31 +45,29 @@ const JobApply = () => {
   useEffect(() => {
     fetchJobsAPI();
   }, []);
+
   //delete list
   const handleDelete = async (jobId) => {
     try {
-      await axios.delete(`http://localhost:5000/api/v1/favorite/${jobId}`, {
-        headers: { Authorization: `Bearer ${ACCESS_TOKEN}` },
-      });
+      await fetchJobAPIFavoriteDelete(jobId);
       console.log("Đã xóa bookmark");
       setJobSave((prevJobs) => prevJobs.filter((job) => job.job_id !== jobId));
     } catch (error) {
       console.error("Lỗi khi xóa bookmark:", error);
+      setOpenBaymax(true);
     }
   };
 
   const deleteApplication = async (id) => {
     try {
-      const response = await axios.delete(
-        `http://localhost:5000/api/v1/application/${id}`,
-        { headers: { Authorization: `Bearer ${ACCESS_TOKEN}` } }
-      );
-      console.log("Xóa thành công:", response.data);
+      console.log("Xóa application ID:", id);
+      await fetchJobAPIApplicationDelete(id);
+      console.log("Xóa thành công");
       setJobsAPI((prevJobs) => prevJobs.filter((job) => job.job_id !== id));
       setOpen(false);
-      return response.data;
     } catch (error) {
       console.error("Lỗi khi xóa:", error);
+      setOpenBaymax(true);
       throw error;
     }
   };
@@ -100,10 +75,8 @@ const JobApply = () => {
   useEffect(() => {
     const fetchJobsDetail = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:5000/api/v1/job/${jobID}`
-        );
-        setJobsSelect(response.data.job);
+        const response = await fetchJobAPIdetail(jobID);
+        setJobsSelect(response);
         console.log("Danh sách công việc:", response.data.job);
       } catch (error) {
         console.error("Lỗi khi lấy danh sách công việc:", error);
@@ -113,20 +86,23 @@ const JobApply = () => {
     fetchJobsDetail();
   }, [jobID]);
 
-  const hoverColors = [
-    "hover:bg-blue-100",
-
-    "hover:bg-red-100",
-    "hover:bg-yellow-100",
-    "hover:bg-purple-100",
-    "hover:bg-pink-100",
-  ];
   return (
     <div>
       <JobApplyStatusCom
         openBaymax={openBaymax}
         setOpenBaymax={setOpenBaymax}
         jobsAPI={jobsAPI}
+        setJobsAPI={setJobsAPI}
+        jobSave={jobSave}
+        setJobSave={setJobSave}
+        handleDelete={handleDelete}
+        setJobsSelect={setJobsSelect}
+        jobsSelect={jobsSelect}
+        deleteApplication={deleteApplication}
+        setJobID={setJobID}
+        jobID={jobID}
+        open={open}
+        setOpen={setOpen}
       />
     </div>
   );
