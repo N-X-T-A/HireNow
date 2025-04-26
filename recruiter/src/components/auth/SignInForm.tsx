@@ -40,6 +40,8 @@ export default function SignInForm() {
       localStorage.setItem("accessToken", data.metadata.accessToken);
       localStorage.setItem("recruiter", JSON.stringify(data.metadata));
       localStorage.setItem("isFirstLogin", data.metadata.isFirstLogin);
+      localStorage.setItem("recruiter_id", data.metadata.companyId._id);
+      localStorage.setItem("industry_id", data.metadata.companyId.industry_id);
 
       setAlert({
         variant: "success",
