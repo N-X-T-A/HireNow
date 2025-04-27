@@ -1,0 +1,173 @@
+[{
+  "_id": {
+    "$oid": "67d28aceb386d0abcfe72960"
+  },
+  "title": "Information Technology",
+  "skill_id": [
+    {
+      "$oid": "67d28aceb386d0abcfe72940"
+    },
+    {
+      "$oid": "67d28aceb386d0abcfe72941"
+    },
+    {
+      "$oid": "67d28aceb386d0abcfe72942"
+    },
+    {
+      "$oid": "67d28aceb386d0abcfe72943"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67d28aceb386d0abcfe72961"
+  },
+  "title": "Frontend Developer 1",
+  "skill_id": [
+    {
+      "$oid": "67d28aceb386d0abcfe72941"
+    },
+    {
+      "$oid": "67d28aceb386d0abcfe72942"
+    },
+    {
+      "$oid": "67d28aceb386d0abcfe72943"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67d28aceb386d0abcfe72962"
+  },
+  "title": "Backend Developer 2",
+  "skill_id": [
+    {
+      "$oid": "67d28aceb386d0abcfe72942"
+    },
+    {
+      "$oid": "67d28aceb386d0abcfe72943"
+    },
+    {
+      "$oid": "67d28aceb386d0abcfe72944"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67d28aceb386d0abcfe72963"
+  },
+  "title": "DevOps Engineer 3",
+  "skill_id": [
+    {
+      "$oid": "67d28aceb386d0abcfe72943"
+    },
+    {
+      "$oid": "67d28aceb386d0abcfe72944"
+    },
+    {
+      "$oid": "67d28aceb386d0abcfe72945"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67d28aceb386d0abcfe72964"
+  },
+  "title": "Mobile Developer 4",
+  "skill_id": [
+    {
+      "$oid": "67d28aceb386d0abcfe72944"
+    },
+    {
+      "$oid": "67d28aceb386d0abcfe72945"
+    },
+    {
+      "$oid": "67d28aceb386d0abcfe72946"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67d28aceb386d0abcfe72965"
+  },
+  "title": "Data Scientist 5",
+  "skill_id": [
+    {
+      "$oid": "67d28aceb386d0abcfe72940"
+    },
+    {
+      "$oid": "67d28aceb386d0abcfe72941"
+    },
+    {
+      "$oid": "67d28aceb386d0abcfe72942"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67d28aceb386d0abcfe72966"
+  },
+  "title": "AI Engineer 6",
+  "skill_id": [
+    {
+      "$oid": "67d28aceb386d0abcfe72941"
+    },
+    {
+      "$oid": "67d28aceb386d0abcfe72942"
+    },
+    {
+      "$oid": "67d28aceb386d0abcfe72943"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67d28aceb386d0abcfe72967"
+  },
+  "title": "Cyber Security Specialist 7",
+  "skill_id": [
+    {
+      "$oid": "67d28aceb386d0abcfe72942"
+    },
+    {
+      "$oid": "67d28aceb386d0abcfe72943"
+    },
+    {
+      "$oid": "67d28aceb386d0abcfe72944"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67d28aceb386d0abcfe72968"
+  },
+  "title": "Cloud Engineer 8",
+  "skill_id": [
+    {
+      "$oid": "67d28aceb386d0abcfe72943"
+    },
+    {
+      "$oid": "67d28aceb386d0abcfe72944"
+    },
+    {
+      "$oid": "67d28aceb386d0abcfe72945"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67d28aceb386d0abcfe72969"
+  },
+  "title": "Software Architect 9",
+  "skill_id": [
+    {
+      "$oid": "67d28aceb386d0abcfe72944"
+    },
+    {
+      "$oid": "67d28aceb386d0abcfe72945"
+    },
+    {
+      "$oid": "67d28aceb386d0abcfe72946"
+    }
+  ]
+}]

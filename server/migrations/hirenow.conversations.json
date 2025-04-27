@@ -1,0 +1,34 @@
+[{
+  "_id": {
+    "$oid": "67e015365831a166ef367bc5"
+  },
+  "applicant_id": {
+    "$oid": "67dba1c4425e8c04b30be47f"
+  },
+  "recruiter_id": {
+    "$oid": "67d5362f97895d3ad89456f2"
+  },
+  "last_message": "Thank you very much! I'm excited to join the team and look forward to contributing to the success of the company. I’m eager to get started!",
+  "unread_count": 0,
+  "last_message_time": {
+    "$date": "2025-03-24T13:38:16.100Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67e01761254b54892da2389e"
+  },
+  "applicant_id": {
+    "$oid": "67d2d51558bc0e71a78944bc"
+  },
+  "recruiter_id": {
+    "$oid": "67d5362f97895d3ad89456f2"
+  },
+  "last_message": "Thanks!",
+  "unread_count": 0,
+  "last_message_time": {
+    "$date": "2025-03-25T13:19:48.974Z"
+  },
+  "__v": 0
+}]

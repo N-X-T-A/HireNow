@@ -1,0 +1,59 @@
+[{
+  "_id": {
+    "$oid": "67e3be580315c7b42212d91c"
+  },
+  "name": "Thiết kế",
+  "description": "Thiết kế",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67e3c4e2e3977c8b74ced5b3"
+  },
+  "name": "Nghiên cứu",
+  "description": "Nghiên cứu",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67f099870a05dc2881681ae6"
+  },
+  "name": "Tài chính",
+  "description": "Tài chính",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67f09d22063a0519a263a3c8"
+  },
+  "name": "Phát triển kỹ năng",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67f0a088342e44e70dde4623"
+  },
+  "name": "Tìm nghề không khó",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67f7de04fb234814c91b569b"
+  },
+  "name": " Vui cùng nghề",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67f7de18fb234814c91b569f"
+  },
+  "name": "Chim Tinh Nghề Nghiệp",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67f7de8cfb234814c91b56c8"
+  },
+  "name": "Tìm Việc Thông Minh",
+  "__v": 0
+}]

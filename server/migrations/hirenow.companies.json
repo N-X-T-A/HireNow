@@ -1,0 +1,161 @@
+[{
+  "_id": {
+    "$oid": "67d28aceb386d0abcfe72950"
+  },
+  "name": "Google",
+  "locations": [
+    {
+      "city": "CA",
+      "detailed_location": "1600 Amphitheatre Pkwy, Mountain View"
+    }
+  ],
+  "description": "Google đang tìm kiếm lập trình viên backend có kinh nghiệm...",
+  "website": "https://Google.com",
+  "logo": "https://res.cloudinary.com/dna4rtodi/image/upload/v1742020455/google_y79mhy.jpg",
+  "background_image": "https://res.cloudinary.com/dna4rtodi/image/upload/v1742020554/companies_dra9zy.webp",
+  "size": "201-500 nhân viên",
+  "founded_year": 2010,
+  "social_links": {
+    "linkedin": "https://linkedin.com/company/itsolutions0",
+    "facebook": "https://facebook.com/itsolutions0"
+  },
+  "industry_id": {
+    "$oid": "67d28aceb386d0abcfe72960"
+  },
+  "servicePackage": "hot"
+},
+{
+  "_id": {
+    "$oid": "67d28aceb386d0abcfe72951"
+  },
+  "name": "Microsoft",
+  "locations": [
+    {
+      "city": "WA",
+      "detailed_location": "One Microsoft Way, Redmond"
+    }
+  ],
+  "description": "Là một kỹ sư AI tại Microsoft, ứng viên sẽ chịu trách nhiệm...",
+  "website": "https://itsolutions1.com",
+  "logo": "https://res.cloudinary.com/dna4rtodi/image/upload/v1742020455/microsoft_xjnqbm.png",
+  "background_image": "https://res.cloudinary.com/dna4rtodi/image/upload/v1742020555/companies2_b2jire.jpg",
+  "size": "201-500 nhân viên",
+  "founded_year": 2011,
+  "social_links": {
+    "linkedin": "https://linkedin.com/company/itsolutions1",
+    "facebook": "https://facebook.com/itsolutions1"
+  },
+  "industry_id": {
+    "$oid": "67d28aceb386d0abcfe72960"
+  },
+  "servicePackage": "super-hot"
+},
+{
+  "_id": {
+    "$oid": "67d28aceb386d0abcfe72952"
+  },
+  "name": "Netflix",
+  "locations": [
+    {
+      "city": "CA",
+      "detailed_location": "121 Albright Way, Los Gatos"
+    }
+  ],
+  "description": "Netflix đang tìm kiếm lập trình viên frontend có kinh nghiệm...",
+  "website": "https://Netflix.com",
+  "logo": "https://res.cloudinary.com/dna4rtodi/image/upload/v1742020455/netflix_xl975q.png",
+  "background_image": "https://res.cloudinary.com/dna4rtodi/image/upload/v1742020555/companies3_sm2fbe.jpg",
+  "size": "201-500 nhân viên",
+  "founded_year": 2012,
+  "social_links": {
+    "linkedin": "https://linkedin.com/company/itsolutions2",
+    "facebook": "https://facebook.com/itsolutions2"
+  },
+  "industry_id": {
+    "$oid": "67d28aceb386d0abcfe72960"
+  },
+  "servicePackage": "basic"
+},
+{
+  "_id": {
+    "$oid": "67d28aceb386d0abcfe72953"
+  },
+  "name": "Amazon",
+  "locations": [
+    {
+      "city": "WA",
+      "detailed_location": "410 Terry Ave N, Seattle"
+    }
+  ],
+  "description": "Amazon Web Services (AWS) đang tuyển kiến trúc sư cloud...",
+  "website": "https://Amazon.com",
+  "logo": "https://res.cloudinary.com/dna4rtodi/image/upload/v1742020454/amazon_kfmx19.jpg",
+  "background_image": "https://res.cloudinary.com/dna4rtodi/image/upload/v1742021281/amazon_esnhuw.webp",
+  "size": "201-500 nhân viên",
+  "founded_year": 2013,
+  "social_links": {
+    "linkedin": "https://linkedin.com/company/itsolutions3",
+    "facebook": "https://facebook.com/itsolutions3"
+  },
+  "industry_id": {
+    "$oid": "67d28aceb386d0abcfe72960"
+  },
+  "servicePackage": "super-hot"
+},
+{
+  "_id": {
+    "$oid": "67d28aceb386d0abcfe72954"
+  },
+  "name": "Tesla",
+  "locations": [
+    {
+      "city": "CA",
+      "detailed_location": "3500 Deer Creek Road, Palo Alto"
+    }
+  ],
+  "description": "Tesla đang tìm kiếm kỹ sư phần mềm nhúng...",
+  "website": "https://Tesla.com",
+  "logo": "https://res.cloudinary.com/dna4rtodi/image/upload/v1742020454/tesla_sq6568.png",
+  "background_image": "https://res.cloudinary.com/dna4rtodi/image/upload/v1742020556/companies5_hxkgcs.png",
+  "size": "201-500 nhân viên",
+  "founded_year": 2014,
+  "social_links": {
+    "linkedin": "https://linkedin.com/company/itsolutions4",
+    "facebook": "https://facebook.com/itsolutions4"
+  },
+  "industry_id": {
+    "$oid": "67d28aceb386d0abcfe72960"
+  },
+  "servicePackage": "basic"
+},
+{
+  "_id": {
+    "$oid": "67d5362f97895d3ad89456f0"
+  },
+  "name": "Công ty TNHH Công nghệ ABC",
+  "__v": 1,
+  "background_image": "https://res.cloudinary.com/dna4rtodi/image/upload/v1742020556/companies5_hxkgcs.png",
+  "description": "Chuyên phát triển phần mềm và AI",
+  "founded_year": 2020,
+  "industry_id": {
+    "$oid": "67d28aceb386d0abcfe72960"
+  },
+  "logo": "https://res.cloudinary.com/dna4rtodi/image/upload/v1742020454/tesla_sq6568.png",
+  "size": "50-100",
+  "social_links": {
+    "linkedin": "https://linkedin.com/company/abc-tech",
+    "facebook": "https://facebook.com/abc-tech"
+  },
+  "website": "https://abc-tech.com",
+  "locations": [
+    {
+      "city": "Ha Noi",
+      "detailed_location": "Tầng 3 - Dolphin Plaza, 28 Trần Bình"
+    },
+    {
+      "city": "Da Nang",
+      "detailed_location": "344 Street 2/9, Hai Chau"
+    }
+  ],
+  "servicePackage": "hot"
+}]

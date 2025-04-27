@@ -13,6 +13,7 @@
     "start-recruiter": "cd recruiter && npm run dev",
     "start-cms": "cd cms && npm run dev",
     "install-all": "npm run install-server && npm run install-client && npm run install-recruiter && npm run install-cms",
+    "migrate": "cd server && node migrations/index.js",
     "start-all": "concurrently \"npm run start-server\" \"npm run start-client\" \"npm run start-recruiter\" \"npm run start-cms\"",
     "copy-env": "copy server\\.env.example server\\.env && copy cms\\.env.example cms\\.env"
   },

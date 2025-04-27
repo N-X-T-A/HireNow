@@ -1,0 +1,72 @@
+[{
+  "_id": {
+    "$oid": "67d2904ee3d3c9825a04e04b"
+  },
+  "user_id": {
+    "$oid": "67d2900fe3d3c9825a04e037"
+  },
+  "skill_id": {
+    "$oid": "67d28aceb386d0abcfe72943"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67d2904ee3d3c9825a04e04c"
+  },
+  "user_id": {
+    "$oid": "67d2900fe3d3c9825a04e037"
+  },
+  "skill_id": {
+    "$oid": "67d28aceb386d0abcfe72942"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67d2d53958bc0e71a78944cd"
+  },
+  "user_id": {
+    "$oid": "67d2d51558bc0e71a78944bc"
+  },
+  "skill_id": {
+    "$oid": "65f7a1b3d1a2e3f4c5b6a701"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67d2d53958bc0e71a78944ce"
+  },
+  "user_id": {
+    "$oid": "67d2d51558bc0e71a78944bc"
+  },
+  "skill_id": {
+    "$oid": "65f7a1b3d1a2e3f4c5b6a703"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67d65bfce6dcb985d0aac75c"
+  },
+  "user_id": {
+    "$oid": "67d5362f97895d3ad89456f2"
+  },
+  "skill_id": {
+    "$oid": "65f7a1b3d1a2e3f4c5b6a701"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67d65bfce6dcb985d0aac75d"
+  },
+  "user_id": {
+    "$oid": "67d5362f97895d3ad89456f2"
+  },
+  "skill_id": {
+    "$oid": "65f7a1b3d1a2e3f4c5b6a703"
+  },
+  "__v": 0
+}]

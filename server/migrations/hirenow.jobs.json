@@ -1,0 +1,242 @@
+[{
+  "_id": {
+    "$oid": "67d28aceb386d0abcfe72920"
+  },
+  "company_id": {
+    "$oid": "67d28aceb386d0abcfe72950"
+  },
+  "title": "Full Stack Developer",
+  "skills": [
+    "67d28aceb386d0abcfe72940",
+    "67d28aceb386d0abcfe72941",
+    "67d28aceb386d0abcfe72942"
+  ],
+  "salary_range": "2000 - 4000 USD",
+  "reasons_to_join": "Công ty IT hàng đầu, lương thưởng hấp dẫn",
+  "required_experience": "3 năm kinh nghiệm trở lên",
+  "responsibility": "Xây dựng và phát triển ứng dụng web",
+  "description": "Làm việc với công nghệ mới, môi trường chuyên nghiệp.",
+  "posted_date": {
+    "$date": "2025-03-13T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67d28aceb386d0abcfe72921"
+  },
+  "company_id": {
+    "$oid": "67d28aceb386d0abcfe72951"
+  },
+  "title": "Frontend Developer",
+  "skills": [
+    "67d28aceb386d0abcfe72941",
+    "67d28aceb386d0abcfe72942",
+    "67d28aceb386d0abcfe72943"
+  ],
+  "salary_range": "2000 - 4000 USD",
+  "reasons_to_join": "Công ty IT hàng đầu, lương thưởng hấp dẫn",
+  "required_experience": "3 năm kinh nghiệm trở lên",
+  "responsibility": "Xây dựng và phát triển ứng dụng web",
+  "description": "Làm việc với công nghệ mới, môi trường chuyên nghiệp.",
+  "posted_date": {
+    "$date": "2025-03-13T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67d28aceb386d0abcfe72922"
+  },
+  "company_id": {
+    "$oid": "67d28aceb386d0abcfe72952"
+  },
+  "title": "Backend Developer",
+  "skills": [
+    "67d28aceb386d0abcfe72942",
+    "67d28aceb386d0abcfe72943",
+    "67d28aceb386d0abcfe72944"
+  ],
+  "salary_range": "2000 - 4000 USD",
+  "reasons_to_join": "Công ty IT hàng đầu, lương thưởng hấp dẫn",
+  "required_experience": "3 năm kinh nghiệm trở lên",
+  "responsibility": "Xây dựng và phát triển ứng dụng web",
+  "description": "Làm việc với công nghệ mới, môi trường chuyên nghiệp.",
+  "posted_date": {
+    "$date": "2025-03-13T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67d28aceb386d0abcfe72923"
+  },
+  "company_id": {
+    "$oid": "67d28aceb386d0abcfe72953"
+  },
+  "title": "DevOps Engineer",
+  "skills": [
+    "67d28aceb386d0abcfe72943",
+    "67d28aceb386d0abcfe72944",
+    "67d28aceb386d0abcfe72945"
+  ],
+  "salary_range": "2000 - 4000 USD",
+  "reasons_to_join": "Công ty IT hàng đầu, lương thưởng hấp dẫn",
+  "required_experience": "3 năm kinh nghiệm trở lên",
+  "responsibility": "Xây dựng và phát triển ứng dụng web",
+  "description": "Làm việc với công nghệ mới, môi trường chuyên nghiệp.",
+  "posted_date": {
+    "$date": "2025-03-13T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67d28aceb386d0abcfe72924"
+  },
+  "company_id": {
+    "$oid": "67d28aceb386d0abcfe72954"
+  },
+  "title": "Mobile Developer",
+  "skills": [
+    "67d28aceb386d0abcfe72944",
+    "67d28aceb386d0abcfe72945",
+    "67d28aceb386d0abcfe72946"
+  ],
+  "salary_range": "2000 - 4000 USD",
+  "reasons_to_join": "Công ty IT hàng đầu, lương thưởng hấp dẫn",
+  "required_experience": "3 năm kinh nghiệm trở lên",
+  "responsibility": "Xây dựng và phát triển ứng dụng web",
+  "description": "Làm việc với công nghệ mới, môi trường chuyên nghiệp.",
+  "posted_date": {
+    "$date": "2025-03-13T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67d28aceb386d0abcfe72925"
+  },
+  "company_id": {
+    "$oid": "67d28aceb386d0abcfe72955"
+  },
+  "title": "Data Scientist",
+  "skills": [
+    "67d28aceb386d0abcfe72940",
+    "67d28aceb386d0abcfe72941",
+    "67d28aceb386d0abcfe72942"
+  ],
+  "salary_range": "2000 - 4000 USD",
+  "reasons_to_join": "Công ty IT hàng đầu, lương thưởng hấp dẫn",
+  "required_experience": "3 năm kinh nghiệm trở lên",
+  "responsibility": "Xây dựng và phát triển ứng dụng web",
+  "description": "Làm việc với công nghệ mới, môi trường chuyên nghiệp.",
+  "posted_date": {
+    "$date": "2025-03-13T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67d28aceb386d0abcfe72926"
+  },
+  "company_id": {
+    "$oid": "67d28aceb386d0abcfe72956"
+  },
+  "title": "AI Engineer",
+  "skills": [
+    "67d28aceb386d0abcfe72941",
+    "67d28aceb386d0abcfe72942",
+    "67d28aceb386d0abcfe72943"
+  ],
+  "salary_range": "2000 - 4000 USD",
+  "reasons_to_join": "Công ty IT hàng đầu, lương thưởng hấp dẫn",
+  "required_experience": "3 năm kinh nghiệm trở lên",
+  "responsibility": "Xây dựng và phát triển ứng dụng web",
+  "description": "Làm việc với công nghệ mới, môi trường chuyên nghiệp.",
+  "posted_date": {
+    "$date": "2025-03-13T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67d28aceb386d0abcfe72927"
+  },
+  "company_id": {
+    "$oid": "67d28aceb386d0abcfe72957"
+  },
+  "title": "Cyber Security Specialist",
+  "skills": [
+    "67d28aceb386d0abcfe72942",
+    "67d28aceb386d0abcfe72943",
+    "67d28aceb386d0abcfe72944"
+  ],
+  "salary_range": "2000 - 4000 USD",
+  "reasons_to_join": "Công ty IT hàng đầu, lương thưởng hấp dẫn",
+  "required_experience": "3 năm kinh nghiệm trở lên",
+  "responsibility": "Xây dựng và phát triển ứng dụng web",
+  "description": "Làm việc với công nghệ mới, môi trường chuyên nghiệp.",
+  "posted_date": {
+    "$date": "2025-03-13T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67d28aceb386d0abcfe72928"
+  },
+  "company_id": {
+    "$oid": "67d28aceb386d0abcfe72958"
+  },
+  "title": "Cloud Engineer",
+  "skills": [
+    "67d28aceb386d0abcfe72943",
+    "67d28aceb386d0abcfe72944",
+    "67d28aceb386d0abcfe72945"
+  ],
+  "salary_range": "2000 - 4000 USD",
+  "reasons_to_join": "Công ty IT hàng đầu, lương thưởng hấp dẫn",
+  "required_experience": "3 năm kinh nghiệm trở lên",
+  "responsibility": "Xây dựng và phát triển ứng dụng web",
+  "description": "Làm việc với công nghệ mới, môi trường chuyên nghiệp.",
+  "posted_date": {
+    "$date": "2025-03-13T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67d683e23e1fc688d03fd466"
+  },
+  "company_id": {
+    "$oid": "67d5362f97895d3ad89456f0"
+  },
+  "title": "Lập trình viên Python",
+  "skills": [
+    "65f0a8b3e4b0f1a2d4c9a3d3",
+    "65f0a8b3e4b0f1a2d4c9a3d4"
+  ],
+  "salary_range": "$2000 - $2500",
+  "reasons_to_join": "<ul><li>Môi trường làm việc tốt</li><li>Có cơ hội thăng tiến</li><li>Lương thưởng hấp dẫn</li></ul>",
+  "required_experience": "<p>Yêu cầu tối thiểu: <strong>2 năm kinh nghiệm Python</strong></p>",
+  "responsibility": "<p>Phát triển API backend với Django</p>",
+  "description": "<p>Công ty cần tuyển lập trình viên backend Python...</p>",
+  "posted_date": {
+    "$date": "2025-03-16T07:55:14.660Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67d6c425a884b75164e1a9d8"
+  },
+  "company_id": {
+    "$oid": "67d5362f97895d3ad89456f0"
+  },
+  "title": "Lập trình viên Python",
+  "skills": [
+    "65f0a8b3e4b0f1a2d4c9a3d3",
+    "65f0a8b3e4b0f1a2d4c9a3d4"
+  ],
+  "salary_range": "$2000 - $2500",
+  "reasons_to_join": "<ul><li>Môi trường làm việc tốt</li><li>Có cơ hội thăng tiến</li><li>Lương thưởng hấp dẫn</li></ul>",
+  "required_experience": "<p>Yêu cầu tối thiểu: <strong>2 năm kinh nghiệm Python</strong></p>",
+  "responsibility": "<p>Phát triển API backend với Django</p>",
+  "description": "<p>Công ty cần tuyển lập trình viên backend Python...</p>",
+  "posted_date": {
+    "$date": "2025-03-16T12:29:25.292Z"
+  },
+  "__v": 0
+}]

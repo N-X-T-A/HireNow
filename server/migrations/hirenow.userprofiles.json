@@ -1,0 +1,79 @@
+[{
+  "_id": {
+    "$oid": "67d2900fe3d3c9825a04e039"
+  },
+  "userId": {
+    "$oid": "67d2900fe3d3c9825a04e037"
+  },
+  "username": "Trần Phương Thái",
+  "phone": "0917058121",
+  "location": null,
+  "bio": null,
+  "photoURL": "https://lh3.googleusercontent.com/a/ACg8ocLReXcyIDi4rAoF48R9KUUNSMBvcy3-99MFgV065kfhIlb4xqxi=s96-c",
+  "createdAt": {
+    "$date": "2025-03-13T07:58:07.316Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-13T07:59:09.998Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67d2d51558bc0e71a78944be"
+  },
+  "userId": {
+    "$oid": "67d2d51558bc0e71a78944bc"
+  },
+  "username": "test",
+  "phone": "0987654321",
+  "location": null,
+  "bio": null,
+  "photoURL": "https://res.cloudinary.com/dna4rtodi/image/upload/v1738904017/avatar_dzjb7j.png",
+  "createdAt": {
+    "$date": "2025-03-13T12:52:37.808Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-13T12:53:13.686Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67d65bfce6dcb985d0aac753"
+  },
+  "userId": {
+    "$oid": "67d5362f97895d3ad89456f2"
+  },
+  "phone": "0987654321",
+  "location": null,
+  "bio": null,
+  "photoURL": "https://res.cloudinary.com/dna4rtodi/image/upload/v1738904017/avatar_dzjb7j.png",
+  "createdAt": {
+    "$date": "2025-03-16T05:05:00.539Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-16T05:05:00.539Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67d6a1c86732585a40a48375"
+  },
+  "userId": {
+    "$oid": "67d6a1c76732585a40a48373"
+  },
+  "username": "Trần Phương Thái",
+  "phone": null,
+  "location": null,
+  "bio": null,
+  "photoURL": "https://res.cloudinary.com/dna4rtodi/image/upload/v1738904017/avatar_dzjb7j.png",
+  "createdAt": {
+    "$date": "2025-03-16T10:02:48.003Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-16T10:02:48.003Z"
+  },
+  "__v": 0
+}]

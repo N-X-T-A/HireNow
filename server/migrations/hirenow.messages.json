@@ -1,0 +1,102 @@
+[{
+  "_id": {
+    "$oid": "67e015365831a166ef367bc7"
+  },
+  "conversation_id": {
+    "$oid": "67e015365831a166ef367bc5"
+  },
+  "sender_id": {
+    "$oid": "67d5362f97895d3ad89456f2"
+  },
+  "content": "Congratulations! You have been accepted. Welcome aboard.",
+  "is_read": false,
+  "createdAt": {
+    "$date": "2025-03-23T14:05:42.460Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67e01761254b54892da238a0"
+  },
+  "conversation_id": {
+    "$oid": "67e01761254b54892da2389e"
+  },
+  "sender_id": {
+    "$oid": "67d5362f97895d3ad89456f2"
+  },
+  "content": "Unfortunately, you were not selected. We wish you the best in your future endeavors.",
+  "is_read": true,
+  "createdAt": {
+    "$date": "2025-03-23T14:14:57.565Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67e16048758af4c69ebac16a"
+  },
+  "conversation_id": {
+    "$oid": "67e015365831a166ef367bc5"
+  },
+  "sender_id": {
+    "$oid": "67dba1c4425e8c04b30be47f"
+  },
+  "content": "Thank you very much! I'm excited to join the team and look forward to contributing to the success of the company. I’m eager to get started!",
+  "is_read": true,
+  "createdAt": {
+    "$date": "2025-03-24T13:38:16.083Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67e16795758af4c69ebac331"
+  },
+  "conversation_id": {
+    "$oid": "67e01761254b54892da2389e"
+  },
+  "sender_id": {
+    "$oid": "67d2d51558bc0e71a78944bc"
+  },
+  "content": "Thank you for the opportunity. I appreciate your consideration and wish you all the best moving forward.",
+  "is_read": true,
+  "createdAt": {
+    "$date": "2025-03-24T14:09:25.584Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67e177709e99973ac30f36bc"
+  },
+  "conversation_id": {
+    "$oid": "67e01761254b54892da2389e"
+  },
+  "sender_id": {
+    "$oid": "67d5362f97895d3ad89456f2"
+  },
+  "content": "Thank you for your understanding and kind response. We truly appreciate the time and effort you put into the interview process. We wish you the best of luck in your future endeavors and hope you find success in your next role",
+  "is_read": true,
+  "createdAt": {
+    "$date": "2025-03-24T15:17:04.126Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67e2ad74e05a158c7d713e43"
+  },
+  "conversation_id": {
+    "$oid": "67e01761254b54892da2389e"
+  },
+  "sender_id": {
+    "$oid": "67d5362f97895d3ad89456f2"
+  },
+  "content": "Thanks!",
+  "is_read": true,
+  "createdAt": {
+    "$date": "2025-03-25T13:19:48.957Z"
+  },
+  "__v": 0
+}]

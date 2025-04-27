@@ -1,0 +1,60 @@
+[{
+  "_id": {
+    "$oid": "67d28aceb386d0abcfe72940"
+  },
+  "name": "JavaScript"
+},
+{
+  "_id": {
+    "$oid": "67d28aceb386d0abcfe72941"
+  },
+  "name": "ReactJS"
+},
+{
+  "_id": {
+    "$oid": "67d28aceb386d0abcfe72942"
+  },
+  "name": "Node.js"
+},
+{
+  "_id": {
+    "$oid": "67d28aceb386d0abcfe72943"
+  },
+  "name": "TypeScript"
+},
+{
+  "_id": {
+    "$oid": "67d28aceb386d0abcfe72944"
+  },
+  "name": "MongoDB"
+},
+{
+  "_id": {
+    "$oid": "67d28aceb386d0abcfe72945"
+  },
+  "name": "Python"
+},
+{
+  "_id": {
+    "$oid": "67d28aceb386d0abcfe72946"
+  },
+  "name": "Django"
+},
+{
+  "_id": {
+    "$oid": "67d28aceb386d0abcfe72947"
+  },
+  "name": "AWS"
+},
+{
+  "_id": {
+    "$oid": "67d28aceb386d0abcfe72948"
+  },
+  "name": "Docker"
+},
+{
+  "_id": {
+    "$oid": "67d28aceb386d0abcfe72949"
+  },
+  "name": "Kubernetes"
+}]

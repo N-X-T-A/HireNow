@@ -1,0 +1,53 @@
+[{
+  "_id": {
+    "$oid": "67d2904ee3d3c9825a04e045"
+  },
+  "user_id": {
+    "$oid": "67d2900fe3d3c9825a04e037"
+  },
+  "institution": null,
+  "degree": "bachelor",
+  "field_of_study": "cntt",
+  "start_date": null,
+  "end_date": null,
+  "description": null,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67d2d53958bc0e71a78944c7"
+  },
+  "user_id": {
+    "$oid": "67d2d51558bc0e71a78944bc"
+  },
+  "institution": "Đại học Bách Khoa",
+  "degree": "Cử nhân",
+  "field_of_study": "Khoa học máy tính",
+  "start_date": {
+    "$date": "2019-09-01T00:00:00.000Z"
+  },
+  "end_date": {
+    "$date": "2023-06-01T00:00:00.000Z"
+  },
+  "description": "Studied AI and Machine Learning.",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67d65bfce6dcb985d0aac756"
+  },
+  "user_id": {
+    "$oid": "67d5362f97895d3ad89456f2"
+  },
+  "institution": "Đại học Bách Khoa",
+  "degree": "Cử nhân",
+  "field_of_study": "Khoa học máy tính",
+  "start_date": {
+    "$date": "2019-09-01T00:00:00.000Z"
+  },
+  "end_date": {
+    "$date": "2023-06-01T00:00:00.000Z"
+  },
+  "description": "Studied AI and Machine Learning.",
+  "__v": 0
+}]

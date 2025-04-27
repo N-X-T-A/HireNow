@@ -1,0 +1,72 @@
+[{
+  "_id": {
+    "$oid": "67c8488618f8049ce50e6dad"
+  },
+  "user_id": {
+    "$oid": "67c2bdf3b0b4b9f01a7a4ed5"
+  },
+  "job_id": {
+    "$oid": "67c8486918f8049ce50e6da9"
+  },
+  "cover_letter": "I am interested in this position.",
+  "resume": "https://res.cloudinary.com/dna4rtodi/image/upload/v1741425598/uploads/resumes/n6z30vnaookkpuyheqzy.pdf",
+  "status": "Accepted",
+  "applied_date": {
+    "$date": "2025-03-05T12:50:14.096Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67cc3dbe249e45916d5f8488"
+  },
+  "user_id": {
+    "$oid": "67c2bdf3b0b4b9f01a7a4ed5"
+  },
+  "job_id": {
+    "$oid": "67c8486918f8049ce50e6da9"
+  },
+  "cover_letter": "I am interested in this position.",
+  "resume": "https://res.cloudinary.com/example/uploads/resumes/abc123.pdf",
+  "status": "Pending",
+  "applied_date": {
+    "$date": "2025-03-08T12:53:18.812Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67d4ee18a0550b84996ca098"
+  },
+  "user_id": {
+    "$oid": "67d2d51558bc0e71a78944bc"
+  },
+  "job_id": {
+    "$oid": "67c8486918f8049ce50e6da9"
+  },
+  "cover_letter": "I am interested in this position.",
+  "resume": "https://res.cloudinary.com/example/uploads/resumes/abc123.pdf",
+  "status": "Pending",
+  "applied_date": {
+    "$date": "2025-03-15T03:03:52.927Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67d684493e1fc688d03fd46d"
+  },
+  "user_id": {
+    "$oid": "67d2d51558bc0e71a78944bc"
+  },
+  "job_id": {
+    "$oid": "67d683e23e1fc688d03fd466"
+  },
+  "cover_letter": "I am interested in this position.",
+  "resume": "https://res.cloudinary.com/example/uploads/resumes/abc123.pdf",
+  "status": "Pending",
+  "applied_date": {
+    "$date": "2025-03-16T07:56:57.719Z"
+  },
+  "__v": 0
+}]

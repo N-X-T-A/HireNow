@@ -1,0 +1,502 @@
+[{
+  "_id": {
+    "$oid": "6615c3b1e4a8d92a0b321001"
+  },
+  "companyId": {
+    "$oid": "67d28aceb386d0abcfe72950"
+  },
+  "monthly": {
+    "categories": [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr"
+    ],
+    "series": [
+      {
+        "name": "Jobs Posted",
+        "data": [
+          4,
+          5,
+          6,
+          3
+        ]
+      },
+      {
+        "name": "Applications",
+        "data": [
+          40,
+          55,
+          70,
+          38
+        ]
+      }
+    ]
+  },
+  "quarterly": {
+    "categories": [
+      "Q1",
+      "Q2"
+    ],
+    "series": [
+      {
+        "name": "Jobs Posted",
+        "data": [
+          15,
+          10
+        ]
+      },
+      {
+        "name": "Applications",
+        "data": [
+          165,
+          110
+        ]
+      }
+    ]
+  },
+  "annually": {
+    "categories": [
+      "2021",
+      "2022",
+      "2023",
+      "2024",
+      "2025"
+    ],
+    "series": [
+      {
+        "name": "Jobs Posted",
+        "data": [
+          12,
+          22,
+          30,
+          25,
+          10
+        ]
+      },
+      {
+        "name": "Applications",
+        "data": [
+          120,
+          180,
+          250,
+          210,
+          100
+        ]
+      }
+    ]
+  }
+},
+{
+  "_id": {
+    "$oid": "6615c3b1e4a8d92a0b321002"
+  },
+  "companyId": {
+    "$oid": "67d28aceb386d0abcfe72951"
+  },
+  "monthly": {
+    "categories": [
+      "Jan",
+      "Feb",
+      "Mar"
+    ],
+    "series": [
+      {
+        "name": "Jobs Posted",
+        "data": [
+          3,
+          2,
+          4
+        ]
+      },
+      {
+        "name": "Applications",
+        "data": [
+          20,
+          18,
+          25
+        ]
+      }
+    ]
+  },
+  "quarterly": {
+    "categories": [
+      "Q1"
+    ],
+    "series": [
+      {
+        "name": "Jobs Posted",
+        "data": [
+          9
+        ]
+      },
+      {
+        "name": "Applications",
+        "data": [
+          63
+        ]
+      }
+    ]
+  },
+  "annually": {
+    "categories": [
+      "2022",
+      "2023",
+      "2024",
+      "2025"
+    ],
+    "series": [
+      {
+        "name": "Jobs Posted",
+        "data": [
+          8,
+          20,
+          22,
+          9
+        ]
+      },
+      {
+        "name": "Applications",
+        "data": [
+          90,
+          160,
+          180,
+          63
+        ]
+      }
+    ]
+  }
+},
+{
+  "_id": {
+    "$oid": "6615c3b1e4a8d92a0b321003"
+  },
+  "companyId": {
+    "$oid": "67d28aceb386d0abcfe72952"
+  },
+  "monthly": {
+    "categories": [
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec"
+    ],
+    "series": [
+      {
+        "name": "Jobs Posted",
+        "data": [
+          2,
+          3,
+          1,
+          4
+        ]
+      },
+      {
+        "name": "Applications",
+        "data": [
+          15,
+          25,
+          10,
+          30
+        ]
+      }
+    ]
+  },
+  "quarterly": {
+    "categories": [
+      "Q3",
+      "Q4"
+    ],
+    "series": [
+      {
+        "name": "Jobs Posted",
+        "data": [
+          6,
+          8
+        ]
+      },
+      {
+        "name": "Applications",
+        "data": [
+          50,
+          65
+        ]
+      }
+    ]
+  },
+  "annually": {
+    "categories": [
+      "2020",
+      "2021",
+      "2022",
+      "2023"
+    ],
+    "series": [
+      {
+        "name": "Jobs Posted",
+        "data": [
+          5,
+          12,
+          18,
+          14
+        ]
+      },
+      {
+        "name": "Applications",
+        "data": [
+          40,
+          100,
+          150,
+          130
+        ]
+      }
+    ]
+  }
+},
+{
+  "_id": {
+    "$oid": "6615c3b1e4a8d92a0b321004"
+  },
+  "companyId": {
+    "$oid": "6615c3b1e4a8d92a0b321004"
+  },
+  "monthly": {
+    "categories": [
+      "Feb",
+      "Mar",
+      "Apr"
+    ],
+    "series": [
+      {
+        "name": "Jobs Posted",
+        "data": [
+          2,
+          2,
+          3
+        ]
+      },
+      {
+        "name": "Applications",
+        "data": [
+          12,
+          15,
+          20
+        ]
+      }
+    ]
+  },
+  "quarterly": {
+    "categories": [
+      "Q1",
+      "Q2"
+    ],
+    "series": [
+      {
+        "name": "Jobs Posted",
+        "data": [
+          7,
+          4
+        ]
+      },
+      {
+        "name": "Applications",
+        "data": [
+          47,
+          35
+        ]
+      }
+    ]
+  },
+  "annually": {
+    "categories": [
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ],
+    "series": [
+      {
+        "name": "Jobs Posted",
+        "data": [
+          10,
+          18,
+          20,
+          11
+        ]
+      },
+      {
+        "name": "Applications",
+        "data": [
+          80,
+          130,
+          140,
+          82
+        ]
+      }
+    ]
+  }
+},
+{
+  "_id": {
+    "$oid": "6615c3b1e4a8d92a0b321005"
+  },
+  "companyId": {
+    "$oid": "67d28aceb386d0abcfe72953"
+  },
+  "monthly": {
+    "categories": [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr"
+    ],
+    "series": [
+      {
+        "name": "Jobs Posted",
+        "data": [
+          1,
+          2,
+          3,
+          1
+        ]
+      },
+      {
+        "name": "Applications",
+        "data": [
+          8,
+          10,
+          15,
+          5
+        ]
+      }
+    ]
+  },
+  "quarterly": {
+    "categories": [
+      "Q1",
+      "Q2"
+    ],
+    "series": [
+      {
+        "name": "Jobs Posted",
+        "data": [
+          6,
+          1
+        ]
+      },
+      {
+        "name": "Applications",
+        "data": [
+          33,
+          5
+        ]
+      }
+    ]
+  },
+  "annually": {
+    "categories": [
+      "2022",
+      "2023",
+      "2024",
+      "2025"
+    ],
+    "series": [
+      {
+        "name": "Jobs Posted",
+        "data": [
+          5,
+          10,
+          8,
+          7
+        ]
+      },
+      {
+        "name": "Applications",
+        "data": [
+          30,
+          60,
+          50,
+          38
+        ]
+      }
+    ]
+  }
+},
+{
+  "_id": {
+    "$oid": "6615c3b1e4a8d92a0b321006"
+  },
+  "companyId": {
+    "$oid": "67d5362f97895d3ad89456f0"
+  },
+  "monthly": {
+    "categories": [
+      "Feb",
+      "Mar",
+      "Apr"
+    ],
+    "series": [
+      {
+        "name": "Jobs Posted",
+        "data": [
+          1,
+          1,
+          2
+        ]
+      },
+      {
+        "name": "Applications",
+        "data": [
+          3,
+          5,
+          2
+        ]
+      }
+    ]
+  },
+  "quarterly": {
+    "categories": [
+      "Q1",
+      "Q2"
+    ],
+    "series": [
+      {
+        "name": "Jobs Posted",
+        "data": [
+          3,
+          3
+        ]
+      },
+      {
+        "name": "Applications",
+        "data": [
+          14,
+          2
+        ]
+      }
+    ]
+  },
+  "annually": {
+    "categories": [
+      "2025"
+    ],
+    "series": [
+      {
+        "name": "Jobs Posted",
+        "data": [
+          6
+        ]
+      },
+      {
+        "name": "Applications",
+        "data": [
+          15
+        ]
+      }
+    ]
+  },
+  "__v": 1,
+  "updatedAt": {
+    "$date": "2025-04-11T09:33:08.650Z"
+  }
+}]

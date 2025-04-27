@@ -1,0 +1,45 @@
+[{
+  "_id": {
+    "$oid": "6615730e5f1b2e5c5a4a1f01"
+  },
+  "slugId": "basic",
+  "name": "basic",
+  "price": 29,
+  "features": [
+    "Post up to 1 job at a time",
+    "Each listing visible for 7 days",
+    "Manual candidate search support"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6615730e5f1b2e5c5a4a1f02"
+  },
+  "slugId": "featured",
+  "name": "featured",
+  "price": 70,
+  "label": "POPULAR",
+  "features": [
+    "Each listing visible for 14 days",
+    "Manual candidate search support",
+    "Highlighted job listings for better visibility",
+    "Increased exposure to job seekers"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6615730e5f1b2e5c5a4a1f03"
+  },
+  "slugId": "premium",
+  "name": "premium",
+  "price": 119,
+  "features": [
+    "Post up to 10 jobs at the same time",
+    "Each listing visible for 30 days",
+    "Manual candidate search support",
+    "Highlighted job listings for better visibility",
+    "Increased exposure to job seekers",
+    "1-on-1 personalized recruitment consultation",
+    "Priority placement in email marketing campaigns"
+  ]
+}]
