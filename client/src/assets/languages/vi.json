@@ -98,5 +98,20 @@
   "allPosts": "Tất cả các bài viết",
   "latestPosts": "Bài viết mới nhất",
   "interviews": "Các bài phỏng vấn",
-  "tags": "Thẻ"
+  "tags": "Thẻ",
+  "aboutUs": "Về Chúng Tôi",
+  "introduce": "Giới thiệu",
+  "news": "Tin tức",
+  "blog": "Blog",
+  "contact": "Liên hệ",
+  "forCandidate": "Dành cho Ứng Viên",
+  "findJobs": "Tìm việc làm",
+  "createCV": "Tạo CV",
+  "interviewSkills": "Kỹ năng phỏng vấn",
+  "forEmployer": "Dành cho Nhà Tuyển Dụng",
+  "postJobs": "Đăng tin tuyển dụng",
+  "findCandidates": "Tìm kiếm ứng viên",
+  "recruitmentSolutions": "Giải pháp tuyển dụng",
+  "pricing": "Báo giá dịch vụ",
+  "followUs": "Theo dõi chúng tôi"
 }

@@ -98,5 +98,20 @@
   "allPosts": "All Posts",
   "latestPosts": "Latest Posts",
   "interviews": "Interviews",
-  "tags": "Tags"
+  "tags": "Tags",
+  "aboutUs": "About Us",
+  "introduce": "Introduction",
+  "news": "News",
+  "blog": "Blog",
+  "contact": "Contact",
+  "forCandidate": "For Candidates",
+  "findJobs": "Find Jobs",
+  "createCV": "Create CV",
+  "interviewSkills": "Interview Skills",
+  "forEmployer": "For Employers",
+  "postJobs": "Post Jobs",
+  "findCandidates": "Find Candidates",
+  "recruitmentSolutions": "Recruitment Solutions",
+  "pricing": "Pricing",
+  "followUs": "Follow Us"
 }
