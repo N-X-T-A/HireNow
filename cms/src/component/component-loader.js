@@ -19,7 +19,10 @@ const Component = {
     "ShowImage",
     path.join(__dirname, "./Image/Show.jsx")
   ),
-
+  UploadImage: componentLoader.add(
+    "UploadImage",
+    path.join(__dirname, "./Image/UploadImage.jsx")
+  ),
   TagSelect: componentLoader.add(
     "TagSelect",
     path.join(__dirname, "./Tag/TagSelect.jsx")
