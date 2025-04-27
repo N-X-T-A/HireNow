@@ -441,7 +441,7 @@ const JobDetail = ({ jobId }) => {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 50, opacity: 0 }}
           transition={{ duration: 0.5 }}
-          className="fixed top-[5%] right-[45%] shadow-lg"
+          className="fixed top-[10%] right-[45%] shadow-lg"
         >
           <div className="relative flex items-center justify-center">
             <p className="!mb-0 px-4 py-2 font-[600] rounded-lg text-white bg-green-500">
@@ -456,7 +456,7 @@ const JobDetail = ({ jobId }) => {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 50, opacity: 0 }}
           transition={{ duration: 0.5 }}
-          className="fixed top-[5%] right-[45%] shadow-lg"
+          className="fixed top-[10%] right-[45%] shadow-lg"
         >
           <div className="relative flex items-center justify-center">
             <p className="!mb-0 px-4 py-2 font-[600] rounded-lg text-white bg-red-500">

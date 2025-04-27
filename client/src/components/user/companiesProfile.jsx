@@ -70,11 +70,7 @@ export const CompaniesProfileUserShow = ({ company, error, loading }) => {
                     </p>
                   ))}
                 </div>
-                <div className="flex flex-col gap-2">
-                  <button className="px-4 py-2 rounded-[20px] border-[1px] border-[#1E90FF] text-[#1E90FF] font-[500] ">
-                    Link
-                  </button>
-                </div>
+                <div className="flex flex-col gap-2"></div>
               </div>
               <div className="flex gap-4 items-center w-full border-t-[1px] pt-2">
                 <p
@@ -204,7 +200,7 @@ export const CompaniesProfileUserShow = ({ company, error, loading }) => {
                       {/* post */}
                       <span className="flex flex-col gap-2 max-h-[590px] overflow-y-auto">
                         <div className="w-full">
-                          <div className="flex w-full border rounded-lg  p-4 bg-white">
+                          <div className="flex w-full border rounded-lg p-4 bg-white">
                             {/* Hình ảnh */}
                             <img
                               src="/src/assets/user/companies3.jpg"
@@ -215,18 +211,18 @@ export const CompaniesProfileUserShow = ({ company, error, loading }) => {
                             {/* Nội dung */}
                             <div className="w-2/3 pl-4">
                               <h3 className="text-lg font-bold">
-                                Our People, Our Culture, Our Technology
+                                Khám phá Văn hóa Công ty Chúng Tôi
                               </h3>
                               <p className="text-sm text-gray-700 mt-2">
-                                We are passionate about people who love
-                                technology. Our people innovate with creativity
-                                while being a part of an open environment
-                                dedicated to building a legacy.
+                                Chúng tôi trân trọng những con người đam mê công
+                                nghệ và đổi mới không ngừng. Tại đây, bạn sẽ
+                                được làm việc trong môi trường năng động, sáng
+                                tạo và thân thiện.
                               </p>
                               <p className="text-sm text-gray-700 mt-2">
-                                We have a diverse employee population ranging
-                                from entry-level individuals to experienced
-                                professionals...
+                                Chúng tôi luôn khuyến khích sự phát triển cá
+                                nhân và đề cao tinh thần làm việc nhóm để cùng
+                                nhau đạt được những thành tựu vượt bậc...
                               </p>
 
                               {/* Liên kết */}
@@ -241,14 +237,14 @@ export const CompaniesProfileUserShow = ({ company, error, loading }) => {
                                 >
                                   <path d="M10.59 13.41L9.17 12l6-6 6 6-1.41 1.41L16 9.83V20h-2V9.83l-4.59 4.58z"></path>
                                 </svg>
-                                Learn more about careers at Marvell
+                                Tìm hiểu thêm về cơ hội nghề nghiệp
                               </a>
                             </div>
                           </div>
                         </div>
                         {/*  */}
                         <div className="w-full">
-                          <div className="flex w-full border rounded-lg  p-4 bg-white">
+                          <div className="flex w-full border rounded-lg p-4 bg-white">
                             {/* Hình ảnh */}
                             <img
                               src="/src/assets/user/companies3.jpg"
@@ -259,18 +255,18 @@ export const CompaniesProfileUserShow = ({ company, error, loading }) => {
                             {/* Nội dung */}
                             <div className="w-2/3 pl-4">
                               <h3 className="text-lg font-bold">
-                                Our People, Our Culture, Our Technology
+                                Phát triển Sự nghiệp Cùng Chúng Tôi
                               </h3>
                               <p className="text-sm text-gray-700 mt-2">
-                                We are passionate about people who love
-                                technology. Our people innovate with creativity
-                                while being a part of an open environment
-                                dedicated to building a legacy.
+                                Chúng tôi luôn tìm kiếm những tài năng mới, từ
+                                sinh viên mới ra trường cho đến những chuyên gia
+                                giàu kinh nghiệm, để cùng nhau xây dựng tương
+                                lai vững chắc.
                               </p>
                               <p className="text-sm text-gray-700 mt-2">
-                                We have a diverse employee population ranging
-                                from entry-level individuals to experienced
-                                professionals...
+                                Môi trường làm việc cởi mở và chính sách đào tạo
+                                bài bản giúp bạn phát triển toàn diện các kỹ
+                                năng chuyên môn và kỹ năng lãnh đạo...
                               </p>
 
                               {/* Liên kết */}
@@ -285,14 +281,14 @@ export const CompaniesProfileUserShow = ({ company, error, loading }) => {
                                 >
                                   <path d="M10.59 13.41L9.17 12l6-6 6 6-1.41 1.41L16 9.83V20h-2V9.83l-4.59 4.58z"></path>
                                 </svg>
-                                Learn more about careers at Marvell
+                                Khám phá các vị trí tuyển dụng
                               </a>
                             </div>
                           </div>
                         </div>
                         {/*  */}
                         <div className="w-full">
-                          <div className="flex w-full border rounded-lg  p-4 bg-white">
+                          <div className="flex w-full border rounded-lg p-4 bg-white">
                             {/* Hình ảnh */}
                             <img
                               src="/src/assets/user/companies3.jpg"
@@ -303,18 +299,18 @@ export const CompaniesProfileUserShow = ({ company, error, loading }) => {
                             {/* Nội dung */}
                             <div className="w-2/3 pl-4">
                               <h3 className="text-lg font-bold">
-                                Our People, Our Culture, Our Technology
+                                Công Nghệ Là Trái Tim Của Chúng Tôi
                               </h3>
                               <p className="text-sm text-gray-700 mt-2">
-                                We are passionate about people who love
-                                technology. Our people innovate with creativity
-                                while being a part of an open environment
-                                dedicated to building a legacy.
+                                Với tầm nhìn đổi mới sáng tạo, chúng tôi không
+                                ngừng phát triển các giải pháp công nghệ tiên
+                                tiến, đáp ứng nhu cầu ngày càng cao của khách
+                                hàng trên toàn thế giới.
                               </p>
                               <p className="text-sm text-gray-700 mt-2">
-                                We have a diverse employee population ranging
-                                from entry-level individuals to experienced
-                                professionals...
+                                Gia nhập đội ngũ của chúng tôi để cùng nhau kiến
+                                tạo những sản phẩm có tầm ảnh hưởng lớn trong kỷ
+                                nguyên số...
                               </p>
 
                               {/* Liên kết */}
@@ -329,7 +325,7 @@ export const CompaniesProfileUserShow = ({ company, error, loading }) => {
                                 >
                                   <path d="M10.59 13.41L9.17 12l6-6 6 6-1.41 1.41L16 9.83V20h-2V9.83l-4.59 4.58z"></path>
                                 </svg>
-                                Learn more about careers at Marvell
+                                Tham gia cùng chúng tôi ngay hôm nay
                               </a>
                             </div>
                           </div>
@@ -353,7 +349,7 @@ export const CompaniesProfileUserShow = ({ company, error, loading }) => {
                 className="w-full rounded-lg p-2 flex flex-wrap gap-4 justify-center items-center"
                 style={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }}
               >
-                <div className=" flex flex-wrap gap-4 justify-center">
+                <div className="cursor-pointer flex flex-wrap gap-4 justify-center">
                   {Companyjobs.map((job, index) => (
                     <div
                       key={index}
@@ -465,7 +461,10 @@ export const CompaniesProfileUserShow = ({ company, error, loading }) => {
                     </p>
                   </span>
                 </div>
-                <button className="w-full p-2 rounded-lg bg-[#1E90FF] text-[white] font-[500]">
+                <button
+                  onClick={() => setActiveTabs(1)}
+                  className="w-full p-2 rounded-lg bg-[#1E90FF] text-[white] font-[500]"
+                >
                   Xem ngay
                 </button>
               </div>
@@ -483,7 +482,7 @@ export const CompaniesProfileUserShow = ({ company, error, loading }) => {
               </p>
             </span>
             {/* listJob */}
-            <div className="p-2 rounded-md border-1">
+            <div className="p-2 rounded-md border-1 cursor-pointer">
               <div className="w-full p-3 flex flex-col gap-2">
                 <div className="flex gap-2 items-center">
                   <img
@@ -508,7 +507,7 @@ export const CompaniesProfileUserShow = ({ company, error, loading }) => {
                 </div>
               </div>
             </div>
-            <div className="p-2 rounded-md border-1">
+            <div className="p-2 rounded-md border-1 cursor-pointer">
               <div className="w-full p-3 flex flex-col gap-2">
                 <div className="flex gap-2 items-center">
                   <img
@@ -533,7 +532,7 @@ export const CompaniesProfileUserShow = ({ company, error, loading }) => {
                 </div>
               </div>
             </div>
-            <div className="p-2 rounded-md border-1">
+            <div className="p-2 rounded-md border-1 cursor-pointer">
               <div className="w-full p-3 flex flex-col gap-2">
                 <div className="flex gap-2 items-center">
                   <img
