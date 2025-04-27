@@ -241,7 +241,7 @@ const UserPage1Com = ({ jobsList, companiesList, user, hoverColors }) => {
               <img
                 src={company.logo}
                 alt=""
-                className="absolute max-w-[70px] left-5 top-[-1/2] -translate-y-1/2 p-[2px] rounded-full bg-white"
+                className="absolute w-[70px] h-[70px] object-cover left-5 top-[-1/2] -translate-y-1/2 p-[2px] rounded-full bg-white"
               />
               <p
                 onClick={() => navigate(`/user/company/${company._id}`)}
