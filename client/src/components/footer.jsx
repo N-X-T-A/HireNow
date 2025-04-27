@@ -1,31 +1,34 @@
 import React from "react";
+import { useLanguage } from "../hooks/useLanguage";
 
 const Footer = () => {
+  const { translations } = useLanguage();
+
   return (
-    <footer className="mt-2 bg-white border-t border-gray-300 text-black py-10 px-6">
+    <footer className="mt-2 bg-[#1e90ff] border-t border-gray-300 py-10 px-6 text-white">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
         {/* Company */}
         <div>
-          <h3 className="text-lg mb-4">Về Chúng Tôi</h3>
+          <h3 className="text-lg mb-4">{translations.aboutUs}</h3>
           <ul className="space-y-2">
             <li>
-              <a href="#" className="hover:underline">
-                Giới thiệu
+              <a href="#" className="text-white hover:underline">
+                {translations.introduce}
               </a>
             </li>
             <li>
-              <a href="#" className="hover:underline">
-                Tin tức
+              <a href="#" className="text-white hover:underline">
+                {translations.news}
               </a>
             </li>
             <li>
-              <a href="#" className="hover:underline">
-                Blog
+              <a href="#" className="text-white hover:underline">
+                {translations.blog}
               </a>
             </li>
             <li>
-              <a href="#" className="hover:underline">
-                Liên hệ
+              <a href="#" className="text-white hover:underline">
+                {translations.contact}
               </a>
             </li>
           </ul>
@@ -33,26 +36,28 @@ const Footer = () => {
 
         {/* Candidate */}
         <div>
-          <h3 className="text-lg font-semibold mb-4">Dành cho Ứng Viên</h3>
+          <h3 className="text-lg font-semibold mb-4">
+            {translations.forCandidate}
+          </h3>
           <ul className="space-y-2">
             <li>
-              <a href="#" className="hover:underline">
-                Tìm việc làm
+              <a href="#" className="text-white hover:underline">
+                {translations.findJobs}
               </a>
             </li>
             <li>
-              <a href="#" className="hover:underline">
-                Tạo CV
+              <a href="#" className="text-white hover:underline">
+                {translations.createCV}
               </a>
             </li>
             <li>
-              <a href="#" className="hover:underline">
-                Kỹ năng phỏng vấn
+              <a href="#" className="text-white hover:underline">
+                {translations.interviewSkills}
               </a>
             </li>
             <li>
-              <a href="#" className="hover:underline">
-                Hồ sơ cá nhân
+              <a href="#" className="text-white hover:underline">
+                {translations.profile}
               </a>
             </li>
           </ul>
@@ -61,27 +66,27 @@ const Footer = () => {
         {/* Employer */}
         <div>
           <h3 className="text-lg font-semibold mb-4">
-            Dành cho Nhà Tuyển Dụng
+            {translations.forEmployer}
           </h3>
           <ul className="space-y-2">
             <li>
-              <a href="#" className="hover:underline">
-                Đăng tin tuyển dụng
+              <a href="#" className="text-white hover:underline">
+                {translations.postJobs}
               </a>
             </li>
             <li>
-              <a href="#" className="hover:underline">
-                Tìm kiếm ứng viên
+              <a href="#" className="text-white hover:underline">
+                {translations.findCandidates}
               </a>
             </li>
             <li>
-              <a href="#" className="hover:underline">
-                Giải pháp tuyển dụng
+              <a href="#" className="text-white hover:underline">
+                {translations.recruitmentSolutions}
               </a>
             </li>
             <li>
-              <a href="#" className="hover:underline">
-                Báo giá dịch vụ
+              <a href="#" className="text-white hover:underline">
+                {translations.pricing}
               </a>
             </li>
           </ul>
@@ -89,25 +94,27 @@ const Footer = () => {
 
         {/* Follow Us */}
         <div>
-          <h3 className="text-lg font-semibold mb-4">Theo dõi chúng tôi</h3>
+          <h3 className="text-lg font-semibold mb-4">
+            {translations.followUs}
+          </h3>
           <ul className="space-y-2">
             <li>
-              <a href="#" className="hover:underline">
+              <a href="#" className="text-white hover:underline">
                 Facebook
               </a>
             </li>
             <li>
-              <a href="#" className="hover:underline">
+              <a href="#" className="text-white hover:underline">
                 LinkedIn
               </a>
             </li>
             <li>
-              <a href="#" className="hover:underline">
+              <a href="#" className="text-white hover:underline">
                 Instagram
               </a>
             </li>
             <li>
-              <a href="#" className="hover:underline">
+              <a href="#" className="text-white hover:underline">
                 Twitter
               </a>
             </li>
@@ -117,7 +124,7 @@ const Footer = () => {
 
       {/* Bottom Text */}
       <div className="mt-10 border-t border-gray-300 pt-6 text-center text-sm">
-        © 2025 JobFinder. All rights reserved.
+        © 2025 HireNow. All rights reserved.
       </div>
     </footer>
   );
