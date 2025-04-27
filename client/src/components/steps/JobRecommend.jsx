@@ -1,7 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
 import { StepperContext } from "../../contexts/StepperContext";
+import { useLanguage } from "../../hooks/useLanguage";
 
 const JobRecommend = ({ setIsStepValid }) => {
+  const { translations } = useLanguage();
   const { userData, setUserData } = useContext(StepperContext);
   const [formData, setFormData] = useState({
     institution: userData.education?.[0]?.school || "",
@@ -12,7 +14,6 @@ const JobRecommend = ({ setIsStepValid }) => {
     description: userData.education?.[0]?.description || "",
   });
 
-  //
   useEffect(() => {
     setUserData((prev) => ({
       ...prev,
@@ -25,7 +26,6 @@ const JobRecommend = ({ setIsStepValid }) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  //kiem tra
   useEffect(() => {
     setIsStepValid(
       formData.institution.trim() !== "" &&
@@ -39,62 +39,63 @@ const JobRecommend = ({ setIsStepValid }) => {
 
   return (
     <div className="flex flex-col max-h-[400px] overflow-y-auto">
-      <p className="!mb-1">Đã tốt nghiệp tại</p>
+      <p className="!mb-1">{translations["graduatedLabel"]}</p>
       <input
         type="text"
         name="institution"
-        placeholder="Tốt nghiệp tại"
-        value={formData.school}
+        placeholder={translations["graduatedPlaceholder"]}
+        value={formData.institution}
         onChange={handleChange}
         className="border p-2 mb-3"
       />
-      <p className="!mb-1">Bằng cấp:</p>
+
+      <p className="!mb-1">{translations["degreeLabel"]}</p>
       <select
         name="degree"
         value={formData.degree}
         onChange={handleChange}
         className="border p-2 mb-3"
       >
-        <option value="">Chọn bằng</option>
-        <option value="bachelor">Cử nhân</option>
-        <option value="master">Thạc sĩ</option>
-        <option value="phd">Tiến sĩ</option>
+        <option value="">{translations["selectDegreeDefault"]}</option>
+        <option value="bachelor">{translations["bachelor"]}</option>
+        <option value="master">{translations["master"]}</option>
+        <option value="phd">{translations["phd"]}</option>
       </select>
 
-      <p className="!mb-1">Ngành học:</p>
+      <p className="!mb-1">{translations["fieldOfStudyLabel"]}</p>
       <input
         type="text"
         name="field_of_study"
-        placeholder="Nhập ngành học"
+        placeholder={translations["fieldOfStudyPlaceholder"]}
         value={formData.field_of_study}
         onChange={handleChange}
         className="border p-2 mb-3"
       />
 
-      <p className="!mb-1">Năm bắt đầu:</p>
+      <p className="!mb-1">{translations["startDateLabel"]}</p>
       <input
         type="number"
         name="start_date"
-        placeholder="Nhập năm bắt đầu"
+        placeholder={translations["startDatePlaceholder"]}
         value={formData.start_date}
         onChange={handleChange}
         className="border p-2 mb-3"
       />
 
-      <p className="!mb-1">Năm kết thúc:</p>
+      <p className="!mb-1">{translations["endDateLabel"]}</p>
       <input
         type="number"
         name="end_date"
-        placeholder="Nhập năm kết thúc"
+        placeholder={translations["endDatePlaceholder"]}
         value={formData.end_date}
         onChange={handleChange}
         className="border p-2 mb-3"
       />
 
-      <p className="!mb-1">Mô tả thêm:</p>
+      <p className="!mb-1">{translations["descriptionLabel"]}</p>
       <textarea
         name="description"
-        placeholder="Nhập mô tả"
+        placeholder={translations["descriptionPlaceholder"]}
         value={formData.description}
         onChange={handleChange}
         className="border p-6"

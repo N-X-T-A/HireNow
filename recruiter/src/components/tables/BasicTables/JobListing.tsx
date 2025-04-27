@@ -18,6 +18,7 @@ import TextArea from "../../form/input/TextArea";
 import apiFetch from "../../../utils/api";
 import BulletListInput from "../../form/input/BulletListInput";
 import { SERVICE_URL } from "../../../api/config";
+import Loader from "../../ui/loader/Loader";
 
 const API_URL = `${SERVICE_URL}/job`;
 
@@ -163,7 +164,13 @@ export default function JobListingTable() {
 
               <TableBody className="divide-y divide-gray-100 dark:divide-white/[0.05]">
                 {loading ? (
-                  <></>
+                  <TableRow>
+                    <TableCell colSpan={6} className="text-center py-10">
+                      <div className="flex justify-center">
+                        <Loader />
+                      </div>
+                    </TableCell>
+                  </TableRow>
                 ) : (
                   tableData.map((job) => (
                     <TableRow key={job._id}>

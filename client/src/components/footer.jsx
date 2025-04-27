@@ -1,68 +1,123 @@
+import React from "react";
+
 const Footer = () => {
   return (
-    <footer className="bg-gray-500 text-white py-10 mt-10">
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
-        {/* Cột 1: Giới thiệu */}
+    <footer className="mt-2 bg-white border-t border-gray-300 text-black py-10 px-6">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+        {/* Company */}
         <div>
-          <h2 className="text-lg font-bold">Khám phá thiết kế</h2>
-          <p className="text-sm mt-2">
-            Hành trình trở thành UI Designer, chia sẻ kinh nghiệm, kiến thức và
-            các xu hướng thiết kế mới nhất.
-          </p>
-        </div>
-
-        {/* Cột 2: Liên kết nhanh */}
-        <div>
-          <h2 className="text-lg font-bold">Liên kết nhanh</h2>
-          <ul className="mt-2 space-y-2 ">
+          <h3 className="text-lg mb-4">Về Chúng Tôi</h3>
+          <ul className="space-y-2">
             <li>
-              <a href="#" className="hover:text-gray-400 text-white ">
-                Trang chủ
+              <a href="#" className="hover:underline">
+                Giới thiệu
               </a>
             </li>
             <li>
-              <a href="#" className="hover:text-gray-400 text-white">
-                Bài viết
+              <a href="#" className="hover:underline">
+                Tin tức
               </a>
             </li>
             <li>
-              <a href="#" className="hover:text-gray-400 text-white">
-                Dự án
+              <a href="#" className="hover:underline">
+                Blog
               </a>
             </li>
             <li>
-              <a href="#" className="hover:text-gray-400 text-white">
+              <a href="#" className="hover:underline">
                 Liên hệ
               </a>
             </li>
           </ul>
         </div>
 
-        {/* Cột 3: Mạng xã hội */}
+        {/* Candidate */}
         <div>
-          <h2 className="text-lg font-bold">Theo dõi chúng tôi</h2>
-          <div className="flex justify-center md:justify-start gap-4 mt-2">
-            <a href="#" className="hover:text-gray-400 text-white">
-              Facebook
-            </a>
-            <a href="#" className="hover:text-gray-400 text-white">
-              Twitter
-            </a>
-            <a href="#" className="hover:text-gray-400 text-white">
-              LinkedIn
-            </a>
-            <a href="#" className="hover:text-gray-400 text-white">
-              Behance
-            </a>
-          </div>
+          <h3 className="text-lg font-semibold mb-4">Dành cho Ứng Viên</h3>
+          <ul className="space-y-2">
+            <li>
+              <a href="#" className="hover:underline">
+                Tìm việc làm
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:underline">
+                Tạo CV
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:underline">
+                Kỹ năng phỏng vấn
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:underline">
+                Hồ sơ cá nhân
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        {/* Employer */}
+        <div>
+          <h3 className="text-lg font-semibold mb-4">
+            Dành cho Nhà Tuyển Dụng
+          </h3>
+          <ul className="space-y-2">
+            <li>
+              <a href="#" className="hover:underline">
+                Đăng tin tuyển dụng
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:underline">
+                Tìm kiếm ứng viên
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:underline">
+                Giải pháp tuyển dụng
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:underline">
+                Báo giá dịch vụ
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        {/* Follow Us */}
+        <div>
+          <h3 className="text-lg font-semibold mb-4">Theo dõi chúng tôi</h3>
+          <ul className="space-y-2">
+            <li>
+              <a href="#" className="hover:underline">
+                Facebook
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:underline">
+                LinkedIn
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:underline">
+                Instagram
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:underline">
+                Twitter
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
 
-      {/* Dòng bản quyền */}
-      <div className="mt-8 text-center border-t border-gray-700 pt-4">
-        <p className="text-xs">
-          © 2025 Khám phá thiết kế. All rights reserved.
-        </p>
+      {/* Bottom Text */}
+      <div className="mt-10 border-t border-gray-300 pt-6 text-center text-sm">
+        © 2025 JobFinder. All rights reserved.
       </div>
     </footer>
   );

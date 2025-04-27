@@ -10,6 +10,7 @@ import BulletListInput from "../components/form/input/BulletListInput";
 import Alert from "../components/ui/alert/Alert";
 import apiFetch from "../utils/api";
 import { SERVICE_URL } from "../api/config";
+import Loader from "../components/ui/loader/Loader";
 
 export default function JobForm() {
   const [formData, setFormData] = useState({
@@ -29,15 +30,15 @@ export default function JobForm() {
     variant: "success" | "error";
     message: string;
   } | null>(null);
-
   const [multiOptions, setMultiOptions] = useState<
     { value: string; text: string }[]
   >([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchSkills = async () => {
       try {
-        const id = "67d28aceb386d0abcfe72960";
+        const id = localStorage.getItem("industry_id");
         const data = await apiFetch(`${SERVICE_URL}/job/skills/${id}`);
         const options = data.map((skill: { _id: string; name: string }) => ({
           value: skill._id,
@@ -115,6 +116,7 @@ export default function JobForm() {
     };
 
     try {
+      setLoading(true);
       await apiFetch(`${SERVICE_URL}/job`, {
         method: "POST",
         body: JSON.stringify(submittedData),
@@ -139,6 +141,8 @@ export default function JobForm() {
         variant: "error",
         message: "Failed to post job. Try again later.",
       });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -224,7 +228,7 @@ export default function JobForm() {
           />
         </div>
         <div className="mt-6">
-          <Label htmlFor="descriptions">Required Experience</Label>
+          <Label htmlFor="required_experience">Required Experience</Label>
           <TextArea
             value={formData.required_experience}
             onChange={(content) => handleChange("required_experience", content)}
@@ -234,9 +238,10 @@ export default function JobForm() {
         <div className="mt-6 flex justify-end">
           <button
             onClick={handleSubmit}
-            className="px-6 py-3 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 transition"
+            className="px-6 py-3 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 transition flex items-center justify-center min-w-[120px]"
+            disabled={loading}
           >
-            Post
+            {loading ? <Loader /> : "Post"}
           </button>
         </div>
       </div>

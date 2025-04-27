@@ -21,6 +21,7 @@ export const blogResource = {
         components: {
           list: Component.PreviewImage,
           show: Component.ShowImage,
+          edit: Component.UploadImage,
         },
       },
       tags: {

@@ -6,6 +6,7 @@ import { blogResource } from "#resources/blog.js";
 import { TagResource } from "#resources/tag.js";
 import dotenv from "dotenv";
 import { PlanResource } from "#resources/plan.js";
+import { getDashboardData } from "#utils/dashboard-metrics.js";
 dotenv.config();
 
 AdminJS.registerAdapter({
@@ -24,12 +25,17 @@ const adminJS = new AdminJS({
   },
   resources: [blogResource, TagResource, PlanResource],
   rootPath: "/admin",
-  dashboard: { component: Component.MainDashboard },
+  dashboard: {
+    handler: async (req, res, context) => {
+      return await getDashboardData(req);
+    },
+    component: Component.MainDashboard,
+  },
 });
 
 const adminRouter = AdminJSExpress.buildAuthenticatedRouter(adminJS, {
   authenticate: async (email, password) => {
-    if (email === process.env.EMAIL && password === process.env.PASSWORD) {
+    if (email === "admin@example.com" && password === "1") {
       return { email };
     }
     return null;

@@ -1,69 +1,17 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { GoogleOAuthProvider } from "@react-oauth/google";
+import { BrowserRouter as Router } from "react-router-dom";
 import "./index.css";
-import Home from "./pages/Home";
-import Test from "./pages/Test";
-import Login from "./pages/Access/Login";
-import UserManager from "./pages/User/UserManager";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Environment } from "./environments/Environment";
-import UserPage1 from "./pages/User/UserPage1";
-import UserPage2 from "./pages/User/UserPage2";
-import UserPage3 from "./pages/User/UserPage3";
-import PrivateRoute from "./layout/PrivateRoute";
-import EmployerManager from "./pages/employer/employerManager";
-import EmployerPage1 from "./pages/employer/employerPage1";
-import JobDetailPage from "./pages/User/jobDetailPage";
-import UserProfile from "./pages/User/userProfile";
-import { ShowProfile } from "./pages/User/showProfile";
-import ShowCompanieProfile from "./pages/User/showCompanieProfile";
-import Register from "./pages/Access/register";
-import JobApply from "./pages/User/jobApply";
-import Blogs from "./pages/Blogs";
-import BlogDetail from "./pages/BlogDetail";
-import NotFound from "./pages/NotFound";
-import RegisterRecruiter from "./pages/Access/registerRecruiter";
-import EmployerIntro from "./pages/employerIntro";
-import ScrollToTop from "./layout/ScrollToTop";
+import App from "./App";
+import LanguageProvider from "./hooks/useLanguage";
+
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <Router>
-      <ScrollToTop />
-      <Routes>
-        {/* public route */}
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/test" element={<Test />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/register-recruiter" element={<RegisterRecruiter />} />
-        <Route path="/Recruiter-introduction" element={<EmployerIntro />} />
-        <Route path="/blogs" element={<Blogs />} />
-        <Route path="/blogs/:id" element={<BlogDetail />} />
-        <Route path="*" element={<NotFound />} />
-
-        {/* Private Employee route */}
-        <Route element={<PrivateRoute allowedRoles={["candidate"]} />}>
-          <Route path="/user/*" element={<UserManager />}>
-            <Route path="userHome" element={<UserPage1 />} />
-            <Route path="jobs" element={<UserPage2 />} />
-            <Route path="test" element={<UserPage3 />} />
-            <Route path="jobs/:jobId" element={<JobDetailPage />} />
-            <Route path="profile" element={<UserProfile />} />
-            <Route path="profile-user" element={<ShowProfile />} />
-            <Route path="company/:ComId" element={<ShowCompanieProfile />} />
-            <Route path="job-apply" element={<JobApply />} />
-          </Route>
-        </Route>
-
-        {/* Route dành cho Employer  */}
-        <Route element={<PrivateRoute allowedRoles={[, "recruiter"]} />}>
-          <Route path="/employer/*" element={<EmployerManager />}>
-            <Route path="page1" element={<EmployerPage1 />} />
-          </Route>
-        </Route>
-      </Routes>
-    </Router>
+    <LanguageProvider>
+      <Router>
+        <App />
+      </Router>
+    </LanguageProvider>
   </StrictMode>
 );

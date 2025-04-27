@@ -1,4 +1,3 @@
-// src/components/Intro.js
 import React, { useState, memo } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -9,26 +8,21 @@ import {
 import { motion } from "framer-motion";
 import { introData } from "../../data/data";
 import RotatingText from "../../components/text/RoatingText";
+import { useLanguage } from "../../hooks/useLanguage";
 
 const Intro = memo(() => {
   const [open, setOpen] = useState(false);
-  const {
-    leftImage,
-    logo,
-    mainText,
-    subText,
-    buttonText,
-    socialIcons,
-    article,
-    rightImage,
-  } = introData;
+  const { translations } = useLanguage();
+  const { leftImage, logo, socialIcons, article, rightImage } = introData;
+
   const texts = [
-    "Dream job",
-    "High-paying job",
-    "Remote job",
-    "Stable job",
-    "Perfect job",
+    translations["intro.dreamJob"],
+    translations["intro.highPayingJob"],
+    translations["intro.remoteJob"],
+    translations["intro.stableJob"],
+    translations["intro.perfectJob"],
   ];
+
   return (
     <div className="w-full bg-white flex rounded-[10px] gap-2">
       {/* Left Section */}
@@ -60,14 +54,20 @@ const Intro = memo(() => {
         <div className="flex flex-col w-full h-full items-center justify-between">
           <div className="w-full flex justify-between px-[25px]">
             <div>
-              <p className="!m-0 text-[20px] font-[700]">Service</p>
-              <p className="!m-0 text-[18px] font-[600] underline">FAQS</p>
+              <p className="!m-0 text-[20px] font-[700]">
+                {translations["intro.service"]}
+              </p>
+              <p className="!m-0 text-[18px] font-[600] underline">
+                {translations["intro.faqs"]}
+              </p>
             </div>
             <img className="max-w-28 w-full" src={logo} alt="Logo" />
           </div>
           <div className="w-full px-[25px]">
             <h3 className="my-0 mx-2">
-              <span className="inline">With HireNow, you can find a </span>
+              <span className="inline whitespace-pre-line">
+                {translations["findWithHireNow"]}
+              </span>
               <span className="inline-flex">
                 <RotatingText
                   texts={texts}
@@ -86,9 +86,9 @@ const Intro = memo(() => {
           </div>
           <div className="w-full px-[25px] mb-[20px]">
             <p className="!m-0 text-[15px] font-[400]">
-              Kết nối với chúng tôi:
+              {translations["intro.connectWithUs"]}
             </p>
-            <div className="flex gap-3 text-[30px] pt-[10px]">
+            <div className="flex gap-3 text-[30px] pt-[10px] cursor-pointer">
               {socialIcons.map((item, index) => (
                 <FontAwesomeIcon key={index} icon={eval(item.icon)} />
               ))}

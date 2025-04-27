@@ -2,9 +2,11 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { StepperContext } from "../../contexts/StepperContext";
 import Multiselect from "multiselect-react-dropdown";
+import { useLanguage } from "../../hooks/useLanguage";
 
 const Salary = ({ setIsStepValid }) => {
   const { userData, setUserData } = useContext(StepperContext);
+  const { translations } = useLanguage();
 
   const [jobListings, setJobListings] = useState([]);
   const [jobSkills, setJobSkills] = useState([]);
@@ -17,14 +19,11 @@ const Salary = ({ setIsStepValid }) => {
     end_date: userData.experience?.[0]?.end_date || "",
     description: userData.experience?.[0]?.description || "",
   });
-  //Api fetch
+
   useEffect(() => {
     axios
       .get("http://localhost:5000/api/v1/job/listings")
-      .then((response) => {
-        setJobListings(response.data);
-        console.log(jobListings);
-      })
+      .then((response) => setJobListings(response.data))
       .catch((error) =>
         console.error("Lỗi khi fetch danh sách ngành nghề: ", error)
       );
@@ -34,10 +33,7 @@ const Salary = ({ setIsStepValid }) => {
     if (selectedJob) {
       axios
         .get(`http://localhost:5000/api/v1/job/skills/${selectedJob._id}`)
-        .then((response) => {
-          setJobSkills(response.data);
-          console.log(jobSkills);
-        })
+        .then((response) => setJobSkills(response.data))
         .catch((error) =>
           console.error("Lỗi khi fetch danh sách kỹ năng: ", error)
         );
@@ -45,7 +41,7 @@ const Salary = ({ setIsStepValid }) => {
       setJobSkills([]);
     }
   }, [selectedJob]);
-  // Cập nhật context
+
   useEffect(() => {
     setUserData((prev) => ({
       ...prev,
@@ -58,31 +54,31 @@ const Salary = ({ setIsStepValid }) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
-  // Kiểm tra dữ liệu hợp lệ
+
   useEffect(() => {
     setIsStepValid(
       formData.company_name.trim() !== "" &&
         formData.start_date.trim() !== "" &&
         formData.end_date.trim() !== "" &&
-        formData.position.trim() !== "" &&
+        formData.position?.trim() !== "" &&
         skills.length > 0 &&
         formData.description.trim() !== ""
     );
   }, [formData, skills, setIsStepValid]);
-  console.log(skills);
+
   return (
     <div className="flex flex-col">
-      <p className="!mb-1">Đã có kinh nghiệm tại</p>
+      <p className="!mb-1">{translations.experienceAt}</p>
       <input
         type="text"
         name="company_name"
-        placeholder="Nhập tên công ty"
-        value={formData.company}
+        placeholder={translations.enterCompanyName}
+        value={formData.company_name}
         onChange={handleChange}
         className="border p-2 mb-3"
       />
 
-      <p className="!mb-1">Chọn ngành nghề</p>
+      <p className="!mb-1">{translations.selectJobTitle}</p>
       <select
         className="border p-2 mb-3"
         value={selectedJob ? selectedJob._id : ""}
@@ -98,7 +94,7 @@ const Salary = ({ setIsStepValid }) => {
           }));
         }}
       >
-        <option value="">Chọn ngành nghề</option>
+        <option value="">{translations.selectJobTitle}</option>
         {jobListings.map((job) => (
           <option key={job._id} value={job._id}>
             {job.title}
@@ -106,18 +102,18 @@ const Salary = ({ setIsStepValid }) => {
         ))}
       </select>
 
-      <p className="!mb-1">Chọn kỹ năng của bạn</p>
+      <p className="!mb-1">{translations.selectYourSkills}</p>
       <Multiselect
         className="mb-3"
         options={jobSkills}
-        placeholder="Chọn kỹ năng của bạn"
+        placeholder={translations.selectYourSkills}
         displayValue="name"
         selectedValues={skills}
         onSelect={(selectedList) => setSkills(selectedList)}
         onRemove={(selectedList) => setSkills(selectedList)}
       />
 
-      <p className="!mb-1">Ngày bắt đầu:</p>
+      <p className="!mb-1">{translations.startDate}</p>
       <input
         type="date"
         name="start_date"
@@ -126,7 +122,7 @@ const Salary = ({ setIsStepValid }) => {
         className="border p-2 mb-3"
       />
 
-      <p className="!mb-1">Ngày kết thúc:</p>
+      <p className="!mb-1">{translations.endDate}</p>
       <input
         type="date"
         name="end_date"
@@ -135,10 +131,10 @@ const Salary = ({ setIsStepValid }) => {
         className="border p-2 mb-3"
       />
 
-      <p className="!mb-1">Mô tả thêm:</p>
+      <p className="!mb-1">{translations.description}</p>
       <textarea
         name="description"
-        placeholder="Nhập mô tả"
+        placeholder={translations.enterDescription}
         value={formData.description}
         onChange={handleChange}
         className="border p-2"

@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useLanguage } from "../../hooks/useLanguage";
 
 const ChatList = ({ conversations, onSelectUser }) => {
   const [search, setSearch] = useState("");
+  const { translations } = useLanguage();
 
   const filteredConversations = conversations.filter((conversation) =>
     conversation.partner.username.toLowerCase().includes(search.toLowerCase())
@@ -42,7 +44,7 @@ const ChatList = ({ conversations, onSelectUser }) => {
           ))
         ) : (
           <p className="text-gray-500 text-center mt-4">
-            No conversations found
+            {translations["noConversations"]}
           </p>
         )}
       </ul>

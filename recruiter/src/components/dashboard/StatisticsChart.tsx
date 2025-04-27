@@ -3,21 +3,19 @@ import Chart from "react-apexcharts";
 import { ApexOptions } from "apexcharts";
 import ChartTab from "../common/ChartTab";
 import { SERVICE_URL } from "../../api/config";
+import Loader from "../ui/loader/Loader";
 
 export default function StatisticsChart() {
   const [tab, setTab] = useState<"monthly" | "quarterly" | "annually">(
     "monthly"
   );
   const [chartData, setChartData] = useState<any>(null);
-  const [hideAnnuallyTab, setHideAnnuallyTab] = useState(false); // State to hide "Annually" tab
+  const [hideAnnuallyTab, setHideAnnuallyTab] = useState(false);
 
   useEffect(() => {
     const fetchStatistics = async () => {
       const accessToken = localStorage.getItem("accessToken");
-      if (!accessToken) {
-        console.error("Access token is missing.");
-        return;
-      }
+      if (!accessToken) return;
 
       try {
         const response = await fetch(`${SERVICE_URL}/statistics`, {
@@ -29,9 +27,8 @@ export default function StatisticsChart() {
         const data = await response.json();
         setChartData(data.metadata);
 
-        // Check if "annually" data has only 1 year, hide the "Annually" tab
         if (data.metadata.annually.categories.length <= 1) {
-          setHideAnnuallyTab(true); // Hide "Annually" tab
+          setHideAnnuallyTab(true);
         }
       } catch (error) {
         console.error("Error fetching statistics data:", error);
@@ -42,7 +39,11 @@ export default function StatisticsChart() {
   }, []);
 
   if (!chartData) {
-    return null;
+    return (
+      <div className="flex justify-center items-center h-[310px] bg-white dark:bg-white/[0.03] rounded-2xl border border-gray-200 dark:border-gray-800">
+        <Loader />
+      </div>
+    );
   }
 
   const currentData = chartData[tab];
@@ -116,12 +117,18 @@ export default function StatisticsChart() {
 
       <div className="max-w-full overflow-x-auto custom-scrollbar">
         <div className="min-w-[1000px] xl:min-w-full">
-          <Chart
-            options={options}
-            series={currentData.series}
-            type="area"
-            height={310}
-          />
+          {!chartData ? (
+            <div className="h-[310px] flex justify-center items-center">
+              <Loader />
+            </div>
+          ) : (
+            <Chart
+              options={options}
+              series={currentData.series}
+              type="area"
+              height={310}
+            />
+          )}
         </div>
       </div>
     </div>

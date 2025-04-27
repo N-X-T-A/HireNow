@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { PaperAirplaneIcon } from "@heroicons/react/24/outline";
+import { useLanguage } from "../../hooks/useLanguage";
 const ChatDetail = ({ selectedConversation, messages, onSendMessage }) => {
   const [message, setMessage] = useState("");
+  const { translations } = useLanguage();
 
   const handleSendMessage = () => {
     if (!message.trim()) return;
@@ -42,7 +44,9 @@ const ChatDetail = ({ selectedConversation, messages, onSendMessage }) => {
             </div>
           ))
         ) : (
-          <p className="text-gray-500 text-center">Chưa có tin nhắn nào</p>
+          <p className="text-gray-500 text-center">
+            {translations["noMessages"]}
+          </p>
         )}
       </div>
 
@@ -50,7 +54,7 @@ const ChatDetail = ({ selectedConversation, messages, onSendMessage }) => {
         <textarea
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          placeholder="Nhập tin nhắn"
+          placeholder={translations["enterMessage"]}
           className="flex-[9] p-2 border-1 rounded-md focus:border-2 focus:outline-none resize-none"
         />
         <button
