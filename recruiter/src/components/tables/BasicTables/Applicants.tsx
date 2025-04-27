@@ -360,9 +360,16 @@ export default function ApplicantsTable() {
                         )}
                       </TableCell>
                       <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                        <Button variant="outline" size="sm">
-                          <DownloadIcon />
-                        </Button>
+                        <a
+                          href={applicant.resume}
+                          download
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <Button variant="outline" size="sm">
+                            View
+                          </Button>
+                        </a>
                       </TableCell>
                     </TableRow>
                   ))
