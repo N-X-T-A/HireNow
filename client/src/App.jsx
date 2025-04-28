@@ -46,7 +46,7 @@ const App = () => {
           <Route path="/user/*" element={<UserManager />}>
             <Route path="userHome" element={<UserPage1 />} />
             <Route path="jobs" element={<UserPage2 />} />
-            <Route path="test" element={<UserPage3 />} />
+            <Route path="chat" element={<UserPage3 />} />
             <Route path="jobs/:jobId" element={<JobDetailPage />} />
             <Route path="profile" element={<UserProfile />} />
             <Route path="profile-user" element={<ShowProfile />} />

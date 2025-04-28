@@ -179,7 +179,7 @@ const JobApplyStatusCom = ({
                 onClick={(e) => {
                   e.stopPropagation();
                 }}
-                className="md:w-[1000px] h-auto bg-white rounded-[10px] shadow-lg overflow-hidden flex gap-4 p-4"
+                className="md:w-[1000px] h-[90%] bg-white rounded-[10px] shadow-lg overflow-hidden flex gap-4 p-4"
               >
                 {/* bên phải - left section */}
                 <div className="flex-[7] w-full  flex flex-col border-r-2 border-gray-200 ">
@@ -264,7 +264,13 @@ const JobApplyStatusCom = ({
                   </div>
                 </div>
                 {/* bên phải - right section */}
-                <div className="flex-[3] w-full flex flex-col gap-3">
+                <div
+                  className="flex-[3] w-full flex flex-col gap-3 overflow-y-auto"
+                  style={{
+                    scrollbarWidth: "none",
+                    msOverflowStyle: "none",
+                  }}
+                >
                   {/* Thông tin công ty */}
                   <div className="flex w-[80%] flex-col gap-4 p-4">
                     <div className="flex justify-between items-center">

@@ -20,7 +20,14 @@ const UserPage3 = () => {
     const socket = connectSocket(token);
 
     socket.on("newMessage", (newMessage) => {
-      setMessages((prevMessages) => [...prevMessages, newMessage]);
+      if (
+        selectedConversation &&
+        newMessage.conversation_id === selectedConversation._id
+      ) {
+        setMessages((prevMessages) => [...prevMessages, newMessage]);
+      }
+
+      getConversations();
     });
 
     socket.on("messagesRead", ({ conversation_id }) => {

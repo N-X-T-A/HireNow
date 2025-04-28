@@ -10,7 +10,7 @@ interface SelectProps {
   placeholder?: string;
   onChange: (value: string) => void;
   className?: string;
-  value?: string; // Updated to accept value prop
+  value?: string;
   defaultValue?: string;
 }
 
@@ -24,7 +24,7 @@ const Select: React.FC<SelectProps> = ({
 }) => {
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
-    onChange(value); // Trigger parent handler
+    onChange(value);
   };
 
   return (
@@ -34,7 +34,7 @@ const Select: React.FC<SelectProps> = ({
           ? "text-gray-800 dark:text-white/90"
           : "text-gray-400 dark:text-gray-400"
       } ${className}`}
-      value={value} // Now it correctly uses the value prop
+      value={value}
       onChange={handleChange}
     >
       <option

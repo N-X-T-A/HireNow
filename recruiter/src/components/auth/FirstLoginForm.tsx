@@ -149,8 +149,8 @@ export default function FirstLoginForm() {
                 <Select
                   options={industryOptions}
                   placeholder="Select industry"
+                  value={formData.industry}
                   onChange={handleSelectChange}
-                  defaultValue={formData.industry}
                 />
               </div>
               <button type="button" onClick={nextStep} className="btn-primary">

@@ -44,10 +44,17 @@ const BlogDetail = () => {
     fetchJob();
   }, [id]);
 
-  const handleScrollTo = (id) => {
+  const handleScrollTo = (id, offset = 100) => {
     const el = document.getElementById(id);
     if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      const rect = el.getBoundingClientRect();
+      const scrollTop =
+        window.pageYOffset || document.documentElement.scrollTop;
+      const targetPosition = rect.top + scrollTop - offset;
+      window.scrollTo({
+        top: targetPosition,
+        behavior: "smooth",
+      });
     }
   };
 
