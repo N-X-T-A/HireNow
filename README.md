@@ -1,7 +1,7 @@
 **Setup Project**
 ---
 
-* System Requirements
+** System Requirements **
 - Node.js >= 16.x  
 - npm (Node Package Manager, included with Node.js)  
 - Supporting tools: `git`, `MongoDB`
