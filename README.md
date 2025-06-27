@@ -1,35 +1,35 @@
 **Setup Project**
 ---
 
-* Yêu cầu hệ thống  
-✅Node.js >= 16.x  
-✅npm (Node Package Manager, cài kèm Node.js)  
-✅Các công cụ hỗ trợ (git,mongoDB)  
+* System Requirements
+- Node.js >= 16.x  
+- npm (Node Package Manager, included with Node.js)  
+- Supporting tools: `git`, `MongoDB`
 
-* Cài đặt  
-Tải mã nguồn về máy:
+* Installation  
+**1. Clone the repository**
 ```powershell
 git clone https://github.com/N-X-T-A/HireNow.git
 cd HireNow
 ```  
-Cài đặt dependencies:
+**2. Install dependencies**
 ```powershell
 npm run install-all
 ```
-Cấu hình biến môi trường:  
+**3. Configure environment variables**
 ```powershell
 npm run copy-env
 ```
-Chạy migrations:
+**4. Run database migrations**
 ```powershell
 npm run migrate
 ```
-Chạy ứng dụng:  
+**5. Start the application** 
 ```powershell
 npm run start-all
 ```
 
-**about project**
+**About project**
 ---
 HOMEPAGE 🖥
 
