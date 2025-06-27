@@ -6,7 +6,8 @@
 - npm (Node Package Manager, included with Node.js)  
 - Supporting tools: `git`, `MongoDB`
 
-* Installation  
+* Installation
+  
 **1. Clone the repository**
 ```powershell
 git clone https://github.com/N-X-T-A/HireNow.git
